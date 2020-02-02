@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "348466715003",
+    "firebase_url": "https://motorbro-439cf.firebaseio.com",
+    "project_id": "motorbro-439cf",
+    "storage_bucket": "motorbro-439cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348466715003:android:f42bace3167a3015cd45de",
+        "android_client_info": {
+          "package_name": "com.elevintech.motorbro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348466715003-ftukt9n7ugascfuvf0v14t2tvvo7k5hr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEmjH2QOFfYpfisVtnSJsRAMdO_rqSLkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348466715003-ftukt9n7ugascfuvf0v14t2tvvo7k5hr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348466715003:android:d59414c7cca40821cd45de",
+        "android_client_info": {
+          "package_name": "com.elevintech.motorbroshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348466715003-ftukt9n7ugascfuvf0v14t2tvvo7k5hr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEmjH2QOFfYpfisVtnSJsRAMdO_rqSLkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348466715003-ftukt9n7ugascfuvf0v14t2tvvo7k5hr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
