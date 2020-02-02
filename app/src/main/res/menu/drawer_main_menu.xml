@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/garage"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Garage" />
+
+        <item
+            android:id="@+id/glovebox"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Glove Box" />
+
+        <item
+            android:id="@+id/my_account"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="My Account" />
+
+        <item
+            android:id="@+id/achievements"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Achievements" />
+
+        <item
+            android:id="@+id/parts_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Types of Parts" />
+
+        <item
+            android:id="@+id/schedule_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Types of Schedule" />
+
+        <item
+            android:id="@+id/service_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Types of Service" />
+
+
+
+        <!--        <item-->
+        <!--            android:id="@+id/language"-->
+        <!--            android:icon="@drawable/brand_icon"-->
+        <!--            android:title="Language" />-->
+
+
+    </group>
+
+    <group android:id="@+id/sign_out_section">
+
+        <item
+            android:id="@+id/sign_out"
+            android:icon="@drawable/ic_launcher_background"
+
+            android:title="Sign Out" />
+    </group>
+</menu>

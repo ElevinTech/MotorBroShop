@@ -26,7 +26,8 @@ class MotorBroDatabase {
 
     }
 
-    fun registerUser(user: ShopUser, callback: () -> Unit) {
+
+    fun addToShopUsersCollection(user: ShopUser, callback: () -> Unit) {
 
         // Access a Cloud Firestore instance from your Activity
         val db = FirebaseFirestore.getInstance()
@@ -45,6 +46,50 @@ class MotorBroDatabase {
 
     }
 
+    fun registerShopUser(user: ShopUser, callback: () -> Unit) {
+
+        val uid = FirebaseAuth.getInstance().uid!!
+
+        // Access a Cloud Firestore instance from your Activity
+        val db = FirebaseFirestore.getInstance()
+
+        // Add a new document with a generated ID
+        db.collection("shop-users").document(uid)
+            .set(user)
+            .addOnSuccessListener {
+
+                addToShopUsersCollection(user){
+                    callback()
+                }
+
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+
+    }
+
+
+
+    fun getUser(callback: (ShopUser) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("shop-users").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = ShopUser()
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                user = documentSnapshot.toObject(ShopUser::class.java)!!
+
+            }
+
+            callback( user )
+        }
+    }
 
 
 }

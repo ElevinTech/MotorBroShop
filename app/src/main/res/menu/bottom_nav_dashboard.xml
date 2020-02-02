@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tabhome"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/tabparts"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Parts" />
+
+    <item
+        android:id="@+id/tabshop"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="" />
+
+    <item
+        android:id="@+id/tabreminders"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Reminders" />
+
+    <item
+        android:id="@+id/tabhistory"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="History" />
+
+
+
+
+</menu>

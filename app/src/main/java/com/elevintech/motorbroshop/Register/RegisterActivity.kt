@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
 
                     val user = ShopUser(firstNameEditText.text.toString(), lastNameEditText.text.toString(), emailEditText.text.toString(), task.result!!.user!!.uid, selectedShop.shopId)
 
-                    firebaseDatabase.registerUser(user) {
+                    firebaseDatabase.registerShopUser(user) {
                         println("New Success")
                         progressDialog.hide()
                         val intent = Intent(applicationContext, DashboardActivity::class.java)
