@@ -1,11 +1,11 @@
 package com.elevintech.motorbroshop.Database
 
-import com.elevintech.motorbroshop.Model.Consumer
-import com.elevintech.motorbroshop.Model.ScannedUser
-import com.elevintech.motorbroshop.Model.Shop
-import com.elevintech.motorbroshop.Model.ShopUser
+import com.elevintech.motorbroshop.DispatchGroup
+import com.elevintech.motorbroshop.Model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 
 class MotorBroDatabase {
 
@@ -106,6 +106,7 @@ class MotorBroDatabase {
 
             if (documentSnapshot != null && documentSnapshot.exists()) {
                 user = documentSnapshot.toObject(Consumer::class.java)!!
+                user.uid = documentSnapshot.id
 
             }
 
@@ -213,23 +214,50 @@ class MotorBroDatabase {
         }
     }
 
-    fun addShopCustomer(consumerId: String, callback: () -> Unit){
+    fun addShopCustomer(consumer: Consumer, callback: () -> Unit){
         getShopId{
 
             val shopId = it
 
             val db = FirebaseFirestore.getInstance()
-            db.collection("shops").document(shopId).collection("customers").document(consumerId)
-                .set(mapOf("dateScanned" to System.currentTimeMillis() / 1000,
-                            "uid" to consumerId))
+            db.collection("shops").document(shopId).collection("customers").document(consumer.uid)
+                .set(consumer)
                 .addOnSuccessListener { callback()}
                 .addOnFailureListener {
-                        e -> println(e)
+                    e -> println(e)
                     callback()
                 }
 
 
         }
+    }
+
+    fun getCustomers(callback: (MutableList<Consumer>) -> Unit) {
+
+        var customersList = mutableListOf<Consumer>()
+
+        getShopId{shopId ->
+
+            val db = FirebaseFirestore.getInstance()
+            db.collection("shops").document(shopId).collection("customers").get()
+                .addOnSuccessListener {querySnapshot ->
+
+                    for(consumer in querySnapshot.documents){
+
+                        val customer = consumer.toObject(Consumer::class.java)
+                        customersList.add(customer!!)
+
+                    }
+                    callback(customersList)
+
+                }
+                .addOnFailureListener {
+                    e -> println(e)
+                    callback(customersList)
+                }
+        }
+
+
     }
 
 
