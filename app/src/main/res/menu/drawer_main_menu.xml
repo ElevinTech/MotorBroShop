@@ -5,47 +5,34 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/garage"
+            android:id="@+id/documents"
             android:icon="@drawable/ic_launcher_background"
-            android:title="Garage" />
+            android:title="Dcouments" />
 
         <item
-            android:id="@+id/glovebox"
+            android:id="@+id/branches"
             android:icon="@drawable/ic_launcher_background"
-            android:title="Glove Box" />
+            android:title="Branches" />
 
         <item
-            android:id="@+id/my_account"
+            android:id="@+id/employees"
             android:icon="@drawable/ic_launcher_background"
-            android:title="My Account" />
+            android:title="Employees" />
 
         <item
-            android:id="@+id/achievements"
+            android:id="@+id/list"
             android:icon="@drawable/ic_launcher_background"
-            android:title="Achievements" />
+            android:title="List" />
 
         <item
-            android:id="@+id/parts_menu"
+            android:id="@+id/settings"
             android:icon="@drawable/ic_launcher_background"
-            android:title="Types of Parts" />
+            android:title="Settings" />
 
         <item
-            android:id="@+id/schedule_menu"
+            android:id="@+id/feedback"
             android:icon="@drawable/ic_launcher_background"
-            android:title="Types of Schedule" />
-
-        <item
-            android:id="@+id/service_menu"
-            android:icon="@drawable/ic_launcher_background"
-            android:title="Types of Service" />
-
-
-
-        <!--        <item-->
-        <!--            android:id="@+id/language"-->
-        <!--            android:icon="@drawable/brand_icon"-->
-        <!--            android:title="Language" />-->
-
+            android:title="Feedback" />
 
     </group>
 

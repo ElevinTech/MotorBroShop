@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.forEach
 import com.elevintech.motorbroshop.Consumer.ConsumerProfileActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
@@ -72,35 +73,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
-
-//        // get menu from navigationView
-//        val nav_menu = nav_view.menu
-//
-//        // find MenuItem you want to change
-//        val nav_profile_status = nav_menu.findItem(R.id.profile_status)
-//
-//        // set new title to the MenuItem
-//        nav_profile_status.title = "NewTitleForCamera"
-//
-//        // do the same for other MenuItems
-//        val nav_meeting = nav_menu.findItem(R.id.next_meeting)
-//        nav_meeting.title = "NewTitleForGallery"
-//
-//        // get header from navigationView
-//        val nav_header = nav_view.getHeaderView(0)
-//
-//        // find headerItem you want to change
-//        val nav_user = nav_header.user_first_name
-//
-//        // set text to the headerItem
-//        nav_user.setText("Gotcha")
-//
-//        val nav_user_image = nav_header.profileImage
-
-
-//        updateUserImage(nav_user_image)
-
         nav_view.setNavigationItemSelectedListener(this)
 
     }
@@ -109,43 +81,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         when(item.itemId){
 
-
-            R.id.parts_menu-> {
-//                // TODO: There's a bug here make these unclickable when from here
-//                val intent = Intent(applicationContext, TypeOfPartsActivity::class.java)
-//                startActivity(intent)
-            }
-
-            R.id.schedule_menu-> {
-//                // TODO: There's a bug here make these unclickable when from here
-//                val intent = Intent(applicationContext, TypeOfHistoryActivity::class.java)
-//                startActivity(intent)
-            }
-
-            R.id.service_menu-> {
-//                // TODO: There's a bug here make these unclickable when from here
-//                val intent = Intent(applicationContext, TypeOfReminderActivity::class.java)
-//                startActivity(intent)
-            }
-
-            R.id.my_account -> {
-//                val intent = Intent(applicationContext, MyAccountActivity::class.java)
-//                startActivity(intent)
-            }
-
-            R.id.garage -> {
-//                val intent = Intent(applicationContext, GarageActivity::class.java)
-//                startActivity(intent)
-            }
-
-            R.id.glovebox -> {
-//                val intent = Intent(applicationContext, GloveboxActivity::class.java)
-//                startActivity(intent)
-            }
-
-            R.id.achievements -> {
-//                val intent = Intent(applicationContext, AchievementsActivity::class.java)
-//                startActivity(intent)
+            R.id.employees -> {
+                val intent = Intent(this, EmployeeListActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.sign_out -> {

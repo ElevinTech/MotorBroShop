@@ -120,9 +120,67 @@ class MotorBroDatabase {
         // Add a new document with a generated ID
         db.collection("shops").document(shop.shopId)
             .set(shop)
-            .addOnSuccessListener {callback()}
+            .addOnSuccessListener {
+                callback()
+            }
             .addOnFailureListener {
                 e -> println(e)
+                callback()
+            }
+    }
+
+    fun updateOwnerShopId(shopId: String, callback: () -> Unit){
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+
+        db.collection("shop-user").document(uid)
+            .update(mapOf("shopId" to shopId))
+            .addOnSuccessListener {}
+            .addOnFailureListener {e -> println(e)}
+    }
+
+    fun getShopEmployees(callback: (MutableList<ShopUser>) -> Unit) {
+
+        getUser {
+
+            var employeeList = mutableListOf<ShopUser>()
+
+            FirebaseFirestore.getInstance().collection("shop-users")
+                .whereEqualTo("shopId","${it.shopId}")
+                .whereEqualTo("shopOwner",false)
+                .get()
+                .addOnSuccessListener {
+
+                    for (shop in it){
+                        val shop = shop.toObject(ShopUser::class.java)
+                        employeeList.add(shop)
+                    }
+
+                    callback(employeeList)
+
+                }
+
+        }
+
+    }
+
+    fun generateEmployeeId(callback: (employeeId: String) -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("shop-users").document()
+        val employeeId = ref.id
+
+        callback(employeeId)
+    }
+
+    fun createEmployee(employee: ShopUser, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("shop-users").document(employee.uid)
+            .set(employee)
+            .addOnSuccessListener { callback()}
+            .addOnFailureListener {
+                    e -> println(e)
                 callback()
             }
     }

@@ -6,5 +6,6 @@ class ShopUser(
     var email: String = "",
     var uid: String ="",
     var shopId: String = "",
-    var isShopOwner: Boolean = false
+    var isShopOwner: Boolean = false,
+    var branchId: String = ""
 )

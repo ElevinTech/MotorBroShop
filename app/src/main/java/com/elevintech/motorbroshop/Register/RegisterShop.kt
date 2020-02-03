@@ -35,11 +35,14 @@ class RegisterShop : AppCompatActivity() {
         val shopName = shopNameEditText.text.toString()
 
         var shop = Shop("$shopName", "", "$shopId")
-        MotorBroDatabase().saveShop(shop){
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
-            finish()
+        MotorBroDatabase().updateOwnerShopId(shopId){
+            MotorBroDatabase().saveShop(shop){
+                val intent = Intent(this, DashboardActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
+
     }
 
     fun hasCompletedValues(): Boolean {
