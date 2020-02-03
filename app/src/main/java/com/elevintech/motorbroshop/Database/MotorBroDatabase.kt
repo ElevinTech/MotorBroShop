@@ -1,6 +1,7 @@
 package com.elevintech.motorbroshop.Database
 
 import com.elevintech.motorbroshop.Model.Consumer
+import com.elevintech.motorbroshop.Model.ScannedUser
 import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.google.firebase.auth.FirebaseAuth
@@ -112,6 +113,25 @@ class MotorBroDatabase {
         }
     }
 
+    fun isConsumerExist(uid: String, callback: (Boolean) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("users").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var isExist: Boolean = false
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+
+                isExist = true
+
+            }
+
+            callback( isExist )
+        }
+    }
+
     fun saveShop(shop: Shop, callback: () -> Unit) {
 
         // Access a Cloud Firestore instance from your Activity
@@ -183,6 +203,33 @@ class MotorBroDatabase {
                     e -> println(e)
                 callback()
             }
+    }
+
+    fun getShopId(callback: (shopId: String) -> Unit){
+        getUser {
+
+            callback(it.shopId)
+
+        }
+    }
+
+    fun addShopCustomer(consumerId: String, callback: () -> Unit){
+        getShopId{
+
+            val shopId = it
+
+            val db = FirebaseFirestore.getInstance()
+            db.collection("shops").document(shopId).collection("customers").document(consumerId)
+                .set(mapOf("dateScanned" to System.currentTimeMillis() / 1000,
+                            "uid" to consumerId))
+                .addOnSuccessListener { callback()}
+                .addOnFailureListener {
+                        e -> println(e)
+                    callback()
+                }
+
+
+        }
     }
 
 

@@ -148,16 +148,21 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         if (result.contents != null) {
 
-            MotorBroDatabase().getConsumer(result.contents) {
-                if (it == null) {
+            val consumerId = result.contents
 
-                    Toast.makeText(this, "Invalid QR code", Toast.LENGTH_LONG).show()
+            MotorBroDatabase().isConsumerExist(consumerId) {
+                if (it) {
+
+                    MotorBroDatabase().addShopCustomer(consumerId){
+                        val intent = Intent(this, ConsumerProfileActivity::class.java)
+                        intent.putExtra("consumer", consumerId)
+                        startActivity(intent)
+                    }
+
 
                 } else {
 
-                    val intent = Intent(this, ConsumerProfileActivity::class.java)
-                    intent.putExtra("consumer", it)
-                    startActivity(intent)
+                    Toast.makeText(this, "Invalid QR code", Toast.LENGTH_LONG).show()
 
                 }
             }

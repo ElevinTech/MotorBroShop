@@ -13,4 +13,8 @@ class Utils {
         return progressDialog
     }
 
+    fun getCurrentTimestamp():Long{
+        return System.currentTimeMillis() / 1000
+    }
+
 }
