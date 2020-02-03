@@ -7,8 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.R
-import com.elevintech.motorbroshop.Register.RegisterActivity
-import com.elevintech.motorbroshop.Register.SelectShopActivity
+import com.elevintech.motorbroshop.Register.RegisterAccount
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -19,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         createAccountText.setOnClickListener {
-            val intent = Intent(applicationContext, RegisterActivity::class.java)
+            val intent = Intent(applicationContext, RegisterAccount::class.java)
             startActivity(intent)
         }
 

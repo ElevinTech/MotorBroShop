@@ -1,8 +1,6 @@
 package com.elevintech.motorbroshop.Dashboard
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.forEach
-import androidx.fragment.app.FragmentTransaction
 import com.elevintech.motorbroshop.Consumer.ConsumerProfileActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Login.LoginActivity
@@ -20,9 +17,7 @@ import com.elevintech.motorbroshop.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.qrcode.QRCodeWriter
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.drawer_dashboard.*
 import kotlinx.android.synthetic.main.drawer_header.view.*

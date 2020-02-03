@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Consumer.ConsumerProfileActivity"></activity>
+        <activity android:name=".Register.RegisterShop"></activity>
+        <activity android:name=".Consumer.ConsumerProfileActivity" />
         <activity android:name=".Register.SelectShopActivity" />
         <activity android:name=".SplashPage.SplashPageActivity">
             <intent-filter>
@@ -19,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Dashboard.DashboardActivity" />
-        <activity android:name=".Register.RegisterActivity" />
+        <activity android:name=".Register.RegisterAccount" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".MainActivity" />
     </application>

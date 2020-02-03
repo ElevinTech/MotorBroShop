@@ -15,7 +15,7 @@ import com.elevintech.motorbroshop.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterAccount : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     var selectedShop: Shop = Shop()
@@ -30,12 +30,12 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        shopEditText.setOnClickListener {
-
-            val intent = Intent(applicationContext, SelectShopActivity::class.java)
-            startActivityForResult(intent, SELECT_SHOP)
-
-        }
+//        shopEditText.setOnClickListener {
+//
+//            val intent = Intent(applicationContext, SelectShopActivity::class.java)
+//            startActivityForResult(intent, SELECT_SHOP)
+//
+//        }
 
         createAccountButton.setOnClickListener {
             if (hasCompletedValues()) {
@@ -44,18 +44,18 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK){
-            if (data != null){
-                if (requestCode == SELECT_SHOP){
-                    selectedShop = data!!.getSerializableExtra("selected") as Shop
-                    shopEditText.setText(selectedShop.name)
-                }
-            }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (resultCode == Activity.RESULT_OK){
+//            if (data != null){
+//                if (requestCode == SELECT_SHOP){
+//                    selectedShop = data!!.getSerializableExtra("selected") as Shop
+//                    shopEditText.setText(selectedShop.name)
+//                }
+//            }
+//        }
+//    }
 
     fun registerUser() {
 
@@ -75,12 +75,12 @@ class RegisterActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Samp", "createUserWithEmail:success")
 
-                    val user = ShopUser(firstNameEditText.text.toString(), lastNameEditText.text.toString(), emailEditText.text.toString(), task.result!!.user!!.uid, selectedShop.shopId)
+                    val user = ShopUser(firstNameEditText.text.toString(), lastNameEditText.text.toString(), emailEditText.text.toString(), task.result!!.user!!.uid, selectedShop.shopId, true)
 
                     firebaseDatabase.registerShopUser(user) {
-                        println("New Success")
+
                         progressDialog.hide()
-                        val intent = Intent(applicationContext, DashboardActivity::class.java)
+                        val intent = Intent(applicationContext, RegisterShop::class.java)
                         startActivity(intent)
 
                         finish()
@@ -95,10 +95,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun hasCompletedValues(): Boolean {
-        if (shopEditText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the shop name field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (shopEditText.text.isEmpty()) {
+//            Toast.makeText(this, "Please fill up the shop name field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
         if (firstNameEditText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the first name field", Toast.LENGTH_LONG).show()

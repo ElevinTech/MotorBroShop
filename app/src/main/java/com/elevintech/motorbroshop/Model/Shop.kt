@@ -6,6 +6,7 @@ class Shop (
 
     var name: String = "",
     var logoUrl: String = "",
-    var shopId: String = ""
+    var shopId: String = "",
+    var branches: MutableList<Branch> = mutableListOf()
 
 ) : Serializable

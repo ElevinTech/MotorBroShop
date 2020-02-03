@@ -59,9 +59,11 @@ class MotorBroDatabase {
             .set(user)
             .addOnSuccessListener {
 
-                addToShopUsersCollection(user){
-                    callback()
-                }
+                callback()
+//
+//                addToShopUsersCollection(user){
+//                    callback()
+//                }
 
             }
             .addOnFailureListener {
@@ -108,6 +110,21 @@ class MotorBroDatabase {
 
             callback( user )
         }
+    }
+
+    fun saveShop(shop: Shop, callback: () -> Unit) {
+
+        // Access a Cloud Firestore instance from your Activity
+        val db = FirebaseFirestore.getInstance()
+
+        // Add a new document with a generated ID
+        db.collection("shops").document(shop.shopId)
+            .set(shop)
+            .addOnSuccessListener {callback()}
+            .addOnFailureListener {
+                e -> println(e)
+                callback()
+            }
     }
 
 
