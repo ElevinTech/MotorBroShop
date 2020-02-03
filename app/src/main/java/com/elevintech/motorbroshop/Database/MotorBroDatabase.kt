@@ -1,5 +1,6 @@
 package com.elevintech.motorbroshop.Database
 
+import com.elevintech.motorbroshop.Model.Consumer
 import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.google.firebase.auth.FirebaseAuth
@@ -84,6 +85,24 @@ class MotorBroDatabase {
 
             if (documentSnapshot != null && documentSnapshot.exists()) {
                 user = documentSnapshot.toObject(ShopUser::class.java)!!
+
+            }
+
+            callback( user )
+        }
+    }
+
+    fun getConsumer(uid: String, callback: (Consumer?) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("users").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user: Consumer? = null
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                user = documentSnapshot.toObject(Consumer::class.java)!!
 
             }
 

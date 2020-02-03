@@ -2,29 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/tabhome"
+        android:id="@+id/option1"
         android:icon="@drawable/ic_launcher_background"
-        android:title="Home" />
+        android:title="1st" />
 
     <item
-        android:id="@+id/tabparts"
+        android:id="@+id/option2"
         android:icon="@drawable/ic_launcher_background"
-        android:title="Parts" />
+        android:title="2nd" />
 
     <item
-        android:id="@+id/tabshop"
+        android:id="@+id/scanQr"
         android:icon="@drawable/ic_launcher_background"
-        android:title="" />
+        android:title="Scan" />
 
     <item
-        android:id="@+id/tabreminders"
+        android:id="@+id/option4"
         android:icon="@drawable/ic_launcher_background"
-        android:title="Reminders" />
+        android:title="4th" />
 
-    <item
-        android:id="@+id/tabhistory"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="History" />
 
 
 
