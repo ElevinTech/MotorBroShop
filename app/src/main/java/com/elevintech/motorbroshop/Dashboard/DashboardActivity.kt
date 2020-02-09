@@ -139,7 +139,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 R.id.scanQr -> {
                     val scanner = IntentIntegrator(this)
                     scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-                    scanner.setPrompt("Scan a barcode")
+                    scanner.setPrompt("Scan a QR code")
                     scanner.setOrientationLocked(true)
                     scanner.setBeepEnabled(true)
                     scanner.initiateScan()
