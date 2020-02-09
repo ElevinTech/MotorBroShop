@@ -51,24 +51,39 @@
 
 
             <!--android:src="@drawable/motorskyline"-->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"/>
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="200dp"/>-->
 
             <!--android:src="@drawable/motorbroinicon"-->
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="100dp"
-
+                android:layout_marginTop="20dp"
+                android:src="@drawable/motorbroinicon"
                 android:layout_gravity="center"
                 />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:gravity="center"
+                android:text="Merchant"
+                android:textColor="#0EA1F0"
+                android:textSize="19sp" />
 
             <!--android:fontFamily="@font/open_sans"-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email"
-
+                android:fontFamily="@font/open_sans_semibold"
                 android:textSize="19sp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="20dp"
@@ -89,7 +104,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-
+                    android:src="@drawable/email_colored_icon"
                     />
 
                 <EditText
@@ -110,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Password"
-
+                android:fontFamily="@font/open_sans_semibold"
                 android:textSize="19sp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="10dp"
@@ -131,7 +146,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-
+android:src="@drawable/password_colored_icon"
                     />
 
                 <EditText
@@ -159,6 +174,10 @@
 
                 android:textSize="19sp"
                 android:layout_marginTop="10dp"
+
+            android:background="@drawable/login_button_background"
+            android:textColor="@color/white"
+            android:fontFamily="@font/open_sans_semibold"
                 />
 
             <TextView

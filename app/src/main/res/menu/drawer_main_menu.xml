@@ -6,32 +6,32 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/documents"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/side_nav_documents_icon"
             android:title="Dcouments" />
 
         <item
             android:id="@+id/branches"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/side_nav_branches_icon"
             android:title="Branches" />
 
         <item
             android:id="@+id/employees"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/side_nav_employees_icon"
             android:title="Employees" />
 
         <item
             android:id="@+id/list"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/side_nav_list_filled_icon"
             android:title="List" />
 
-        <item
-            android:id="@+id/settings"
-            android:icon="@drawable/ic_launcher_background"
-            android:title="Settings" />
+<!--        <item-->
+<!--            android:id="@+id/settings"-->
+<!--            android:icon="@drawable/ic_launcher_background"-->
+<!--            android:title="Settings" />-->
 
         <item
             android:id="@+id/feedback"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/side_nav_feedback_icon"
             android:title="Feedback" />
 
     </group>
@@ -40,7 +40,7 @@
 
         <item
             android:id="@+id/sign_out"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/side_nav_logout_icon"
 
             android:title="Sign Out" />
     </group>

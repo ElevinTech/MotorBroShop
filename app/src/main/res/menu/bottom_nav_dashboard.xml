@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/tab_home_icon"
         android:title="Home" />
 
     <item
         android:id="@+id/customers"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/tab_customers_icon"
         android:title="Customers" />
 
     <item
         android:id="@+id/scanQr"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/tab_qrcode_icon"
         android:title="Scan" />
 
     <item
         android:id="@+id/option4"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/tab_settings_icon"
         android:title="4th" />
 
 
