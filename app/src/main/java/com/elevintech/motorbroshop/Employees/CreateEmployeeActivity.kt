@@ -3,6 +3,8 @@ package com.elevintech.motorbroshop.Employees
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.Employee
+import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Utils
@@ -15,35 +17,33 @@ class CreateEmployeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_employee)
 
-       MotorBroDatabase().getUser {
+        var owner = intent.getSerializableExtra("owner") as ShopOwner
 
-           val owner = it
+        createAccountButton.setOnClickListener {
 
-           createAccountButton.setOnClickListener {
+            // SHOW PROGRESS DIALOG
+            val progressDialog = Utils().easyProgressDialog(this, "Creating Employee")
+            progressDialog.show()
 
-                val progressDialog = Utils().easyProgressDialog(this, "Creating Employee")
-                progressDialog.show()
+            // CREATE EMPLOYEE OBJECT
+            var employee = Employee()
+            employee.firstName = firstNameEditText.text.toString()
+            employee.lastName = lastNameEditText.text.toString()
+            employee.email = emailEditText.text.toString()
+            employee.shopId = owner.shopId
+            employee.employeeId = FirebaseFirestore.getInstance().collection("employees").document().id
+            employee.branchId = "" // TODO: set employee branch id
+            employee.profilePictureUrl = "" // TODO: set profile picture
 
-                MotorBroDatabase().generateEmployeeId{
-
-                    val employeeId = it
-                    val firstName = firstNameEditText.text.toString()
-                    val lastName = lastNameEditText.text.toString()
-                    val email = emailEditText.text.toString()
-                    val shopId = owner.shopId
-
-                    val employee = ShopUser(firstName, lastName, email, employeeId, shopId, false, "")
-
-                    MotorBroDatabase().createEmployee(employee){
-                        progressDialog.dismiss()
-
-                        finish()
-                    }
-                }
+            // SAVE IN FIRESTORE
+            MotorBroDatabase().createEmployee(employee){
+               progressDialog.dismiss()
+               finish()
             }
+
 
         }
 
+     }
 
-    }
 }

@@ -16,6 +16,7 @@ import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
+import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,6 +33,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     lateinit var homeFragment: HomeFragment
     lateinit var customersListFragment: CustomerListFragment
+    lateinit var owner: ShopOwner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,23 +45,19 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         val db = MotorBroDatabase()
 
-        db.getUser {
-            println("Got User")
-            println(it.firstName)
-
-            setValuesNavHeader(it)
+        db.getOwner {
+            owner = it
+            setValuesNavHeader()
         }
     }
 
-    private fun setValuesNavHeader(user: ShopUser) {
+    private fun setValuesNavHeader() {
 
         val navHeader = nav_view.getHeaderView(0)
 
-        val navUserName = navHeader.usersNameText
-        val navUserEmail = navHeader.userEmailText
+        navHeader.usersNameText.text = owner.firstName + " " + owner.lastName
+        navHeader.userEmailText.text = owner.email
 
-        navUserName.setText(user.firstName + " " + user.lastName)
-        navUserEmail.setText(user.email)
     }
 
     private fun buildNavigationDrawer(){
@@ -71,8 +69,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
 
         val drawerLayout = drawer_layout
-        println("is layout nil")
-        println(drawerLayout)
 
         // create navigation drawer
         var toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
@@ -89,6 +85,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.employees -> {
                 val intent = Intent(this, EmployeeListActivity::class.java)
+                intent.putExtra("owner", owner)
                 startActivity(intent)
             }
 

@@ -1,5 +1,7 @@
 package com.elevintech.motorbroshop.Model
 
+import java.io.Serializable
+
 class ShopOwner (
 
     var uid:String = "",
@@ -12,4 +14,4 @@ class ShopOwner (
     var profilePictureUrl:String = ""
 
 
-)
+) : Serializable

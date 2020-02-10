@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
 import com.xwray.groupie.GroupAdapter
@@ -19,11 +20,12 @@ class EmployeeListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee_list)
 
-
+        var owner = intent.getSerializableExtra("owner") as ShopOwner
 
         floatingActionButton.setOnClickListener {
 
             val intent = Intent(this, CreateEmployeeActivity::class.java)
+            intent.putExtra("owner", owner)
             startActivity(intent)
 
         }

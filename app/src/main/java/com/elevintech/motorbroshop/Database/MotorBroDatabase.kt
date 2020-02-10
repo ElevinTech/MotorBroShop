@@ -74,7 +74,17 @@ class MotorBroDatabase {
 
     }
 
+    fun getOwner(callback: (ShopOwner) -> Unit){
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("owners").document(uid)
 
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = documentSnapshot.toObject(ShopOwner::class.java)!!
+            callback( user )
+        }
+    }
 
     fun getUser(callback: (ShopUser) -> Unit){
 
@@ -195,19 +205,6 @@ class MotorBroDatabase {
         callback(employeeId)
     }
 
-    fun createEmployee(employee: ShopUser, callback: () -> Unit) {
-
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("shop-users").document(employee.uid)
-            .set(employee)
-            .addOnSuccessListener { callback()}
-            .addOnFailureListener {
-                    e -> println(e)
-                callback()
-            }
-    }
-
     fun getShopId(callback: (shopId: String) -> Unit){
         getUser {
 
@@ -260,6 +257,16 @@ class MotorBroDatabase {
         }
 
 
+    }
+
+    fun createEmployee(employee: Employee, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("employees").document(employee.employeeId)
+            .set(employee)
+            .addOnSuccessListener {
+                callback()
+            }
     }
 
     fun createShopOwner(owner: ShopOwner, callback: () -> Unit) {
