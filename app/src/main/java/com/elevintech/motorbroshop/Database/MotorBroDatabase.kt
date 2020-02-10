@@ -133,16 +133,18 @@ class MotorBroDatabase {
         }
     }
 
-    fun saveShop(shop: Shop, callback: () -> Unit) {
+    fun createShop(shop: Shop, callback: () -> Unit) {
 
-        // Access a Cloud Firestore instance from your Activity
         val db = FirebaseFirestore.getInstance()
 
-        // Add a new document with a generated ID
         db.collection("shops").document(shop.shopId)
             .set(shop)
             .addOnSuccessListener {
-                callback()
+
+                updateOwnerShopId(shop.shopId){
+                    callback()
+                }
+
             }
             .addOnFailureListener {
                 e -> println(e)
@@ -154,10 +156,10 @@ class MotorBroDatabase {
         val db = FirebaseFirestore.getInstance()
         val uid = FirebaseAuth.getInstance().uid!!
 
-        db.collection("shop-user").document(uid)
+        db.collection("owners").document(uid)
             .update(mapOf("shopId" to shopId))
-            .addOnSuccessListener {}
-            .addOnFailureListener {e -> println(e)}
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { callback() }
     }
 
     fun getShopEmployees(callback: (MutableList<ShopUser>) -> Unit) {
@@ -258,6 +260,35 @@ class MotorBroDatabase {
         }
 
 
+    }
+
+    fun createShopOwner(owner: ShopOwner, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("owners").document(owner.uid)
+            .set(owner)
+            .addOnSuccessListener {
+
+                var user = User( owner.uid, User.UserType.OWNER )
+
+                createNewUser(user){
+                    callback()
+                }
+            }
+    }
+
+    fun createNewUser(user: User, callback: () -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users").document(user.uid)
+            .set(user)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                e -> println(e)
+                callback()
+            }
     }
 
 
