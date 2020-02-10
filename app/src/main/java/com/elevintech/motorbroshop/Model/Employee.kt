@@ -15,7 +15,8 @@ class Employee(
     var lastName: String = "",
 
     var email: String = "",
-    var profilePictureUrl:String = ""
+    var profilePictureUrl:String = "",
 
+    var hasSetupLogin: Boolean = false
 
 ): Serializable

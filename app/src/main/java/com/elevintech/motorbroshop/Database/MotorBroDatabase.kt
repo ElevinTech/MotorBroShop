@@ -17,8 +17,8 @@ class MotorBroDatabase {
         FirebaseFirestore.getInstance().collection("shops").get()
             .addOnSuccessListener {
 
-                for (shop in it){
-                    val shop = shop.toObject(Shop::class.java)
+                for (shopDocument in it){
+                    val shop = shopDocument.toObject(Shop::class.java)
                     shopList.add(shop)
                 }
 
@@ -172,28 +172,23 @@ class MotorBroDatabase {
             .addOnFailureListener { callback() }
     }
 
-    fun getShopEmployees(callback: (MutableList<ShopUser>) -> Unit) {
+    fun getShopEmployees(owner: ShopOwner, callback: (MutableList<Employee>) -> Unit) {
 
-        getUser {
+        var employeeList = mutableListOf<Employee>()
 
-            var employeeList = mutableListOf<ShopUser>()
+        FirebaseFirestore.getInstance().collection("employees")
+            .whereEqualTo("shopId", owner.shopId)
+            .get()
+            .addOnSuccessListener {
 
-            FirebaseFirestore.getInstance().collection("shop-users")
-                .whereEqualTo("shopId","${it.shopId}")
-                .whereEqualTo("shopOwner",false)
-                .get()
-                .addOnSuccessListener {
-
-                    for (shop in it){
-                        val shop = shop.toObject(ShopUser::class.java)
-                        employeeList.add(shop)
-                    }
-
-                    callback(employeeList)
-
+                for (employeeDocument in it){
+                    val employee = employeeDocument.toObject(Employee::class.java)
+                    employeeList.add(employee)
                 }
 
-        }
+                callback(employeeList)
+
+            }
 
     }
 
