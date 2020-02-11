@@ -53,6 +53,8 @@ class CustomerListFragment : Fragment() {
         recycler_view_consumers.layoutManager = LinearLayoutManager(activity)
         var consumersListAdapter = GroupAdapter<ViewHolder>()
 
+        recycler_view_consumers.adapter = consumersListAdapter
+
         if (consumersList.isNotEmpty()){
 
             for(consumer in consumersList){
@@ -62,7 +64,7 @@ class CustomerListFragment : Fragment() {
 
         }
 
-        recycler_view_consumers.adapter = consumersListAdapter
+
     }
 
     inner class employeeItem(val consumer: Consumer): Item<ViewHolder>() {
