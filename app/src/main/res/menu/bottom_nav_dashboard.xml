@@ -16,10 +16,10 @@
         android:icon="@drawable/tab_qrcode_icon"
         android:title="Scan" />
 
-    <item
-        android:id="@+id/option4"
-        android:icon="@drawable/tab_settings_icon"
-        android:title="4th" />
+    <itemw
+        android:id="@+id/reports"
+        android:icon="@drawable/charts_bottom_icon"
+        android:title="Reports" />
 
 
 
