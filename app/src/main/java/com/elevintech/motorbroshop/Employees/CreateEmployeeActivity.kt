@@ -2,6 +2,7 @@ package com.elevintech.motorbroshop.Employees
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Employee
 import com.elevintech.motorbroshop.Model.ShopOwner
@@ -37,12 +38,25 @@ class CreateEmployeeActivity : AppCompatActivity() {
             // SAVE IN FIRESTORE
             MotorBroDatabase().createEmployee(employee){
                progressDialog.dismiss()
-               finish()
+                createBasicAlertDialog(employee)
             }
 
 
         }
 
      }
+
+    fun createBasicAlertDialog(employee: Employee){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Success!")
+        builder.setMessage("Your employee's ID is: '" + employee.employeeId + "', they will use this to create their own login account.")
+        builder.setPositiveButton("Got it") { dialog, which ->
+
+            dialog.dismiss()
+            finish()
+        }
+        builder.setCancelable(false)
+        builder.show()
+    }
 
 }
