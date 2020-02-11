@@ -29,7 +29,6 @@ class CreateEmployeeActivity : AppCompatActivity() {
             var employee = Employee()
             employee.firstName = firstNameEditText.text.toString()
             employee.lastName = lastNameEditText.text.toString()
-            employee.email = emailEditText.text.toString()
             employee.shopId = owner.shopId
             employee.employeeId = FirebaseFirestore.getInstance().collection("employees").document().id
             employee.branchId = "" // TODO: set employee branch id

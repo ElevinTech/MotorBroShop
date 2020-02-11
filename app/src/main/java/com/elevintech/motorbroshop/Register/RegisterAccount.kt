@@ -59,7 +59,7 @@ class RegisterAccount : AppCompatActivity() {
 
                     firebaseDatabase.registerShopUser(user) {
 
-                        progressDialog.hide()
+                        progressDialog.dismiss()
                         val intent = Intent(applicationContext, RegisterShop::class.java)
                         startActivity(intent)
 

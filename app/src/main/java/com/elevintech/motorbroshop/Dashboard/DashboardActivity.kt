@@ -16,8 +16,10 @@ import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
+import com.elevintech.motorbroshop.Model.Employee
 import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
+import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -33,7 +35,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     lateinit var homeFragment: HomeFragment
     lateinit var customersListFragment: CustomerListFragment
-    lateinit var owner: ShopOwner
+
+    var owner = ShopOwner()
+    var employee = Employee()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +50,41 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         val db = MotorBroDatabase()
 
-        db.getOwner {
-            owner = it
-            setValuesNavHeader()
+        db.getUserType{ userType ->
+
+            if ( userType == User.UserType.OWNER ) {
+
+                db.getOwner {
+                    owner = it
+                    setValuesNavHeader(owner)
+                }
+
+            } else if ( userType == User.UserType.EMPLOYEE ){
+
+                db.getEmployee {
+                    employee = it
+                    setValuesNavHeader(employee)
+                }
+
+            }
+
         }
+
     }
 
-    private fun setValuesNavHeader() {
+    private fun setValuesNavHeader(owner: ShopOwner) {
 
         val navHeader = nav_view.getHeaderView(0)
-
         navHeader.usersNameText.text = owner.firstName + " " + owner.lastName
         navHeader.userEmailText.text = owner.email
+
+    }
+
+    private fun setValuesNavHeader(employee: Employee) {
+
+        val navHeader = nav_view.getHeaderView(0)
+        navHeader.usersNameText.text = employee.firstName + " " + employee.lastName
+        navHeader.userEmailText.text = employee.email
 
     }
 
@@ -102,9 +130,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         homeFragment = HomeFragment()
         customersListFragment = CustomerListFragment()
-//        shopFragment = ShopFragment()
-//        remindersFragment = RemindersFragment()
-//        historyFragment = HistoryFragment()
 
         val menuView = bottom_nav.getChildAt(0) as? ViewGroup ?: return
         menuView.forEach {

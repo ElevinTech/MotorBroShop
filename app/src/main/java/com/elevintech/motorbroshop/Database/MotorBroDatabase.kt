@@ -105,6 +105,48 @@ class MotorBroDatabase {
         }
     }
 
+    // used for gettings details of the employee after logging in
+    fun getEmployee(callback: (Employee) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("employees")
+                        .whereEqualTo("uid", uid)
+
+        docRef.get().addOnSuccessListener {
+
+            for (documentSnapshot in it){
+                val employee = documentSnapshot.toObject(Employee::class.java)!!
+                callback( employee )
+            }
+
+        }
+
+    }
+
+    // used for gettings details of the employee before creating login account
+    fun getEmployee(employeeId: String, callback: (Employee?) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("employees").document(employeeId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+
+                val employee = documentSnapshot.toObject(Employee::class.java)!!
+                callback( employee )
+
+            } else {
+
+                callback( null )
+
+            }
+
+        }
+
+    }
+
     fun getConsumer(uid: String, callback: (Consumer?) -> Unit){
 
         val db = FirebaseFirestore.getInstance()
@@ -273,16 +315,16 @@ class MotorBroDatabase {
 
                 var user = User( owner.uid, User.UserType.OWNER )
 
-                createNewUser(user){
+                createNewUser(owner.uid, user){
                     callback()
                 }
             }
     }
 
-    fun createNewUser(user: User, callback: () -> Unit){
+    fun createNewUser(id: String, user: User, callback: () -> Unit){
 
         val db = FirebaseFirestore.getInstance()
-        db.collection("users").document(user.uid)
+        db.collection("users").document(id)
             .set(user)
             .addOnSuccessListener {
                 callback()
@@ -291,6 +333,31 @@ class MotorBroDatabase {
                 e -> println(e)
                 callback()
             }
+    }
+
+    fun getUserType(callback: (String) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("users").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = documentSnapshot.toObject(User::class.java)!!
+            callback( user.userType )
+        }
+
+    }
+
+    fun updateEmployeeFields(employeeId: String, email: String, uid: String, callback: () -> Unit){
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("employees").document(employeeId)
+            .update(mapOf("hasSetupLogin" to true,
+                            "email" to email,
+                            "uid"   to uid))
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { callback() }
     }
 
 

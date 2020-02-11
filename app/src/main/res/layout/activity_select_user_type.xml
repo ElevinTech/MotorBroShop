@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register.SelectUserType"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Which one of the following are you?" />
+
+    <Button
+        android:id="@+id/ownerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I'm a shop owner"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/employeeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I'm an employee"
+        android:textAllCaps="false"/>
+
+</LinearLayout>
