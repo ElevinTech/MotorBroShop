@@ -5,14 +5,15 @@ import java.io.Serializable
 class Document (
 
     var type: String = "",
-    var imageUrl: String = ""
+    var imageUrl: String = "",
+    var dateModified: Long = 0
 
 ) : Serializable {
 
-
     object DocumentType {
-        val BIR = "bir"
-        val BARANGGAY_PERMIT = "brgy_permit"
+        val DTI: String = "dti"
+        val MAYORS_PERMIT: String = "mayors_permit"
+        val BIR: String = "bir"
     }
 
 }

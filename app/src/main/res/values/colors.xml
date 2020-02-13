@@ -3,6 +3,11 @@
     <color name="colorPrimary">#4F6B91</color>
     <color name="colorPrimaryDark">#384C68</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="triadPrimaryGreen">#7bcf3c</color>
+    <color name="triadPrimaryRed">#cf3c7b</color>
+
+
     <color name="colorSecondary">#9C27B0</color>
     <color name="white">#FFFFFF</color>
     <color name="loginTransparentBackground">#F9F7F7</color>

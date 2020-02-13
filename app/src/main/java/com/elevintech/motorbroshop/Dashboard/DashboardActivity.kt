@@ -14,6 +14,7 @@ import com.elevintech.motorbroshop.Consumer.ConsumerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.Fragments.CustomerListFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Documents.DocumentsActivity
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
 import com.elevintech.motorbroshop.Model.Employee
@@ -113,8 +114,16 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.employees -> {
                 val intent = Intent(this, EmployeeListActivity::class.java)
-                intent.putExtra("owner", owner)
+                intent.putExtra("shopId", owner.shopId)
                 startActivity(intent)
+            }
+
+            R.id.documents -> {
+
+                val intent = Intent(this, DocumentsActivity::class.java)
+                intent.putExtra("shopId", owner.shopId)
+                startActivity(intent)
+
             }
 
             R.id.sign_out -> {

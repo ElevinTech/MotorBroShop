@@ -18,7 +18,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_employee)
 
-        var owner = intent.getSerializableExtra("owner") as ShopOwner
+        var shopId = intent.getStringExtra("shopId")
 
         createAccountButton.setOnClickListener {
 
@@ -30,7 +30,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
             var employee = Employee()
             employee.firstName = firstNameEditText.text.toString()
             employee.lastName = lastNameEditText.text.toString()
-            employee.shopId = owner.shopId
+            employee.shopId = shopId
             employee.employeeId = FirebaseFirestore.getInstance().collection("employees").document().id
             employee.branchId = "" // TODO: set employee branch id
             employee.profilePictureUrl = "" // TODO: set profile picture

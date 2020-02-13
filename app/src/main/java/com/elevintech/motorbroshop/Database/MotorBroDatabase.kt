@@ -1,11 +1,15 @@
 package com.elevintech.motorbroshop.Database
 
+import android.net.Uri
 import com.elevintech.motorbroshop.DispatchGroup
 import com.elevintech.motorbroshop.Model.*
+import com.elevintech.motorbroshop.Utils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class MotorBroDatabase {
 
@@ -214,12 +218,12 @@ class MotorBroDatabase {
             .addOnFailureListener { callback() }
     }
 
-    fun getShopEmployees(owner: ShopOwner, callback: (MutableList<Employee>) -> Unit) {
+    fun getShopEmployees(shopId: String, callback: (MutableList<Employee>) -> Unit) {
 
         var employeeList = mutableListOf<Employee>()
 
         FirebaseFirestore.getInstance().collection("employees")
-            .whereEqualTo("shopId", owner.shopId)
+            .whereEqualTo("shopId", shopId)
             .get()
             .addOnSuccessListener {
 
@@ -380,6 +384,65 @@ class MotorBroDatabase {
                             "uid"   to uid))
             .addOnSuccessListener { callback() }
             .addOnFailureListener { callback() }
+    }
+
+    fun getDocument(documentName: String, shopId: String, callback: (Document?) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+
+        val docRef = db.collection("shops").document(shopId).collection("documents").document(documentName)
+
+        docRef.get()
+            .addOnSuccessListener {
+
+                if (it != null && it.exists()) {
+                    val document = it.toObject(Document::class.java)!!
+                    callback(document)
+                } else {
+                    callback(null)
+
+                }
+
+
+            }
+
+    }
+
+    fun uploadDocumentsToFirebaseStorage(imageUri: Uri, callback: (url: String) -> Unit) {
+
+        var filename = UUID.randomUUID().toString()
+        var storageRef = FirebaseStorage.getInstance().getReference("/documents/$filename.jpg")
+
+        // UPLOAD TO FIREBASE
+        storageRef.putFile(imageUri)
+            .addOnSuccessListener {
+
+                storageRef.downloadUrl.addOnSuccessListener {
+                    var url = it.toString()
+
+                    callback(url)
+                }
+
+            }
+            .addOnFailureListener{
+                println( it.toString())
+            }
+    }
+
+    fun saveShopDocument(shopId: String, documentType: String, imageUri: Uri, callback: () -> Unit) {
+
+        uploadDocumentsToFirebaseStorage(imageUri){ imageUrl ->
+            val db = FirebaseFirestore.getInstance()
+            val docRef = db.collection("shops").document(shopId).collection("documents").document("$documentType")
+
+            val document = Document(documentType, imageUrl, Utils().getCurrentTimestamp())
+
+            docRef
+                .set(document)
+                .addOnSuccessListener { callback() }
+                .addOnFailureListener { e -> callback() }
+        }
+
     }
 
 

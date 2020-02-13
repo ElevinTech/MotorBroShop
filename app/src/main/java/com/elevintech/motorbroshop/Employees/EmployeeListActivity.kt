@@ -17,18 +17,18 @@ import kotlinx.android.synthetic.main.row_employee.view.*
 
 class EmployeeListActivity : AppCompatActivity() {
 
-    lateinit var owner: ShopOwner
+    var shopId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee_list)
 
-        owner = intent.getSerializableExtra("owner") as ShopOwner
+        shopId = intent.getStringExtra("shopId")
 
         floatingActionButton.setOnClickListener {
 
             val intent = Intent(this, CreateEmployeeActivity::class.java)
-            intent.putExtra("owner", owner)
+            intent.putExtra("shopId", shopId)
             startActivity(intent)
 
         }
@@ -42,7 +42,7 @@ class EmployeeListActivity : AppCompatActivity() {
 
     private fun getShopEmployees() {
 
-        MotorBroDatabase().getShopEmployees(owner){
+        MotorBroDatabase().getShopEmployees(shopId){
 
             displayEmployeeList(it)
 

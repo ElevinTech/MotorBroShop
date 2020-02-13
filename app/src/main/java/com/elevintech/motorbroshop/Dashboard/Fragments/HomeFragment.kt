@@ -29,15 +29,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val db = MotorBroDatabase()
-        db.getShop {
-            val shop = it
-
-            shopName.setText(shop.name)
-
-        }
+//        db.getShop {
+//            val shop = it
+//
+//            shopName.setText(shop.name)
+//
+//        }
 
         db.getUser {
-            shopUser.setText(it.firstName + " " + it.lastName)
+            shopUser.text = it.firstName + " " + it.lastName
         }
     }
 

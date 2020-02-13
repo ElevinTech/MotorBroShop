@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elevintech.motorbroshop">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Register.RegisterEmployee"></activity>
+        <activity android:name=".CustomCamera.CustomCamera"></activity>
+        <activity
+            android:name=".Documents.AddEditDocument"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Documents.DocumentsActivity" />
+        <activity android:name=".Register.RegisterEmployee" />
         <activity android:name=".Register.EnterEmployeeID" />
         <activity android:name=".Register.SelectUserType" />
         <activity android:name=".Register.RegisterOwner" />
