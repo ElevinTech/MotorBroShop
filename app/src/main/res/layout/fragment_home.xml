@@ -22,6 +22,7 @@
             >
 
             <ImageView
+                android:id="@+id/shopLogo"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
                 android:src="@drawable/yamaha_logo_icon"
@@ -30,6 +31,7 @@
                 />
 
             <TextView
+                android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Yamaha"
@@ -40,6 +42,7 @@
                 />
 
             <TextView
+                android:id="@+id/shopUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User: Michael Pelps"
@@ -50,6 +53,7 @@
                 />
 
             <TextView
+                android:id="@+id/shopEstablished"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Est. 1992"
@@ -60,6 +64,7 @@
                 />
 
             <TextView
+                android:id="@+id/shopCustomersNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Current Customers: 19"
@@ -70,6 +75,7 @@
                 />
 
             <TextView
+                android:id="@+id/shopPartsServicesNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Current Parts and Services: 11"

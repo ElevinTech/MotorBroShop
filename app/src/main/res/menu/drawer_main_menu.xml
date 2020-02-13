@@ -7,7 +7,7 @@
         <item
             android:id="@+id/documents"
             android:icon="@drawable/side_nav_documents_icon"
-            android:title="Dcouments" />
+            android:title="Documents" />
 
         <item
             android:id="@+id/branches"

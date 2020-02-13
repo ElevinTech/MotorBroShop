@@ -214,6 +214,28 @@ class MotorBroDatabase {
         }
     }
 
+    fun getShop(callback: (shop: Shop) -> Unit){
+        getUser {
+
+            val db = FirebaseFirestore.getInstance()
+            db.collection("shops").document(it.shopId)
+                .get()
+                .addOnSuccessListener {
+
+                    var shop = Shop()
+
+                    if (it != null && it.exists()) {
+                        shop = it.toObject(Shop::class.java)!!
+
+                    }
+
+                    callback(shop)
+                }
+
+
+        }
+    }
+
     fun addShopCustomer(consumer: Consumer, callback: () -> Unit){
         getShopId{
 
