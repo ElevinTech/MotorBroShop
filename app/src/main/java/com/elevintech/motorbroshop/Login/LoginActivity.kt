@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Register.RegisterAccount
+import com.elevintech.motorbroshop.Register.RegisterOwner
+import com.elevintech.motorbroshop.Register.SelectUserType
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -18,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         createAccountText.setOnClickListener {
-            val intent = Intent(applicationContext, RegisterAccount::class.java)
+            val intent = Intent(applicationContext, SelectUserType::class.java)
             startActivity(intent)
         }
 
@@ -41,12 +43,12 @@ class LoginActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword("${userNameEditText.text}", "${passwordEditText.text}")
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        progressDialog.hide()
+                        progressDialog.dismiss()
 
                         val intent = Intent(applicationContext, DashboardActivity::class.java)
                         startActivity(intent)
                     } else {
-                        progressDialog.hide()
+                        progressDialog.dismiss()
                         Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }

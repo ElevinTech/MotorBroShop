@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.Employee
+import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
 import com.xwray.groupie.GroupAdapter
@@ -15,15 +17,18 @@ import kotlinx.android.synthetic.main.row_employee.view.*
 
 class EmployeeListActivity : AppCompatActivity() {
 
+    lateinit var owner: ShopOwner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee_list)
 
-
+        owner = intent.getSerializableExtra("owner") as ShopOwner
 
         floatingActionButton.setOnClickListener {
 
             val intent = Intent(this, CreateEmployeeActivity::class.java)
+            intent.putExtra("owner", owner)
             startActivity(intent)
 
         }
@@ -37,7 +42,7 @@ class EmployeeListActivity : AppCompatActivity() {
 
     private fun getShopEmployees() {
 
-        MotorBroDatabase().getShopEmployees{
+        MotorBroDatabase().getShopEmployees(owner){
 
             displayEmployeeList(it)
 
@@ -45,7 +50,7 @@ class EmployeeListActivity : AppCompatActivity() {
 
     }
 
-    private fun displayEmployeeList(employeeList: MutableList<ShopUser>) {
+    private fun displayEmployeeList(employeeList: MutableList<Employee>) {
 
         recycler_view_employees.layoutManager = LinearLayoutManager(this)
         var employeeListAdapter = GroupAdapter<ViewHolder>()
@@ -60,9 +65,10 @@ class EmployeeListActivity : AppCompatActivity() {
         recycler_view_employees.adapter = employeeListAdapter
     }
 
-    inner class employeeItem(val employee: ShopUser): Item<ViewHolder>() {
+    inner class employeeItem(val employee: Employee): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.employeeName.text = employee.firstName + " " + employee.lastName
+            viewHolder.itemView.employeeId.text = employee.employeeId
         }
 
         override fun getLayout(): Int {

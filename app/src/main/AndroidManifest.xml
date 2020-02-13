@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Employees.CreateEmployeeActivity"></activity>
+        <activity android:name=".Register.RegisterEmployee"></activity>
+        <activity android:name=".Register.EnterEmployeeID" />
+        <activity android:name=".Register.SelectUserType" />
+        <activity android:name=".Register.RegisterOwner" />
+        <activity android:name=".Employees.CreateEmployeeActivity" />
         <activity android:name=".Employees.EmployeeListActivity" />
         <activity android:name=".Register.RegisterShop" />
         <activity android:name=".Consumer.ConsumerProfileActivity" />

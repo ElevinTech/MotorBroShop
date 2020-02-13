@@ -1,34 +1,23 @@
 package com.elevintech.motorbroshop.Register
 
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
-import com.elevintech.motorbroshop.Model.Shop
+import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register_owner.*
 
-class RegisterAccount : AppCompatActivity() {
-
-    private lateinit var auth: FirebaseAuth
-    var selectedShop: Shop = Shop()
-
-    companion object {
-        val SELECT_SHOP = 1
-    }
+class RegisterOwner : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
-        auth = FirebaseAuth.getInstance()
+        setContentView(R.layout.activity_register_owner)
 
         createAccountButton.setOnClickListener {
             if (hasCompletedValues()) {
@@ -39,6 +28,7 @@ class RegisterAccount : AppCompatActivity() {
 
     fun registerUser() {
 
+        val auth = FirebaseAuth.getInstance()
         val firebaseDatabase = MotorBroDatabase()
 
         val email = emailEditText.text.toString()
@@ -51,13 +41,19 @@ class RegisterAccount : AppCompatActivity() {
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
+
+                // SUCCESSFULL CREATE OF ACCOUNT
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("Samp", "createUserWithEmail:success")
 
-                    val user = ShopUser(firstNameEditText.text.toString(), lastNameEditText.text.toString(), emailEditText.text.toString(), task.result!!.user!!.uid, selectedShop.shopId, true)
+                    var user = ShopOwner()
+                    user.uid        = task.result!!.user!!.uid
+                    user.firstName  = firstNameEditText.text.toString()
+                    user.lastName   = lastNameEditText.text.toString()
+                    user.shopId     = "" // shop wil be created on the next step, account creation first
+                    user.email      = emailEditText.text.toString()
+                    user.profilePictureUrl = "" // TODO: owner profile picture
 
-                    firebaseDatabase.registerShopUser(user) {
+                    firebaseDatabase.createShopOwner(user) {
 
                         progressDialog.dismiss()
                         val intent = Intent(applicationContext, RegisterShop::class.java)
@@ -66,6 +62,7 @@ class RegisterAccount : AppCompatActivity() {
                         finish()
                     }
 
+                // FAILED CREATE OF ACCOUNT
                 } else {
                     Toast.makeText(baseContext, "${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
                     progressDialog.dismiss()

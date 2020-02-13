@@ -8,6 +8,7 @@ import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.R
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register_shop.*
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,26 +22,23 @@ class RegisterShop : AppCompatActivity() {
 
         saveShopButton.setOnClickListener {
             if (hasCompletedValues()) {
-                saveShop()
+                createShop()
             }
         }
 
     }
 
-    private fun saveShop() {
+    private fun createShop() {
 
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("shops").document()
-        val shopId = ref.id
-        val shopName = shopNameEditText.text.toString()
+        var shop = Shop()
+        shop.shopId = FirebaseFirestore.getInstance().collection("shops").document().id
+        shop.name = shopNameEditText.text.toString()
+        shop.ownerId = FirebaseAuth.getInstance().uid!!
 
-        var shop = Shop("$shopName", "", "$shopId")
-        MotorBroDatabase().updateOwnerShopId(shopId){
-            MotorBroDatabase().saveShop(shop){
-                val intent = Intent(this, DashboardActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+        MotorBroDatabase().createShop(shop){
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }

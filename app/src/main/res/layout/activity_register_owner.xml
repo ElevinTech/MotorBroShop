@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Employees.CreateEmployeeActivity">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,19 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--srcCompatapp:srcCompat="@drawable/backbutton"-->
-                <ImageView
-                    android:id="@+id/backButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_launcher_background"
-                     />
-
-
     </androidx.appcompat.widget.Toolbar>
 
 
@@ -37,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Create an Employee Account"
+        android:text="Create an account"
         android:textColor="#fff"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -61,25 +47,24 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
-<!--            <TextView-->
-<!--                android:id="@+id/firstNameLabel"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="24dp"-->
-<!--                android:text="Profile Picture"-->
-<!--                android:textColor="#0C0C0C"-->
-<!--                android:textSize="18sp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_gravity="center_horizontal"/>-->
+            <TextView
+                android:id="@+id/firstNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Profile Picture"
+                android:textColor="#0C0C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"/>
 
-<!--            &lt;!&ndash;app:srcCompat="@drawable/blueplusicons"&ndash;&gt;-->
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_gravity="center_horizontal"/>-->
-
+            <!--app:srcCompat="@drawable/blueplusicons"-->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -120,24 +105,63 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
+
             <TextView
-                android:id="@+id/textView2213"
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Branch"
+                android:text="Email"
                 android:textColor="#0C0C0C"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/branchEditText"
+                android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Password"
+                android:textColor="#0C0C0C"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Confirm Password"
+                android:textColor="#0C0C0C"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/confirmPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/createAccountButton"

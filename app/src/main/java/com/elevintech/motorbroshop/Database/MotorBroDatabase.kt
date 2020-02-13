@@ -17,8 +17,8 @@ class MotorBroDatabase {
         FirebaseFirestore.getInstance().collection("shops").get()
             .addOnSuccessListener {
 
-                for (shop in it){
-                    val shop = shop.toObject(Shop::class.java)
+                for (shopDocument in it){
+                    val shop = shopDocument.toObject(Shop::class.java)
                     shopList.add(shop)
                 }
 
@@ -74,7 +74,17 @@ class MotorBroDatabase {
 
     }
 
+    fun getOwner(callback: (ShopOwner) -> Unit){
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("owners").document(uid)
 
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = documentSnapshot.toObject(ShopOwner::class.java)!!
+            callback( user )
+        }
+    }
 
     fun getUser(callback: (ShopUser) -> Unit){
 
@@ -93,6 +103,48 @@ class MotorBroDatabase {
 
             callback( user )
         }
+    }
+
+    // used for gettings details of the employee after logging in
+    fun getEmployee(callback: (Employee) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("employees")
+                        .whereEqualTo("uid", uid)
+
+        docRef.get().addOnSuccessListener {
+
+            for (documentSnapshot in it){
+                val employee = documentSnapshot.toObject(Employee::class.java)!!
+                callback( employee )
+            }
+
+        }
+
+    }
+
+    // used for gettings details of the employee before creating login account
+    fun getEmployee(employeeId: String, callback: (Employee?) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("employees").document(employeeId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+
+                val employee = documentSnapshot.toObject(Employee::class.java)!!
+                callback( employee )
+
+            } else {
+
+                callback( null )
+
+            }
+
+        }
+
     }
 
     fun getConsumer(uid: String, callback: (Consumer?) -> Unit){
@@ -133,16 +185,18 @@ class MotorBroDatabase {
         }
     }
 
-    fun saveShop(shop: Shop, callback: () -> Unit) {
+    fun createShop(shop: Shop, callback: () -> Unit) {
 
-        // Access a Cloud Firestore instance from your Activity
         val db = FirebaseFirestore.getInstance()
 
-        // Add a new document with a generated ID
         db.collection("shops").document(shop.shopId)
             .set(shop)
             .addOnSuccessListener {
-                callback()
+
+                updateOwnerShopId(shop.shopId){
+                    callback()
+                }
+
             }
             .addOnFailureListener {
                 e -> println(e)
@@ -154,34 +208,29 @@ class MotorBroDatabase {
         val db = FirebaseFirestore.getInstance()
         val uid = FirebaseAuth.getInstance().uid!!
 
-        db.collection("shop-user").document(uid)
+        db.collection("owners").document(uid)
             .update(mapOf("shopId" to shopId))
-            .addOnSuccessListener {}
-            .addOnFailureListener {e -> println(e)}
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { callback() }
     }
 
-    fun getShopEmployees(callback: (MutableList<ShopUser>) -> Unit) {
+    fun getShopEmployees(owner: ShopOwner, callback: (MutableList<Employee>) -> Unit) {
 
-        getUser {
+        var employeeList = mutableListOf<Employee>()
 
-            var employeeList = mutableListOf<ShopUser>()
+        FirebaseFirestore.getInstance().collection("employees")
+            .whereEqualTo("shopId", owner.shopId)
+            .get()
+            .addOnSuccessListener {
 
-            FirebaseFirestore.getInstance().collection("shop-users")
-                .whereEqualTo("shopId","${it.shopId}")
-                .whereEqualTo("shopOwner",false)
-                .get()
-                .addOnSuccessListener {
-
-                    for (shop in it){
-                        val shop = shop.toObject(ShopUser::class.java)
-                        employeeList.add(shop)
-                    }
-
-                    callback(employeeList)
-
+                for (employeeDocument in it){
+                    val employee = employeeDocument.toObject(Employee::class.java)
+                    employeeList.add(employee)
                 }
 
-        }
+                callback(employeeList)
+
+            }
 
     }
 
@@ -191,19 +240,6 @@ class MotorBroDatabase {
         val employeeId = ref.id
 
         callback(employeeId)
-    }
-
-    fun createEmployee(employee: ShopUser, callback: () -> Unit) {
-
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("shop-users").document(employee.uid)
-            .set(employee)
-            .addOnSuccessListener { callback()}
-            .addOnFailureListener {
-                    e -> println(e)
-                callback()
-            }
     }
 
     fun getShopId(callback: (shopId: String) -> Unit){
@@ -280,6 +316,70 @@ class MotorBroDatabase {
         }
 
 
+    }
+
+    fun createEmployee(employee: Employee, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("employees").document(employee.employeeId)
+            .set(employee)
+            .addOnSuccessListener {
+                callback()
+            }
+    }
+
+    fun createShopOwner(owner: ShopOwner, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("owners").document(owner.uid)
+            .set(owner)
+            .addOnSuccessListener {
+
+                var user = User( owner.uid, User.UserType.OWNER )
+
+                createNewUser(owner.uid, user){
+                    callback()
+                }
+            }
+    }
+
+    fun createNewUser(id: String, user: User, callback: () -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users").document(id)
+            .set(user)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                e -> println(e)
+                callback()
+            }
+    }
+
+    fun getUserType(callback: (String) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("users").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = documentSnapshot.toObject(User::class.java)!!
+            callback( user.userType )
+        }
+
+    }
+
+    fun updateEmployeeFields(employeeId: String, email: String, uid: String, callback: () -> Unit){
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("employees").document(employeeId)
+            .update(mapOf("hasSetupLogin" to true,
+                            "email" to email,
+                            "uid"   to uid))
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { callback() }
     }
 
 
