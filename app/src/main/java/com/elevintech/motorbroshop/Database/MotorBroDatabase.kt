@@ -247,7 +247,8 @@ class MotorBroDatabase {
     }
 
     fun getShopId(callback: (shopId: String) -> Unit){
-        getUser {
+        getOwner {
+
 
             callback(it.shopId)
 
@@ -300,9 +301,12 @@ class MotorBroDatabase {
 
         getShopId{shopId ->
 
+            println("shopId is + ")
+            println(shopId)
             val db = FirebaseFirestore.getInstance()
             db.collection("shops").document(shopId).collection("customers").get()
                 .addOnSuccessListener {querySnapshot ->
+
 
                     for(consumer in querySnapshot.documents){
 
