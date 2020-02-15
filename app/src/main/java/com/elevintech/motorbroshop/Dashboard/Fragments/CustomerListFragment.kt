@@ -57,10 +57,10 @@ class CustomerListFragment : Fragment() {
 
     private fun displayCustomers(customersList: MutableList<Customer>) {
 
-        recycler_view_consumers.layoutManager = LinearLayoutManager(activity)
+        recycler_view_customers.layoutManager = LinearLayoutManager(activity)
         var customersListAdapter = GroupAdapter<ViewHolder>()
 
-        recycler_view_consumers.adapter = customersListAdapter
+        recycler_view_customers.adapter = customersListAdapter
 
         if (customersList.isNotEmpty()){
 

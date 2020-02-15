@@ -240,17 +240,17 @@ class MotorBroDatabase {
 
     }
 
-    fun getShopCustomers(shopId: String, callback: (MutableList<Customer>) -> Unit) {
+    fun getShopCustomerData(shopId: String, callback: (MutableList<CustomerShopData>) -> Unit) {
 
-        var customersList = mutableListOf<Customer>()
+        var customersList = mutableListOf<CustomerShopData>()
 
         val db = FirebaseFirestore.getInstance()
         db.collection("shops").document(shopId).collection("customers").get()
             .addOnSuccessListener {querySnapshot ->
 
-                for(customerSnapshot in querySnapshot.documents){
+                for(customerSnapshot in querySnapshot){
 
-                    val customer = customerSnapshot.toObject(Customer::class.java)
+                    val customer = customerSnapshot.toObject(CustomerShopData::class.java)
                     customersList.add(customer!!)
 
                 }
@@ -258,9 +258,46 @@ class MotorBroDatabase {
 
             }
             .addOnFailureListener {
-                e -> println(e)
+                    e -> println(e)
                 callback(customersList)
             }
+
+    }
+
+    fun getShopCustomers(shopId: String, callback: (MutableList<Customer>) -> Unit) {
+
+
+        getShopCustomerData(shopId){ customerShopDataList ->
+
+            val listOfCustomerId = mutableListOf<String>()
+            for (customerShopData in customerShopDataList){
+                listOfCustomerId.add(customerShopData.customerId)
+            }
+
+
+            val listOfCustomers = mutableListOf<Customer>()
+            val db = FirebaseFirestore.getInstance()
+            db.collection("customers")
+                .whereIn("uid", listOfCustomerId)
+                .get()
+                .addOnSuccessListener {
+
+                    for(customerSnapshot in it){
+
+                        val customer = customerSnapshot.toObject(Customer::class.java)
+                        listOfCustomers.add(customer)
+
+                    }
+                    callback(listOfCustomers)
+
+                }
+                .addOnFailureListener {
+                    callback(listOfCustomers)
+                }
+
+
+
+        }
 
     }
 
