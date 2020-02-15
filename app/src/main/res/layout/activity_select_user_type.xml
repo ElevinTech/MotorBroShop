@@ -12,20 +12,81 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Which one of the following are you?" />
+        android:text="Which one of the following are you?"
+        android:fontFamily="@font/open_sans_bold"
+        android:textSize="17sp"
+        android:textColor="@color/textColorBlack"/>
 
-    <Button
-        android:id="@+id/ownerButton"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="I'm a shop owner"
-        android:textAllCaps="false" />
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        >
 
-    <Button
-        android:id="@+id/employeeButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="I'm an employee"
-        android:textAllCaps="false"/>
+        <LinearLayout
+            android:id="@+id/employeeButton"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/shadow_background"
+            >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+android:src="@drawable/employee_colored_icon"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Employee"
+                android:textColor="@color/textColorBlack"
+                android:fontFamily="@font/open_sans_bold"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ownerButton"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/shadow_background"
+            >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/owner_icon"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Owner"
+                android:textColor="@color/textColorBlack"
+                android:fontFamily="@font/open_sans_bold"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

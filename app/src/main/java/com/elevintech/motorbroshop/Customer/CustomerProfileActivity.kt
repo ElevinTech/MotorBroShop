@@ -22,7 +22,7 @@ class CustomerProfileActivity : AppCompatActivity() {
 
     private fun updateUI(customer: Customer) {
 
-        customerNameText.text = customer.firstName + " " + customer.lastName
-
+        userNameToolbar.text = (customer.firstName + " " + customer.lastName)
+        userNameFull.text = (customer.firstName + " " + customer.lastName)
     }
 }

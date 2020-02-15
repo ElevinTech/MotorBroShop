@@ -90,24 +90,6 @@ class MotorBroDatabase {
         }
     }
 
-//    fun getUser(callback: () -> Unit){
-//
-//        val db = FirebaseFirestore.getInstance()
-//        val uid = FirebaseAuth.getInstance().uid!!
-//        val docRef = db.collection("shop-users").document(uid)
-//
-//        docRef.get().addOnSuccessListener { documentSnapshot ->
-//
-//            var user = ShopUser()
-//
-//            if (documentSnapshot != null && documentSnapshot.exists()) {
-//                user = documentSnapshot.toObject(ShopUser::class.java)!!
-//
-//            }
-//
-//            callback( user )
-//        }
-//    }
 
     // used for gettings details of the employee after logging in
     fun getEmployee(callback: (Employee) -> Unit){
@@ -225,13 +207,7 @@ class MotorBroDatabase {
         callback(employeeId)
     }
 
-//    fun getShopId(callback: (shopId: String) -> Unit){
-//        getUser {
-//
-//            callback(it.shopId)
-//
-//        }
-//    }
+
 
     fun getShop(shopId: String, callback: (shop: Shop) -> Unit){
 

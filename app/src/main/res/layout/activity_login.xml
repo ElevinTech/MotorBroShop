@@ -69,13 +69,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
 
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="3dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="Merchant"
-                android:textColor="#0EA1F0"
+                android:textColor="#120A7C"
+
                 android:textSize="19sp" />
 
             <!--android:fontFamily="@font/open_sans"-->
@@ -84,15 +85,15 @@
                 android:layout_height="wrap_content"
                 android:text="Email"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textSize="19sp"
+                android:textSize="16sp"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp"
                 android:textColor="#3D3D3D"
                 />
 
-            <LinearLayout
-                android:layout_marginTop="10dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
@@ -105,19 +106,28 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/email_colored_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="10dp"
                     />
 
                 <EditText
                     android:id="@+id/userNameEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text=""
+                    android:layout_height="50dp"
+
+
+                    android:paddingLeft="50dp"
+                    android:paddingBottom="12dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="40dp"
                     android:inputType="textEmailAddress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
 
                     />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <!--android:fontFamily="@font/open_sans"-->
@@ -126,40 +136,49 @@
                 android:layout_height="wrap_content"
                 android:text="Password"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textSize="19sp"
+                android:textSize="16sp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:textColor="#3D3D3D"
                 />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 >
 
                 <!--android:src="@drawable/password_icon"-->
                 <ImageView
+                    android:id="@+id/passwordImageView"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
 android:src="@drawable/password_colored_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="10dp"
                     />
 
                 <EditText
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text=""
+                    android:layout_height="50dp"
+
+                    android:paddingLeft="50dp"
+                    android:paddingBottom="12dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="40dp"
                     android:inputType="textPassword"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
 
                     />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--android:background="@drawable/login_button_background"
                 android:textColor="@color/white"
@@ -187,7 +206,7 @@ android:src="@drawable/password_colored_icon"
                 android:text="Don't have an Account? Register Here"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:textColor="#0A7C65"
+                android:textColor="#120A7C"
                 />
 
 

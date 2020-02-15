@@ -1,19 +1,585 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Customer.CustomerProfileActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
 
-    <TextView
-        android:id="@+id/customerNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_gradient_oval"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-</LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:tint="@color/white"
+            android:layout_marginTop="2dp"
+            app:srcCompat="@drawable/back_button_icon" />
+
+        <TextView
+            android:id="@+id/userNameToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Jimmy Michaels"
+            android:textColor="#fff"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView11"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:text="Jimmy Michaels"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="19sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scrollView2"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/toolbar"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/toolbar" />-->
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#F0F0F0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:paddingBottom="20dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/circle_gradient_oval"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Level 4"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Member Level"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="#CECECE"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/sample_user_2"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="520"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Member Points"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="#CECECE"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:paddingBottom="20dp"
+                android:background="@drawable/shadow_background"
+
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/customer_icon"
+                    android:tint="@color/colorPrimaryDark"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+
+                    >
+                    <TextView
+                        android:id="@+id/userNameFull"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jimmy Michaels"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Age: 15"
+                        android:fontFamily="@font/open_sans"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gender: Male"
+                        android:fontFamily="@font/open_sans"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Member Since: December 10, 2020"
+                        android:fontFamily="@font/open_sans"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email: jovdelfin01@gmail.com"
+                        android:fontFamily="@font/open_sans"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:paddingBottom="20dp"
+                android:background="@drawable/shadow_background"
+
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/side_nav_documents_icon"
+                    android:tint="@color/colorPrimaryDark"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:orientation="vertical"
+
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Documents"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="20dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardPreventCornerOverlap="false"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/driver_license_colored_icon"
+                                    android:scaleType="centerCrop"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Drivers License"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/textColorBlack"
+                                android:textSize="13sp"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardPreventCornerOverlap="false"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/car_registration_icon"
+                                    android:scaleType="centerCrop"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Registration"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/textColorBlack"
+                                android:textSize="13sp"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardPreventCornerOverlap="false"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/insurance_icon"
+                                    android:scaleType="centerCrop"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Insurance"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/textColorBlack"
+                                android:textSize="13sp"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:paddingBottom="20dp"
+                android:background="@drawable/shadow_background"
+
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/motorcycle_icon"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vehicles"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/textColorBlack"
+                        />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="20dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="15dp"
+                                app:cardPreventCornerOverlap="false"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/motor_bike_image_1"
+                                    android:scaleType="center"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2019 Mitsubishi Mia"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/textColorBlack"
+                                android:textSize="13sp"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="15dp"
+                                app:cardPreventCornerOverlap="false"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/motor_bike_image_1"
+                                    android:scaleType="center"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2019 Mitsubishi Mia"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/textColorBlack"
+                                android:textSize="13sp"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="15dp"
+                                app:cardPreventCornerOverlap="false"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/motor_bike_image_1"
+                                    android:scaleType="center"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2019 Mitsubishi Mia"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/textColorBlack"
+                                android:textSize="13sp"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
