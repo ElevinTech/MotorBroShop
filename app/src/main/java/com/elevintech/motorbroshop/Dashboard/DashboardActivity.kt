@@ -181,6 +181,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         if (result.contents != null) {
 
+            val progressDialog = Utils().easyProgressDialog(this, "Pulling Customer Details....")
+            progressDialog.show()
+
             val customerId = result.contents
 
             MotorBroDatabase().getCustomer(customerId) { customer ->
@@ -189,6 +192,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     val customerShopData = CustomerShopData(Utils().getCurrentTimestamp().toString(), customerId)
 
                     MotorBroDatabase().addShopCustomer(user.shopId, customerShopData){
+
+                        progressDialog.dismiss()
                         val intent = Intent(this, CustomerProfileActivity::class.java)
                         intent.putExtra("customer", customer)
                         startActivity(intent)
@@ -197,6 +202,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
                 } else {
 
+                    progressDialog.dismiss()
                     Toast.makeText(this, "Invalid QR code", Toast.LENGTH_LONG).show()
 
                 }
