@@ -34,6 +34,9 @@ class RegisterShop : AppCompatActivity() {
         shop.shopId = FirebaseFirestore.getInstance().collection("shops").document().id
         shop.name = shopNameEditText.text.toString()
         shop.ownerId = FirebaseAuth.getInstance().uid!!
+        shop.address = shopAddressEditText.text.toString()
+        shop.dateEstablished = shopDateEstablished.text.toString()
+        shop.description = shopDescriptionEditText.text.toString()
 
         MotorBroDatabase().createShop(shop){
             val intent = Intent(this, DashboardActivity::class.java)

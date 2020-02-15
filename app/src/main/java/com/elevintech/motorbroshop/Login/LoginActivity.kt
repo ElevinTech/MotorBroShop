@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.R
-import com.elevintech.motorbroshop.Register.RegisterAccount
-import com.elevintech.motorbroshop.Register.RegisterOwner
 import com.elevintech.motorbroshop.Register.SelectUserType
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*

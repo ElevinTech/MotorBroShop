@@ -11,7 +11,7 @@
         android:padding="25dp">
 
         <TextView
-            android:id="@+id/consumerName"
+            android:id="@+id/customerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Some Name" />

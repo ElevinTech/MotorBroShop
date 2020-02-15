@@ -7,25 +7,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
-import com.elevintech.motorbroshop.Model.Consumer
+import com.elevintech.motorbroshop.Model.Customer
+import com.elevintech.motorbroshop.Model.User
 
 import com.elevintech.motorbroshop.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_customer_list.*
-import kotlinx.android.synthetic.main.row_consumer.view.*
+import kotlinx.android.synthetic.main.row_customer.view.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class CustomerListFragment : Fragment() {
 
+    lateinit var user: User
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        user = (activity as DashboardActivity).user
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_customer_list, container, false)
     }
@@ -40,26 +47,26 @@ class CustomerListFragment : Fragment() {
 
     private fun getCustomers() {
 
-        MotorBroDatabase().getCustomers{
+        MotorBroDatabase().getShopCustomers(user.shopId){
 
-            displayConsumers(it)
+            displayCustomers(it)
 
         }
 
     }
 
-    private fun displayConsumers(consumersList: MutableList<Consumer>) {
+    private fun displayCustomers(customersList: MutableList<Customer>) {
 
         recycler_view_consumers.layoutManager = LinearLayoutManager(activity)
-        var consumersListAdapter = GroupAdapter<ViewHolder>()
+        var customersListAdapter = GroupAdapter<ViewHolder>()
 
-        recycler_view_consumers.adapter = consumersListAdapter
+        recycler_view_consumers.adapter = customersListAdapter
 
-        if (consumersList.isNotEmpty()){
+        if (customersList.isNotEmpty()){
 
-            for(consumer in consumersList){
+            for(customers in customersList){
 
-                consumersListAdapter.add(employeeItem(consumer))
+                customersListAdapter.add(customerItem(customers))
             }
 
         }
@@ -67,13 +74,13 @@ class CustomerListFragment : Fragment() {
 
     }
 
-    inner class employeeItem(val consumer: Consumer): Item<ViewHolder>() {
+    inner class customerItem(val customer: Customer): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
-            viewHolder.itemView.consumerName.text = consumer.firstName + " " + consumer.lastName
+            viewHolder.itemView.customerName.text = customer.firstName + " " + customer.lastName
         }
 
         override fun getLayout(): Int {
-            return R.layout.row_consumer
+            return R.layout.row_customer
 
         }
     }
