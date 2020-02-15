@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.elevintech.motorbroshop.Consumer.ConsumerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.Fragments.CustomerListFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
+import com.elevintech.motorbroshop.Dashboard.Fragments.PartsServicesFragment
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Documents.DocumentsActivity
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
@@ -36,6 +37,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     lateinit var homeFragment: HomeFragment
     lateinit var customersListFragment: CustomerListFragment
+    lateinit var partsServicesFragment: PartsServicesFragment
 
     var owner = ShopOwner()
     var employee = Employee()
@@ -174,6 +176,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     scanner.setOrientationLocked(true)
                     scanner.setBeepEnabled(true)
                     scanner.initiateScan()
+                }
+
+                R.id.partsservices -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, partsServicesFragment, "partsservicesFragmentTag")
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
                 }
 
 

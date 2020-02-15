@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CustomCamera.CustomCamera"></activity>
+        <activity android:name=".AddPartsServices.AddPartsServicesActivity"></activity>
+        <activity android:name=".CustomCamera.CustomCamera" />
         <activity
             android:name=".Documents.AddEditDocument"
             android:screenOrientation="portrait" />
