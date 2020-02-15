@@ -10,6 +10,7 @@ import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Employee
 import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.User
+import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register_employee.*
@@ -53,7 +54,7 @@ class RegisterEmployee : AppCompatActivity() {
                     val uid = task.result!!.user!!.uid
                     val employeeId = employee.employeeId
 
-                    val user = User( employeeId,  User.UserType.EMPLOYEE)
+                    val user = UserType( employeeId,  UserType.Type.EMPLOYEE)
 
                     MotorBroDatabase().createNewUser(uid, user){
                         MotorBroDatabase().updateEmployeeFields(employeeId, email, uid){

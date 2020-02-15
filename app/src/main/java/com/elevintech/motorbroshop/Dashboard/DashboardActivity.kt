@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.forEach
 import androidx.fragment.app.FragmentTransaction
-import com.elevintech.motorbroshop.Consumer.ConsumerProfileActivity
+import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.Fragments.CustomerListFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.PartsServicesFragment
@@ -18,11 +18,9 @@ import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Documents.DocumentsActivity
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
-import com.elevintech.motorbroshop.Model.Employee
-import com.elevintech.motorbroshop.Model.ShopOwner
-import com.elevintech.motorbroshop.Model.ShopUser
-import com.elevintech.motorbroshop.Model.User
+import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.Utils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -39,14 +37,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     lateinit var customersListFragment: CustomerListFragment
     lateinit var partsServicesFragment: PartsServicesFragment
 
-    var owner = ShopOwner()
-    var employee = Employee()
-
+    var user: User = User()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.drawer_dashboard)
-
 
         buildNavigationDrawer()
         setUpBottomNav()
@@ -55,18 +50,18 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         db.getUserType{ userType ->
 
-            if ( userType == User.UserType.OWNER ) {
+            if ( userType == UserType.Type.OWNER) {
 
                 db.getOwner {
-                    owner = it
-                    setValuesNavHeader(owner)
+                    user = it
+                    setValuesNavHeader()
                 }
 
-            } else if ( userType == User.UserType.EMPLOYEE ){
+            } else if ( userType == UserType.Type.EMPLOYEE ){
 
                 db.getEmployee {
-                    employee = it
-                    setValuesNavHeader(employee)
+                    user = it
+                    setValuesNavHeader()
                 }
 
             }
@@ -75,19 +70,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     }
 
-    private fun setValuesNavHeader(owner: ShopOwner) {
+    private fun setValuesNavHeader() {
 
         val navHeader = nav_view.getHeaderView(0)
-        navHeader.usersNameText.text = owner.firstName + " " + owner.lastName
-        navHeader.userEmailText.text = owner.email
-
-    }
-
-    private fun setValuesNavHeader(employee: Employee) {
-
-        val navHeader = nav_view.getHeaderView(0)
-        navHeader.usersNameText.text = employee.firstName + " " + employee.lastName
-        navHeader.userEmailText.text = employee.email
+        navHeader.usersNameText.text = user.firstName + " " + user.lastName
+        navHeader.userEmailText.text = user.email
 
     }
 
@@ -116,14 +103,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             R.id.employees -> {
                 val intent = Intent(this, EmployeeListActivity::class.java)
-                intent.putExtra("shopId", owner.shopId)
+                intent.putExtra("shopId", user.shopId)
                 startActivity(intent)
             }
 
             R.id.documents -> {
 
                 val intent = Intent(this, DocumentsActivity::class.java)
-                intent.putExtra("shopId", owner.shopId)
+                intent.putExtra("shopId", user.shopId)
                 startActivity(intent)
 
             }
@@ -204,20 +191,28 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         if (result.contents != null) {
 
-            val consumerId = result.contents
+            val progressDialog = Utils().easyProgressDialog(this, "Pulling Customer Details....")
+            progressDialog.show()
 
-            MotorBroDatabase().getConsumer(consumerId) {
-                if (it != null) {
+            val customerId = result.contents
 
-                    MotorBroDatabase().addShopCustomer(it){
-                        val intent = Intent(this, ConsumerProfileActivity::class.java)
-                        intent.putExtra("consumer", consumerId)
+            MotorBroDatabase().getCustomer(customerId) { customer ->
+                if (customer != null) {
+
+                    val customerShopData = CustomerShopData(Utils().getCurrentTimestamp().toString(), customerId)
+
+                    MotorBroDatabase().addShopCustomer(user.shopId, customerShopData){
+
+                        progressDialog.dismiss()
+                        val intent = Intent(this, CustomerProfileActivity::class.java)
+                        intent.putExtra("customer", customer)
                         startActivity(intent)
                     }
 
 
                 } else {
 
+                    progressDialog.dismiss()
                     Toast.makeText(this, "Invalid QR code", Toast.LENGTH_LONG).show()
 
                 }

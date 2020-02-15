@@ -16,7 +16,6 @@
         android:id="@+id/usersNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sandra Adams"
         android:textSize="19sp"
         android:layout_marginLeft="20dp"
         android:textColor="@color/textColorBlack"
@@ -28,9 +27,7 @@
         android:id="@+id/userEmailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sandra_a88@gmail.com"
         android:textSize="16sp"
-
         android:layout_marginLeft="20dp"
         android:textColor="#4B4B4B"
 

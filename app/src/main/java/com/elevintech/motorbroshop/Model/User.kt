@@ -2,18 +2,17 @@ package com.elevintech.motorbroshop.Model
 
 import java.io.Serializable
 
-class User (
+open class User (
 
     var uid: String = "",
+    var shopId: String = "",
+
+    var firstName:String = "",
+    var lastName: String = "",
+
+    var email: String = "",
+    var profilePictureUrl:String = "",
+
     var userType: String = ""
 
-): Serializable{
-
-    object UserType {
-        val OWNER = "owner"
-        val EMPLOYEE = "employee"
-    }
-
-
-}
-
+): Serializable

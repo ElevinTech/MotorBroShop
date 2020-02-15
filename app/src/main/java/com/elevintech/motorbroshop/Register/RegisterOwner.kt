@@ -11,13 +11,13 @@ import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
 import com.elevintech.motorbroshop.R
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register_owner.*
 
 class RegisterOwner : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_register_owner)
 
         createAccountButton.setOnClickListener {
             if (hasCompletedValues()) {

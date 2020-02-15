@@ -90,24 +90,6 @@ class MotorBroDatabase {
         }
     }
 
-    fun getUser(callback: (ShopUser) -> Unit){
-
-        val db = FirebaseFirestore.getInstance()
-        val uid = FirebaseAuth.getInstance().uid!!
-        val docRef = db.collection("shop-users").document(uid)
-
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-
-            var user = ShopUser()
-
-            if (documentSnapshot != null && documentSnapshot.exists()) {
-                user = documentSnapshot.toObject(ShopUser::class.java)!!
-
-            }
-
-            callback( user )
-        }
-    }
 
     // used for gettings details of the employee after logging in
     fun getEmployee(callback: (Employee) -> Unit){
@@ -151,41 +133,20 @@ class MotorBroDatabase {
 
     }
 
-    fun getConsumer(uid: String, callback: (Consumer?) -> Unit){
+    fun getCustomer(customerId: String, callback: (Customer?) -> Unit){
 
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection("users").document(uid)
+        val docRef = db.collection("customers").document(customerId)
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
 
-            var user: Consumer? = null
+            var customer: Customer? = null
 
             if (documentSnapshot != null && documentSnapshot.exists()) {
-                user = documentSnapshot.toObject(Consumer::class.java)!!
-                user.uid = documentSnapshot.id
-
+                customer = documentSnapshot.toObject(Customer::class.java)!!
             }
 
-            callback( user )
-        }
-    }
-
-    fun isConsumerExist(uid: String, callback: (Boolean) -> Unit){
-
-        val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection("users").document(uid)
-
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-
-            var isExist: Boolean = false
-
-            if (documentSnapshot != null && documentSnapshot.exists()) {
-
-                isExist = true
-
-            }
-
-            callback( isExist )
+            callback( customer )
         }
     }
 
@@ -246,83 +207,60 @@ class MotorBroDatabase {
         callback(employeeId)
     }
 
-    fun getShopId(callback: (shopId: String) -> Unit){
-        getOwner {
 
 
-            callback(it.shopId)
+    fun getShop(shopId: String, callback: (shop: Shop) -> Unit){
 
-        }
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId)
+            .get()
+            .addOnSuccessListener {
+
+                var shop = Shop()
+
+                if (it != null && it.exists()) {
+                    shop = it.toObject(Shop::class.java)!!
+
+                }
+
+                callback(shop)
+            }
     }
 
-    fun getShop(callback: (shop: Shop) -> Unit){
-        getUser {
+    fun addShopCustomer(shopId: String, customer: CustomerShopData, callback: () -> Unit){
 
-            val db = FirebaseFirestore.getInstance()
-            db.collection("shops").document(it.shopId)
-                .get()
-                .addOnSuccessListener {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId).collection("customers").document(customer.customerId)
+            .set(customer)
+            .addOnSuccessListener { callback()}
+            .addOnFailureListener {
+                e -> println(e)
+                callback()
+            }
 
-                    var shop = Shop()
-
-                    if (it != null && it.exists()) {
-                        shop = it.toObject(Shop::class.java)!!
-
-                    }
-
-                    callback(shop)
-                }
-
-
-        }
     }
 
-    fun addShopCustomer(consumer: Consumer, callback: () -> Unit){
-        getShopId{
+    fun getShopCustomers(shopId: String, callback: (MutableList<Customer>) -> Unit) {
 
-            val shopId = it
+        var customersList = mutableListOf<Customer>()
 
-            val db = FirebaseFirestore.getInstance()
-            db.collection("shops").document(shopId).collection("customers").document(consumer.uid)
-                .set(consumer)
-                .addOnSuccessListener { callback()}
-                .addOnFailureListener {
-                    e -> println(e)
-                    callback()
-                }
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId).collection("customers").get()
+            .addOnSuccessListener {querySnapshot ->
 
+                for(customerSnapshot in querySnapshot.documents){
 
-        }
-    }
-
-    fun getCustomers(callback: (MutableList<Consumer>) -> Unit) {
-
-        var customersList = mutableListOf<Consumer>()
-
-        getShopId{shopId ->
-
-            println("shopId is + ")
-            println(shopId)
-            val db = FirebaseFirestore.getInstance()
-            db.collection("shops").document(shopId).collection("customers").get()
-                .addOnSuccessListener {querySnapshot ->
-
-
-                    for(consumer in querySnapshot.documents){
-
-                        val customer = consumer.toObject(Consumer::class.java)
-                        customersList.add(customer!!)
-
-                    }
-                    callback(customersList)
+                    val customer = customerSnapshot.toObject(Customer::class.java)
+                    customersList.add(customer!!)
 
                 }
-                .addOnFailureListener {
-                    e -> println(e)
-                    callback(customersList)
-                }
-        }
+                callback(customersList)
 
+            }
+            .addOnFailureListener {
+                e -> println(e)
+                callback(customersList)
+            }
 
     }
 
@@ -343,7 +281,7 @@ class MotorBroDatabase {
             .set(owner)
             .addOnSuccessListener {
 
-                var user = User( owner.uid, User.UserType.OWNER )
+                var user = UserType( owner.uid, UserType.Type.OWNER )
 
                 createNewUser(owner.uid, user){
                     callback()
@@ -351,11 +289,11 @@ class MotorBroDatabase {
             }
     }
 
-    fun createNewUser(id: String, user: User, callback: () -> Unit){
+    fun createNewUser(id: String, userType: UserType, callback: () -> Unit){
 
         val db = FirebaseFirestore.getInstance()
         db.collection("users").document(id)
-            .set(user)
+            .set(userType)
             .addOnSuccessListener {
                 callback()
             }
@@ -372,8 +310,6 @@ class MotorBroDatabase {
         val docRef = db.collection("users").document(uid)
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
-
-            println(uid)
 
             var user = documentSnapshot.toObject(User::class.java)!!
             callback( user.userType )

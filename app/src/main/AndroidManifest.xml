@@ -27,7 +27,7 @@
         <activity android:name=".Employees.CreateEmployeeActivity" />
         <activity android:name=".Employees.EmployeeListActivity" />
         <activity android:name=".Register.RegisterShop" />
-        <activity android:name=".Consumer.ConsumerProfileActivity" />
+        <activity android:name=".Customer.CustomerProfileActivity" />
         <activity android:name=".Register.SelectShopActivity" />
         <activity android:name=".SplashPage.SplashPageActivity">
             <intent-filter>
@@ -37,7 +37,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Dashboard.DashboardActivity" />
-        <activity android:name=".Register.RegisterAccount" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".MainActivity" />
 

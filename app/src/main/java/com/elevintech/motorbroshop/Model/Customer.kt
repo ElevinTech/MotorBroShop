@@ -1,8 +1,13 @@
 package com.elevintech.motorbroshop.Model
 
-class Customer (
+import java.io.Serializable
 
-    var dateScanned: String = "",
-    var uid: String = ""
-
-)
+class Customer( var uid: String = "",
+                var firstName: String = "",
+                var lastName: String = "",
+                var gender: String = "",
+                var email: String = "",
+                var customParts: List<String> = listOf(),
+                var customReminders: List<String> = listOf(),
+                var customHistory: List<String> = listOf(),
+                var customFuel: List<String> = listOf()) : Serializable
