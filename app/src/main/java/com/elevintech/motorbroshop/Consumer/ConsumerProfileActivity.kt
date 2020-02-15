@@ -27,7 +27,7 @@ class ConsumerProfileActivity : AppCompatActivity() {
 
     private fun updateUI() {
 
-        consumerNameText.setText(consumer.firstName + " " + consumer.lastName)
-
+        userNameToolbar.setText(consumer.firstName + " " + consumer.lastName)
+        userNameFull.setText(consumer.firstName + " " + consumer.lastName)
     }
 }

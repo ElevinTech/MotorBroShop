@@ -369,6 +369,8 @@ class MotorBroDatabase {
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
 
+            println(uid)
+
             var user = documentSnapshot.toObject(User::class.java)!!
             callback( user.userType )
         }
