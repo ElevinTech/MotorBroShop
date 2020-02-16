@@ -35,9 +35,9 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_marginBottom="16dp"
 
+            android:layout_gravity="center_horizontal"
             android:text="Documents"
             android:textColor="#fff"
             android:textSize="21sp"

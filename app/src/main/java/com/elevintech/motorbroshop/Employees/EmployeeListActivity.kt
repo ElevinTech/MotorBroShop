@@ -69,6 +69,11 @@ class EmployeeListActivity : AppCompatActivity() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.employeeName.text = employee.firstName + " " + employee.lastName
             viewHolder.itemView.employeeId.text = employee.employeeId
+            viewHolder.itemView.setOnClickListener {
+
+
+
+            }
         }
 
         override fun getLayout(): Int {

@@ -1,8 +1,7 @@
-package com.elevintech.motorbroshop.Branch
+package com.elevintech.motorbroshop.Branches
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Branch
 import com.elevintech.motorbroshop.R
@@ -11,8 +10,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_edit_branch.*
 
 class CreateBranch : AppCompatActivity() {
-
-    var branch = Branch()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +29,7 @@ class CreateBranch : AppCompatActivity() {
             branch.name = branchNameEditText.text.toString()
             branch.contactNumber = contactNumberEditText.text.toString()
             branch.imageUrl = ""
+            branch.email = emailEditText.text.toString()
             branch.isMain = (isMainSwitch.isChecked)
 
             MotorBroDatabase().saveBranch(shopId, branch){

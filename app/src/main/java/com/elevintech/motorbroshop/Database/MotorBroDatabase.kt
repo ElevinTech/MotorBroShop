@@ -245,7 +245,10 @@ class MotorBroDatabase {
         var customersList = mutableListOf<CustomerShopData>()
 
         val db = FirebaseFirestore.getInstance()
-        db.collection("shops").document(shopId).collection("customers").get()
+        db.collection("shops")
+            .document(shopId)
+            .collection("customers")
+            .get()
             .addOnSuccessListener {querySnapshot ->
 
                 for(customerSnapshot in querySnapshot){
@@ -266,6 +269,7 @@ class MotorBroDatabase {
 
     fun getShopCustomers(shopId: String, callback: (MutableList<Customer>) -> Unit) {
 
+        println("shopId: $shopId")
 
         getShopCustomerData(shopId){ customerShopDataList ->
 
@@ -453,6 +457,21 @@ class MotorBroDatabase {
             .addOnFailureListener {
                     e -> println(e)
                 callback()
+            }
+    }
+
+    fun getBranch(shopId: String, branchId: String, callback: (Branch) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("shops").document(shopId).collection("branches").document(branchId)
+            .get()
+            .addOnSuccessListener {
+
+                val branch = it.toObject(Branch::class.java)!!
+                callback(branch)
+
+
             }
     }
 

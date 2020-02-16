@@ -7,6 +7,80 @@
     android:orientation="vertical"
     tools:context=".Employees.EmployeeListActivity">
 
+    <!-- TOOLBAR -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#3C7BCF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/gloveboxBackImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/back_icon"
+            android:tint="@color/white"/>
+
+
+        <!-- android:fontFamily="@font/lato" -->
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+
+            android:layout_gravity="center_horizontal"
+            android:text="Employees"
+            android:textColor="#fff"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/shadow_background"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/glovebox_new_icon"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height= "wrap_content"
+            android:text="Create and set roles for your employees from this page"
+            android:textColor="@color/textColorBlack"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/open_sans"
+            />
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_margin="20dp"
         android:id="@+id/floatingActionButton"

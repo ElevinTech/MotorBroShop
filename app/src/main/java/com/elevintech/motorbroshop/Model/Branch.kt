@@ -10,6 +10,7 @@ class Branch (
 
     var name: String = "",
     var contactNumber: String = "",
+    var email: String = "",
 
     var imageUrl: String = "",
     var isMain: Boolean = false

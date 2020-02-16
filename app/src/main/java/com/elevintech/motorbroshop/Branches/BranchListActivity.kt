@@ -1,4 +1,4 @@
-package com.elevintech.motorbroshop.Branch
+package com.elevintech.motorbroshop.Branches
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -70,9 +70,9 @@ class BranchListActivity : AppCompatActivity() {
             row.branchName.text = branch.name
 
             row.setOnClickListener {
-                val intent = Intent(this@BranchListActivity, EditBranch::class.java)
+                val intent = Intent(this@BranchListActivity, BranchDetailsActivity::class.java)
                 intent.putExtra("shopId", shopId)
-                intent.putExtra("branch", branch)
+                intent.putExtra("branchId", branch.id)
                 startActivity(intent)
             }
 
