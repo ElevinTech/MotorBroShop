@@ -51,35 +51,12 @@ class LoginActivity : AppCompatActivity() {
                 .addOnSuccessListener {
 
                     checkUserType(progressDialog)
-//                }(this) { task ->
-//                    if (task.isSuccessful) {
-//
-//                        // Should not be able to login using the motor bro consumer account
-//
-//
-//                    } else {
-//
-//                        try {
-//                            throw task.exception()
-//                            } catch (e: FirebaseAuthWeakPasswordException) {
-//                                mTxtPassword.setError(getString(R.string.error_weak_password))
-//                                mTxtPassword.requestFocus()
-//                            } catch (e: FirebaseAuthInvalidCredentialsException) {
-//                                mTxtEmail.setError(getString(R.string.error_invalid_email))
-//                                mTxtEmail.requestFocus()
-//                            } catch (e: FirebaseAuthUserCollisionException) {
-//                                mTxtEmail.setError(getString(R.string.error_user_exists))
-//                                mTxtEmail.requestFocus()
-//                            } catch (e: Exception) {
-//                                Log.e(FragmentActivity.TAG, e.message)
-//                            }
-//
-//                        progressDialog.dismiss()
-//                        Toast.makeText(baseContext, "Authentication failed: ${task.result.toString()}", Toast.LENGTH_SHORT).show()
-//                    }
+
                 }.addOnFailureListener {  e ->
+
                     progressDialog.dismiss()
                     Toast.makeText(baseContext, "Authentication failed: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+
                 }
 
         }
