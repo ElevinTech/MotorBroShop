@@ -12,6 +12,12 @@
         android:title="Customers" />
 
     <item
+        android:id="@+id/partsServices"
+        android:icon="@drawable/tab_settings_icon"
+        android:title="Parts/Services" />
+
+
+    <item
         android:id="@+id/scanQr"
         android:icon="@drawable/tab_qrcode_icon"
         android:title="Scan" />
