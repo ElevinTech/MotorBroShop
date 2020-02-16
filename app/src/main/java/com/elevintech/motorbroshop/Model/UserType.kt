@@ -11,6 +11,7 @@ class UserType(
     object Type {
         val OWNER = "owner"
         val EMPLOYEE = "employee"
+        val CUSTOMER = "customer"
     }
 
 

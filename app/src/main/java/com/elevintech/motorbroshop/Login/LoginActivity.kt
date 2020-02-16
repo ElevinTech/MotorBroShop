@@ -6,10 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
+import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.User
+import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Register.SelectUserType
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+
+
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -39,19 +48,57 @@ class LoginActivity : AppCompatActivity() {
             progressDialog.show()
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword("${userNameEditText.text}", "${passwordEditText.text}")
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        progressDialog.dismiss()
+                .addOnSuccessListener {
 
-
-
-                        val intent = Intent(applicationContext, DashboardActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        progressDialog.dismiss()
-                        Toast.makeText(baseContext, "Authentication failed: ${task.result.toString()}", Toast.LENGTH_SHORT).show()
-                    }
+                    checkUserType(progressDialog)
+//                }(this) { task ->
+//                    if (task.isSuccessful) {
+//
+//                        // Should not be able to login using the motor bro consumer account
+//
+//
+//                    } else {
+//
+//                        try {
+//                            throw task.exception()
+//                            } catch (e: FirebaseAuthWeakPasswordException) {
+//                                mTxtPassword.setError(getString(R.string.error_weak_password))
+//                                mTxtPassword.requestFocus()
+//                            } catch (e: FirebaseAuthInvalidCredentialsException) {
+//                                mTxtEmail.setError(getString(R.string.error_invalid_email))
+//                                mTxtEmail.requestFocus()
+//                            } catch (e: FirebaseAuthUserCollisionException) {
+//                                mTxtEmail.setError(getString(R.string.error_user_exists))
+//                                mTxtEmail.requestFocus()
+//                            } catch (e: Exception) {
+//                                Log.e(FragmentActivity.TAG, e.message)
+//                            }
+//
+//                        progressDialog.dismiss()
+//                        Toast.makeText(baseContext, "Authentication failed: ${task.result.toString()}", Toast.LENGTH_SHORT).show()
+//                    }
+                }.addOnFailureListener {  e ->
+                    progressDialog.dismiss()
+                    Toast.makeText(baseContext, "Authentication failed: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
                 }
+
+        }
+    }
+
+    private fun checkUserType(progressDialog: ProgressDialog) {
+        MotorBroDatabase().getUserType{ userType ->
+
+            if (userType == UserType.Type.CUSTOMER){
+                progressDialog.dismiss()
+
+                Toast.makeText(baseContext, "Please use the MotorBroConsumer app", Toast.LENGTH_SHORT).show()
+                FirebaseAuth.getInstance().signOut()
+            } else {
+                progressDialog.dismiss()
+
+                val intent = Intent(applicationContext, DashboardActivity::class.java)
+                startActivity(intent)
+            }
 
         }
     }
