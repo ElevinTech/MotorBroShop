@@ -43,6 +43,8 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         progressDialog.dismiss()
 
+
+
                         val intent = Intent(applicationContext, DashboardActivity::class.java)
                         startActivity(intent)
                     } else {

@@ -173,7 +173,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                         .commit()
                 }
 
-
             }
 
             true
