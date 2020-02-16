@@ -424,5 +424,36 @@ class MotorBroDatabase {
 
     }
 
+    fun getShopBranches(shopId: String, callback: (MutableList<Branch>) -> Unit) {
+
+        var branchList = mutableListOf<Branch>()
+
+        FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("branches")
+            .get()
+            .addOnSuccessListener {
+
+                for (branchDocument in it){
+                    val branch = branchDocument.toObject(Branch::class.java)
+                    branchList.add(branch)
+                }
+
+                callback(branchList)
+
+            }
+
+    }
+
+    fun saveBranch(shopId: String, branch: Branch, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId).collection("branches").document(branch.id)
+            .set(branch)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+    }
 
 }

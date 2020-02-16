@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CustomCamera.CustomCamera"></activity>
+        <activity android:name=".Branch.EditBranch"></activity>
+        <activity android:name=".Branch.CreateBranch" />
+        <activity android:name=".Branch.BranchListActivity" />
+        <activity android:name=".CustomCamera.CustomCamera" />
         <activity
             android:name=".Documents.AddEditDocument"
             android:screenOrientation="portrait" />

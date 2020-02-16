@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.forEach
 import androidx.fragment.app.FragmentTransaction
+import com.elevintech.motorbroshop.Branch.BranchListActivity
 import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.Fragments.CustomerListFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
@@ -108,6 +109,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.documents -> {
 
                 val intent = Intent(this, DocumentsActivity::class.java)
+                intent.putExtra("shopId", user.shopId)
+                startActivity(intent)
+
+            }
+
+            R.id.branches -> {
+
+                val intent = Intent(this, BranchListActivity::class.java)
                 intent.putExtra("shopId", user.shopId)
                 startActivity(intent)
 

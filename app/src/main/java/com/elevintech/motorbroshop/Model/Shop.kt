@@ -10,9 +10,6 @@ class Shop (
     var name: String = "",
     var logoUrl: String = "",
 
-    var documents: MutableList<Document> = mutableListOf(),
-    var branches: MutableList<Branch> = mutableListOf(),
-
     var dateEstablished: String = "",
     var description: String = "",
     var address: String = ""
