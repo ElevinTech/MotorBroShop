@@ -46,7 +46,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setContentView(R.layout.drawer_dashboard)
 
         buildNavigationDrawer()
-        setUpBottomNav()
+
 
         val db = MotorBroDatabase()
 
@@ -57,6 +57,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 db.getOwner {
                     user = it
                     setValuesNavHeader()
+                    setUpBottomNav()
                 }
 
             } else if ( userType == UserType.Type.EMPLOYEE ){
@@ -64,6 +65,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 db.getEmployee {
                     user = it
                     setValuesNavHeader()
+                    setUpBottomNav()
                 }
 
             }
