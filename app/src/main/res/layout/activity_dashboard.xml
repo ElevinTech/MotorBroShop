@@ -40,13 +40,14 @@
         <!--            />-->
 
         <ImageView
-            android:id="@+id/shopImageView"
+            android:id="@+id/chatImageView"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="right"
-            app:srcCompat="@drawable/ic_launcher_background"
-            android:visibility="gone"
+            app:srcCompat="@drawable/chat_icon"
+            android:visibility="visible"
+            android:tint="#414141"
             />
 
     </androidx.appcompat.widget.Toolbar>

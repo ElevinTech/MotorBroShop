@@ -25,10 +25,10 @@
             android:icon="@drawable/side_nav_employees_icon"
             android:title="Employees" />
 
-        <item
-            android:id="@+id/list"
-            android:icon="@drawable/side_nav_list_filled_icon"
-            android:title="Parts and Services" />
+<!--        <item-->
+<!--            android:id="@+id/list"-->
+<!--            android:icon="@drawable/side_nav_list_filled_icon"-->
+<!--            android:title="Parts and Services" />-->
 
 <!--        <item-->
 <!--            android:id="@+id/settings"-->
