@@ -517,4 +517,19 @@ class MotorBroDatabase {
 
     }
 
+    fun saveProduct(shopId: String, product: Product, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId).collection("products").document(product.id)
+            .set(product)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+
+    }
+
 }
