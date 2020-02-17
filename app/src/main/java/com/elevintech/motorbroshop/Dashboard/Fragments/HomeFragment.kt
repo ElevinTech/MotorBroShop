@@ -13,6 +13,7 @@ import com.elevintech.motorbroshop.Model.UserType
 
 import com.elevintech.motorbroshop.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -29,11 +30,8 @@ class HomeFragment : Fragment() {
         user = (activity as DashboardActivity).user
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         val db = MotorBroDatabase()
 
         db.getUserType{ userType ->
@@ -42,15 +40,32 @@ class HomeFragment : Fragment() {
                     println("its an owner!")
                     println("user is " + it.firstName)
                     user = it
-                    setupShop()
+                    setupShop(view)
                 }
             } else if ( userType == UserType.Type.EMPLOYEE ){
                 db.getEmployee {
                     user = it
-                    setupShop()
+                    setupShop(view)
                 }
             }
         }
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        if (!isAdded) {
+            return
+        }
+
+
     }
 
 
@@ -61,9 +76,9 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun setupShop() {
+    private fun setupShop(view: View) {
 
-        if (shopName == null) {
+        if (view.shopName == null) {
             return
         }
 
@@ -72,11 +87,14 @@ class HomeFragment : Fragment() {
         db.getShop(user.shopId) {
             val shop = it
 
-            shopName.setText(shop.name)
+            view.shopName.text = shop.name
+            //shopName.setText(shop.name)
             if (shop.dateEstablished != "") {
-                shopEstablished.setText("Acquired: " + shop.dateEstablished)
+
+                view.shopEstablished.text = "Acquired: " + shop.dateEstablished
+                //shopEstablished.setText("Acquired: " + shop.dateEstablished)
             } else {
-                shopEstablished.setText("")
+                view.shopEstablished.text = ""
             }
         }
     }

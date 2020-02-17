@@ -22,5 +22,13 @@ class PartsServicesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_parts_services, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (!isAdded) {
+            return
+        }
+    }
+
 
 }

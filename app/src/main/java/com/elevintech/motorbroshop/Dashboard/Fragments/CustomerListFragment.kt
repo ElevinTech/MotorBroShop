@@ -17,6 +17,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_customer_list.*
+import kotlinx.android.synthetic.main.fragment_customer_list.view.*
 import kotlinx.android.synthetic.main.row_customer.view.*
 
 /**
@@ -34,31 +35,43 @@ class CustomerListFragment : Fragment() {
         user = (activity as DashboardActivity).user
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_customer_list, container, false)
+
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!isAdded) {
+            return
+        }
+
+//        getCustomers()
     }
 
 
     override fun onResume() {
         super.onResume()
 
-        getCustomers()
+
 
     }
 
-    private fun getCustomers() {
+    private fun getCustomers(view: View) {
 
         MotorBroDatabase().getShopCustomers(user.shopId){
-            displayCustomers(it)
+            displayCustomers(it, view)
         }
 
     }
 
-    private fun displayCustomers(customersList: MutableList<Customer>) {
+    private fun displayCustomers(customersList: MutableList<Customer>, view: View) {
 
         var customersListAdapter = GroupAdapter<ViewHolder>()
-        recycler_view_customers.adapter = customersListAdapter
-        
-        recycler_view_customers.layoutManager = LinearLayoutManager(activity)
+        view.recycler_view_customers.adapter = customersListAdapter
+
+        view.recycler_view_customers.layoutManager = LinearLayoutManager(activity)
 
 
         if (customersList.isNotEmpty()){
