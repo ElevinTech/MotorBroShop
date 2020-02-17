@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.forEach
 import androidx.fragment.app.FragmentTransaction
 import com.elevintech.motorbroshop.Branches.BranchListActivity
+import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.Fragments.CustomerListFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
@@ -18,6 +19,7 @@ import com.elevintech.motorbroshop.Dashboard.Fragments.PartsServicesFragment
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Documents.DocumentsActivity
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
+import com.elevintech.motorbroshop.FeedbackActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
 import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.R
@@ -46,7 +48,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setContentView(R.layout.drawer_dashboard)
 
         buildNavigationDrawer()
-        setUpBottomNav()
 
         val db = MotorBroDatabase()
 
@@ -55,8 +56,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             if ( userType == UserType.Type.OWNER) {
 
                 db.getOwner {
+                    println("its an owner!")
+                    println("user is " + it.firstName)
                     user = it
                     setValuesNavHeader()
+                    setUpBottomNav()
                 }
 
             } else if ( userType == UserType.Type.EMPLOYEE ){
@@ -64,10 +68,16 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 db.getEmployee {
                     user = it
                     setValuesNavHeader()
+                    setUpBottomNav()
                 }
 
             }
 
+        }
+
+        chatImageView.setOnClickListener {
+            val intent = Intent(this, ChatListActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -133,6 +143,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             }
 
+            R.id.feedback -> {
+                val intent = Intent(this, FeedbackActivity::class.java)
+                startActivity(intent)
+            }
+
             R.id.sign_out -> {
                 logOut()
             }
@@ -161,7 +176,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, homeFragment, "homeFragmentTag")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
 
                 }
@@ -170,7 +185,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, customersListFragment, "customersListFragmentTag")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
 
                 }
@@ -188,7 +203,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, partsServicesFragment, "partsservicesFragmentTag")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
                 }
 

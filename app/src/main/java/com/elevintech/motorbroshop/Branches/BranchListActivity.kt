@@ -30,6 +30,10 @@ class BranchListActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+
+        gloveboxBackImageView.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {

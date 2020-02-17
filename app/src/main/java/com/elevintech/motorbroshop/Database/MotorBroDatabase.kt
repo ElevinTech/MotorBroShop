@@ -5,9 +5,7 @@ import com.elevintech.motorbroshop.DispatchGroup
 import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.Utils
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
@@ -89,6 +87,8 @@ class MotorBroDatabase {
             callback( user )
         }
     }
+
+
 
 
     // used for gettings details of the employee after logging in
@@ -513,6 +513,151 @@ class MotorBroDatabase {
             .addOnFailureListener {
                 e -> println(e)
                 callback()
+            }
+
+    }
+
+    fun getLastMessages(callback: (chat : MutableList<ChatMessage>)-> Unit){
+
+        val uid = FirebaseAuth.getInstance().uid!!
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("user-chat-last-messages").document(uid).collection("last-message-from").orderBy("createdDate")
+
+
+        ref
+            .addSnapshotListener { querysnapshot, e ->
+
+                val chatLogList = arrayListOf<ChatMessage>()
+
+                for (snapshot in querysnapshot!!.documents){
+
+
+                    val message = snapshot.toObject(ChatMessage::class.java)!!
+                    chatLogList.add(message)
+
+
+                }
+
+                callback(chatLogList)
+
+            }
+    }
+
+    fun getUserById(id: String, callback: (User) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("users").document(id)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            val user = documentSnapshot.toObject(User::class.java)!!
+            callback( user )
+        }
+    }
+
+    fun getChatLog(fromId: String, toId: String, callback: (chat : MutableList<ChatMessage>) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("user-chat-messages")
+            .document(fromId)
+            .collection(toId)
+            .orderBy("createdDate", Query.Direction.DESCENDING)
+            .limit(7)
+
+
+        ref
+            .addSnapshotListener { querysnapshot, e ->
+
+                val chatLogList = arrayListOf<ChatMessage>()
+
+                for (snapshot in querysnapshot!!.documentChanges.reversed()){
+
+                    if (snapshot.type == DocumentChange.Type.ADDED){
+
+                        val message = snapshot.document.toObject(ChatMessage::class.java)!!
+                        chatLogList.add(message)
+                    }
+
+                }
+
+                callback(chatLogList)
+
+            }
+
+    }
+
+    fun saveChatToSender(chatMessage : ChatMessage, callback: () -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("user-chat-messages").document(chatMessage.fromId).collection(chatMessage.toId)
+
+        ref
+            .add(chatMessage)
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+
+
+    }
+
+    fun saveChatToReceiver(chatMessage : ChatMessage, callback: () -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("user-chat-messages").document(chatMessage.toId).collection(chatMessage.fromId)
+
+        ref
+            .add(chatMessage)
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+
+
+    }
+
+    fun saveLastMessageToSender(chatMessage : ChatMessage, callback: () -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("user-chat-last-messages").document(chatMessage.fromId).collection("last-message-from").document(chatMessage.toId)
+
+        ref
+            .set(chatMessage)
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+
+
+    }
+
+    fun saveLastMessageToReceiver(chatMessage : ChatMessage, callback: () -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("user-chat-last-messages").document(chatMessage.toId).collection("last-message-from").document(chatMessage.fromId)
+
+        ref
+            .set(chatMessage)
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+
+
+    }
+
+    fun getPreviousChatLog(fromId: String, toId: String, previousCreatedDate: Int, callback: (chat : MutableList<ChatMessage>) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("user-chat-messages")
+            .document(fromId).collection(toId)
+            .orderBy("createdDate", Query.Direction.DESCENDING)
+            .startAfter(previousCreatedDate)
+            .limit(7)
+
+        docRef.get()
+            .addOnSuccessListener {
+
+                val chatLogList = arrayListOf<ChatMessage>()
+
+                for (snapshot in it){
+                    val message = snapshot.toObject(ChatMessage::class.java)!!
+                    chatLogList.add(message)
+                }
+
+                callback(chatLogList)
+
             }
 
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.User
+import com.elevintech.motorbroshop.Model.UserType
 
 import com.elevintech.motorbroshop.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -35,15 +36,51 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val db = MotorBroDatabase()
-//        db.getShop {
-//            val shop = it
-//
-//            shopName.setText(shop.name)
-//
-//        }
 
-        shopUser.text = user.firstName + " " + user.lastName
+        db.getUserType{ userType ->
 
+            if ( userType == UserType.Type.OWNER) {
+
+                db.getOwner {
+                    println("its an owner!")
+                    println("user is " + it.firstName)
+                    user = it
+                    setupShop()
+                }
+
+            } else if ( userType == UserType.Type.EMPLOYEE ){
+
+                db.getEmployee {
+                    user = it
+                    setupShop()
+                }
+
+            }
+
+        }
+
+
+
+//        shopUser.text = user.firstName + " " + user.lastName
+
+    }
+
+    private fun setupShop() {
+        val db = MotorBroDatabase()
+        println("shopId is " + user.shopId)
+        db.getShop(user.shopId) {
+            val shop = it
+
+            shopName.setText(shop.name)
+
+            if (shop.dateEstablished != "") {
+                shopEstablished.setText("Acquired: " + shop.dateEstablished)
+            } else {
+                shopEstablished.setText("")
+            }
+
+
+        }
     }
 
 

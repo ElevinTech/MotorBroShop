@@ -41,6 +41,10 @@ class DocumentsActivity : AppCompatActivity() {
 
         }
 
+        gloveboxBackImageView.setOnClickListener {
+            finish()
+        }
+
     }
 
     fun goToEditDocument(documentType: String){

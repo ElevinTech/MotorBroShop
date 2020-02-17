@@ -32,6 +32,10 @@ class EmployeeListActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+
+        back_button.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {

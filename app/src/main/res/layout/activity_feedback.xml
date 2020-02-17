@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FeedbackActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#3C7BCF"
+        android:elevation="10dp"
+        android:paddingTop="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:paddingStart="0dp"
+            android:padding="18dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/back_icon"
+            android:tint="@color/white"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:textSize="19sp"
+            android:fontFamily="@font/open_sans_bold"
+            android:textColor="@color/white"
+            />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You can contact us with our information below if you have any questions."
+        android:layout_margin="20dp"
+        android:textColor="@color/textColorBlack"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/contact_email_icon"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email: motorbro@gmail.com"
+            android:textColor="@color/textColorBlack"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/contact_facbeook_icon"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Facebook: facebook.com/motorbro"
+            android:textColor="@color/textColorBlack"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/contact_website_icon"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Website: motorbro.io"
+            android:textColor="@color/textColorBlack"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
