@@ -10,6 +10,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.StrictMode
 import com.github.florent37.runtimepermission.RuntimePermission
 import android.provider.MediaStore
 import android.view.View
@@ -40,6 +41,10 @@ class UpdateShop : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_shop)
+
+        // uri exposure fix
+        var builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
 
         saveShopButton.setOnClickListener {
             if (hasCompletedValues()) {

@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import java.util.*
 import java.io.File
 import android.net.Uri
+import android.os.StrictMode
 import android.view.View
 import android.widget.Toast
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
@@ -28,6 +29,10 @@ class AddPartsServicesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_parts_services)
+
+        // uri exposure fix
+        var builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
 
         imgMainProfile.setOnClickListener {
             askUploadSource()

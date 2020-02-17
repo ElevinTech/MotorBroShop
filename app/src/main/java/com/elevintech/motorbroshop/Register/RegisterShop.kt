@@ -17,6 +17,7 @@ import android.app.DatePickerDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.StrictMode
 import com.github.florent37.runtimepermission.RuntimePermission
 import android.provider.MediaStore
 import android.view.View
@@ -39,6 +40,10 @@ class RegisterShop : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_shop)
+
+        // uri exposure fix
+        var builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
 
         saveShopButton.setOnClickListener {
             if (hasCompletedValues()) {
