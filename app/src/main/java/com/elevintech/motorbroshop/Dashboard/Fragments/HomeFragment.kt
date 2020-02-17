@@ -13,6 +13,7 @@ import com.elevintech.motorbroshop.Model.UserType
 
 import com.elevintech.motorbroshop.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -29,57 +30,70 @@ class HomeFragment : Fragment() {
         user = (activity as DashboardActivity).user
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val db = MotorBroDatabase()
+
+        db.getUserType{ userType ->
+            if ( userType == UserType.Type.OWNER) {
+                db.getOwner {
+                    user = it
+                    setupShop(view)
+                }
+            } else if ( userType == UserType.Type.EMPLOYEE ){
+                db.getEmployee {
+                    user = it
+                    setupShop(view)
+                }
+            }
+        }
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val db = MotorBroDatabase()
+    }
 
-        db.getUserType{ userType ->
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-            if ( userType == UserType.Type.OWNER) {
-
-                db.getOwner {
-                    println("its an owner!")
-                    println("user is " + it.firstName)
-                    user = it
-                    setupShop()
-                }
-
-            } else if ( userType == UserType.Type.EMPLOYEE ){
-
-                db.getEmployee {
-                    user = it
-                    setupShop()
-                }
-
-            }
-
+        if (!isAdded) {
+            return
         }
 
 
+    }
 
-//        shopUser.text = user.firstName + " " + user.lastName
+
+
+    override fun onResume() {
+        super.onResume()
+
 
     }
 
-    private fun setupShop() {
+    private fun setupShop(view: View) {
+
+        if (view.shopName == null) {
+            return
+        }
+
         val db = MotorBroDatabase()
         println("shopId is " + user.shopId)
         db.getShop(user.shopId) {
             val shop = it
 
-            shopName.setText(shop.name)
-
+            view.shopName.text = shop.name
+            //shopName.setText(shop.name)
             if (shop.dateEstablished != "") {
-                shopEstablished.setText("Acquired: " + shop.dateEstablished)
+
+                view.shopEstablished.text = "Acquired: " + shop.dateEstablished
+                //shopEstablished.setText("Acquired: " + shop.dateEstablished)
             } else {
-                shopEstablished.setText("")
+                view.shopEstablished.text = ""
             }
-
-
         }
     }
 

@@ -17,6 +17,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_customer_list.*
+import kotlinx.android.synthetic.main.fragment_customer_list.view.*
 import kotlinx.android.synthetic.main.row_customer.view.*
 
 /**
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.row_customer.view.*
 class CustomerListFragment : Fragment() {
 
     lateinit var user: User
+    lateinit var thisView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,41 +36,48 @@ class CustomerListFragment : Fragment() {
         user = (activity as DashboardActivity).user
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_list, container, false)
+        thisView = inflater.inflate(R.layout.fragment_customer_list, container, false)
+
+
+        return thisView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!isAdded) {
+            return
+        }
+
     }
 
 
     override fun onResume() {
         super.onResume()
 
-        getCustomers()
+        getCustomers(thisView)
 
     }
 
-    private fun getCustomers() {
+    private fun getCustomers(view: View) {
 
         MotorBroDatabase().getShopCustomers(user.shopId){
-
-            displayCustomers(it)
-
+            displayCustomers(it, view)
         }
 
     }
 
-    private fun displayCustomers(customersList: MutableList<Customer>) {
+    private fun displayCustomers(customersList: MutableList<Customer>, view: View) {
 
-        recycler_view_customers.layoutManager = LinearLayoutManager(activity)
         var customersListAdapter = GroupAdapter<ViewHolder>()
+        view.recycler_view_customers.adapter = customersListAdapter
 
-        recycler_view_customers.adapter = customersListAdapter
+        view.recycler_view_customers.layoutManager = LinearLayoutManager(activity)
+
 
         if (customersList.isNotEmpty()){
-
             for(customers in customersList){
-
                 customersListAdapter.add(customerItem(customers))
             }
-
         }
 
 

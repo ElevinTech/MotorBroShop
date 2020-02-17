@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.forEach
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Branches.BranchListActivity
 import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
@@ -48,31 +49,30 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setContentView(R.layout.drawer_dashboard)
 
         buildNavigationDrawer()
-
-
+        setUpBottomNav()
         val db = MotorBroDatabase()
 
-        db.getUserType { userType ->
+        db.getUserType{ userType ->
 
-            if (userType == UserType.Type.OWNER) {
+            if ( userType == UserType.Type.OWNER) {
 
                 db.getOwner {
                     user = it
                     setValuesNavHeader()
-                    setUpBottomNav()
+
                 }
 
-            } else if (userType == UserType.Type.EMPLOYEE) {
+            } else if ( userType == UserType.Type.EMPLOYEE ){
 
                 db.getEmployee {
                     user = it
                     setValuesNavHeader()
-                    setUpBottomNav()
+
                 }
+
             }
+
         }
-
-
 
         chatImageView.setOnClickListener {
             val intent = Intent(this, ChatListActivity::class.java)
@@ -84,6 +84,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun setValuesNavHeader() {
 
         val navHeader = nav_view.getHeaderView(0)
+        Glide.with(this).load(user.profilePictureUrl).into(navHeader.imageProfileView)
         navHeader.usersNameText.text = user.firstName + " " + user.lastName
         navHeader.userEmailText.text = user.email
 
