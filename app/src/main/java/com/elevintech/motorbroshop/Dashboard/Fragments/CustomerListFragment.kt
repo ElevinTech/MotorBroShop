@@ -48,27 +48,23 @@ class CustomerListFragment : Fragment() {
     private fun getCustomers() {
 
         MotorBroDatabase().getShopCustomers(user.shopId){
-
             displayCustomers(it)
-
         }
 
     }
 
     private fun displayCustomers(customersList: MutableList<Customer>) {
 
-        recycler_view_customers.layoutManager = LinearLayoutManager(activity)
         var customersListAdapter = GroupAdapter<ViewHolder>()
-
         recycler_view_customers.adapter = customersListAdapter
+        
+        recycler_view_customers.layoutManager = LinearLayoutManager(activity)
+
 
         if (customersList.isNotEmpty()){
-
             for(customers in customersList){
-
                 customersListAdapter.add(customerItem(customers))
             }
-
         }
 
 

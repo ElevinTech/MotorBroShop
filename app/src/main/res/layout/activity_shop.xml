@@ -112,7 +112,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/open_sans"
-                android:text="Yamaha"
+                android:text=""
                 android:textColor="#555555"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -145,7 +145,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/open_sans"
-                android:text="Quezon City, Mambugan Street"
+                android:text=""
                 android:textColor="#555555"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -178,7 +178,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/open_sans"
-                android:text="January 12 2019"
+                android:text=""
                 android:textColor="#555555"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -213,7 +213,7 @@
             android:maxLength="150"
             android:paddingLeft="16dp"
             android:paddingTop="10dp"
-            android:text="Our shop lies in between the heart of manila itself. Our goal is to be the primary shop within metro manila."
+            android:text=""
             android:textSize="14sp"
             android:visibility="visible"
             android:focusable="false"/>

@@ -34,52 +34,50 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val db = MotorBroDatabase()
 
         db.getUserType{ userType ->
-
             if ( userType == UserType.Type.OWNER) {
-
                 db.getOwner {
                     println("its an owner!")
                     println("user is " + it.firstName)
                     user = it
                     setupShop()
                 }
-
             } else if ( userType == UserType.Type.EMPLOYEE ){
-
                 db.getEmployee {
                     user = it
                     setupShop()
                 }
-
             }
-
         }
+    }
 
 
 
-//        shopUser.text = user.firstName + " " + user.lastName
+    override fun onResume() {
+        super.onResume()
+
 
     }
 
     private fun setupShop() {
+
+        if (shopName == null) {
+            return
+        }
+
         val db = MotorBroDatabase()
         println("shopId is " + user.shopId)
         db.getShop(user.shopId) {
             val shop = it
 
             shopName.setText(shop.name)
-
             if (shop.dateEstablished != "") {
                 shopEstablished.setText("Acquired: " + shop.dateEstablished)
             } else {
                 shopEstablished.setText("")
             }
-
-
         }
     }
 
