@@ -2,6 +2,8 @@ package com.elevintech.motorbroshop
 
 import android.app.ProgressDialog
 import android.content.Context
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Utils {
 
@@ -16,5 +18,48 @@ class Utils {
     fun getCurrentTimestamp():Long{
         return System.currentTimeMillis() / 1000
     }
+
+    fun convertMillisecondsToDate(dateInMilliseconds: Long , datePatternFormat: String) : String{
+
+        val sdf = SimpleDateFormat("$datePatternFormat") // sample date format: MM/dd/yyyy hh:mm
+        val netDate = Date(dateInMilliseconds)
+
+        return sdf.format(netDate).toString()
+    }
+
+    fun convertDateToMilliseconds(year: Int, month: Int, day: Int, hour: Int, minute: Int, seconds: Int): Long{
+
+        val cal = Calendar.getInstance()
+        cal.set(year, month, day, hour, minute, seconds)
+
+        return cal.timeInMillis
+
+    }
+
+    fun monthInWords(monthString: String): String {
+
+        var month = ""
+        when(monthString.toInt()) {
+
+            1 -> { month = "January" }
+            2 -> { month = "February" }
+            3 -> { month = "March" }
+            4 -> { month = "April" }
+
+            5 -> { month = "May" }
+            6 -> { month = "June" }
+            7 -> { month = "July" }
+            8 -> { month = "August" }
+
+            9 -> { month = "September" }
+            10 -> { month = "October" }
+            11 -> { month = "November" }
+            12 -> { month = "December" }
+
+        }
+
+        return month
+    }
+
 
 }

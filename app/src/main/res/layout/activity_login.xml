@@ -7,10 +7,9 @@
     android:fillViewport="true"
     tools:context="com.elevintech.motorbroshop.Login.LoginActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -221,7 +220,6 @@ android:src="@drawable/password_colored_icon"
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
-
+    </ScrollView>
 
 </FrameLayout>

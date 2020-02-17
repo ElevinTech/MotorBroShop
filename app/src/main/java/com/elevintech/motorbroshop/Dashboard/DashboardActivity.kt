@@ -21,6 +21,7 @@ import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
 import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.Shop.ShopActivity
 import com.elevintech.motorbroshop.Utils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -102,6 +103,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         when(item.itemId){
 
+            R.id.shop -> {
+
+                val intent = Intent(this, ShopActivity::class.java)
+                intent.putExtra("shopId", user.shopId)
+                startActivity(intent)
+
+            }
+
             R.id.employees -> {
                 val intent = Intent(this, EmployeeListActivity::class.java)
                 intent.putExtra("shopId", user.shopId)
@@ -137,6 +146,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         homeFragment = HomeFragment()
         customersListFragment = CustomerListFragment()
+        partsServicesFragment = PartsServicesFragment()
 
         val menuView = bottom_nav.getChildAt(0) as? ViewGroup ?: return
         menuView.forEach {

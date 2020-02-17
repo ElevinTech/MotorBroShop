@@ -475,4 +475,41 @@ class MotorBroDatabase {
             }
     }
 
+    fun uploadImageToFirebaseStorage(imageUri: Uri, callback: (url: String) -> Unit) {
+
+        var filename = UUID.randomUUID().toString()
+        var storageRef = FirebaseStorage.getInstance().getReference("/user_uploads/$filename.jpg")
+
+        // UPLOAD TO FIREBASE
+        storageRef.putFile(imageUri)
+            .addOnSuccessListener {
+
+                storageRef.downloadUrl.addOnSuccessListener {
+                    var url = it.toString()
+
+                    callback(url)
+                }
+
+            }
+            .addOnFailureListener{
+                println( it.toString())
+            }
+    }
+
+    fun updateShop(shop: Shop, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("shops").document(shop.shopId)
+            .set(shop)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                e -> println(e)
+                callback()
+            }
+
+    }
+
 }

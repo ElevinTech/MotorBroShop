@@ -1,19 +1,12 @@
-package com.elevintech.motorbroshop.Register
+package com.elevintech.motorbroshop.Shop
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.elevintech.motorbroshop.Dashboard.DashboardActivity
-import com.elevintech.motorbroshop.Database.MotorBroDatabase
-import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.R
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_register_shop.*
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import android.Manifest
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -21,28 +14,36 @@ import com.github.florent37.runtimepermission.RuntimePermission
 import android.provider.MediaStore
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.Dashboard.DashboardActivity
+import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.Utils
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_update_shop.*
 import java.util.*
 import java.io.File
 import java.text.DecimalFormat
 
-
-class RegisterShop : AppCompatActivity() {
+class UpdateShop : AppCompatActivity() {
 
     var imageUri: Uri? = null
     var OPEN_CAMERA = 10
     var OPEN_GALLERY = 11
+
+    lateinit var shop: Shop
 
     lateinit var mDateSetListener: DatePickerDialog.OnDateSetListener
     var dateEstablished = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_shop)
+        setContentView(R.layout.activity_update_shop)
 
         saveShopButton.setOnClickListener {
             if (hasCompletedValues()) {
-                createShop()
+                saveShop()
             }
         }
 
@@ -53,6 +54,26 @@ class RegisterShop : AppCompatActivity() {
         shopDateEstablished.setOnClickListener {
             setDatePickerAction(it as EditText)
             openDatePicker()
+        }
+
+        val shopId = intent.getStringExtra("shopId")
+        MotorBroDatabase().getShop(shopId){
+            shop = it
+            updateUi(it)
+        }
+
+    }
+
+    private fun updateUi(shop: Shop) {
+        shopNameEditText.setText(shop.name.capitalize())
+        shopAddressEditText.setText(shop.address.capitalize())
+        shopDateEstablished.setText( Utils().convertMillisecondsToDate(shop.dateEstablished.toLong(),"MMM d yyyy") )
+        shopDescriptionEditText.setText(shop.description)
+
+        if (shop.imageUrl != ""){
+            Glide.with(this).load(shop.imageUrl).into(mainProfilePhoto)
+            mainProfilePhoto.visibility = View.VISIBLE
+            emptyImageIcon.visibility = View.GONE
         }
 
     }
@@ -116,64 +137,14 @@ class RegisterShop : AppCompatActivity() {
 
         if (resultCode == RESULT_OK && imageUri != null) {
 
-                // do something with the image here
-                // example: imageView.setImageURI(imageUri)
-                mainProfilePhoto.setImageURI(imageUri)
-                mainProfilePhoto.visibility = View.VISIBLE
-                emptyImageIcon.visibility = View.GONE
-
-            }
-
-    }
-
-    private fun createShop() {
-
-        var shop = Shop()
-        shop.shopId = FirebaseFirestore.getInstance().collection("shops").document().id
-        shop.name = shopNameEditText.text.toString()
-        shop.ownerId = FirebaseAuth.getInstance().uid!!
-        shop.address = shopAddressEditText.text.toString()
-        shop.dateEstablished = dateEstablished
-        shop.description = shopDescriptionEditText.text.toString()
-
-        val progressDialog = Utils().easyProgressDialog(this, "Registering shop...")
-        progressDialog.show()
-
-        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-            shop.imageUrl = imageUrl
-
-            MotorBroDatabase().createShop(shop){
-
-                progressDialog.dismiss()
-
-                val intent = Intent(this, DashboardActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            // do something with the image here
+            // example: imageView.setImageURI(imageUri)
+            mainProfilePhoto.setImageURI(imageUri)
+            mainProfilePhoto.visibility = View.VISIBLE
+            emptyImageIcon.visibility = View.GONE
 
         }
 
-
-    }
-
-    fun hasCompletedValues(): Boolean {
-
-        if (shopNameEditText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the shop name field", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if (shopAddressEditText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the shop address field", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if (imageUri == null) {
-            Toast.makeText(this, "Please upload your shop's image", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        return true
     }
 
     private fun setDatePickerAction(view: EditText){
@@ -218,4 +189,60 @@ class RegisterShop : AppCompatActivity() {
         dialog.show()
 
     }
+
+    private fun saveShop() {
+
+        var updatedShop = Shop()
+        updatedShop.shopId = shop.shopId
+        updatedShop.imageUrl = shop.imageUrl
+        updatedShop.name = shopNameEditText.text.toString()
+        updatedShop.ownerId = FirebaseAuth.getInstance().uid!!
+        updatedShop.address = shopAddressEditText.text.toString()
+        updatedShop.dateEstablished = if (dateEstablished != ""){ dateEstablished } else { shop.dateEstablished }
+        updatedShop.description = shopDescriptionEditText.text.toString()
+
+        val progressDialog = Utils().easyProgressDialog(this, "Updating Shop...")
+        progressDialog.show()
+
+        if (imageUri != null){
+
+            MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+                updatedShop.imageUrl = imageUrl
+
+                MotorBroDatabase().updateShop(updatedShop){
+                    progressDialog.dismiss()
+                    finish()
+                }
+
+            }
+
+        } else {
+
+            MotorBroDatabase().updateShop(updatedShop){
+                progressDialog.dismiss()
+                finish()
+            }
+
+        }
+
+
+
+    }
+
+    fun hasCompletedValues(): Boolean {
+
+        if (shopNameEditText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the shop name field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (shopAddressEditText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the shop address field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        return true
+    }
+
+
 }

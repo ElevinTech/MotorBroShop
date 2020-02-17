@@ -15,12 +15,14 @@ class SelectUserType : AppCompatActivity() {
         employeeButton.setOnClickListener {
             val intent = Intent(applicationContext, EnterEmployeeID::class.java)
             startActivity(intent)
+            finish()
         }
 
 
         ownerButton.setOnClickListener {
             val intent = Intent(applicationContext, RegisterOwner::class.java)
             startActivity(intent)
+            finish()
         }
 
 

@@ -11,7 +11,10 @@ class Shop (
     var logoUrl: String = "",
 
     var dateEstablished: String = "",
+
     var description: String = "",
-    var address: String = ""
+    var address: String = "",
+
+    var imageUrl: String = ""
 
 ) : Serializable

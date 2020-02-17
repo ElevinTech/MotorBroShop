@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register.RegisterShop">
+    tools:context=".Shop.UpdateShop">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Shop Registration"
+        android:text="Update Shop"
         android:textColor="#fff"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -74,7 +74,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This will be your main shop photo that will be shown in the consumer app. You can also edit this later"
+                android:text="This will be your main shop photo that will be shown in the consumer app"
                 app:layout_constraintStart_toStartOf="parent"
 
                 android:textSize="13sp"
@@ -247,7 +247,6 @@
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:text=""
-                    android:inputType="text"
                     android:focusable="false"
                     />
 
