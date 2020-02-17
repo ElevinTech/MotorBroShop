@@ -273,32 +273,37 @@ class MotorBroDatabase {
 
         getShopCustomerData(shopId){ customerShopDataList ->
 
-            val listOfCustomerId = mutableListOf<String>()
-            for (customerShopData in customerShopDataList){
-                listOfCustomerId.add(customerShopData.customerId)
-            }
+                if (customerShopDataList.isEmpty()){
+                        callback(mutableListOf())
+
+                } else {
+
+                        val listOfCustomerId = mutableListOf<String>()
+                        for (customerShopData in customerShopDataList){
+                            listOfCustomerId.add(customerShopData.customerId)
+                        }
 
 
-            val listOfCustomers = mutableListOf<Customer>()
-            val db = FirebaseFirestore.getInstance()
-            db.collection("customers")
-                .whereIn("uid", listOfCustomerId)
-                .get()
-                .addOnSuccessListener {
+                        val listOfCustomers = mutableListOf<Customer>()
+                        val db = FirebaseFirestore.getInstance()
+                        db.collection("customers")
+                            .whereIn("uid", listOfCustomerId)
+                            .get()
+                            .addOnSuccessListener {
 
-                    for(customerSnapshot in it){
+                                for(customerSnapshot in it){
 
-                        val customer = customerSnapshot.toObject(Customer::class.java)
-                        listOfCustomers.add(customer)
+                                    val customer = customerSnapshot.toObject(Customer::class.java)
+                                    listOfCustomers.add(customer)
 
-                    }
-                    callback(listOfCustomers)
+                                }
+                                callback(listOfCustomers)
 
+                            }
+                            .addOnFailureListener {
+                                callback(listOfCustomers)
+                            }
                 }
-                .addOnFailureListener {
-                    callback(listOfCustomers)
-                }
-
 
 
         }
