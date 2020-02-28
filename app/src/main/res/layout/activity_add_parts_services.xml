@@ -129,6 +129,51 @@
                 android:layout_marginRight="20dp"
                 />
 
+            <TextView
+                android:id="@+id/customerSelectorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                android:text="Customer to assign part for"
+                android:textColor="@color/textColorBlack"
+                android:textSize="15sp"
+                android:visibility="gone"
+                />
+
+            <LinearLayout
+                android:id="@+id/customerSelectorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+
+                    android:layout_marginLeft="20dp"
+                    />
+                <!--                    android:src="@drawable/odometer_icon"-->
+
+
+                <EditText
+                    android:id="@+id/customerName"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:inputType="text"
+                    android:focusable="false"
+                    />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,7 +181,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/open_sans"
-                android:text="Name"
+                android:text="Name of Part / Service"
                 android:textColor="@color/textColorBlack"
                 android:textSize="15sp"
 
@@ -173,53 +218,6 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/open_sans"
-                android:text="Date"
-                android:textColor="@color/textColorBlack"
-                android:textSize="15sp"
-                android:visibility="gone"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                >
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-
-                    android:layout_marginLeft="20dp"
-                    />
-<!--                    android:src="@drawable/calendar_small_icon"-->
-
-
-
-                <EditText
-                    android:id="@+id/dateText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:inputType="datetime"
-                    android:focusable="false"
-                    />
-
-            </LinearLayout>
-
-
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -227,7 +225,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/open_sans"
-                android:text="Type of Parts"
+                android:text="Type of Part / Service"
                 android:textColor="@color/textColorBlack"
                 android:textSize="15sp"
 
@@ -342,6 +340,94 @@
                     android:layout_weight="1"
                     android:text=""
                     android:inputType="numberDecimal"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans"
+                android:text="Date"
+                android:textColor="@color/textColorBlack"
+                android:textSize="15sp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+
+                    android:layout_marginLeft="20dp"
+                    />
+                <!--                    android:src="@drawable/calendar_small_icon"-->
+
+
+
+                <EditText
+                    android:id="@+id/dateText"
+                    android:hint="optional"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:inputType="datetime"
+                    android:focusable="false"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans"
+                android:text="Odometer"
+                android:textColor="@color/textColorBlack"
+                android:textSize="15sp"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+
+                    android:layout_marginLeft="20dp"
+                    />
+                <!--                    android:src="@drawable/wrenchicon"-->
+
+                =
+
+                <EditText
+                    android:id="@+id/odometerText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:hint="optional"/>
 
             </LinearLayout>
 

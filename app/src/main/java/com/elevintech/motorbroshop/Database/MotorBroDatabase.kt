@@ -30,6 +30,19 @@ class MotorBroDatabase {
 
     }
 
+    fun saveBikeParts(bikeParts: BikeParts, customerId: String, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("customers").document(customerId).collection("bike-parts")
+            .add(bikeParts)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+    }
 
     fun addToShopUsersCollection(user: ShopUser, callback: () -> Unit) {
 

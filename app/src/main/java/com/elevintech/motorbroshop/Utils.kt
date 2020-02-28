@@ -61,5 +61,23 @@ class Utils {
         return month
     }
 
+    fun showProgressDialog(context: Context, message: String): ProgressDialog{
+        var progressDialog = ProgressDialog(context)
+        progressDialog.setMessage(message)
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        return progressDialog
+    }
+
+    fun convertDateToTimestamp(date: String, format: String):Long{
+
+        val unixTime = SimpleDateFormat(format).parse( date ).time.toString().toLong()
+        val timestamp = unixTime / 1000
+
+        return timestamp
+
+    }
+
 
 }

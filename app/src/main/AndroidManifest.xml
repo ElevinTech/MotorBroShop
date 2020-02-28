@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Chat.ChatLogActivity"></activity>
+        <activity android:name=".Customer.CustomerSelectorActivity"></activity>
+        <activity android:name=".AddPartsServices.AddPartsServicesForCustomerActivity" />
+        <activity android:name=".Chat.ChatLogActivity" />
         <activity android:name=".Chat.ChatListActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".Shop.UpdateShop" />

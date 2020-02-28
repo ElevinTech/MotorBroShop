@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesActivity
+import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesForCustomerActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Product
@@ -45,11 +46,32 @@ class PartsServicesFragment : Fragment() {
 
         floating_button.setOnClickListener {
 
-            val intent = Intent(activity, AddPartsServicesActivity::class.java)
-            intent.putExtra("shopId", user.shopId)
-            startActivity(intent)
+            askWhoPartIsFor()
 
         }
+    }
+
+    private fun askWhoPartIsFor() {
+        val options = arrayOf(" Add to inventory (default)", "Assign to a customer")
+        val builder = android.app.AlertDialog.Builder(activity)
+        builder.setTitle("What are you creating the item for?")
+        builder.setItems(options){ _, which ->
+
+            if(which == 0){
+
+                val intent = Intent(activity, AddPartsServicesActivity::class.java)
+                intent.putExtra("shopId", user.shopId)
+                startActivity(intent)
+
+            }else if(which == 1){
+
+                val intent = Intent(activity, AddPartsServicesForCustomerActivity::class.java)
+                intent.putExtra("shopId", user.shopId)
+                startActivity(intent)
+
+            }
+        }
+        builder.show()
     }
 
     override fun onResume() {
