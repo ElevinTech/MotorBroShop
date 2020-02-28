@@ -6,7 +6,8 @@ class Document (
 
     var type: String = "",
     var imageUrl: String = "",
-    var dateModified: Long = 0
+    var dateModified: Long = 0,
+    var status: String = "unverified"
 
 ) : Serializable {
 
