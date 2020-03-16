@@ -154,6 +154,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         bikeParts.price = priceEditText.text.toString().toDouble()
         bikeParts.note = descriptionEditText.text.toString()
         bikeParts.userId = FirebaseAuth.getInstance().uid!!
+        bikeParts.createdByShop = true
 
         val database = MotorBroDatabase()
         database.saveBikeParts(bikeParts, selectedCustomerId) {
