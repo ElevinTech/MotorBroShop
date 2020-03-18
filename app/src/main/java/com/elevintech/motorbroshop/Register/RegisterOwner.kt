@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.StrictMode
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -29,6 +30,10 @@ class RegisterOwner : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_owner)
+
+        // uri exposure fix
+        var builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
 
         createAccountButton.setOnClickListener {
             if (hasCompletedValues()) {

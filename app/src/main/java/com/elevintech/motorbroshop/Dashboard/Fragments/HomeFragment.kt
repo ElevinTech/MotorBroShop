@@ -37,8 +37,6 @@ class HomeFragment : Fragment() {
         db.getUserType{ userType ->
             if ( userType == UserType.Type.OWNER) {
                 db.getOwner {
-                    println("its an owner!")
-                    println("user is " + it.firstName)
                     user = it
                     setupShop(view)
                 }

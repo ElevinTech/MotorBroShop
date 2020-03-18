@@ -30,6 +30,19 @@ class MotorBroDatabase {
 
     }
 
+    fun saveBikeParts(bikeParts: BikeParts, customerId: String, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("customers").document(customerId).collection("bike-parts")
+            .add(bikeParts)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+    }
 
     fun addToShopUsersCollection(user: ShopUser, callback: () -> Unit) {
 
@@ -87,8 +100,6 @@ class MotorBroDatabase {
             callback( user )
         }
     }
-
-
 
 
     // used for gettings details of the employee after logging in
@@ -658,6 +669,52 @@ class MotorBroDatabase {
 
                 callback(chatLogList)
 
+            }
+
+    }
+
+    fun saveProduct(shopId: String, product: Product, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId).collection("products").document(product.id)
+            .set(product)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+
+    }
+
+    fun getShopProducts(shopId: String, callback: (MutableList<Product>) -> Unit) {
+
+        println("getShopProducts")
+        println("shopId: $shopId")
+
+        var list = mutableListOf<Product>()
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops")
+            .document(shopId)
+            .collection("products")
+            .get()
+            .addOnSuccessListener {
+
+                println()
+                for (productDocument in it){
+                    val product = productDocument.toObject(Product::class.java)
+                    list.add(product)
+                    println("product: " + product.name)
+                }
+
+                callback(list)
+
+                println("addOnSuccessListener")
+            }
+            .addOnFailureListener {
+                e -> println("FailureListener: $e")
+                callback(list)
             }
 
     }

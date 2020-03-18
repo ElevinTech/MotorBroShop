@@ -31,6 +31,8 @@ class RegisterEmployee : AppCompatActivity() {
                 registerUser()
 
         }
+
+        employeeName.text = employee.firstName
     }
 
     fun registerUser() {

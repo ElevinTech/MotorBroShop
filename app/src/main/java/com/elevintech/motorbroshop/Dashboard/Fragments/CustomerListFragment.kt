@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.row_customer.view.*
 class CustomerListFragment : Fragment() {
 
     lateinit var user: User
+    lateinit var thisView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +36,10 @@ class CustomerListFragment : Fragment() {
         user = (activity as DashboardActivity).user
 
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_customer_list, container, false)
+        thisView = inflater.inflate(R.layout.fragment_customer_list, container, false)
 
 
-        return view
+        return thisView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,14 +48,13 @@ class CustomerListFragment : Fragment() {
             return
         }
 
-//        getCustomers()
     }
 
 
     override fun onResume() {
         super.onResume()
 
-
+        getCustomers(thisView)
 
     }
 

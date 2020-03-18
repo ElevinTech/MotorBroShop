@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.StrictMode
 import android.provider.MediaStore
 import android.view.View
 import com.bumptech.glide.Glide
@@ -32,6 +33,10 @@ class AddEditDocument : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_document)
+
+        // uri exposure fix
+        var builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
 
         documentType = intent.getStringExtra("documentType")!!
         shopId = intent.getStringExtra("shopId")!!
