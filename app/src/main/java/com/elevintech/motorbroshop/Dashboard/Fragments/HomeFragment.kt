@@ -1,17 +1,20 @@
 package com.elevintech.motorbroshop.Dashboard.Fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.Model.UserType
 
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.Shop.ShopActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -53,6 +56,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        chatImageView.setOnClickListener {
+            val intent = Intent(context, ChatListActivity::class.java)
+            startActivity(intent)
+        }
+
+        editShopButton.setOnClickListener {
+            val intent = Intent(activity, ShopActivity::class.java)
+            intent.putExtra("shopId", user.shopId)
+            startActivity(intent)
+        }
 
     }
 

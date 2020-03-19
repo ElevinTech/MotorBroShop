@@ -22,6 +22,7 @@ class ShopActivity : AppCompatActivity() {
 
         shopId = intent.getStringExtra("shopId")!!
 
+
         backButton.setOnClickListener {
             finish()
         }

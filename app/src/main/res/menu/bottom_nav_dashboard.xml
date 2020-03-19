@@ -14,7 +14,7 @@
     <item
         android:id="@+id/partsServices"
         android:icon="@drawable/tab_settings_icon"
-        android:title="Parts/Services" />
+        android:title="Services" />
 
 
     <item
@@ -22,10 +22,10 @@
         android:icon="@drawable/tab_qrcode_icon"
         android:title="Scan" />
 
-    <itemw
-        android:id="@+id/reports"
-        android:icon="@drawable/charts_bottom_icon"
-        android:title="Reports" />
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/more_icon"
+        android:title="More" />
 
 
 

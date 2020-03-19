@@ -196,12 +196,12 @@
 
                 >
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
 
-                    android:layout_marginLeft="20dp"
-                    />
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    />-->
 <!--                    android:src="@drawable/odometer_icon"-->
 
 
@@ -240,15 +240,15 @@
 
                 >
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
 
-                    android:layout_marginLeft="20dp"
-                    />
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    />-->
 <!--                    android:src="@drawable/wrenchicon"-->
 
-                    =
+
 
                 <EditText
                     android:id="@+id/typeEditText"
@@ -280,14 +280,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-
                 >
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
 
-                    android:layout_marginLeft="20dp"/>
+<!--                    android:layout_marginLeft="20dp"/>-->
 <!--                    android:src="@drawable/brand_icon"-->
 
 
@@ -325,10 +324,10 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="20dp"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:layout_marginLeft="20dp"/>-->
 
 
                 <EditText
@@ -362,11 +361,10 @@
                 android:orientation="horizontal"
                 >
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-
-                    android:layout_marginLeft="20dp"
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
                     />
                 <!--                    android:src="@drawable/calendar_small_icon"-->
 
@@ -409,12 +407,11 @@
 
                 >
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-
-                    android:layout_marginLeft="20dp"
-                    />
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    />-->
                 <!--                    android:src="@drawable/wrenchicon"-->
 
                 =

@@ -11,7 +11,7 @@
 
 
 
-            <corners android:radius="3dp" />
+            <corners android:radius="1dp" />
         </shape>
     </item>
     <item>
@@ -24,7 +24,7 @@
 
 <!--            <solid android:color="#10CCCCCC" />-->
 
-            <corners android:radius="3dp" />
+            <corners android:radius="1dp" />
         </shape>
     </item>
     <item>
@@ -37,7 +37,7 @@
 
 <!--            <solid android:color="#20CCCCCC" />-->
 
-            <corners android:radius="3dp" />
+            <corners android:radius="1dp" />
         </shape>
     </item>
 

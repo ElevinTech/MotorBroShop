@@ -1,28 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/drawer_layout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fitsSystemWindows="true"-->
+<!--    tools:context=".Dashboard.DashboardActivity">-->
+
+<!--    <include-->
+<!--        layout="@layout/activity_dashboard"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        app:menu="@menu/drawer_main_menu"-->
+<!--        app:itemIconTint="#242424"-->
+<!--        app:headerLayout="@layout/drawer_header"/>-->
+
+<!--</androidx.drawerlayout.widget.DrawerLayout>-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".Dashboard.DashboardActivity">
 
-    <include
-        layout="@layout/activity_dashboard"
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:background="#03A9F4"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+
+<!--        &lt;!&ndash; android:fontFamily="@font/lato" &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/actionBarTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:text="Dashboard"-->
+<!--            android:textColor="#fff"-->
+<!--            android:textSize="19sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:fontFamily="@font/open_sans_semibold"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/scrollView2"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/toolbar"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/toolbar" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/chatImageView"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginRight="15dp"-->
+<!--            android:layout_gravity="right"-->
+<!--            app:srcCompat="@drawable/chat_icon"-->
+<!--            android:visibility="visible"-->
+<!--            android:tint="#FFFFFF"-->
+<!--            />-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_main_menu"
-        app:itemIconTint="#242424"
-        app:headerLayout="@layout/drawer_header"/>
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="60dp"
+        android:background="@android:color/white">
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/qrCodeImage"-->
+        <!--            android:layout_width="200dp"-->
+        <!--            android:layout_height="200dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            app:srcCompat="@drawable/ic_launcher_background" />-->
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:labelVisibilityMode="labeled"
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_dashboard" />
 
 
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</RelativeLayout>

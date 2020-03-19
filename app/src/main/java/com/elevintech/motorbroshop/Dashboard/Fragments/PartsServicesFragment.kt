@@ -45,9 +45,7 @@ class PartsServicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         floating_button.setOnClickListener {
-
             askWhoPartIsFor()
-
         }
     }
 
@@ -84,9 +82,7 @@ class PartsServicesFragment : Fragment() {
     private fun getProducts() {
 
         MotorBroDatabase().getShopProducts(user.shopId){
-
             displayProducts(it)
-
         }
 
     }
@@ -98,14 +94,10 @@ class PartsServicesFragment : Fragment() {
 
 
         if (customersList.isNotEmpty()){
-
             for(customers in customersList){
-
                 customersListAdapter.add(customerItem(customers))
             }
-
-            noDataLayout.visibility = View.GONE
-
+            noDataFullLayout.visibility = View.GONE
         }
 
         recycler_view_type_of_parts.adapter = customersListAdapter

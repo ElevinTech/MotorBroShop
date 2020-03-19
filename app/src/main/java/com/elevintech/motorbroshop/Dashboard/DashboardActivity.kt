@@ -16,6 +16,7 @@ import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.Fragments.CustomerListFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.HomeFragment
+import com.elevintech.motorbroshop.Dashboard.Fragments.MoreFragment
 import com.elevintech.motorbroshop.Dashboard.Fragments.PartsServicesFragment
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Documents.DocumentsActivity
@@ -30,7 +31,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.zxing.integration.android.IntentIntegrator
-import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.drawer_dashboard.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
 
@@ -41,6 +41,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     lateinit var homeFragment: HomeFragment
     lateinit var customersListFragment: CustomerListFragment
     lateinit var partsServicesFragment: PartsServicesFragment
+    lateinit var moreFragment: MoreFragment
 
     var user: User = User()
 
@@ -48,7 +49,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.drawer_dashboard)
 
-        buildNavigationDrawer()
+//        buildNavigationDrawer()
         setUpBottomNav()
         val db = MotorBroDatabase()
 
@@ -58,56 +59,45 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
                 db.getOwner {
                     user = it
-                    setValuesNavHeader()
-
+//                    setValuesNavHeader()
                 }
-
             } else if ( userType == UserType.Type.EMPLOYEE ){
 
                 db.getEmployee {
                     user = it
-                    setValuesNavHeader()
-
+//                    setValuesNavHeader()
                 }
-
             }
-
-        }
-
-        chatImageView.setOnClickListener {
-            val intent = Intent(this, ChatListActivity::class.java)
-            startActivity(intent)
         }
 
     }
 
-    private fun setValuesNavHeader() {
+//    private fun setValuesNavHeader() {
+//
+//        val navHeader = nav_view.getHeaderView(0)
+//        Glide.with(this).load(user.profilePictureUrl).into(navHeader.imageProfileView)
+//        navHeader.usersNameText.text = user.firstName + " " + user.lastName
+//        navHeader.userEmailText.text = user.email
+//
+//    }
 
-        val navHeader = nav_view.getHeaderView(0)
-        Glide.with(this).load(user.profilePictureUrl).into(navHeader.imageProfileView)
-        navHeader.usersNameText.text = user.firstName + " " + user.lastName
-        navHeader.userEmailText.text = user.email
-
-    }
-
-    private fun buildNavigationDrawer(){
-
-        // set toolbar as our created view
-        setSupportActionBar(toolbar)
-
-        // remove default title, so we can set it through XML
-        getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
-
-        val drawerLayout = drawer_layout
-
-        // create navigation drawer
-        var toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        nav_view.setNavigationItemSelectedListener(this)
-
-    }
+//    private fun buildNavigationDrawer(){
+//
+//        // set toolbar as our created view
+//        setSupportActionBar(toolbar)
+//
+//        // remove default title, so we can set it through XML
+//        getSupportActionBar()!!.setDisplayShowTitleEnabled(false)
+//
+//        val drawerLayout = drawer_layout
+//
+//        // create navigation drawer
+//        var toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
+//
+//        nav_view.setNavigationItemSelectedListener(this)
+//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
@@ -162,6 +152,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         homeFragment = HomeFragment()
         customersListFragment = CustomerListFragment()
         partsServicesFragment = PartsServicesFragment()
+        moreFragment = MoreFragment()
 
         val menuView = bottom_nav.getChildAt(0) as? ViewGroup ?: return
         menuView.forEach {
@@ -203,6 +194,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, partsServicesFragment, "partsservicesFragmentTag")
+//                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+                }
+
+                R.id.more -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, moreFragment, "moreFragmentTag")
 //                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
                 }
