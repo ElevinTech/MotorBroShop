@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8AF0F0F0"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#0A363636"
     tools:context=".Dashboard.Fragments.HomeFragment">
 
     <ScrollView
@@ -20,69 +21,233 @@
         android:orientation="vertical"
         >
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#03A9F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <!-- android:fontFamily="@font/lato" -->
+                <TextView
+                    android:id="@+id/actionBarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Dashboard"
+                    android:textColor="#fff"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/open_sans_bold"
+                    app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+                    app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                    app:layout_constraintStart_toStartOf="@+id/toolbar" />
+
+                <ImageView
+                    android:id="@+id/chatImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right"
+                    app:srcCompat="@drawable/chat_icon"
+                    android:visibility="visible"
+                    android:tint="#FFFFFF"
+                    />
+            </androidx.appcompat.widget.Toolbar>
+
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
             android:background="@drawable/rounded_shadow_background"
+            android:paddingBottom="20dp"
             >
 
-            <ImageView
-                android:id="@+id/shopLogo"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:src="@drawable/yamaha_logo_icon"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                />
-
             <TextView
-                android:id="@+id/shopName"
+                android:id="@+id/yourShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Your Shop"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="@color/textColorBlack"
-                android:textSize="19sp"
+                android:textColor="#03A9F4"
+                android:textSize="16sp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
                 />
 
 
-            <TextView
-                android:id="@+id/shopEstablished"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/textColorBlack"
-                android:textSize="13sp"
+                android:padding="7dp"
                 android:layout_marginLeft="20dp"
-                />
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/shopCustomersNumber"
-                android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/motorcycleImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/motorbroinicon"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="3dp"/>
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/shopName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="#030303"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="23dp"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:orientation="vertical"
+                android:background="#7C7C7C"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/textColorBlack"
-                android:textSize="13sp"
-                android:layout_marginLeft="20dp"
-                />
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="2dp"
+                >
 
-            <TextView
-                android:id="@+id/shopPartsServicesNumber"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/calendar_icon"
+                    android:tint="#575757"
+                    />
+                <TextView
+                    android:id="@+id/shopEstablished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text=""
+                    android:textColor="#292929"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/textColorBlack"
-                android:textSize="13sp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="2dp"
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/users_icon"
+                    android:tint="#575757"
+                    />
+                <TextView
+                    android:id="@+id/shopCustomersNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="#292929"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="9dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:padding="2dp"
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/wrench_icon"
+                    android:tint="#575757"
+                    />
+                <TextView
+                    android:id="@+id/shopPartsServicesNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="#292929"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="9dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
-                />
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                >
+                <Button
+                    android:id="@+id/editShopButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Edit your Shop"
+                    android:textAllCaps="false"
+                    android:background="@drawable/white_bg_light_black_background"
+                    android:textColor="#2196F3"
+                    android:layout_marginRight="10dp"
 
+                    />
 
+                <Button
+                    android:id="@+id/viewShopButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="View your Shop"
+                    android:textAllCaps="false"
+                    android:background="@drawable/white_bg_light_black_background"
+                    android:textColor="#2196F3"
+
+                    />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -101,8 +266,8 @@
                 android:layout_height="wrap_content"
                 android:text="Employees"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="@color/textColorBlack"
-                android:textSize="19sp"
+                android:textColor="#03A9F4"
+                android:textSize="16sp"
 
                 />
 
@@ -110,12 +275,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
                 >
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/sample_man_circular"
 
                     android:layout_marginTop="10dp"
@@ -126,10 +292,10 @@
                     android:layout_height="wrap_content"
                     android:text="Jack Mantley"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="@color/textColorBlack"
-                    android:textSize="15sp"
+                    android:textColor="#313131"
+                    android:textSize="13sp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     />
 
             </LinearLayout>
@@ -140,7 +306,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/rounded_shadow_background"
         android:padding="20dp"
         >
@@ -150,48 +317,57 @@
             android:layout_height="wrap_content"
             android:text="Last Scanned"
             android:fontFamily="@font/open_sans_semibold"
-            android:textColor="@color/textColorBlack"
-            android:textSize="19sp"
-
+            android:textColor="#03A9F4"
+            android:textSize="16sp"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+
             >
 
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/sample_man_circular"
 
             android:layout_marginTop="10dp"
             />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Michael Strahan"
-                android:fontFamily="@font/open_sans_semibold"
-                android:textColor="@color/textColorBlack"
-                android:textSize="15sp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dec 20, 1992"
-                android:fontFamily="@font/open_sans_semibold"
-                android:textColor="@color/textColorBlack"
-                android:textSize="11sp"
-                android:textAlignment="textEnd"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="5dp"
-                />
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Michael Strahan"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="#313131"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dec 20, 1992"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="#313131"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -210,8 +386,8 @@
                 android:layout_height="wrap_content"
                 android:text="Parts and Services - Last Added"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="@color/textColorBlack"
-                android:textSize="19sp"
+                android:textColor="#03A9F4"
+                android:textSize="16sp"
 
                 />
 
@@ -219,40 +395,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
                 >
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/tab_settings_icon"
 
                     android:layout_marginTop="10dp"
-                    android:tint="@color/colorPrimaryDark"
+                    android:tint="#3D5AFE"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yamaha Mio Battery"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="@color/textColorBlack"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dec 20, 1992"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="@color/textColorBlack"
-                    android:textSize="11sp"
-                    android:textAlignment="textEnd"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="5dp"
-                    />
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yamaha Mio Battery"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="#313131"
+                        android:textSize="13sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dec 20, 1992"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="#313131"
+                        android:textSize="10sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="5dp"
+                        />
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

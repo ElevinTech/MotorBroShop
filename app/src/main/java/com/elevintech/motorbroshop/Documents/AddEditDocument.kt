@@ -153,12 +153,8 @@ class AddEditDocument : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == GALLERY_INTENT && data!= null) imageUri = data!!.data
-
         if (resultCode == RESULT_OK && imageUri != null) {
-
             imageView.setImageURI(imageUri)
-
         }
-
     }
 }
