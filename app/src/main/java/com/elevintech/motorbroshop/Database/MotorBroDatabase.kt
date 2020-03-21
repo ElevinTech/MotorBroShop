@@ -259,6 +259,7 @@ class MotorBroDatabase {
         db.collection("shops")
             .document(shopId)
             .collection("customers")
+            .orderBy("dateScanned", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener {querySnapshot ->
 
@@ -276,6 +277,29 @@ class MotorBroDatabase {
                 callback(customersList)
             }
 
+    }
+
+    fun getCustomerByUid(uid: String, callback: (Customer?) -> Unit){
+        val db = FirebaseFirestore.getInstance()
+
+        val docRef = db.collection("customers").document(uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+
+                    val customer = document!!.toObject(Customer::class.java)
+                    callback(customer)
+
+                } else {
+                    callback(Customer())
+                }
+            }
+            .addOnFailureListener { exception ->
+
+                println("Error getting User: $exception")
+                callback(Customer())
+
+            }
     }
 
     fun getShopCustomers(shopId: String, callback: (MutableList<Customer>) -> Unit) {

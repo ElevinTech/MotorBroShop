@@ -221,8 +221,20 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                >
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/viewShopButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="View your Shop"
+                    android:textAllCaps="false"
+                    android:background="@drawable/white_bg_light_black_background"
+                    android:textColor="#2196F3"
+
+                    />
+
                 <Button
                     android:id="@+id/editShopButton"
                     android:layout_width="0dp"
@@ -236,17 +248,6 @@
 
                     />
 
-                <Button
-                    android:id="@+id/viewShopButton"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="View your Shop"
-                    android:textAllCaps="false"
-                    android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#2196F3"
-
-                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -279,13 +280,26 @@
                 >
 
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/sample_man_circular"
-
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="50dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="10dp"
-                    />
+                    app:elevation="0dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/sample_man_circular"
+                        android:id="@+id/lastEmployeeImage"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="3dp"/>
+                </androidx.cardview.widget.CardView>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -330,13 +344,26 @@
             >
 
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/sample_man_circular"
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="10dp"
-            />
+            android:elevation="0dp"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/sample_man_circular"
+                android:id="@+id/lastScannedUserImage"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="3dp"/>
+        </androidx.cardview.widget.CardView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -346,24 +373,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Michael Strahan"
                     android:fontFamily="@font/open_sans_semibold"
                     android:textColor="#313131"
                     android:textSize="13sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
+                    android:id="@+id/lastScannedUserName"
                     />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dec 20, 1992"
                     android:fontFamily="@font/open_sans_semibold"
                     android:textColor="#313131"
                     android:textSize="10sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="5dp"
+                    android:id="@+id/lastScannedUserDate"
                     />
 
             </LinearLayout>
@@ -416,18 +443,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yamaha Mio Battery"
                         android:fontFamily="@font/open_sans_semibold"
                         android:textColor="#313131"
                         android:textSize="13sp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
+                        android:id="@+id/latestProductName"
                         />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dec 20, 1992"
+                        android:id="@+id/latestProductDate"
                         android:fontFamily="@font/open_sans_semibold"
                         android:textColor="#313131"
                         android:textSize="10sp"
