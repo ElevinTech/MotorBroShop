@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
@@ -107,6 +108,22 @@ class HomeFragment : Fragment() {
                 view.shopEstablished.text = "Acquired: $date"
             } else {
                 view.shopEstablished.text = ""
+            }
+
+            // GET EMPLOYEES
+            MotorBroDatabase().getShopEmployees(user.shopId){ employeeList ->
+
+                for (employee in employeeList){
+
+                    // instantiate the view for the dialog
+                    val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
+                    viewInflated.findViewById<TextView>(R.id.employeeName).text = employee.firstName + " " + employee.lastName
+                    Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.findViewById(R.id.lastEmployeeImage))
+                    view.employeeLayout.addView(viewInflated)
+
+
+                }
+
             }
 
             // GET CUSTOMERS

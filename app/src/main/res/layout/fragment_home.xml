@@ -260,6 +260,7 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/rounded_shadow_background"
             android:padding="20dp"
+            android:id="@+id/employeeLayout"
             >
 
             <TextView
@@ -272,47 +273,47 @@
 
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                >
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                >-->
 
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="50dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="10dp"
-                    app:elevation="0dp"
-                    >
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:cardCornerRadius="50dp"-->
+<!--                    app:cardPreventCornerOverlap="false"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    app:elevation="0dp"-->
+<!--                    >-->
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/sample_man_circular"
-                        android:id="@+id/lastEmployeeImage"
-                        android:scaleType="centerCrop"
-                        android:layout_marginBottom="3dp"/>
-                </androidx.cardview.widget.CardView>
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:src="@drawable/sample_man_circular"-->
+<!--                        android:id="@+id/lastEmployeeImage"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:layout_marginBottom="3dp"/>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jack Mantley"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="#313131"
-                    android:textSize="13sp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Jack Mantley"-->
+<!--                    android:fontFamily="@font/open_sans_semibold"-->
+<!--                    android:textColor="#313131"-->
+<!--                    android:textSize="13sp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
         </LinearLayout>
 
 
@@ -339,31 +340,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="20dp">
 
-            >
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp"
-            app:cardPreventCornerOverlap="false"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            android:elevation="0dp"
-            >
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/sample_man_circular"
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/lastScannedUserImage"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="3dp"/>
-        </androidx.cardview.widget.CardView>
-
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
