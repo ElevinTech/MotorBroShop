@@ -96,7 +96,6 @@ class HomeFragment : Fragment() {
         }
 
         val db = MotorBroDatabase()
-        println("shopId is " + user.shopId)
         db.getShop(user.shopId) {
             val shop = it
 
@@ -139,7 +138,6 @@ class HomeFragment : Fragment() {
 
                         view.lastScannedUserName.text = "${firstCustomerAllData!!.firstName}  ${firstCustomerAllData!!.lastName}"
                         view.lastScannedUserDate.text = Utils().convertMillisecondsToDate((firstCustomerBasicData.dateScanned.toLong() * 1000), "MMM dd, yyyy")
-                        println("profile image" + firstCustomerAllData.profileImage)
                         Glide.with(this).load(firstCustomerAllData.profileImage).into(view.lastScannedUserImage)
                     }
 
