@@ -578,13 +578,13 @@ class MotorBroDatabase {
             }
     }
 
-    fun getUserById(id: String, callback: (User) -> Unit){
+    fun getCustomerById(id: String, callback: (Customer) -> Unit){
 
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection("users").document(id)
+        val docRef = db.collection("customers").document(id)
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
-            val user = documentSnapshot.toObject(User::class.java)!!
+            val user = documentSnapshot.toObject(Customer::class.java)!!
             callback( user )
         }
     }
@@ -739,6 +739,105 @@ class MotorBroDatabase {
             .addOnFailureListener {
                 e -> println("FailureListener: $e")
                 callback(list)
+            }
+
+    }
+
+    fun getChatRoomOfShop(shopId: String, callback: (MutableList<ChatRoom>)-> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("chat-rooms")
+            .whereEqualTo("participants.shop", shopId)
+            .orderBy("lastMessage.createdDate", Query.Direction.DESCENDING)
+
+        ref
+            .addSnapshotListener { querysnapshot, e ->
+
+                val chatRoomList = arrayListOf<ChatRoom>()
+
+                for ( snapshot in querysnapshot!!.documentChanges){
+                    if ( snapshot.type == DocumentChange.Type.ADDED || snapshot.type == DocumentChange.Type.MODIFIED ){
+                        val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                        chatRoomList.add(chatRoom)
+                    }
+                }
+
+                callback(chatRoomList)
+
+            }
+    }
+
+    fun getChatRoomMessages(chatRoomId: String, callback: (MutableList<ChatMessage>) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("chat-rooms")
+            .document(chatRoomId)
+            .collection("chat-messages")
+            .orderBy("createdDate", Query.Direction.DESCENDING)
+
+        ref
+            .addSnapshotListener { querysnapshot, e ->
+                val chatLogList = arrayListOf<ChatMessage>()
+
+                for (snapshot in querysnapshot!!.documentChanges.reversed()){
+                    if (snapshot.type == DocumentChange.Type.ADDED){
+                        val message = snapshot.document.toObject(ChatMessage::class.java)!!
+                        chatLogList.add(message)
+                    }
+                }
+
+                callback(chatLogList)
+
+            }
+    }
+
+    fun createNewChatRoom(participants: Map<String, String>, callback: (String) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms")
+
+        chatRoomRef
+            .add( mapOf("participants" to participants) )
+            .addOnSuccessListener {
+                println("chat room created!: " + it.id)
+                callback( it.id )
+            }
+            .addOnFailureListener { e ->
+                println(e)
+                callback( "" )
+            }
+    }
+
+    fun saveMessageInChatRoom(chatMessage: ChatMessage, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms").document(chatMessage.chatRoomId).collection("chat-messages")
+
+        chatRoomRef
+            .add( chatMessage )
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener { e ->
+                println(e)
+                callback()
+            }
+
+    }
+
+    fun updateChatRoomLastMessage(chatRoomId: String, latestMessage: ChatMessage, callback:() -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms").document(chatRoomId)
+
+        chatRoomRef
+            .update( mapOf("lastMessage" to latestMessage) )
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener { e ->
+                println(e)
+                callback()
             }
 
     }

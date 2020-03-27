@@ -6,6 +6,8 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.ChatMessage
+import com.elevintech.motorbroshop.Model.Customer
+import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.R
 import com.google.firebase.auth.FirebaseAuth
@@ -19,53 +21,79 @@ import kotlinx.android.synthetic.main.row_chat_to.view.*
 class ChatLogActivity : AppCompatActivity() {
 
     var paginationStartAt = 0 // https://www.youtube.com/watch?v=poqTHxtDXwU&t=316s
-    lateinit var userSecondary : User
     val adapter = GroupAdapter<ViewHolder>()
+    lateinit var customer : Customer
+    lateinit var chatRoomId: String
+    lateinit var shop: Shop
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        Glide.with(this).load(userSecondary.profilePictureUrl).into(imgMainProfile)
-        profileName.text = userSecondary.firstName.capitalize()
+        shop = intent.getSerializableExtra("shop") as Shop
+        customer = intent.getSerializableExtra("customer") as Customer
+        chatRoomId = intent.getStringExtra("chatRoomId")!!
+
+        Glide.with(this).load(customer.profileImage).into(imgMainProfile)
+        profileName.text = customer.firstName.capitalize()
+
+        if (chatRoomId != ""){
+            println("has chat room id: " + chatRoomId)
+            getChats()
+        }
+
+        btnSendChat.setOnClickListener {
+            val message = txtChatMessage.text.toString()
+            if ( message != "" )
+                sendChat()
+        }
     }
 
 
     fun setLastMesssageAsRead(){
 
         val toId = FirebaseAuth.getInstance().uid!!
-        val fromId = userSecondary.uid
+        val fromId = customer.uid
 
 //        DateFilipinaDatabase().setLastMessageAsRead(fromId, toId){}
     }
 
     // need this variable so the pagination value does not get changed when user sends/receives a chat
     var doOnce = false
-    fun getChats(){
-        val fromId = FirebaseAuth.getInstance().uid!!
-        val toId = userSecondary.uid
 
-        var db = MotorBroDatabase()
-        db.getChatLog(fromId, toId){
+    fun getChats(){
+//        val fromId = FirebaseAuth.getInstance().uid!!
+//        val toId = customer.uid
+//
+//        var db = MotorBroDatabase()
+//        db.getChatLog(fromId, toId){
+//
+//            val chatList = it
+//            displayChats(chatList)
+//
+//            if (chatList.isNotEmpty()){
+//                if (!doOnce){
+//                    paginationStartAt = chatList.first().createdDate.toInt()
+//                    doOnce = true
+//                }
+//            }
+//
+//        }
+
+        MotorBroDatabase().getChatRoomMessages(chatRoomId){
 
             val chatList = it
             displayChats(chatList)
 
-            if (chatList.isNotEmpty()){
-                if (!doOnce){
-                    paginationStartAt = chatList.first().createdDate.toInt()
-                    doOnce = true
-                }
-            }
-
         }
+
+
+
     }
 
     fun displayChats(chatLogList : MutableList<ChatMessage>){
 
         recycler_view_chat_logs.adapter = adapter
-
-        val uid = FirebaseAuth.getInstance().uid
 
         for ((index, chatMessage) in chatLogList.withIndex()) {
 
@@ -75,10 +103,12 @@ class ChatLogActivity : AppCompatActivity() {
             if (index > 0)
                 previousChat =  chatLogList[index-1]
 
-            if (chatMessage.fromId == uid){
+            if (chatMessage.fromId == shop.shopId){
                 adapter.add(ChatToItem(chatMessage, previousChat))
+                adapter.notifyItemInserted(index)
             } else {
                 adapter.add(ChatFromItem(chatMessage, previousChat))
+                adapter.notifyItemInserted(index)
             }
 
         }
@@ -91,27 +121,54 @@ class ChatLogActivity : AppCompatActivity() {
 
         val createdDate = System.currentTimeMillis() / 1000
         val message = txtChatMessage.text.toString()
-        val fromId = FirebaseAuth.getInstance().currentUser?.uid!!
-        val toId = userSecondary.uid
-
-        val chatMessage = ChatMessage(createdDate, fromId, toId, message, false)
-        val chatMessageRead = ChatMessage(createdDate, fromId, toId, message, true)
-
-        var db = MotorBroDatabase()
-        db.saveChatToSender(chatMessageRead){}
-        db.saveChatToReceiver(chatMessage){}
-        db.saveLastMessageToSender(chatMessageRead){}
-        db.saveLastMessageToReceiver(chatMessage){}
-        //db.incrementChatBadgeCountOfUser(chatMessage.toId){}
+        val senderId = shop.shopId
+        val receiverId = customer.uid
+        val db = MotorBroDatabase()
 
         txtChatMessage.setText("")
+
+        if (chatRoomId == ""){
+
+            // create new chat room
+            val participants = mapOf("user" to receiverId, "shop" to senderId)
+            db.createNewChatRoom ( participants ){ chatRoomId ->
+
+                // save message in chat room
+                val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId)
+                db.saveMessageInChatRoom(chatMessage){
+
+                    // save message in last messages
+                    db.updateChatRoomLastMessage(chatRoomId, chatMessage){
+                        this.chatRoomId = chatRoomId
+
+                        getChats()
+                    }
+
+                }
+
+            }
+
+        } else {
+
+            val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId!!)
+
+            // save message in chat room
+            db.saveMessageInChatRoom(chatMessage){
+
+                // save message in last messages
+                db.updateChatRoomLastMessage(chatRoomId, chatMessage){
+
+                }
+
+            }
+        }
 
     }
 
     fun getPreviousChats(){
 
         val fromId = FirebaseAuth.getInstance().uid!!
-        val toId = userSecondary.uid
+        val toId = customer.uid
 
         var db =  MotorBroDatabase()
         db.getPreviousChatLog(fromId, toId, paginationStartAt){
@@ -125,7 +182,7 @@ class ChatLogActivity : AppCompatActivity() {
 
             }
 
-            chatSwipeRefreshLayout.isRefreshing = false
+//            chatSwipeRefreshLayout.isRefreshing = false
 
         }
 
@@ -170,11 +227,11 @@ class ChatLogActivity : AppCompatActivity() {
                 "THIS CHAT: " + chat.createdDate + " || PREVIOUS CHAT: " + previousChat.createdDate + " || MESSAGE: " + chat.message
             )
 
-            // display date separator
-            if (chat.getDate() != previousChat.getDate()){
-                viewHolder.itemView.txtDateFrom.visibility = View.VISIBLE
-                viewHolder.itemView.txtDateFrom.text = chat.getDate()
-            }
+//            // display date separator
+//            if (chat.getDate() != previousChat.getDate()){
+//                viewHolder.itemView.txtDateFrom.visibility = View.VISIBLE
+//                viewHolder.itemView.txtDateFrom.text = chat.getDate()
+//            }
 
         }
 
@@ -189,11 +246,11 @@ class ChatLogActivity : AppCompatActivity() {
             viewHolder.itemView.textViewToRow.text = chat.message
             viewHolder.itemView.timeTo.text = chat.getTime()
 
-            // display date separator
-            if (chat.getDate() != previous.getDate()){
-                viewHolder.itemView.txtDateTo.visibility = View.VISIBLE
-                viewHolder.itemView.txtDateTo.text = chat.getDate()
-            }
+//            // display date separator
+//            if (chat.getDate() != previous.getDate()){
+//                viewHolder.itemView.txtDateTo.visibility = View.VISIBLE
+//                viewHolder.itemView.txtDateTo.text = chat.getDate()
+//            }
 
             println(
                 "THIS CHAT: " + chat.createdDate + " || PREVIOUS CHAT: " + previous.createdDate + " || MESSAGE: " + chat.message

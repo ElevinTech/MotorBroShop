@@ -60,38 +60,63 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/chatSwipeRefreshLayout"
+<!--            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--                android:id="@+id/chatSwipeRefreshLayout"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/txtChatMessage"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:visibility="invisible">-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_chat_logs"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="12dp"
+                android:background="#F1F1F1"
+                android:paddingBottom="20dp"
+                android:layout_marginBottom="5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/txtChatMessage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="invisible">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:background="#F1F1F1"
-                    android:id="@+id/recycler_view_chat_logs"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:paddingBottom="10dp" />
+<!--            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-            <ImageView
+            <ImageButton
                 android:id="@+id/btnSendChat"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="16dp"
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="7dp"
+                android:scaleType="centerCrop"
+                android:background="#00000000"
                 android:src="@drawable/send"
-                android:tint="#3F51B5"
-                app:layout_constraintTop_toBottomOf="@id/chatSwipeRefreshLayout"
+
+                android:layout_marginBottom="5dp"
+                android:tint="@color/colorPrimaryDark"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_chat_logs" />
+<!--            -->
+<!--            <ImageView-->
+<!--                android:id="@+id/btnSendChat"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:src="@drawable/send"-->
+<!--                android:tint="#3F51B5"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/recycler_view_chat_logs"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                />-->
 
             <EditText
                 android:id="@+id/txtChatMessage"
