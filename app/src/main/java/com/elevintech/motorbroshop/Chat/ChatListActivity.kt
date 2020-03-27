@@ -74,7 +74,15 @@ class ChatListActivity : AppCompatActivity() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
             viewHolder.itemView.userName.text = chatOtherUser.firstName.capitalize()
+
+            if (chatRoom.lastMessage.fromId == shopId){
+                viewHolder.itemView.chatPreview.text = "You: " + chatRoom.lastMessage.message
+            } else {
+                viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
+            }
+
             viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
+
             viewHolder.itemView.setOnClickListener {
                 val intent = Intent(this@ChatListActivity, ChatLogActivity::class.java)
                 intent.putExtra("customer", chatOtherUser)
@@ -89,15 +97,14 @@ class ChatListActivity : AppCompatActivity() {
                 Glide.with(applicationContext).load(chatOtherUser.profileImage).into(viewHolder.itemView.imgMainProfile)
 
 
-            // Display unread message (if the last message is not from user and not yet read)
-            val loggedInUser = FirebaseAuth.getInstance().uid
-            if (chatRoom.lastMessage.fromId != loggedInUser){
-                if (!chatRoom.lastMessage.read){
-                    viewHolder.itemView.chatPreview.setTypeface(null, Typeface.BOLD) // TODO: Bold not working always
-                    viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
-//                    viewHolder.itemView.unreadDot.visibility = View.VISIBLE
-                }
-            }
+//            // Display unread message (if the last message is not from user and not yet read)
+//            if (chatRoom.lastMessage.fromId != shopId){
+//                if (!chatRoom.lastMessage.read){
+//                    viewHolder.itemView.chatPreview.setTypeface(null, Typeface.BOLD) // TODO: Bold not working always
+//                    viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
+////                    viewHolder.itemView.unreadDot.visibility = View.VISIBLE
+//                }
+//            }
 
 
         }
