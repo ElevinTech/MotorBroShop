@@ -15,6 +15,8 @@ class Shop (
     var description: String = "",
     var address: String = "",
 
-    var imageUrl: String = ""
+    var imageUrl: String = "",
+
+    var deviceTokens: Map<String, String> = mapOf() // FCM device tokens of all the users working for the shop (e.g. the shop owner and employees)
 
 ) : Serializable

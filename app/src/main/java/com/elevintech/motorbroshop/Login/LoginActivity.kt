@@ -11,13 +11,13 @@ import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Register.SelectUserType
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-
-
+import com.google.firebase.iid.FirebaseInstanceId
 
 
 class LoginActivity : AppCompatActivity() {
@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword("${userNameEditText.text}", "${passwordEditText.text}")
                 .addOnSuccessListener {
 
+                    verifyDeviceToken()
                     checkUserType(progressDialog)
 
                 }.addOnFailureListener {  e ->
@@ -79,5 +80,25 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun verifyDeviceToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Get new Instance ID token
+                    val token = task.result?.token!!
+
+                    // Log and toast
+                    MotorBroDatabase().getUserToken{ tokenInDatabase ->
+                        if (tokenInDatabase != token){
+                            MotorBroDatabase().updateFcmToken(token)
+                        }
+                    }
+                } else {
+                    println("getInstanceId failed" + task.exception)
+                }
+
+            })
     }
 }

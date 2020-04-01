@@ -842,4 +842,69 @@ class MotorBroDatabase {
 
     }
 
+    fun updateFcmToken(token: String) {
+
+        getUserType{ userType ->
+
+            if ( userType == UserType.Type.OWNER) {
+
+                getOwner {
+                    updateShopTokens(it.shopId, token)
+                    updateUserToken(it.uid, token)
+                }
+            } else if ( userType == UserType.Type.EMPLOYEE ){
+
+                getEmployee {
+                    updateShopTokens(it.shopId, token)
+                    updateUserToken(it.uid, token)
+                }
+            }
+        }
+
+    }
+
+    private fun updateUserToken(uid: String, token: String) {
+
+        val db = FirebaseFirestore.getInstance()
+        val userBio = db.collection("users").document(uid)
+
+        userBio
+            .update("token", token)
+            .addOnSuccessListener {}
+            .addOnFailureListener { e -> println("error update user's fcm token: $e") }
+
+
+    }
+
+    private fun updateShopTokens(shopId: String, token: String) {
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("shops").document(shopId)
+
+        userBio
+            .update("deviceTokens.$uid", token)
+            .addOnSuccessListener { println("success saving shop token: $shopId")}
+            .addOnFailureListener { e -> println("error update user's fcm token: $e") }
+
+    }
+
+    fun getUserToken(callback: (String) -> Unit){
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("users").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = UserType()
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                user = documentSnapshot.toObject(UserType::class.java)!!
+
+            }
+
+            callback( user.token )
+        }
+    }
+
 }
