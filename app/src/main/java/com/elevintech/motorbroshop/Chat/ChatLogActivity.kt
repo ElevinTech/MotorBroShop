@@ -22,6 +22,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     var paginationStartAt = 0 // https://www.youtube.com/watch?v=poqTHxtDXwU&t=316s
     val adapter = GroupAdapter<ViewHolder>()
+    var recipientToken = ""
     lateinit var customer : Customer
     lateinit var chatRoomId: String
     lateinit var shop: Shop
@@ -34,19 +35,27 @@ class ChatLogActivity : AppCompatActivity() {
         customer = intent.getSerializableExtra("customer") as Customer
         chatRoomId = intent.getStringExtra("chatRoomId")!!
 
-        Glide.with(this).load(customer.profileImage).into(imgMainProfile)
-        profileName.text = customer.firstName.capitalize()
-
-        if (chatRoomId != ""){
-            println("has chat room id: " + chatRoomId)
-            getChats()
-        }
+        updateUi()
+        getChats()
+        getRecipientToken()
 
         btnSendChat.setOnClickListener {
             val message = txtChatMessage.text.toString()
-            if ( message != "" )
+            if ( message != "" && recipientToken != "")
                 sendChat()
         }
+    }
+
+    private fun getRecipientToken() {
+        MotorBroDatabase().getCustomerDeviceToken(customer.uid) { token ->
+            recipientToken = token
+        }
+    }
+
+
+    private fun updateUi() {
+        Glide.with(this).load(customer.profileImage).into(imgMainProfile)
+        profileName.text = customer.firstName.capitalize()
     }
 
 
@@ -62,32 +71,13 @@ class ChatLogActivity : AppCompatActivity() {
     var doOnce = false
 
     fun getChats(){
-//        val fromId = FirebaseAuth.getInstance().uid!!
-//        val toId = customer.uid
-//
-//        var db = MotorBroDatabase()
-//        db.getChatLog(fromId, toId){
-//
-//            val chatList = it
-//            displayChats(chatList)
-//
-//            if (chatList.isNotEmpty()){
-//                if (!doOnce){
-//                    paginationStartAt = chatList.first().createdDate.toInt()
-//                    doOnce = true
-//                }
-//            }
-//
-//        }
 
-        MotorBroDatabase().getChatRoomMessages(chatRoomId){
-
-            val chatList = it
-            displayChats(chatList)
-
+        if (chatRoomId != ""){
+            MotorBroDatabase().getChatRoomMessages(chatRoomId){
+                val chatList = it
+                displayChats(chatList)
+            }
         }
-
-
 
     }
 
@@ -124,6 +114,7 @@ class ChatLogActivity : AppCompatActivity() {
         val senderId = shop.shopId
         val receiverId = customer.uid
         val db = MotorBroDatabase()
+        val fcmTokenList = arrayListOf(recipientToken)  // list of the device tokens of users who will receive the chat message
 
         txtChatMessage.setText("")
 
@@ -134,7 +125,7 @@ class ChatLogActivity : AppCompatActivity() {
             db.createNewChatRoom ( participants ){ chatRoomId ->
 
                 // save message in chat room
-                val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId)
+                val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId, fcmTokenList)
                 db.saveMessageInChatRoom(chatMessage){
 
                     // save message in last messages
@@ -150,7 +141,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         } else {
 
-            val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId!!)
+            val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId!!, fcmTokenList)
 
             // save message in chat room
             db.saveMessageInChatRoom(chatMessage){
@@ -222,17 +213,6 @@ class ChatLogActivity : AppCompatActivity() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.textViewFromRow.text = chat.message
             viewHolder.itemView.timeFrom.text = chat.getTime()
-
-            println(
-                "THIS CHAT: " + chat.createdDate + " || PREVIOUS CHAT: " + previousChat.createdDate + " || MESSAGE: " + chat.message
-            )
-
-//            // display date separator
-//            if (chat.getDate() != previousChat.getDate()){
-//                viewHolder.itemView.txtDateFrom.visibility = View.VISIBLE
-//                viewHolder.itemView.txtDateFrom.text = chat.getDate()
-//            }
-
         }
 
     }
@@ -246,15 +226,6 @@ class ChatLogActivity : AppCompatActivity() {
             viewHolder.itemView.textViewToRow.text = chat.message
             viewHolder.itemView.timeTo.text = chat.getTime()
 
-//            // display date separator
-//            if (chat.getDate() != previous.getDate()){
-//                viewHolder.itemView.txtDateTo.visibility = View.VISIBLE
-//                viewHolder.itemView.txtDateTo.text = chat.getDate()
-//            }
-
-            println(
-                "THIS CHAT: " + chat.createdDate + " || PREVIOUS CHAT: " + previous.createdDate + " || MESSAGE: " + chat.message
-            )
         }
 
     }

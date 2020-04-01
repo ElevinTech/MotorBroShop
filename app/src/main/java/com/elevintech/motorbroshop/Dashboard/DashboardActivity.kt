@@ -63,14 +63,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 db.getOwner {
                     user = it
 //                    setValuesNavHeader()
-                    println("owner: ${user.uid}")
                 }
             } else if ( userType == UserType.Type.EMPLOYEE ){
 
                 db.getEmployee {
                     user = it
 //                    setValuesNavHeader()
-                    println("employee: ${user.uid}")
                 }
             }
         }

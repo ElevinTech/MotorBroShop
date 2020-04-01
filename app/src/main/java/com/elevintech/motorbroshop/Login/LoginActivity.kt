@@ -50,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword("${userNameEditText.text}", "${passwordEditText.text}")
                 .addOnSuccessListener {
 
-                    verifyDeviceToken()
                     checkUserType(progressDialog)
 
                 }.addOnFailureListener {  e ->
@@ -66,13 +65,13 @@ class LoginActivity : AppCompatActivity() {
     private fun checkUserType(progressDialog: ProgressDialog) {
         MotorBroDatabase().getUserType{ userType ->
 
-            if (userType == UserType.Type.CUSTOMER){
-                progressDialog.dismiss()
+            progressDialog.dismiss()
 
+            if (userType == UserType.Type.CUSTOMER){
                 Toast.makeText(baseContext, "Please use the MotorBroConsumer app", Toast.LENGTH_SHORT).show()
                 FirebaseAuth.getInstance().signOut()
             } else {
-                progressDialog.dismiss()
+                getDeviceToken( userType )
 
                 val intent = Intent(applicationContext, DashboardActivity::class.java)
                 startActivity(intent)
@@ -82,23 +81,23 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun verifyDeviceToken() {
+    private fun getDeviceToken( userType: String ) {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Get new Instance ID token
                     val token = task.result?.token!!
-
-                    // Log and toast
-                    MotorBroDatabase().getUserToken{ tokenInDatabase ->
-                        if (tokenInDatabase != token){
+                    MotorBroDatabase().getUserCommonData { user ->
+                        if (user.token != token){
                             MotorBroDatabase().updateFcmToken(token)
                         }
                     }
+
                 } else {
                     println("getInstanceId failed" + task.exception)
                 }
 
             })
     }
+
 }

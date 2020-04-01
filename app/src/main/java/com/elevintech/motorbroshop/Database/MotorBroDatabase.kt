@@ -392,7 +392,7 @@ class MotorBroDatabase {
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
 
-            var user = documentSnapshot.toObject(User::class.java)!!
+            var user = documentSnapshot.toObject(UserType::class.java)!!
             callback( user.userType )
         }
 
@@ -714,9 +714,6 @@ class MotorBroDatabase {
 
     fun getShopProducts(shopId: String, callback: (MutableList<Product>) -> Unit) {
 
-        println("getShopProducts")
-        println("shopId: $shopId")
-
         var list = mutableListOf<Product>()
         val db = FirebaseFirestore.getInstance()
         db.collection("shops")
@@ -842,24 +839,42 @@ class MotorBroDatabase {
 
     }
 
-    fun updateFcmToken(token: String) {
+    fun getCustomerDeviceToken(customerId: String, callback: (String) -> Unit){
 
-        getUserType{ userType ->
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("users").document(customerId)
 
-            if ( userType == UserType.Type.OWNER) {
+        docRef.get().addOnSuccessListener { documentSnapshot ->
 
+            var user = documentSnapshot.toObject(User::class.java)!!
+            callback( user.token )
+        }
+
+    }
+
+    // Get a "User" class object - which is a data class that both Employee and Owner has a value of
+    // (e.g. they both have "firstName", "lastName", "deviceToken", "shopId", etc...
+    fun getUserCommonData(callback: (User) -> Unit){
+        getUserType { userType ->
+            if (userType == UserType.Type.OWNER) {
                 getOwner {
-                    updateShopTokens(it.shopId, token)
-                    updateUserToken(it.uid, token)
+                    callback(it)
                 }
-            } else if ( userType == UserType.Type.EMPLOYEE ){
-
+            } else if (userType == UserType.Type.EMPLOYEE) {
                 getEmployee {
-                    updateShopTokens(it.shopId, token)
-                    updateUserToken(it.uid, token)
+                    callback(it)
                 }
             }
         }
+    }
+
+    fun updateFcmToken(token: String) {
+
+        getUserCommonData{
+            updateShopTokens(it.shopId, token)
+            updateUserToken(it.uid, token)
+        }
+
 
     }
 
@@ -887,24 +902,6 @@ class MotorBroDatabase {
             .addOnSuccessListener { println("success saving shop token: $shopId")}
             .addOnFailureListener { e -> println("error update user's fcm token: $e") }
 
-    }
-
-    fun getUserToken(callback: (String) -> Unit){
-        val db = FirebaseFirestore.getInstance()
-        val uid = FirebaseAuth.getInstance().uid!!
-        val docRef = db.collection("users").document(uid)
-
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-
-            var user = UserType()
-
-            if (documentSnapshot != null && documentSnapshot.exists()) {
-                user = documentSnapshot.toObject(UserType::class.java)!!
-
-            }
-
-            callback( user.token )
-        }
     }
 
 }

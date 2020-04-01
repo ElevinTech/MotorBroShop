@@ -8,7 +8,8 @@ class ChatMessage(val createdDate: Long = 0,
                   val toId: String = "",
                   val message: String = "",
                   val read: Boolean = false,
-                  val chatRoomId: String = "") : Serializable {
+                  val chatRoomId: String = "",
+                  val recipientTokens: List<String> = listOf() ) : Serializable {
 
     fun getDate(): String {
         return Utils().convertMillisecondsToDate(createdDate * 1000, "MMM d yyyy")
