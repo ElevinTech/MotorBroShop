@@ -904,4 +904,28 @@ class MotorBroDatabase {
 
     }
 
+    // on user log-out
+    fun deleteUserToken(){
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("users").document(uid)
+
+        userBio
+            .update("token", "")
+            .addOnSuccessListener { println("success deleting token")}
+            .addOnFailureListener { e -> println("error update user's fcm token: $e") }
+
+    }
+
+    fun deleteShopToken(shopId: String){
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("shops").document(shopId)
+
+        userBio
+            .update("deviceTokens.$uid", FieldValue.delete())
+            .addOnSuccessListener { println("success delete shop token: $shopId")}
+            .addOnFailureListener { e -> println("error update user's fcm token: $e") }
+    }
+
 }

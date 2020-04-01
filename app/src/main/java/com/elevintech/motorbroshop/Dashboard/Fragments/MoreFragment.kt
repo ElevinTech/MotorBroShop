@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.elevintech.motorbroshop.Branches.BranchListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
+import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Documents.DocumentsActivity
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.FeedbackActivity
@@ -85,6 +86,8 @@ class MoreFragment : Fragment() {
         }
 
         signoutView.setOnClickListener {
+            MotorBroDatabase().deleteUserToken()
+            MotorBroDatabase().deleteShopToken(user.shopId)
             logOut()
         }
 
