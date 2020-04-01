@@ -48,7 +48,7 @@ class FirebaseMessagingService : FirebaseMessagingService(){
         createNotificationChannel()
 
         val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.camera_icon)
+            .setSmallIcon(R.drawable.motorbroinicon)
             .setContentTitle( notificationData["title"] )
             .setContentText( notificationData["body"] )
             .setDefaults(Notification.DEFAULT_ALL) //Important for heads-up notification
