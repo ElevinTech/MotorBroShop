@@ -51,8 +51,8 @@ class FirebaseMessagingService : FirebaseMessagingService(){
             .setSmallIcon(R.drawable.camera_icon)
             .setContentTitle( notificationData["title"] )
             .setContentText( notificationData["body"] )
-            .setDefaults(Notification.DEFAULT_VIBRATE) //Important for heads-up notification
-            .setPriority(Notification.PRIORITY_MAX) //Important for heads-up notification
+            .setDefaults(Notification.DEFAULT_ALL) //Important for heads-up notification
+            .setPriority(NotificationCompat.PRIORITY_MAX) //Important for heads-up notification
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setOngoing(true)

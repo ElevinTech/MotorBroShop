@@ -47,6 +47,10 @@ class MoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         user = (activity as DashboardActivity).user
+
+        userFirstName.text = user.firstName
+        emailText.text = user.email
+
         editShopLayout.setOnClickListener {
             val intent = Intent(activity, ShopActivity::class.java)
             intent.putExtra("shopId", user.shopId)

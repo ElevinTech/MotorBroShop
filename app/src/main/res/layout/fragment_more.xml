@@ -99,17 +99,17 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         >
+
                         <TextView
                             android:id="@+id/userFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Jovin Delfin"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="#313131"
-                            android:textSize="15sp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="20dp"
+                            android:fontFamily="@font/open_sans"
+                            android:textColor="#313131"
+                            android:textSize="15sp"
 
                             />
 
@@ -117,14 +117,13 @@
                             android:id="@+id/emailText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="jovdelfin01@gmail.com"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
                             android:fontFamily="@font/open_sans_bold"
                             android:textColor="#535353"
+
+
                             android:textSize="13sp"
-                            android:layout_marginTop="3dp"
-
-
-                            android:layout_marginLeft="10dp"
 
                             />
 
