@@ -34,7 +34,7 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        customerId = intent.getStringExtra("userId")!!
+        customerId = intent.getStringExtra("customerId")!!
         shopId = intent.getStringExtra("shopId")!!
         chatRoomId = intent.getStringExtra("chatRoomId")!!
 

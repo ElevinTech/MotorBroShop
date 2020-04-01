@@ -36,7 +36,7 @@ class FirebaseMessagingService : FirebaseMessagingService(){
                     val intent = Intent(this, ChatLogActivity::class.java)
                     intent.putExtra("chatRoomId", notificationData["chatRoom"])
                     intent.putExtra("shopId", notificationData["shop"])
-                    intent.putExtra("userId", notificationData["user"])
+                    intent.putExtra("customerId", notificationData["user"])
                     val pendingIntent = PendingIntent.getActivity(this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
                     buildNotification( notificationData, pendingIntent )
