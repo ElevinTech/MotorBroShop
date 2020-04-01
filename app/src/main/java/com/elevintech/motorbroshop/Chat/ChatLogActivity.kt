@@ -23,26 +23,50 @@ class ChatLogActivity : AppCompatActivity() {
     var paginationStartAt = 0 // https://www.youtube.com/watch?v=poqTHxtDXwU&t=316s
     val adapter = GroupAdapter<ViewHolder>()
     var recipientToken = ""
-    lateinit var customer : Customer
+    lateinit var customer: Customer
     lateinit var chatRoomId: String
     lateinit var shop: Shop
+
+    lateinit var customerId: String
+    lateinit var shopId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        shop = intent.getSerializableExtra("shop") as Shop
-        customer = intent.getSerializableExtra("customer") as Customer
+        customerId = intent.getStringExtra("userId")!!
+        shopId = intent.getStringExtra("shopId")!!
         chatRoomId = intent.getStringExtra("chatRoomId")!!
 
-        updateUi()
-        getChats()
-        getRecipientToken()
+        getShop()
+        getCustomer()
+
 
         btnSendChat.setOnClickListener {
             val message = txtChatMessage.text.toString()
             if ( message != "" && recipientToken != "")
                 sendChat()
+        }
+
+        btnBack.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun getCustomer() {
+        MotorBroDatabase().getCustomer(customerId){
+            customer = it!!
+
+            updateUi()
+            getRecipientToken()
+        }
+    }
+
+    private fun getShop() {
+        MotorBroDatabase().getShop(shopId){
+            shop = it
+
+            getChats()
         }
     }
 

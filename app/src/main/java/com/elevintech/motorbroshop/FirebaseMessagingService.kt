@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.elevintech.motorbroshop.Chat.ChatListActivity
+import com.elevintech.motorbroshop.Chat.ChatLogActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -32,7 +33,10 @@ class FirebaseMessagingService : FirebaseMessagingService(){
                 val notificationData = remoteMessage.data
 
                 if (notificationData["notificationType"] == "chat"){
-                    val intent = Intent(this, ChatListActivity::class.java)
+                    val intent = Intent(this, ChatLogActivity::class.java)
+                    intent.putExtra("chatRoomId", notificationData["chatRoom"])
+                    intent.putExtra("shopId", notificationData["shop"])
+                    intent.putExtra("userId", notificationData["user"])
                     val pendingIntent = PendingIntent.getActivity(this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
                     buildNotification( notificationData, pendingIntent )
