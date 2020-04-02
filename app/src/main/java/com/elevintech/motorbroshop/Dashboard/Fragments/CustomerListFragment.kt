@@ -1,12 +1,15 @@
 package com.elevintech.motorbroshop.Dashboard.Fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.elevintech.motorbroshop.Chat.ChatListActivity
+import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Customer
@@ -17,7 +20,9 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_customer_list.*
+import kotlinx.android.synthetic.main.fragment_customer_list.chatImageView
 import kotlinx.android.synthetic.main.fragment_customer_list.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.row_customer.view.*
 
 /**
@@ -46,6 +51,12 @@ class CustomerListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (!isAdded) {
             return
+        }
+
+        chatImageView.setOnClickListener {
+            val intent = Intent(context, ChatListActivity::class.java)
+            intent.putExtra("shopId", user.shopId)
+            startActivity(intent)
         }
 
     }
@@ -86,6 +97,12 @@ class CustomerListFragment : Fragment() {
     inner class customerItem(val customer: Customer): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.customerName.text = customer.firstName + " " + customer.lastName
+
+            viewHolder.itemView.setOnClickListener {
+                val intent = Intent(activity, CustomerProfileActivity::class.java)
+                intent.putExtra("customer", customer)
+                startActivity(intent)
+            }
         }
 
         override fun getLayout(): Int {

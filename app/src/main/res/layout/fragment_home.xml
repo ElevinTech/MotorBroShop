@@ -103,7 +103,7 @@
                     >
 
                     <ImageView
-                        android:id="@+id/motorcycleImage"
+                        android:id="@+id/shopImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/motorbroinicon"
@@ -233,6 +233,7 @@
                     android:textAllCaps="false"
                     android:background="@drawable/white_bg_light_black_background"
                     android:textColor="#2196F3"
+                    android:layout_marginRight="20dp"
 
                     />
 
@@ -265,6 +266,7 @@
             >
 
             <TextView
+                android:id="@+id/employeeHeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Employees"
@@ -329,6 +331,7 @@
         >
 
         <TextView
+            android:id="@+id/lastScannedHeaderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Last Scanned"
@@ -396,6 +399,7 @@
             >
 
             <TextView
+                android:id="@+id/partsServicesHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Parts and Services - Last Added"
@@ -414,6 +418,7 @@
 
 
                 <ImageView
+                    android:id="@+id/partsIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/tab_settings_icon"
@@ -423,6 +428,7 @@
                     />
 
                 <LinearLayout
+                    android:id="@+id/partsMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"

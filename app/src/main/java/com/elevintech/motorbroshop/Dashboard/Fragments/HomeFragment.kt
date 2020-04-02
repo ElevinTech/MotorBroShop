@@ -21,39 +21,24 @@ import com.elevintech.motorbroshop.Shop.UpdateShop
 import com.elevintech.motorbroshop.Utils
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.row_employee_dashboard.view.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class HomeFragment : Fragment() {
 
-    lateinit var user: User
+    var user = User()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        user = (activity as DashboardActivity).user
-
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
-        val db = MotorBroDatabase()
-
-        db.getUserType{ userType ->
-            if ( userType == UserType.Type.OWNER) {
-                db.getOwner {
-                    user = it
-                    setupShop(view)
-                }
-            } else if ( userType == UserType.Type.EMPLOYEE ){
-                db.getEmployee {
-                    user = it
-                    setupShop(view)
-                }
-            }
-        }
+        //user = (activity as DashboardActivity).user
+        getUserType(view)
 
         return view
     }
@@ -87,7 +72,22 @@ class HomeFragment : Fragment() {
         if (!isAdded) {
             return
         }
+    }
 
+    private fun getUserType(view: View) {
+        MotorBroDatabase().getUserType{ userType ->
+            if ( userType == UserType.Type.OWNER) {
+                MotorBroDatabase().getOwner {
+                    user = it
+                    setupShop(view)
+                }
+            } else if ( userType == UserType.Type.EMPLOYEE ){
+                MotorBroDatabase().getEmployee {
+                    user = it
+                    setupShop(view)
+                }
+            }
+        }
 
     }
     private fun setupShop(view: View) {
@@ -104,8 +104,22 @@ class HomeFragment : Fragment() {
 
             // GET DATE ESTABLISHED
             if (shop.dateEstablished != "") {
+                //val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
                 val date = Utils().convertMillisecondsToDate(shop.dateEstablished, "MMM dd, yyyy")
                 view.shopEstablished.text = "Acquired: $date"
+//                if (view.shopImageView != null) {
+//                    Glide.with(this).load(shop.imageUrl).into(view.shopImageView)
+//                }
+
+                if (view.shopImageView != null) {
+                    if (shop.imageUrl != "") {
+                        Glide.with(this).load(shop.imageUrl).into(view.shopImageView)
+                    } else {
+                        // Put an empty image here
+                        Glide.with(this).load(R.drawable.users_icon).into(view.shopImageView)
+                    }
+                }
+
             } else {
                 view.shopEstablished.text = ""
             }
@@ -113,17 +127,17 @@ class HomeFragment : Fragment() {
             // GET EMPLOYEES
             MotorBroDatabase().getShopEmployees(user.shopId){ employeeList ->
 
-                for (employee in employeeList){
+                if (employeeList.size != 0) {
+                    for (employee in employeeList){
+                        // instantiate the view for the dialog
+                        //val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
+                        view.employeeName.text = employee.firstName + " " + employee.lastName
+                        Glide.with(this).load(employee.profilePictureUrl).into(view.lastEmployeeImage)
 
-                    // instantiate the view for the dialog
-                    val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
-                    viewInflated.findViewById<TextView>(R.id.employeeName).text = employee.firstName + " " + employee.lastName
-                    Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.findViewById(R.id.lastEmployeeImage))
-                    view.employeeLayout.addView(viewInflated)
-
-
+                    }
+                } else {
+                    view.employeeHeaderText.text = "You have no employees yet."
                 }
-
             }
 
             // GET CUSTOMERS
@@ -139,10 +153,21 @@ class HomeFragment : Fragment() {
 
                         view.lastScannedUserName.text = "${firstCustomerAllData!!.firstName}  ${firstCustomerAllData!!.lastName}"
                         view.lastScannedUserDate.text = Utils().convertMillisecondsToDate((firstCustomerBasicData.dateScanned.toLong() * 1000), "MMM dd, yyyy")
-                        Glide.with(this).load(firstCustomerAllData.profileImage).into(view.lastScannedUserImage)
+
+                        if(view.lastScannedUserImage != null) {
+                            if (firstCustomerAllData.profileImage != "") {
+                                Glide.with(this).load(firstCustomerAllData.profileImage).into(view.lastScannedUserImage)
+                            } else {
+                                // Put an empty image here
+                                Glide.with(this).load(R.drawable.users_icon).into(view.lastScannedUserImage)
+                            }
+
+                        }
+
+
                     }
-
-
+                } else {
+                    view.lastScannedHeaderText.text = "No User Scanned Yet, Get Started by scannign a user."
                 }
 
             }
@@ -151,13 +176,22 @@ class HomeFragment : Fragment() {
             MotorBroDatabase().getShopProducts(user.shopId){ productsList ->
                 val productCount = productsList.count()
                 view.shopPartsServicesNumber.text = "$productCount parts/services"
+                if (productCount != 0) {
 
-                // GET FIRST CUSTOMER
-                if (productCount > 0){
-                    val latestProduct = productsList[0]
-                    view.latestProductName.text = "${latestProduct.brand} ${latestProduct.name}"
-                    view.latestProductDate.text = Utils().convertMillisecondsToDate((latestProduct.dateCreated.toLong() * 1000), "MMM dd, yyyy")
+
+                    // GET FIRST CUSTOMER
+                    if (productCount > 0){
+                        val latestProduct = productsList[0]
+                        view.latestProductName.text = "${latestProduct.brand} ${latestProduct.name}"
+                        view.latestProductDate.text = Utils().convertMillisecondsToDate((latestProduct.dateCreated.toLong() * 1000), "MMM dd, yyyy")
+                    }
+                } else {
+                    view.partsServicesHeader.text = "No Parts / Services yet!"
+                    view.partsIcon.visibility = View.GONE
+                    view.partsMessage.visibility = View.GONE
+
                 }
+
 
             }
         }

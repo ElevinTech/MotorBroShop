@@ -259,7 +259,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 if (customer != null) {
 
                     val customerShopData = CustomerShopData(Utils().getCurrentTimestamp().toString(), customerId)
-
                     MotorBroDatabase().addShopCustomer(user.shopId, customerShopData){
 
                         progressDialog.dismiss()

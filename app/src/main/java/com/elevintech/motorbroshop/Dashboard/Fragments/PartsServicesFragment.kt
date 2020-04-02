@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesActivity
 import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesForCustomerActivity
+import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Product
@@ -20,7 +21,9 @@ import com.elevintech.motorbroshop.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_parts_services.*
+import kotlinx.android.synthetic.main.fragment_parts_services.chatImageView
 import kotlinx.android.synthetic.main.row_product.view.*
 
 /**
@@ -29,6 +32,7 @@ import kotlinx.android.synthetic.main.row_product.view.*
 class PartsServicesFragment : Fragment() {
 
     lateinit var user: User
+    var customersListAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +51,21 @@ class PartsServicesFragment : Fragment() {
         floating_button.setOnClickListener {
             askWhoPartIsFor()
         }
+
+        chatImageView.setOnClickListener {
+            val intent = Intent(context, ChatListActivity::class.java)
+            intent.putExtra("shopId", user.shopId)
+            startActivity(intent)
+        }
+        setupRecyclerView()
+
+
+    }
+
+    private fun setupRecyclerView() {
+        recycler_view_type_of_parts.layoutManager = LinearLayoutManager(activity)
+        recycler_view_type_of_parts.isNestedScrollingEnabled = true
+        recycler_view_type_of_parts.adapter = customersListAdapter
     }
 
     private fun askWhoPartIsFor() {
@@ -74,34 +93,23 @@ class PartsServicesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         getProducts()
-
     }
 
     private fun getProducts() {
-
         MotorBroDatabase().getShopProducts(user.shopId){
             displayProducts(it)
         }
-
     }
 
     private fun displayProducts(customersList: MutableList<Product>) {
-
-        recycler_view_type_of_parts.layoutManager = LinearLayoutManager(activity)
-        var customersListAdapter = GroupAdapter<ViewHolder>()
-
-
         if (customersList.isNotEmpty()){
             for(customers in customersList){
                 customersListAdapter.add(customerItem(customers))
             }
+
             noDataFullLayout.visibility = View.GONE
         }
-
-        recycler_view_type_of_parts.adapter = customersListAdapter
-
     }
 
     inner class customerItem(val product: Product): Item<ViewHolder>() {

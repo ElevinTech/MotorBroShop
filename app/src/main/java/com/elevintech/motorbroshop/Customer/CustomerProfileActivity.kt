@@ -17,6 +17,9 @@ class CustomerProfileActivity : AppCompatActivity() {
 
         updateUI(customer)
 
+        btnBack.setOnClickListener {
+            finish()
+        }
 
     }
 
