@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/motorbro_splash_white_bg"
     tools:context=".SplashPage.SplashPageActivity">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/motorbroinicon"
         android:layout_gravity="center"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,8 +23,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Version 0.5"
-        android:textSize="16sp"
+        android:text="Shop Version 0.9"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
