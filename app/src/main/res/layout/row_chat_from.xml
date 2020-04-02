@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="#3F51B5"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
         app:cardCornerRadius="10dp"
         app:contentPadding="15dp"
         android:layout_marginTop="10dp"
@@ -64,14 +64,13 @@
 
 
             <TextView
+                android:id="@+id/timeFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12:00 pm"
-                android:id="@+id/timeFrom"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
                 android:layout_gravity="start"
-                android:fontFamily="@font/open_sans_bold"/>
+                android:text="12:00 pm"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
 
         </LinearLayout>
 

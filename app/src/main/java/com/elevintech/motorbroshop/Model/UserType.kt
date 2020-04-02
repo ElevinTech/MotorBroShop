@@ -4,7 +4,8 @@ import java.io.Serializable
 
 class UserType(
     var uid: String = "",
-    var userType: String = ""
+    var userType: String = "",
+    var token: String = ""
 
 ): Serializable{
 

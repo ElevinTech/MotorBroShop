@@ -13,6 +13,5 @@ open class User (
     var email: String = "",
     var profilePictureUrl:String = "",
 
-    var userType: String = ""
-
+    var token: String = ""
 ): Serializable

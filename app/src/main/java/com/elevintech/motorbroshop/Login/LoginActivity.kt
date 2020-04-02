@@ -11,13 +11,13 @@ import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Register.SelectUserType
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-
-
+import com.google.firebase.iid.FirebaseInstanceId
 
 
 class LoginActivity : AppCompatActivity() {
@@ -65,13 +65,13 @@ class LoginActivity : AppCompatActivity() {
     private fun checkUserType(progressDialog: ProgressDialog) {
         MotorBroDatabase().getUserType{ userType ->
 
-            if (userType == UserType.Type.CUSTOMER){
-                progressDialog.dismiss()
+            progressDialog.dismiss()
 
+            if (userType == UserType.Type.CUSTOMER){
                 Toast.makeText(baseContext, "Please use the MotorBroConsumer app", Toast.LENGTH_SHORT).show()
                 FirebaseAuth.getInstance().signOut()
             } else {
-                progressDialog.dismiss()
+                getDeviceToken( userType )
 
                 val intent = Intent(applicationContext, DashboardActivity::class.java)
                 startActivity(intent)
@@ -80,4 +80,24 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun getDeviceToken( userType: String ) {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Get new Instance ID token
+                    val token = task.result?.token!!
+                    MotorBroDatabase().getUserCommonData { user ->
+                        if (user.token != token){
+                            MotorBroDatabase().updateFcmToken(token)
+                        }
+                    }
+
+                } else {
+                    println("getInstanceId failed" + task.exception)
+                }
+
+            })
+    }
+
 }

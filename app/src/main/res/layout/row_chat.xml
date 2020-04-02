@@ -38,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:text="Ya Chin-Ho"
+        android:layout_marginTop="3dp"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -51,13 +51,25 @@
         android:id="@+id/chatPreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Hi there"
+        android:layout_marginStart="10sp"
+        android:text=""
         android:textColor="#000000"
-        android:textStyle="bold"
+        android:textSize="13sp"
         android:fontFamily="@font/open_sans"
         app:layout_constraintStart_toEndOf="@+id/layoutImgProfile"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <TextView
+        android:id="@+id/chatDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="3:52 pm"
+        android:textSize="11sp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintStart_toEndOf="@+id/layoutImgProfile"
+        app:layout_constraintTop_toBottomOf="@+id/chatPreview" />
 
 <!--    <ImageView-->
 <!--        android:id="@+id/unreadDot"-->

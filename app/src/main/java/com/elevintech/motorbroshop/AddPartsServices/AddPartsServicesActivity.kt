@@ -62,6 +62,7 @@ class AddPartsServicesActivity : AppCompatActivity() {
             product.brand = brandEditText.text.toString()
             product.shopId = shopId
             product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+            product.dateCreated = Utils().getCurrentTimestamp().toString()
             MotorBroDatabase().saveProduct(shopId, product){
                 progressDialog.dismiss()
                 finish()

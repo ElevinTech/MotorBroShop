@@ -27,6 +27,14 @@ class Utils {
         return sdf.format(netDate).toString()
     }
 
+    fun convertMillisecondsToDate(dateInMilliseconds: String , datePatternFormat: String) : String{
+
+        val sdf = SimpleDateFormat("$datePatternFormat") // sample date format: "h:mm a"	12:08 PM / "EEE, MMM d, ''yy"	Wed, Jul 4, '01
+        val netDate = Date(dateInMilliseconds.toLong())
+
+        return sdf.format(netDate).toString()
+    }
+
     fun convertDateToMilliseconds(year: Int, month: Int, day: Int, hour: Int, minute: Int, seconds: Int): Long{
 
         val cal = Calendar.getInstance()

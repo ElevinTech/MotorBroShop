@@ -9,7 +9,8 @@ class Product (
     var imageUrl: String = "",
     var type: String = "", // either a part or service
     var brand: String = "",
-    var shopId: String = ""
+    var shopId: String = "",
+    var dateCreated: String =""
 
 
 )

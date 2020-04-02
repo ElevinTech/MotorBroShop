@@ -27,9 +27,12 @@ import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Shop.ShopActivity
 import com.elevintech.motorbroshop.Utils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.drawer_dashboard.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
@@ -70,6 +73,28 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
         }
 
+        retrieveCurrentRegistrationToken{}
+
+    }
+
+
+    // TODO: Change this for firestore
+    fun retrieveCurrentRegistrationToken(callback: (String) -> Unit){
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    println("getInstanceId failed" + task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+
+                // Log and toast
+                println("FCM token: " + token)
+
+                callback(token!!)
+            })
     }
 
 //    private fun setValuesNavHeader() {
@@ -139,6 +164,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
 
             R.id.sign_out -> {
+                MotorBroDatabase().deleteUserToken()
+                MotorBroDatabase().deleteShopToken(user.shopId)
                 logOut()
             }
 
