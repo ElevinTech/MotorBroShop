@@ -92,12 +92,21 @@ class HomeFragment : Fragment() {
     }
     private fun setupShop(view: View) {
 
+        if (!isAdded) {
+            return
+        }
+
         if (view.shopName == null) {
             return
         }
 
         val db = MotorBroDatabase()
         db.getShop(user.shopId) {
+
+            if (!isAdded) {
+                return@getShop
+            }
+
             val shop = it
 
             view.shopName.text = shop.name
@@ -127,14 +136,18 @@ class HomeFragment : Fragment() {
             // GET EMPLOYEES
             MotorBroDatabase().getShopEmployees(user.shopId){ employeeList ->
 
+                if (!isAdded) {
+                    return@getShopEmployees
+                }
+
                 if (employeeList.size != 0) {
                     for (employee in employeeList){
                         // instantiate the view for the dialog
-                        //val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
-                        view.employeeName.text = employee.firstName + " " + employee.lastName
-                        Glide.with(this).load(employee.profilePictureUrl).into(view.lastEmployeeImage)
-
+                        val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
+                        viewInflated.employeeName.text = employee.firstName + " " + employee.lastName
+                        Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.lastEmployeeImage)
                     }
+
                 } else {
                     view.employeeHeaderText.text = "You have no employees yet."
                 }
@@ -142,6 +155,11 @@ class HomeFragment : Fragment() {
 
             // GET CUSTOMERS
             MotorBroDatabase().getShopCustomerData(user.shopId){ customerList ->
+
+                if (!isAdded) {
+                    return@getShopCustomerData
+                }
+
                 val customerCount = customerList.count()
                 view.shopCustomersNumber.text = "$customerCount customer(s)"
 
@@ -150,6 +168,10 @@ class HomeFragment : Fragment() {
                     val firstCustomerBasicData = customerList[0]
 
                     MotorBroDatabase().getCustomerByUid( firstCustomerBasicData.customerId ){ firstCustomerAllData ->
+
+                        if (!isAdded) {
+                            return@getCustomerByUid
+                        }
 
                         view.lastScannedUserName.text = "${firstCustomerAllData!!.firstName}  ${firstCustomerAllData!!.lastName}"
                         view.lastScannedUserDate.text = Utils().convertMillisecondsToDate((firstCustomerBasicData.dateScanned.toLong() * 1000), "MMM dd, yyyy")
@@ -174,6 +196,11 @@ class HomeFragment : Fragment() {
 
             // GET PARTS/SERVICES
             MotorBroDatabase().getShopProducts(user.shopId){ productsList ->
+
+                if (!isAdded) {
+                    return@getShopProducts
+                }
+
                 val productCount = productsList.count()
                 view.shopPartsServicesNumber.text = "$productCount parts/services"
                 if (productCount != 0) {
