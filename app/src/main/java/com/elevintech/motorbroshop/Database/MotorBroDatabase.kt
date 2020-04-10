@@ -743,6 +743,31 @@ class MotorBroDatabase {
 
     }
 
+    fun getChatRoomByParticipants(user: String, shop: String, callback: (String) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms")
+            .whereEqualTo("participants.user", user )
+            .whereEqualTo("participants.shop", shop )
+
+        chatRoomRef.get().addOnSuccessListener {
+
+            if (it.count() != 0){
+                println("count of chatroom is exist")
+                for (chatRoom in it){
+                    callback(chatRoom.id)
+                }
+
+            } else {
+                println("no chat room found")
+                callback("")
+
+            }
+
+
+        }
+
+    }
     fun getChatRoomOfShop(shopId: String, callback: (MutableList<ChatRoom>)-> Unit){
 
         val db = FirebaseFirestore.getInstance()
