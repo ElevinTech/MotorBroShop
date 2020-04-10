@@ -150,6 +150,7 @@ class HomeFragment : Fragment() {
                         val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
                         viewInflated.employeeName.text = employee.firstName + " " + employee.lastName
                         Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.lastEmployeeImage)
+                        view.employeeLayout.addView(viewInflated)
                     }
 
                 } else {
