@@ -13,7 +13,8 @@ class Product (
     var dateCreated: String ="",
     var odometer: Double = 0.0,
     var isShopProduct: Boolean = true,
-    var customerId: String = ""
+    var customerId: String = "",
+    var dateLong: Long = 0
 
 
 )

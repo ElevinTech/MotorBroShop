@@ -67,6 +67,9 @@ class UpdateShop : AppCompatActivity() {
             updateUi(it)
         }
 
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun updateUi(shop: Shop) {

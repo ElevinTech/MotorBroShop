@@ -19,7 +19,7 @@
 <!--            android:visibility="gone"-->
 <!--            />-->
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -220,5 +220,5 @@
                 android:layout_marginTop="20dp"
                 />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

@@ -186,6 +186,8 @@ class TypeOfPartsActivity : AppCompatActivity() {
 
             viewHolder.itemView.checkbox.isChecked = part.isChecked
 
+
+
             viewHolder.itemView.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
 
                 part.isChecked = isChecked

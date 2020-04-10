@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.elevintech.motorbroshop.R
 import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
@@ -153,6 +154,8 @@ class AddPartsServicesActivity : AppCompatActivity() {
             product.shopId = shopId
             product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
             product.dateCreated = Utils().getCurrentTimestamp().toString()
+            product.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+
             MotorBroDatabase().saveProduct(shopId, product){
                 progressDialog.dismiss()
                 finish()
@@ -222,6 +225,20 @@ class AddPartsServicesActivity : AppCompatActivity() {
             mainProfilePhoto.visibility = View.VISIBLE
             emptyImageIcon.visibility = View.GONE
 
+        }
+
+        if (resultCode == Activity.RESULT_OK){
+            if (data != null){
+                if (requestCode == SELECT_PART_TYPE){
+                    var partType = data!!.getStringExtra("selectedPart").toString()
+                    typeOfPartsText.setText(partType)
+                }
+
+                if (requestCode == SELECT_PART_BRAND){
+                    var brandType = data!!.getStringExtra("selectedBrand").toString()
+                    brandText.setText(brandType)
+                }
+            }
         }
 
     }

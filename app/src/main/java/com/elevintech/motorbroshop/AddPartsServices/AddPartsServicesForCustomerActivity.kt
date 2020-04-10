@@ -1,6 +1,7 @@
 package com.elevintech.motorbroshop.AddPartsServices
 
 import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
@@ -18,6 +19,8 @@ import com.elevintech.motorbroshop.Model.BikeParts
 import com.elevintech.motorbroshop.Model.Customer
 import com.elevintech.motorbroshop.Model.Product
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.TypeOf.TypeOfBrandActivity
+import com.elevintech.motorbroshop.TypeOf.TypeOfPartsActivity
 import com.elevintech.motorbroshop.Utils
 import com.github.florent37.runtimepermission.RuntimePermission
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +40,11 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
     var birthDayInMilliseconds = 0.toLong()
     lateinit var mDateSetListener: DatePickerDialog.OnDateSetListener
+
+    companion object {
+        val SELECT_PART_TYPE = 1
+        val SELECT_PART_BRAND = 2
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +82,22 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
         backButton.setOnClickListener {
             finish()
+        }
+
+        typeOfPartsText.setOnClickListener {
+            val intent = Intent(applicationContext, TypeOfPartsActivity::class.java)
+            intent.putExtra("fromAddExtra", true)
+            startActivityForResult(intent, AddPartsServicesForCustomerActivity.SELECT_PART_TYPE)
+        }
+
+        brandText.setOnClickListener {
+            val intent = Intent(applicationContext, TypeOfBrandActivity::class.java)
+            intent.putExtra("fromAddExtra", true)
+            startActivityForResult(intent, AddPartsServicesForCustomerActivity.SELECT_PART_BRAND)
+        }
+
+        noteText.setOnClickListener {
+            noteText.getParent().requestDisallowInterceptTouchEvent(true);
         }
     }
 
@@ -253,6 +277,20 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
             selectedCustomerId = customer.uid
             customerName.setText(capitalize(customer.firstName) + " " + capitalize(customer.lastName))
 
+        }
+
+        if (resultCode == Activity.RESULT_OK){
+            if (data != null){
+                if (requestCode == AddPartsServicesForCustomerActivity.SELECT_PART_TYPE){
+                    var partType = data!!.getStringExtra("selectedPart").toString()
+                    typeOfPartsText.setText(partType)
+                }
+
+                if (requestCode == AddPartsServicesForCustomerActivity.SELECT_PART_BRAND){
+                    var brandType = data!!.getStringExtra("selectedBrand").toString()
+                    brandText.setText(brandType)
+                }
+            }
         }
 
     }

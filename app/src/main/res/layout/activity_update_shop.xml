@@ -10,27 +10,42 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary"
+        android:background="#F1333A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/back_icon"
+            android:tint="@color/white"/>
+
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Update your shop"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar" />
 
     </androidx.appcompat.widget.Toolbar>
 
 
     <!--android:fontFamily="@font/lato"-->
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Update Shop"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar" />
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -114,7 +129,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/camera_compact_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#F1333A"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -150,7 +165,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/shop_name_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#F1333A"
                     />
 
                 <EditText
@@ -193,7 +208,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/address_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#F1333A"
                     />
 
                 <EditText
@@ -236,7 +251,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/date_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#F1333A"
                     />
 
                 <EditText

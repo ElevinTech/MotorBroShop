@@ -29,8 +29,13 @@ class Utils {
 
     fun convertMillisecondsToDate(dateInMilliseconds: String , datePatternFormat: String) : String{
 
-        val sdf = SimpleDateFormat("$datePatternFormat") // sample date format: "h:mm a"	12:08 PM / "EEE, MMM d, ''yy"	Wed, Jul 4, '01
-        val netDate = Date(dateInMilliseconds.toLong())
+        val sdf = SimpleDateFormat("$datePatternFormat")
+
+        var newDate = dateInMilliseconds
+        if(newDate.count() == 10) {
+            newDate += "000"// sample date format: "h:mm a"	12:08 PM / "EEE, MMM d, ''yy"	Wed, Jul 4, '01
+        }
+        val netDate = Date(newDate.toLong())
 
         return sdf.format(netDate).toString()
     }

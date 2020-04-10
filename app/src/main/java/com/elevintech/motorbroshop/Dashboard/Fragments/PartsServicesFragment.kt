@@ -138,6 +138,10 @@ class PartsServicesFragment : Fragment() {
             if (!product.dateCreated.isEmpty()) {
                 viewHolder.itemView.dateText.text = Utils().convertMillisecondsToDate(product.dateCreated, "MMM d, yyyy")
             }
+
+//            if(product.dateLong != 0.toLong()) {
+//                viewHolder.itemView.dateText.text = Utils().convertMillisecondsToDate(product.dateLong, "MMM d, yyyy")
+//            }
             //viewHolder.itemView.typeOfParts.text =
             // TODO: Fix thiss
             if (product.imageUrl != "") {
