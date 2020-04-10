@@ -25,7 +25,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="#03A9F4"
+                android:background="#F1333A"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="Your Shop"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#03A9F4"
+                android:textColor="#F1333A"
                 android:textSize="16sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
@@ -148,7 +148,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/calendar_icon"
-                    android:tint="#575757"
+                    android:tint="#888888"
                     />
                 <TextView
                     android:id="@+id/shopEstablished"
@@ -175,7 +175,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/users_icon"
-                    android:tint="#575757"
+                    android:tint="#888888"
                     />
                 <TextView
                     android:id="@+id/shopCustomersNumber"
@@ -202,7 +202,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/wrench_icon"
-                    android:tint="#575757"
+                    android:tint="#888888"
                     />
                 <TextView
                     android:id="@+id/shopPartsServicesNumber"
@@ -232,7 +232,7 @@
                     android:text="View your Shop"
                     android:textAllCaps="false"
                     android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#2196F3"
+                    android:textColor="#F1333A"
                     android:layout_marginRight="20dp"
 
                     />
@@ -245,7 +245,7 @@
                     android:text="Edit your Shop"
                     android:textAllCaps="false"
                     android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#2196F3"
+                    android:textColor="#F1333A"
                     android:layout_marginRight="10dp"
 
                     />
@@ -271,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:text="Employees"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#03A9F4"
+                android:textColor="#F1333A"
                 android:textSize="16sp"
 
                 />
@@ -336,7 +336,7 @@
             android:layout_height="wrap_content"
             android:text="Last Scanned"
             android:fontFamily="@font/open_sans_semibold"
-            android:textColor="#03A9F4"
+            android:textColor="#F1333A"
             android:textSize="16sp"
             />
 
@@ -404,7 +404,7 @@
                 android:layout_height="wrap_content"
                 android:text="Parts and Services - Last Added"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#03A9F4"
+                android:textColor="#F1333A"
                 android:textSize="16sp"
 
                 />
@@ -424,7 +424,7 @@
                     android:src="@drawable/tab_settings_icon"
 
                     android:layout_marginTop="10dp"
-                    android:tint="#3D5AFE"
+                    android:tint="#F3242B"
                     />
 
                 <LinearLayout

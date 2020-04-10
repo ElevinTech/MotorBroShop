@@ -25,6 +25,10 @@ class CustomerSelectorActivity : AppCompatActivity() {
 
         getCustomers()
 
+        backButton.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun getCustomers() {

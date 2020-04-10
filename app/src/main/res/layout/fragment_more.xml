@@ -23,7 +23,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="#03A9F4"
+                android:background="#F1333A"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:text="Account"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="#03A9F4"
+                    android:textColor="#F1333A"
                     android:textSize="16sp"
 
                     />
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:text="Shop"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="#03A9F4"
+                    android:textColor="#F1333A"
                     android:textSize="16sp"
 
                     />
@@ -167,7 +167,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/shop_name_icon"
-                    android:tint="#2196F3"
+                    android:tint="#F1333A"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -206,7 +206,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_branches_icon"
-                        android:tint="#2196F3"
+                        android:tint="#F1333A"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -242,7 +242,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_documents_icon"
-                        android:tint="#2196F3"
+                        android:tint="#F1333A"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -278,7 +278,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_employees_icon"
-                        android:tint="#2196F3"
+                        android:tint="#F1333A"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -317,7 +317,7 @@
                 android:layout_height="wrap_content"
                 android:text="Settings"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#03A9F4"
+                android:textColor="#F1333A"
                 android:textSize="16sp"
 
                 />
@@ -334,7 +334,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/side_nav_feedback_icon"
-                    android:tint="#2196F3"
+                    android:tint="#F1333A"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -370,7 +370,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/terms_services_icon"
-                    android:tint="#2196F3"
+                    android:tint="#F1333A"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout

@@ -71,6 +71,10 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
             startActivityForResult(intent, SELECT_CUSTOMER)
 
         }
+
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun openDatePicker() {
@@ -127,41 +131,52 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 //        val progressDialog = Utils().easyProgressDialog(this, "Saving Product...")
 //        progressDialog.show()
 //
-//        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-//            var product = Product()
-//            product.name = nameEditText.text.toString()
-//            product.description = descriptionEditText.text.toString()
-//            product.price = priceEditText.text.toString()
-//            product.imageUrl = imageUrl
-//            product.type = typeEditText.text.toString()
-//            product.brand = brandEditText.text.toString()
-//            product.shopId = shopId
-//            product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
-//            MotorBroDatabase().saveProduct(shopId, product){
-//                progressDialog.dismiss()
-//                finish()
-//            }
-//        }
-
+        val shopId = intent.getStringExtra("shopId")
         val showDialog = Utils().showProgressDialog(this, "Saving bike part")
 
-        val bikeParts = BikeParts()
-        bikeParts.date = dateText.text.toString()
-        bikeParts.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
-        bikeParts.odometer = odometerText.text.toString().toDouble()
-        bikeParts.typeOfParts = typeEditText.text.toString()
-        bikeParts.brand = brandEditText.text.toString()
-        bikeParts.price = priceEditText.text.toString().toDouble()
-        bikeParts.note = descriptionEditText.text.toString()
-        bikeParts.userId = FirebaseAuth.getInstance().uid!!
-        bikeParts.createdByShop = true
+        // Save it to both so it would appear on both
+        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+            var product = Product()
+            product.description = noteText.text.toString()
+            product.price = priceText.text.toString()
+            product.imageUrl = imageUrl
+            product.type = typeOfPartsText.text.toString()
+            product.brand = brandText.text.toString()
+            product.shopId = shopId
+            product.isShopProduct = false
+            product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+            MotorBroDatabase().saveProduct(shopId, product){
 
-        val database = MotorBroDatabase()
-        database.saveBikeParts(bikeParts, selectedCustomerId) {
-                showDialog.dismiss()
-                Toast.makeText(this, "Successfully saved bike part", Toast.LENGTH_SHORT).show()
-                finish()
+                val bikeParts = BikeParts()
+                bikeParts.date = dateText.text.toString()
+                bikeParts.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+                bikeParts.odometer = odometerText.text.toString().toDouble()
+                bikeParts.typeOfParts = typeOfPartsText.text.toString()
+                bikeParts.brand = brandText.text.toString()
+                bikeParts.price = priceText.text.toString().toDouble()
+                bikeParts.note = noteText.text.toString()
+                bikeParts.userId = FirebaseAuth.getInstance().uid!!
+                bikeParts.shopId = shopId
+                bikeParts.createdByShop = true
+
+                val database = MotorBroDatabase()
+                database.saveBikeParts(bikeParts, selectedCustomerId) {
+                    showDialog.dismiss()
+                    Toast.makeText(this, "Successfully saved bike part", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+
+            }
         }
+
+
+
+
+
+    }
+
+
+    private fun saveBikeParts() {
 
     }
 
@@ -244,28 +259,38 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
     fun hasCompletedValues(): Boolean {
 
-        if (nameEditText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the Title field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (nameEditText.text.isEmpty()) {
+//            Toast.makeText(this, "Please fill up the Title field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
 //        if (dateText.text.isEmpty()) {
 //            Toast.makeText(this, "Please fill up the Date field", Toast.LENGTH_LONG).show()
 //            return false
 //        }
 
-        if (typeEditText.text.isEmpty()) {
+        if (odometerText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (typeOfPartsText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Type of part field", Toast.LENGTH_LONG).show()
             return false
         }
 
-        if (brandEditText.text.isEmpty()) {
+        if (brandText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Brand field", Toast.LENGTH_LONG).show()
             return false
         }
 
-        if (priceEditText.text.isEmpty()) {
+        if (priceText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Price field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (dateText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
             return false
         }
 
@@ -273,7 +298,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
             return false
         }
-
 
         return true
     }

@@ -12,12 +12,14 @@ import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.Model.UserType
 
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Shop.ShopActivity
 import com.elevintech.motorbroshop.Shop.UpdateShop
+import com.elevintech.motorbroshop.ShopView.ShopViewActivity
 import com.elevintech.motorbroshop.Utils
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -29,6 +31,7 @@ import kotlinx.android.synthetic.main.row_employee_dashboard.view.*
 class HomeFragment : Fragment() {
 
     var user = User()
+    var shop = Shop()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +56,8 @@ class HomeFragment : Fragment() {
         }
 
         viewShopButton.setOnClickListener {
-            val intent = Intent(activity, ShopActivity::class.java)
-            intent.putExtra("shopId", user.shopId)
+            val intent = Intent(activity, ShopViewActivity::class.java)
+            intent.putExtra("shop", shop)
             startActivity(intent)
         }
 
@@ -107,6 +110,7 @@ class HomeFragment : Fragment() {
                 return@getShop
             }
 
+            this.shop = it
             val shop = it
 
             view.shopName.text = shop.name
@@ -189,7 +193,7 @@ class HomeFragment : Fragment() {
 
                     }
                 } else {
-                    view.lastScannedHeaderText.text = "No User Scanned Yet, Get Started by scannign a user."
+                    view.lastScannedHeaderText.text = "No User Scanned Yet, Get Started by scanning a user."
                 }
 
             }
@@ -205,12 +209,13 @@ class HomeFragment : Fragment() {
                 view.shopPartsServicesNumber.text = "$productCount parts/services"
                 if (productCount != 0) {
 
-
                     // GET FIRST CUSTOMER
                     if (productCount > 0){
                         val latestProduct = productsList[0]
-                        view.latestProductName.text = "${latestProduct.brand} ${latestProduct.name}"
-                        view.latestProductDate.text = Utils().convertMillisecondsToDate((latestProduct.dateCreated.toLong() * 1000), "MMM dd, yyyy")
+                        if (!latestProduct.dateCreated.isEmpty()) {
+                            view.latestProductName.text = "${latestProduct.brand} ${latestProduct.name}"
+                            view.latestProductDate.text = Utils().convertMillisecondsToDate((latestProduct.dateCreated.toLong() * 1000), "MMM dd, yyyy")
+                        }
                     }
                 } else {
                     view.partsServicesHeader.text = "No Parts / Services yet!"

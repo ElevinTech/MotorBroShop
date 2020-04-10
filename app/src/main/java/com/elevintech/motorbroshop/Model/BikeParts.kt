@@ -9,4 +9,5 @@ class BikeParts(
     var brand: String = "",
     var note: String = "",
     var price: Double = 0.0,
+    var shopId: String ="",
     var createdByShop: Boolean = false)

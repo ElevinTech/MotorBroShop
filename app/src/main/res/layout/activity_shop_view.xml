@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#F1333A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/back_icon"
+            android:tint="@color/white"/>
+
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Shop"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/shopImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shop1_sample" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:src="@drawable/location_small_icon"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            />
+
+        <LinearLayout
+            android:layout_weight="20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="3dp"
+            >
+
+            <TextView
+                android:id="@+id/mainLocationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Main - Quezon City"
+                android:textColor="#394887"
+                android:fontFamily="@font/open_sans"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/shopImageView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/branchesLocationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Branches - Makati, Manila, Antipolo"
+                android:textColor="#394887"
+                android:fontFamily="@font/open_sans"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/shopImageView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/shopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bike and Coffee"
+        android:textSize="18sp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textColor="@color/textColorBlack"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/verified_icon"
+            />
+
+        <TextView
+            android:id="@+id/verifiedText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Verified"
+            android:textColor="@color/textColorBlack"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/calendar_shop_icon"
+            />
+
+        <TextView
+            android:id="@+id/calendarText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Founded: Dec 2019"
+            android:textColor="@color/textColorBlack"
+            android:fontFamily="@font/open_sans"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="15sp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textColor="@color/textColorBlack"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/shopDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco
+laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+ dolor in reprehenderit in voluptate velit esse cillum dolore
+ eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+ non proident, sunt in culpa qui officia deserunt mollit anim
+id est laborum."
+        android:layout_marginRight="20dp"
+        android:textSize="11sp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/textColorBlack"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parts"
+        android:textSize="15sp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textColor="@color/textColorBlack"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:src="@drawable/parts_shop_icon"
+            />
+
+        <TextView
+            android:id="@+id/listOfPartsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Gears, Motor Brakes, Oil Filter"
+            android:textColor="@color/textColorBlack"
+            android:fontFamily="@font/open_sans_semibold"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!--    -->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingTop="20dp"-->
+    <!--        android:paddingStart="16dp"-->
+    <!--        android:paddingEnd="16dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/cardView">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textView1"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Shop Details"-->
+    <!--            android:fontFamily="@font/open_sans"-->
+    <!--            android:textColor="#333333"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="25dp"-->
+    <!--                android:layout_height="25dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:fontFamily="@font/open_sans_semibold"-->
+    <!--                android:src="@drawable/shop_name_icon"-->
+    <!--                android:textColor="#3F3F3F"-->
+    <!--                android:tint="#4F6B91" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/shopName"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center_vertical"-->
+    <!--                android:layout_marginStart="16dp"-->
+    <!--                android:fontFamily="@font/open_sans"-->
+    <!--                android:text=""-->
+    <!--                android:textColor="#555555"-->
+    <!--                android:textSize="14sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--        </LinearLayout>-->
+
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+
+    <!--            android:layout_marginTop="10dp"-->
+    <!--            android:orientation="horizontal"-->
+
+    <!--            >-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="25dp"-->
+    <!--                android:layout_height="25dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:fontFamily="@font/open_sans_semibold"-->
+    <!--                android:src="@drawable/address_icon"-->
+    <!--                android:textColor="#3F3F3F"-->
+    <!--                android:tint="#4F6B91" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/shopAddress"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center_vertical"-->
+    <!--                android:layout_marginStart="16dp"-->
+    <!--                android:fontFamily="@font/open_sans"-->
+    <!--                android:text=""-->
+    <!--                android:textColor="#555555"-->
+    <!--                android:textSize="14sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--        </LinearLayout>-->
+
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+
+    <!--            android:layout_marginTop="10dp"-->
+    <!--            android:orientation="horizontal"-->
+
+    <!--            >-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="25dp"-->
+    <!--                android:layout_height="25dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:fontFamily="@font/open_sans_semibold"-->
+    <!--                android:src="@drawable/date_icon"-->
+    <!--                android:textColor="#3F3F3F"-->
+    <!--                android:tint="#4F6B91" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/dateEstablished"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center_vertical"-->
+    <!--                android:layout_marginStart="16dp"-->
+    <!--                android:fontFamily="@font/open_sans"-->
+    <!--                android:text=""-->
+    <!--                android:textColor="#555555"-->
+    <!--                android:textSize="14sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_marginStart="20dp"-->
+    <!--            android:layout_marginEnd="20dp"-->
+    <!--            android:id="@+id/textView1111"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="24dp"-->
+    <!--            android:fontFamily="@font/open_sans"-->
+    <!--            android:text="Description"-->
+    <!--            android:textColor="#333333"-->
+
+    <!--            android:textSize="12sp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <EditText-->
+    <!--            android:layout_marginStart="20dp"-->
+    <!--            android:layout_marginEnd="20dp"-->
+    <!--            android:id="@+id/shopDescriptionEditText"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="90dp"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:background="@drawable/white_rounded_background"-->
+
+    <!--            android:fontFamily="@font/open_sans"-->
+    <!--            android:gravity="start|top"-->
+    <!--            android:hint=""-->
+    <!--            android:inputType="textMultiLine"-->
+    <!--            android:maxLength="150"-->
+    <!--            android:paddingLeft="16dp"-->
+    <!--            android:paddingTop="10dp"-->
+    <!--            android:text=""-->
+    <!--            android:textSize="14sp"-->
+    <!--            android:visibility="visible"-->
+    <!--            android:focusable="false"/>-->
+
+
+    <!--    </LinearLayout>-->
+
+
+</LinearLayout>

@@ -18,6 +18,7 @@ import com.elevintech.motorbroshop.Model.Product
 import com.elevintech.motorbroshop.Model.User
 
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.Utils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -58,8 +59,6 @@ class PartsServicesFragment : Fragment() {
             startActivity(intent)
         }
         setupRecyclerView()
-
-
     }
 
     private fun setupRecyclerView() {
@@ -93,8 +92,10 @@ class PartsServicesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        customersListAdapter.clear()
         getProducts()
     }
+
 
     private fun getProducts() {
         MotorBroDatabase().getShopProducts(user.shopId){
@@ -115,10 +116,37 @@ class PartsServicesFragment : Fragment() {
     inner class customerItem(val product: Product): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-            viewHolder.itemView.productName.text = product.name
-            viewHolder.itemView.productBrand.text = product.brand
+            var isShopProduct = "Shop - "
 
-            Glide.with(activity as DashboardActivity).load(product.imageUrl).into(viewHolder.itemView.productImage)
+            if (product.isShopProduct == false) {
+                isShopProduct = "Customer - "
+            }
+
+            viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
+            viewHolder.itemView.odometerText.text = product.odometer.toString() + "km"
+            viewHolder.itemView.cashText.text = " ₱" + product.price
+            viewHolder.itemView.noteText.text = product.description
+
+//            if (product.isShopProduct == false) {
+//                if (product.customerId != "") {
+//                    MotorBroDatabase().getCustomerByUid(product.customerId) {
+//                        var userDescription = it
+//                    }
+//                }
+//            }
+
+            if (!product.dateCreated.isEmpty()) {
+                viewHolder.itemView.dateText.text = Utils().convertMillisecondsToDate(product.dateCreated, "MMM d, yyyy")
+            }
+            //viewHolder.itemView.typeOfParts.text =
+            // TODO: Fix thiss
+            if (product.imageUrl != "") {
+                viewHolder.itemView.productImage.visibility = View.VISIBLE
+                Glide.with(activity as DashboardActivity).load(product.imageUrl).into(viewHolder.itemView.productImage)
+            } else {
+                viewHolder.itemView.productImage.visibility = View.GONE
+            }
+
         }
 
         override fun getLayout(): Int {

@@ -32,6 +32,7 @@ class CustomerListFragment : Fragment() {
 
     lateinit var user: User
     lateinit var thisView: View
+    var customersListAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +65,7 @@ class CustomerListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
+        customersListAdapter.clear()
         getCustomers(thisView)
 
     }
@@ -79,7 +80,7 @@ class CustomerListFragment : Fragment() {
 
     private fun displayCustomers(customersList: MutableList<Customer>, view: View) {
 
-        var customersListAdapter = GroupAdapter<ViewHolder>()
+
         view.recycler_view_customers.adapter = customersListAdapter
 
         view.recycler_view_customers.layoutManager = LinearLayoutManager(activity)

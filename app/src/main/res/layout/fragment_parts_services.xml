@@ -36,7 +36,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="#03A9F4"
+                android:background="#F1333A"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:text="Your Parts and Services"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:textColor="#03A9F4"
+                    android:textColor="#F1333A"
                     android:textSize="16sp"
 
                     />
@@ -129,6 +129,40 @@
                         />
                 </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
+                <Button
+                    android:id="@+id/shopPartsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Shops parts"
+                    android:background="#fff"
+                    android:textColor="#E42424"
+                    />
+
+                <Button
+                    android:id="@+id/customerPartsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Customer parts"
+                    android:background="#fff"
+
+                    />
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/noDataFullLayout"

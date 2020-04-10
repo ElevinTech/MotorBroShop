@@ -21,6 +21,10 @@ class CustomerProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        chatUserButton.setOnClickListener {
+
+        }
+
     }
 
     private fun updateUI(customer: Customer) {

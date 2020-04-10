@@ -10,7 +10,10 @@ class Product (
     var type: String = "", // either a part or service
     var brand: String = "",
     var shopId: String = "",
-    var dateCreated: String =""
+    var dateCreated: String ="",
+    var odometer: Double = 0.0,
+    var isShopProduct: Boolean = true,
+    var customerId: String = ""
 
 
 )

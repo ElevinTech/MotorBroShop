@@ -168,8 +168,6 @@ class UpdateShop : AppCompatActivity() {
 
             // PUT THE SELECTED DATE ON THE DATE PLACEHOLDER
             view.setText( monthInWords + " " + dayString + " " + year )
-
-
         }
 
     }

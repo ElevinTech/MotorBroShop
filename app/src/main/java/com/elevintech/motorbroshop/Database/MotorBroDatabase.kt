@@ -266,7 +266,10 @@ class MotorBroDatabase {
                 for(customerSnapshot in querySnapshot){
 
                     val customer = customerSnapshot.toObject(CustomerShopData::class.java)
-                    customersList.add(customer!!)
+                    if (customer != null) {
+                        customersList.add(customer)
+                    }
+
 
                 }
                 callback(customersList)
@@ -926,6 +929,69 @@ class MotorBroDatabase {
             .update("deviceTokens.$uid", FieldValue.delete())
             .addOnSuccessListener { println("success delete shop token: $shopId")}
             .addOnFailureListener { e -> println("error update user's fcm token: $e") }
+    }
+
+    fun saveCustomPart(part: String, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("customers").document(uid)
+
+        userBio
+            .update("customParts", FieldValue.arrayUnion("$part"))
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+    }
+
+    fun saveDeletedParts(parts: String, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("customers").document(uid)
+
+        userBio
+            .update("deletedParts", FieldValue.arrayUnion("$parts "))
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+    }
+
+    fun saveDeletedBrands(parts: String, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("customers").document(uid)
+
+        userBio
+            .update("deletedBrands", FieldValue.arrayUnion("$parts "))
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
+    }
+
+    fun getUser(callback: (User) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val docRef = db.collection("customers").document(uid)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var user = User()
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                user = documentSnapshot.toObject(User::class.java)!!
+
+            }
+
+            callback( user )
+        }
+    }
+
+    fun saveCustomBrand(part: String, callback: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().uid!!
+        val userBio = db.collection("customers").document(uid)
+
+        userBio
+            .update("customBrands", FieldValue.arrayUnion("$part"))
+            .addOnSuccessListener { callback() }
+            .addOnFailureListener { e -> callback() }
     }
 
 }

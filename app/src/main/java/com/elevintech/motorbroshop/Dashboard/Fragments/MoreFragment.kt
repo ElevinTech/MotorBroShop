@@ -19,6 +19,7 @@ import com.elevintech.motorbroshop.Model.User
 
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Shop.ShopActivity
+import com.elevintech.motorbroshop.Shop.UpdateShop
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_more.*
 
@@ -53,7 +54,7 @@ class MoreFragment : Fragment() {
         emailText.text = user.email
 
         editShopLayout.setOnClickListener {
-            val intent = Intent(activity, ShopActivity::class.java)
+            val intent = Intent(activity, UpdateShop::class.java)
             intent.putExtra("shopId", user.shopId)
             startActivity(intent)
         }
