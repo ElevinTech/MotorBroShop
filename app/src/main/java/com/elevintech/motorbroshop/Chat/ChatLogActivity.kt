@@ -149,7 +149,7 @@ class ChatLogActivity : AppCompatActivity() {
             db.createNewChatRoom ( participants ){ chatRoomId ->
 
                 // save message in chat room
-                val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId, fcmTokenList)
+                val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId, fcmTokenList, shop.name)
                 db.saveMessageInChatRoom(chatMessage){
 
                     // save message in last messages
@@ -165,7 +165,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         } else {
 
-            val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId!!, fcmTokenList)
+            val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId!!, fcmTokenList, shop.name)
 
             // save message in chat room
             db.saveMessageInChatRoom(chatMessage){
