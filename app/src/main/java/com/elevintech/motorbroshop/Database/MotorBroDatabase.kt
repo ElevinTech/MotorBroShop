@@ -4,8 +4,10 @@ import android.net.Uri
 import com.elevintech.motorbroshop.DispatchGroup
 import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.Utils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
@@ -1017,6 +1019,30 @@ class MotorBroDatabase {
             .update("customBrands", FieldValue.arrayUnion("$part"))
             .addOnSuccessListener { callback() }
             .addOnFailureListener { e -> callback() }
+    }
+
+    fun getDeviceToken(callback: (String) -> Unit) {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Get new Instance ID token
+                    val token = task.result?.token!!
+                    callback(token)
+
+                } else {
+                    println("getInstanceId failed" + task.exception)
+                }
+
+            })
+    }
+
+    fun checkIfLoggedIn(callback: (Boolean) -> Unit){
+        // Initialize Firebase Auth
+        val auth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        callback(currentUser != null)
+
     }
 
 }

@@ -20,7 +20,14 @@ class FirebaseMessagingService : FirebaseMessagingService(){
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        MotorBroDatabase().updateFcmToken(token)
+
+        MotorBroDatabase().checkIfLoggedIn { isLoggedIn ->
+
+            if(isLoggedIn)
+                MotorBroDatabase().updateFcmToken(token)
+
+        }
+
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

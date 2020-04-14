@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
+import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.github.florent37.runtimepermission.RuntimePermission
 import com.google.firebase.auth.FirebaseAuth
@@ -63,26 +64,36 @@ class RegisterOwner : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
 
-                    var user = ShopOwner()
-                    user.uid        = it.user!!.uid
-                    user.firstName  = firstNameEditText.text.toString()
-                    user.lastName   = lastNameEditText.text.toString()
-                    user.shopId     = "" // shop wil be created on the next step, account creation first
-                    user.email      = emailEditText.text.toString()
+                // GET DEVICE TOKEN
+                firebaseDatabase.getDeviceToken{ token ->
 
+                    // SAVE THE USER DOCUMENT
+                    val user = UserType(it.user!!.uid,  UserType.Type.OWNER, token)
+                    firebaseDatabase.createNewUser(user.uid , user){
 
-                    firebaseDatabase.uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-                        user.profilePictureUrl = imageUrl
+                        // UPLOAD IMAGE
+                        firebaseDatabase.uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
 
-                        firebaseDatabase.createShopOwner(user) {
+                            // SAVE THE OWNER DOCUMENT
+                            var owner = ShopOwner()
+                            owner.uid        = user.uid
+                            owner.firstName  = firstNameEditText.text.toString()
+                            owner.lastName   = lastNameEditText.text.toString()
+                            owner.shopId     = "" // shop wil be created on the next step, account creation first
+                            owner.email      = emailEditText.text.toString()
+                            owner.profilePictureUrl = imageUrl
+                            firebaseDatabase.createShopOwner(owner) {
 
-                            progressDialog.dismiss()
-                            val intent = Intent(applicationContext, RegisterShop::class.java)
-                            startActivity(intent)
+                                progressDialog.dismiss()
+                                val intent = Intent(applicationContext, RegisterShop::class.java)
+                                startActivity(intent)
 
-                            finish()
+                                finish()
+                            }
                         }
                     }
+                }
+
 
             }.addOnFailureListener {  e ->
 
@@ -122,6 +133,11 @@ class RegisterOwner : AppCompatActivity() {
 
         if (passwordEditText.text.toString() != confirmPasswordEditText.text.toString()) {
             Toast.makeText(this, "Please make sure your password is the same as your confirm password text", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (imageUri == null) {
+            Toast.makeText(this, "Please upload an image", Toast.LENGTH_LONG).show()
             return false
         }
 
