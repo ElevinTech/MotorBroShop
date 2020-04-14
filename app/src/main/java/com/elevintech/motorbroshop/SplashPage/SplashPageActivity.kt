@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
+import com.elevintech.motorbroshop.Register.SelectLocation
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashPageActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class SplashPageActivity : AppCompatActivity() {
 
         //Navigate with delay
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+
     }
 
     public override fun onDestroy() {
@@ -44,7 +46,7 @@ class SplashPageActivity : AppCompatActivity() {
 
             val currentUser = auth.currentUser
             if (currentUser != null) {
-                val intent = Intent(applicationContext, DashboardActivity::class.java)
+                val intent = Intent(applicationContext, SelectLocation::class.java)
                 startActivity(intent)
                 finish()
             } else {

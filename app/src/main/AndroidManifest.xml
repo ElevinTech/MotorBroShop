@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddTypeOfParts.AddBrandActivity"></activity>
+        <activity android:name=".Register.SelectLocation"></activity>
+        <activity android:name=".AddTypeOfParts.AddBrandActivity" />
         <activity android:name=".TypeOf.TypeOfBrandActivity" />
         <activity android:name=".AddTypeOfParts.AddTypeOfParts" />
         <activity android:name=".TypeOf.TypeOfPartsActivity" />

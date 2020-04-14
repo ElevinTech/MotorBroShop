@@ -62,6 +62,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.airbnb.android:lottie:3.4.0"
 
 }
 
