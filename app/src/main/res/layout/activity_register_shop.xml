@@ -171,8 +171,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Address"
                 android:fontFamily="@font/open_sans"
+                android:text="Address"
                 android:textColor="#555555"
                 android:textSize="15sp"
                 android:textStyle="bold" />

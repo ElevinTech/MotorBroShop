@@ -7,7 +7,8 @@
     tools:context=".Register.SelectLocation"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="40dp">
+    android:padding="40dp"
+    android:background="@color/white">
 
     <EditText
         android:layout_marginBottom="40dp"
@@ -54,11 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="Setting your location will allow your shop to be searchable for potential customers. Start by typing in your city or province."
+            android:text="Selecting your location will allow your shop to be searchable for potential customers. Just start by typing in your city or province."
             android:textSize="14sp"
             android:layout_weight="1"/>
-
-
 
     </LinearLayout>
 

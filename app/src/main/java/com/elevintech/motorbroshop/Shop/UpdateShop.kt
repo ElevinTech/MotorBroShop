@@ -19,7 +19,9 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Model.Address
 import com.elevintech.motorbroshop.Model.Shop
+import com.elevintech.motorbroshop.Register.SelectLocation
 import com.elevintech.motorbroshop.Utils
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_update_shop.*
@@ -32,11 +34,14 @@ class UpdateShop : AppCompatActivity() {
     var imageUri: Uri? = null
     var OPEN_CAMERA = 10
     var OPEN_GALLERY = 11
+    var SELECT_LOCATION = 12
 
     lateinit var shop: Shop
 
     lateinit var mDateSetListener: DatePickerDialog.OnDateSetListener
     var dateEstablished = ""
+    var address = Address()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +74,13 @@ class UpdateShop : AppCompatActivity() {
 
         backButton.setOnClickListener {
             finish()
+        }
+
+        shopAddressEditText.setOnClickListener {
+
+            val intent = Intent(this, SelectLocation::class.java)
+            startActivityForResult(intent, SELECT_LOCATION)
+
         }
     }
 
@@ -141,7 +153,8 @@ class UpdateShop : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == OPEN_GALLERY && data!= null) { imageUri = data!!.data }
+        if (requestCode == OPEN_GALLERY && data!= null)
+            imageUri = data.data
 
         if (resultCode == RESULT_OK && imageUri != null) {
 
@@ -150,6 +163,14 @@ class UpdateShop : AppCompatActivity() {
             mainProfilePhoto.setImageURI(imageUri)
             mainProfilePhoto.visibility = View.VISIBLE
             emptyImageIcon.visibility = View.GONE
+
+        }
+
+        if (requestCode == SELECT_LOCATION && data!=null){
+
+            address = data.getSerializableExtra("address")!! as Address
+
+            shopAddressEditText.setText( address.province + ", " + address.city +  ", " + address.street )
 
         }
 
@@ -206,6 +227,8 @@ class UpdateShop : AppCompatActivity() {
         updatedShop.address = shopAddressEditText.text.toString()
         updatedShop.dateEstablished = if (dateEstablished != ""){ dateEstablished } else { shop.dateEstablished }
         updatedShop.description = shopDescriptionEditText.text.toString()
+        updatedShop.fullAddress = address
+        updatedShop.searchTags = createListOfSearchTag()
 
         val progressDialog = Utils().easyProgressDialog(this, "Updating Shop...")
         progressDialog.show()
@@ -233,6 +256,31 @@ class UpdateShop : AppCompatActivity() {
 
 
 
+    }
+
+    private fun createListOfSearchTag(): ArrayList<String> {
+        val province = stringToWords(address.province) // sample value: ["Ilocos", "Norte"]
+        val city = stringToWords(address.city) // sample value: ["San", "Nicolas"]
+        val street = stringToWords(address.street)// sample value: ["Lentils", "drive"]
+        val shopName = stringToWords(shopNameEditText.text.toString()) // sample value: ["Harley", "Davidson"]
+        val returnList = ArrayList<String>()
+
+        returnList.addAll(province)
+        returnList.addAll(city)
+        returnList.addAll(street)
+        returnList.addAll(shopName)
+
+        return returnList
+    }
+
+    private fun stringToWords(mnemonic: String): List<String> {
+        val words = ArrayList<String>()
+        for (w in mnemonic.trim(' ').split(" ")) {
+            if (w.isNotEmpty()) {
+                words.add(w.toLowerCase())
+            }
+        }
+        return words
     }
 
     fun hasCompletedValues(): Boolean {

@@ -46,7 +46,7 @@ class SplashPageActivity : AppCompatActivity() {
 
             val currentUser = auth.currentUser
             if (currentUser != null) {
-                val intent = Intent(applicationContext, SelectLocation::class.java)
+                val intent = Intent(applicationContext, DashboardActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
