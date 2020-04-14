@@ -167,11 +167,8 @@ class UpdateShop : AppCompatActivity() {
         }
 
         if (requestCode == SELECT_LOCATION && data!=null){
-
             address = data.getSerializableExtra("address")!! as Address
-
             shopAddressEditText.setText( address.province + ", " + address.city +  ", " + address.street )
-
         }
 
     }

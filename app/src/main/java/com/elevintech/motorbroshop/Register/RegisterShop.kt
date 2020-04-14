@@ -22,6 +22,7 @@ import com.github.florent37.runtimepermission.RuntimePermission
 import android.provider.MediaStore
 import android.view.View
 import android.widget.EditText
+import com.elevintech.motorbroshop.Model.Address
 import com.elevintech.motorbroshop.Utils
 import java.util.*
 import java.io.File
@@ -33,9 +34,11 @@ class RegisterShop : AppCompatActivity() {
     var imageUri: Uri? = null
     var OPEN_CAMERA = 10
     var OPEN_GALLERY = 11
+    var SELECT_LOCATION = 12
 
     lateinit var mDateSetListener: DatePickerDialog.OnDateSetListener
     var dateEstablished = ""
+    var address = Address()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +61,13 @@ class RegisterShop : AppCompatActivity() {
         shopDateEstablished.setOnClickListener {
             setDatePickerAction(it as EditText)
             openDatePicker()
+        }
+
+        shopAddressEditText.setOnClickListener {
+
+            val intent = Intent(this, SelectLocation::class.java)
+            startActivityForResult(intent, SELECT_LOCATION)
+
         }
 
     }
@@ -127,7 +137,12 @@ class RegisterShop : AppCompatActivity() {
                 mainProfilePhoto.visibility = View.VISIBLE
                 emptyImageIcon.visibility = View.GONE
 
-            }
+         }
+
+        if (requestCode == SELECT_LOCATION && data!=null){
+            address = data.getSerializableExtra("address")!! as Address
+            shopAddressEditText.setText( address.province + ", " + address.city +  ", " + address.street )
+        }
 
     }
 
@@ -140,6 +155,8 @@ class RegisterShop : AppCompatActivity() {
         shop.address = shopAddressEditText.text.toString()
         shop.dateEstablished = dateEstablished
         shop.description = shopDescriptionEditText.text.toString()
+        shop.fullAddress = address
+        shop.searchTags = createListOfSearchTag()
 
         val progressDialog = Utils().easyProgressDialog(this, "Registering shop...")
         progressDialog.show()
@@ -159,6 +176,31 @@ class RegisterShop : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun createListOfSearchTag(): ArrayList<String> {
+        val province = stringToWords(address.province) // sample value: ["Ilocos", "Norte"]
+        val city = stringToWords(address.city) // sample value: ["San", "Nicolas"]
+        val street = stringToWords(address.street)// sample value: ["Lentils", "drive"]
+        val shopName = stringToWords(shopNameEditText.text.toString()) // sample value: ["Harley", "Davidson"]
+        val returnList = ArrayList<String>()
+
+        returnList.addAll(province)
+        returnList.addAll(city)
+        returnList.addAll(street)
+        returnList.addAll(shopName)
+
+        return returnList
+    }
+
+    private fun stringToWords(mnemonic: String): List<String> {
+        val words = ArrayList<String>()
+        for (w in mnemonic.trim(' ').split(" ")) {
+            if (w.isNotEmpty()) {
+                words.add(w.toLowerCase())
+            }
+        }
+        return words
     }
 
     fun hasCompletedValues(): Boolean {
