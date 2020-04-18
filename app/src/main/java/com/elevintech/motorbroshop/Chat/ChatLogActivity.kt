@@ -94,7 +94,7 @@ class ChatLogActivity : AppCompatActivity() {
     // need this variable so the pagination value does not get changed when user sends/receives a chat
     var doOnce = false
 
-    fun getChats(){
+    private fun getChats(){
 
         if (chatRoomId != ""){
             MotorBroDatabase().getChatRoomMessages(chatRoomId){
@@ -105,7 +105,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     }
 
-    fun displayChats(chatLogList : MutableList<ChatMessage>){
+    private fun displayChats(chatLogList : MutableList<ChatMessage>){
 
         recycler_view_chat_logs.adapter = adapter
 
@@ -131,7 +131,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     }
 
-    fun sendChat(){
+    private fun sendChat(){
 
         val createdDate = System.currentTimeMillis() / 1000
         val message = txtChatMessage.text.toString()
@@ -155,29 +155,21 @@ class ChatLogActivity : AppCompatActivity() {
                     // save message in last messages
                     db.updateChatRoomLastMessage(chatRoomId, chatMessage){
                         this.chatRoomId = chatRoomId
-
                         getChats()
                     }
-
                 }
-
             }
 
         } else {
 
             val chatMessage = ChatMessage(createdDate, senderId, receiverId, message, false, chatRoomId!!, fcmTokenList, shop.name)
-
             // save message in chat room
             db.saveMessageInChatRoom(chatMessage){
-
                 // save message in last messages
                 db.updateChatRoomLastMessage(chatRoomId, chatMessage){
-
                 }
-
             }
         }
-
     }
 
     fun getPreviousChats(){

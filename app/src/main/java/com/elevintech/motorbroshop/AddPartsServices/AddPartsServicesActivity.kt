@@ -152,7 +152,11 @@ class AddPartsServicesActivity : AppCompatActivity() {
         product.shopId = shopId
         product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
         product.dateCreated = Utils().getCurrentTimestamp().toString()
-        product.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+
+        if (!dateText.text.isEmpty()) {
+            product.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+        }
+
 
         if (imageUri == null){
 
@@ -172,14 +176,8 @@ class AddPartsServicesActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
         }
-
-
-
-
     }
-
 
     private fun askUploadSource(){
 
@@ -270,10 +268,10 @@ class AddPartsServicesActivity : AppCompatActivity() {
 //            return false
 //        }
 
-        if (odometerText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (odometerText.text.isEmpty()) {
+//            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
         if (typeOfPartsText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Type of part field", Toast.LENGTH_LONG).show()
@@ -290,10 +288,10 @@ class AddPartsServicesActivity : AppCompatActivity() {
             return false
         }
 
-        if (dateText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (dateText.text.isEmpty()) {
+//            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
 
         return true

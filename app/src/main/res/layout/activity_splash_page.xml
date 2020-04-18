@@ -24,9 +24,9 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:src="@drawable/motorbro_blue_red"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/motor_bro_red_blue_icon"
         android:layout_gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

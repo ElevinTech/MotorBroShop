@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Branches.BranchListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
@@ -52,6 +53,11 @@ class MoreFragment : Fragment() {
 
         userFirstName.text = user.firstName
         emailText.text = user.email
+        if (user.profilePictureUrl != "") {
+            Glide.with(this).load(user.profilePictureUrl).into(userProfileImage)
+        }
+
+
 
         editShopLayout.setOnClickListener {
             val intent = Intent(activity, UpdateShop::class.java)

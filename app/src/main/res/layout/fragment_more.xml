@@ -23,7 +23,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="#F1333A"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -87,10 +87,10 @@
 
 
                     <ImageView
+                        android:id="@+id/userProfileImage"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/user_sample_facial_hair"
-
                         android:layout_marginTop="10dp"
                         />
 

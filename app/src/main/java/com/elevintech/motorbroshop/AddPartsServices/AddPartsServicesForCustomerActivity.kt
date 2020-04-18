@@ -173,7 +173,11 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
                 val bikeParts = BikeParts()
                 bikeParts.date = dateText.text.toString()
-                bikeParts.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+
+                if (!dateText.text.isEmpty()) {
+                    bikeParts.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+                }
+
                 bikeParts.odometer = odometerText.text.toString().toDouble()
                 bikeParts.typeOfParts = typeOfPartsText.text.toString()
                 bikeParts.brand = brandText.text.toString()
@@ -307,10 +311,10 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 //            return false
 //        }
 
-        if (odometerText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (odometerText.text.isEmpty()) {
+//            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
         if (typeOfPartsText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Type of part field", Toast.LENGTH_LONG).show()
@@ -327,10 +331,10 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
             return false
         }
 
-        if (dateText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (dateText.text.isEmpty()) {
+//            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
         if (imageUri == null) {
             Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
