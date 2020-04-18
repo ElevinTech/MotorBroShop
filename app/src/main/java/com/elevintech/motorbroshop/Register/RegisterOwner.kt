@@ -23,9 +23,9 @@ import java.util.*
 
 class RegisterOwner : AppCompatActivity() {
 
-    var imageUri: Uri? = null
-    var OPEN_CAMERA = 10
-    var OPEN_GALLERY = 11
+    private var imageUri: Uri? = null
+    private var OPEN_CAMERA = 10
+    private var OPEN_GALLERY = 11
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,25 +70,27 @@ class RegisterOwner : AppCompatActivity() {
                     user.shopId     = "" // shop wil be created on the next step, account creation first
                     user.email      = emailEditText.text.toString()
 
+                    firebaseDatabase.uploadImageToFirebaseStorage(imageUri!!){ imageUrl, didFinish ->
 
-                    firebaseDatabase.uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-                        user.profilePictureUrl = imageUrl
+                        if (didFinish) {
 
-                        firebaseDatabase.createShopOwner(user) {
-
+                            user.profilePictureUrl = imageUrl
+                            firebaseDatabase.createShopOwner(user) {
+                                progressDialog.dismiss()
+                                val intent = Intent(applicationContext, RegisterShop::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
                             progressDialog.dismiss()
-                            val intent = Intent(applicationContext, RegisterShop::class.java)
-                            startActivity(intent)
-
-                            finish()
+                            Toast.makeText(baseContext, "Creation failed: $imageUrl", Toast.LENGTH_SHORT).show()
                         }
+
                     }
 
             }.addOnFailureListener {  e ->
-
                 progressDialog.dismiss()
                 Toast.makeText(baseContext, "Creation failed: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-
             }
 
     }
@@ -122,6 +124,11 @@ class RegisterOwner : AppCompatActivity() {
 
         if (passwordEditText.text.toString() != confirmPasswordEditText.text.toString()) {
             Toast.makeText(this, "Please make sure your password is the same as your confirm password text", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if(imageUri == null) {
+            Toast.makeText(this, "Please select an image to upload as your profile picture.", Toast.LENGTH_LONG).show()
             return false
         }
 

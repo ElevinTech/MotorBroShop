@@ -142,7 +142,7 @@ class AddPartsServicesActivity : AppCompatActivity() {
         val progressDialog = Utils().easyProgressDialog(this, "Saving Product...")
         progressDialog.show()
 
-        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl, didUpload ->
             var product = Product()
 
             //product.name = nameEditText.text.toString()

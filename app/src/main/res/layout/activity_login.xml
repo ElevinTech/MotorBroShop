@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@drawable/circle_gradient_oval"
     tools:context="com.elevintech.motorbroshop.Login.LoginActivity">
 
     <ScrollView
@@ -13,9 +14,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#FFFFFF">
+        android:layout_height="0dp"
+        android:orientation="vertical">
 
         <!--        <RelativeLayout-->
         <!--            android:id="@+id/topNegativeLayout"-->
@@ -43,6 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,27 +57,14 @@
 
             <!--android:src="@drawable/motorbroinicon"-->
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="100dp"
+                android:layout_width="160dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/motorbroinicon"
+                android:src="@drawable/motorbro_white_red"
                 android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:gravity="start"
-                android:text="Merchant"
-                android:textColor="#120A7C"
-
-                android:textSize="19sp" />
 
             <!--android:fontFamily="@font/open_sans"-->
             <TextView
@@ -88,7 +76,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="5dp"
-                android:textColor="#3D3D3D"
+                android:textColor="#FFFFFF"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,18 +92,18 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/email_colored_icon"
+                    android:src="@drawable/email_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginLeft="10dp"
+                    android:tint="@color/white"
+                    android:layout_marginTop="5dp"
                     />
 
                 <EditText
                     android:id="@+id/userNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-
-
                     android:paddingLeft="50dp"
                     android:paddingBottom="12dp"
                     android:layout_marginLeft="10dp"
@@ -124,6 +112,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/white"
 
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -139,7 +128,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:textColor="#3D3D3D"
+                android:textColor="#FFFFFF"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -156,26 +145,28 @@
                     android:id="@+id/passwordImageView"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-android:src="@drawable/password_colored_icon"
+android:src="@drawable/password_icon"
+                    android:tint="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
                     />
 
                 <EditText
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-
                     android:paddingLeft="50dp"
                     android:paddingBottom="12dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="40dp"
+
                     android:inputType="textPassword"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-
+                    android:textColor="@color/white"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -189,12 +180,11 @@ android:src="@drawable/password_colored_icon"
                 android:text="Sign In"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-
                 android:textSize="19sp"
                 android:layout_marginTop="10dp"
 
             android:background="@drawable/login_button_background"
-            android:textColor="@color/white"
+            android:textColor="@color/loginRedButtonBackground"
             android:fontFamily="@font/open_sans_semibold"
                 />
 
@@ -205,7 +195,7 @@ android:src="@drawable/password_colored_icon"
                 android:text="Don't have an Account? Register Here"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:textColor="#120A7C"
+                android:textColor="#FFFFFF"
                 />
 
 

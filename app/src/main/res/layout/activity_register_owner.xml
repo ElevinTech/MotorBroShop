@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#4F6B91"
+        android:background="#F1333A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="100dp">
@@ -102,7 +102,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/camera_compact_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -171,13 +171,13 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
                     android:textColor="#3F3F3F"
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/customer_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText
@@ -215,12 +215,12 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
 
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/customer_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText
@@ -258,12 +258,12 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
 
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/email_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText
@@ -300,12 +300,12 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
 
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/password_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText
@@ -342,12 +342,12 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
 
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/password_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText

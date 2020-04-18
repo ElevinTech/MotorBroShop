@@ -518,24 +518,30 @@ class MotorBroDatabase {
             }
     }
 
-    fun uploadImageToFirebaseStorage(imageUri: Uri, callback: (url: String) -> Unit) {
+    fun uploadImageToFirebaseStorage(imageUri: Uri, callback: (url: String, didUpload: Boolean) -> Unit) {
 
-        var filename = UUID.randomUUID().toString()
-        var storageRef = FirebaseStorage.getInstance().getReference("/user_uploads/$filename.jpg")
+        val filename = UUID.randomUUID().toString()
+        val storageRef = FirebaseStorage.getInstance().getReference("/user_uploads/$filename.jpg")
 
         // UPLOAD TO FIREBASE
         storageRef.putFile(imageUri)
             .addOnSuccessListener {
 
                 storageRef.downloadUrl.addOnSuccessListener {
-                    var url = it.toString()
+                    val url = it.toString()
 
-                    callback(url)
+                    callback(url, true)
                 }
 
             }
             .addOnFailureListener{
                 println( it.toString())
+                if (it.localizedMessage != null) {
+                    callback(it.localizedMessage, false)
+                } else {
+                    callback("Failed to upload photo. Please try again", false)
+                }
+
             }
     }
 
