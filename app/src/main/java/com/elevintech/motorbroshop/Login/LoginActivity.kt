@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(baseContext, "Please use the MotorBroConsumer app", Toast.LENGTH_SHORT).show()
                 FirebaseAuth.getInstance().signOut()
             } else {
-                getDeviceToken( userType )
+                checkDeviceToken()
 
                 val intent = Intent(applicationContext, DashboardActivity::class.java)
                 startActivity(intent)
@@ -81,23 +81,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDeviceToken( userType: String ) {
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Get new Instance ID token
-                    val token = task.result?.token!!
-                    MotorBroDatabase().getUserCommonData { user ->
-                        if (user.token != token){
-                            MotorBroDatabase().updateFcmToken(token)
-                        }
-                    }
+    // updates the device token of the user of it is outdated
+    private fun checkDeviceToken() {
 
-                } else {
-                    println("getInstanceId failed" + task.exception)
+        MotorBroDatabase().getDeviceToken{ token ->
+            MotorBroDatabase().getUserCommonData { user ->
+                if (user.token != token){
+                    MotorBroDatabase().updateFcmToken(token)
                 }
+            }
+        }
 
-            })
     }
+
+
 
 }

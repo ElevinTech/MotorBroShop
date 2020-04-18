@@ -73,28 +73,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
         }
 
-        retrieveCurrentRegistrationToken{}
+        MotorBroDatabase().checkRegistrationToken()
 
-    }
-
-
-    // TODO: Change this for firestore
-    fun retrieveCurrentRegistrationToken(callback: (String) -> Unit){
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    println("getInstanceId failed" + task.exception)
-                    return@OnCompleteListener
-                }
-
-                // Get new Instance ID token
-                val token = task.result?.token
-
-                // Log and toast
-                println("FCM token: " + token)
-
-                callback(token!!)
-            })
     }
 
 //    private fun setValuesNavHeader() {

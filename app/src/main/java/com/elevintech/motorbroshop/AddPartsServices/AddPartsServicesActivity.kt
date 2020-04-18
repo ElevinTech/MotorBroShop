@@ -142,25 +142,40 @@ class AddPartsServicesActivity : AppCompatActivity() {
         val progressDialog = Utils().easyProgressDialog(this, "Saving Product...")
         progressDialog.show()
 
-        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl, didUpload ->
-            var product = Product()
+        val product = Product()
 
-            //product.name = nameEditText.text.toString()
-            product.description = noteText.text.toString()
-            product.price = priceText.text.toString()
-            product.imageUrl = imageUrl
-            product.type = typeOfPartsText.text.toString()
-            product.brand = brandText.text.toString()
-            product.shopId = shopId
-            product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
-            product.dateCreated = Utils().getCurrentTimestamp().toString()
-            product.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+        //product.name = nameEditText.text.toString()
+        product.description = noteText.text.toString()
+        product.price = priceText.text.toString()
+        product.type = typeOfPartsText.text.toString()
+        product.brand = brandText.text.toString()
+        product.shopId = shopId
+        product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+        product.dateCreated = Utils().getCurrentTimestamp().toString()
+        product.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
+
+        if (imageUri == null){
 
             MotorBroDatabase().saveProduct(shopId, product){
                 progressDialog.dismiss()
                 finish()
             }
+
+        } else {
+
+            MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+
+                product.imageUrl = imageUrl
+
+                MotorBroDatabase().saveProduct(shopId, product){
+                    progressDialog.dismiss()
+                    finish()
+                }
+            }
+
         }
+
+
 
 
     }
@@ -280,10 +295,6 @@ class AddPartsServicesActivity : AppCompatActivity() {
             return false
         }
 
-        if (imageUri == null) {
-            Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
-            return false
-        }
 
         return true
     }

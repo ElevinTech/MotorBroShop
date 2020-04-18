@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
+import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.github.florent37.runtimepermission.RuntimePermission
 import com.google.firebase.auth.FirebaseAuth
@@ -23,9 +24,9 @@ import java.util.*
 
 class RegisterOwner : AppCompatActivity() {
 
-    private var imageUri: Uri? = null
-    private var OPEN_CAMERA = 10
-    private var OPEN_GALLERY = 11
+    var imageUri: Uri? = null
+    var OPEN_CAMERA = 10
+    var OPEN_GALLERY = 11
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,34 +64,42 @@ class RegisterOwner : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
 
-                    var user = ShopOwner()
-                    user.uid        = it.user!!.uid
-                    user.firstName  = firstNameEditText.text.toString()
-                    user.lastName   = lastNameEditText.text.toString()
-                    user.shopId     = "" // shop wil be created on the next step, account creation first
-                    user.email      = emailEditText.text.toString()
+                // GET DEVICE TOKEN
+                firebaseDatabase.getDeviceToken{ token ->
 
-                    firebaseDatabase.uploadImageToFirebaseStorage(imageUri!!){ imageUrl, didFinish ->
+                    // SAVE THE USER DOCUMENT
+                    val user = UserType(it.user!!.uid,  UserType.Type.OWNER, token)
+                    firebaseDatabase.createNewUser(user.uid , user){
 
-                        if (didFinish) {
+                        // UPLOAD IMAGE
+                        firebaseDatabase.uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
 
-                            user.profilePictureUrl = imageUrl
-                            firebaseDatabase.createShopOwner(user) {
+                            // SAVE THE OWNER DOCUMENT
+                            var owner = ShopOwner()
+                            owner.uid        = user.uid
+                            owner.firstName  = firstNameEditText.text.toString()
+                            owner.lastName   = lastNameEditText.text.toString()
+                            owner.shopId     = "" // shop wil be created on the next step, account creation first
+                            owner.email      = emailEditText.text.toString()
+                            owner.profilePictureUrl = imageUrl
+                            firebaseDatabase.createShopOwner(owner) {
+
                                 progressDialog.dismiss()
                                 val intent = Intent(applicationContext, RegisterShop::class.java)
                                 startActivity(intent)
+
                                 finish()
                             }
-                        } else {
-                            progressDialog.dismiss()
-                            Toast.makeText(baseContext, "Creation failed: $imageUrl", Toast.LENGTH_SHORT).show()
                         }
-
                     }
+                }
+
 
             }.addOnFailureListener {  e ->
+
                 progressDialog.dismiss()
                 Toast.makeText(baseContext, "Creation failed: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+
             }
 
     }
@@ -127,8 +136,8 @@ class RegisterOwner : AppCompatActivity() {
             return false
         }
 
-        if(imageUri == null) {
-            Toast.makeText(this, "Please select an image to upload as your profile picture.", Toast.LENGTH_LONG).show()
+        if (imageUri == null) {
+            Toast.makeText(this, "Please upload an image", Toast.LENGTH_LONG).show()
             return false
         }
 

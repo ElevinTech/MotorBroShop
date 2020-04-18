@@ -4,8 +4,10 @@ import android.net.Uri
 import com.elevintech.motorbroshop.DispatchGroup
 import com.elevintech.motorbroshop.Model.*
 import com.elevintech.motorbroshop.Utils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
@@ -905,8 +907,26 @@ class MotorBroDatabase {
     fun updateFcmToken(token: String) {
 
         getUserCommonData{
-            updateShopTokens(it.shopId, token)
-            updateUserToken(it.uid, token)
+
+            val shopId = it.shopId
+            val uid = it.uid
+
+            val db = FirebaseFirestore.getInstance()
+
+            // update Shop Tokens
+            val shopRef = db.collection("shops").document(shopId)
+            shopRef
+                .update("deviceTokens.$uid", token)
+                .addOnSuccessListener { println("success saving shop token: $shopId")}
+                .addOnFailureListener { e -> println("error update user's fcm token: $e") }
+
+
+            // update User Token
+            val userRef = db.collection("users").document(uid)
+            userRef
+                .update("token", token)
+                .addOnSuccessListener {}
+                .addOnFailureListener { e -> println("error update user's fcm token: $e") }
         }
 
 
@@ -1023,6 +1043,62 @@ class MotorBroDatabase {
             .update("customBrands", FieldValue.arrayUnion("$part"))
             .addOnSuccessListener { callback() }
             .addOnFailureListener { e -> callback() }
+    }
+
+    fun getDeviceToken(callback: (String) -> Unit) {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Get new Instance ID token
+                    val token = task.result?.token!!
+                    callback(token)
+
+                } else {
+                    println("getInstanceId failed" + task.exception)
+                }
+
+            })
+    }
+
+    fun checkIfLoggedIn(callback: (Boolean) -> Unit){
+        // Initialize Firebase Auth
+        val auth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        callback(currentUser != null)
+
+    }
+
+    fun retrieveCurrentRegistrationToken(callback: (String) -> Unit){
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    println("getInstanceId failed" + task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+
+                // Log and toast
+                println("FCM token: " + token)
+
+                callback(token!!)
+            })
+    }
+
+    fun checkRegistrationToken() {
+        retrieveCurrentRegistrationToken{ currentToken ->
+
+            getUserCommonData {
+                val savedToken = it.token
+
+                if (savedToken != currentToken){
+                    updateFcmToken(currentToken)
+                }
+            }
+
+        }
     }
 
 }
