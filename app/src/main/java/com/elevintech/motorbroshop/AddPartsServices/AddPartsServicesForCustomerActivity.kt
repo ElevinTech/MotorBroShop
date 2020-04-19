@@ -150,17 +150,18 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         val shopId = intent.getStringExtra("shopId")
         val showDialog = Utils().showProgressDialog(this, "Saving bike part")
 
-        // Save it to both so it would appear on both
-        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-            var product = Product()
-            product.description = noteText.text.toString()
-            product.price = priceText.text.toString()
-            product.imageUrl = imageUrl
-            product.type = typeOfPartsText.text.toString()
-            product.brand = brandText.text.toString()
-            product.shopId = shopId
-            product.isShopProduct = false
-            product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+
+        var product = Product()
+        product.description = noteText.text.toString()
+        product.price = priceText.text.toString()
+        product.type = typeOfPartsText.text.toString()
+        product.brand = brandText.text.toString()
+        product.shopId = shopId
+        product.isShopProduct = false
+        product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+
+        if (imageUri == null){
+
             MotorBroDatabase().saveProduct(shopId, product){
 
                 val bikeParts = BikeParts()
@@ -180,7 +181,39 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 }
 
             }
+
+        } else {
+            // Save it to both so it would appear on both
+            MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+
+                product.imageUrl = imageUrl
+
+                MotorBroDatabase().saveProduct(shopId, product){
+
+                    val bikeParts = BikeParts()
+                    bikeParts.typeOfParts = typeOfPartsText.text.toString()
+                    bikeParts.brand = brandText.text.toString()
+                    bikeParts.price = priceText.text.toString().toDouble()
+                    bikeParts.note = noteText.text.toString()
+                    bikeParts.userId = FirebaseAuth.getInstance().uid!!
+                    bikeParts.shopId = shopId
+                    bikeParts.createdByShop = true
+                    bikeParts.imageUrl = imageUrl
+
+                    val database = MotorBroDatabase()
+                    database.saveBikeParts(bikeParts, selectedCustomerId) {
+                        showDialog.dismiss()
+                        Toast.makeText(this, "Successfully saved bike part", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+
+                }
+            }
         }
+
+
+
+
 
 
 
@@ -308,11 +341,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
         if (priceText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Price field", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if (imageUri == null) {
-            Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
             return false
         }
 
