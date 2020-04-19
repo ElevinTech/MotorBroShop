@@ -25,7 +25,6 @@ class ChatListActivity : AppCompatActivity() {
     lateinit var shop: Shop
 
     val chatListAdapter = GroupAdapter<ViewHolder>()
-    var activityPaused = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,15 +43,19 @@ class ChatListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        activityPaused = false
         chatListAdapter.clear()
-        chatRoomAdapterPosition.clear()
+        chatListAdapterReference.clear()
         reycler_view_chats.adapter = chatListAdapter
 
         getShop()
     }
 
-    val chatRoomAdapterPosition: MutableList<String> = ArrayList()
+    // ADAPTER REFERENCE
+    // the position of the chat messages are saved here
+    // the adapter uses it to find the current position of a chat message by it's ID to change it's order
+    // (kapag example yung pangatlong message ay nag bago so need yun ilagay sa taas na position kasi yun na yung latest, hahanapin yung current position nun sa list na to base sa ID nya)
+    val chatListAdapterReference: MutableList<String> = ArrayList()
+
     fun getChatRoomOfShop(shopId: String){
 
         val db = FirebaseFirestore.getInstance()
@@ -62,50 +65,45 @@ class ChatListActivity : AppCompatActivity() {
 
         ref.addSnapshotListener { querysnapshot, e ->
 
-                var position = 0
+            for ( snapshot in querysnapshot!!.documentChanges){
 
-                if (activityPaused){
-                    return@addSnapshotListener
-                } else {
+                if ( snapshot.type == DocumentChange.Type.ADDED ){
 
-                    for ( snapshot in querysnapshot!!.documentChanges){
-                        if ( snapshot.type == DocumentChange.Type.ADDED ){
+                    // GET THE LATEST CHATS
+                    val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                    chatRoom.id = snapshot.document.id
 
-                            val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
-                            chatRoom.id = snapshot.document.id
+                    // ADD TO ADAPTER + ADAPTER REFERENCE
+                    chatListAdapter.add(ChatItem(chatRoom, chatRoom.participants["user"]!!))
+                    chatListAdapterReference.add(chatRoom.id)
 
-                            chatListAdapter.add( ChatItem(chatRoom, chatRoom.participants["user"]!!) )
-                            chatRoomAdapterPosition.add(chatRoom.id)
-                            position++
+                }
 
-                            println("position: " + position + ", chatRoomId: " + chatRoom.id + ", last message: " + chatRoom.lastMessage.message  + ", date: " +  Utils().convertMillisecondsToDate(chatRoom.lastMessage.createdDate * 1000, "MM/dd/yyyy hh:mm") )
+                if ( snapshot.type == DocumentChange.Type.MODIFIED  ){
 
-                        }
+                    // GET THE LATEST CHAT
+                    val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                    val newMessage = chatRoom.lastMessage.message
+                    chatRoom.id = snapshot.document.id
 
-                        if ( snapshot.type == DocumentChange.Type.MODIFIED  ){
+                    // THE ADAPTER REFERENCE USED HERE
+                    val oldPosition = chatListAdapterReference.indexOf(chatRoom.id)
+                    val newPosition = 0 /* new index position 0 = first position in the recycler view */
 
-                            println("something changed")
+                    // MOVE THE CHAT ITEM TO THE FIRST POSITION OF THE ADAPTER REFERENCE
+                    chatListAdapterReference.remove(chatRoom.id)
+                    chatListAdapterReference.add(0, chatRoom.id)
 
-                            val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
-                            val newMessage = chatRoom.lastMessage.message
-                            chatRoom.id = snapshot.document.id
+                    // UPDATE CHAT MESSAGE
+                    chatListAdapter.notifyItemChanged(oldPosition, "$newMessage")
 
-                            val oldPosition = chatRoomAdapterPosition.indexOf(chatRoom.id)
-                            val newPosition = 0
-
-                            println("passing payload: " + newMessage)
-
-                            chatRoomAdapterPosition.remove(chatRoom.id)
-                            chatRoomAdapterPosition.add(0, chatRoom.id)
-
-                            chatListAdapter.notifyItemChanged(oldPosition, "$newMessage")
-                            chatListAdapter.notifyItemMoved(oldPosition, newPosition)
-
-                        }
-                    }
+                    // MOVE THE CHAT ITEM TO THE FIRST POSITION OF THE ADAPTER
+                    chatListAdapter.notifyItemMoved(oldPosition, newPosition) /* move the chat on the first row */
 
                 }
             }
+
+        }
     }
 
     private fun getShop() {
@@ -121,11 +119,10 @@ class ChatListActivity : AppCompatActivity() {
 
     inner class ChatItem(val chatRoom: ChatRoom, val user: String): Item<ViewHolder>() {
 
-
+        // UPDATE CHAT MESSAGE
         override fun bind(viewHolder: ViewHolder, position: Int, payloads: List<Any>) {
 
             if (payloads.isNotEmpty()){
-
 
                 val newMessage = payloads[0] as String
                 viewHolder.itemView.chatPreview.text = newMessage
@@ -152,9 +149,6 @@ class ChatListActivity : AppCompatActivity() {
                 viewHolder.itemView.chatDate.text = Utils().convertMillisecondsToDate(chatRoom.lastMessage.createdDate * 1000, "MMM dd - hh:mm a")
 
                 viewHolder.itemView.setOnClickListener {
-
-                    activityPaused = true
-
                     val intent = Intent(this@ChatListActivity, ChatLogActivity::class.java)
                     intent.putExtra("customerId", chatOtherUser.uid)
                     intent.putExtra("chatRoomId", chatRoom.lastMessage.chatRoomId)
