@@ -20,7 +20,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_customer_list.*
-import kotlinx.android.synthetic.main.fragment_customer_list.chatImageView
+//import kotlinx.android.synthetic.main.fragment_customer_list.chatImageView
 import kotlinx.android.synthetic.main.fragment_customer_list.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.row_customer.view.*

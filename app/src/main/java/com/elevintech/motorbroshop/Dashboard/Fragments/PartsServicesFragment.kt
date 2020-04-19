@@ -24,7 +24,7 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_parts_services.*
-import kotlinx.android.synthetic.main.fragment_parts_services.chatImageView
+//import kotlinx.android.synthetic.main.fragment_parts_services.chatImageView
 import kotlinx.android.synthetic.main.row_product.view.*
 
 /**
