@@ -20,7 +20,9 @@ class ChatListActivity : AppCompatActivity() {
 
     var shopId = ""
     lateinit var shop: Shop
+
     val chatListAdapter = GroupAdapter<ViewHolder>()
+    val latestMessagesMap = HashMap<String, ChatRoom>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,8 @@ class ChatListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        chatListAdapter.clear()
+        latestMessagesMap.clear()
         getShop()
     }
 
@@ -52,7 +56,7 @@ class ChatListActivity : AppCompatActivity() {
         }
     }
 
-    val latestMessagesMap = HashMap<String, ChatRoom>()
+
     private fun refreshRecyclerViewMessages(){
         chatListAdapter.clear()
         latestMessagesMap.values.forEachIndexed { index, chatRoom ->
