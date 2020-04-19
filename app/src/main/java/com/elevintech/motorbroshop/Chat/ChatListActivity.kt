@@ -96,15 +96,11 @@ class ChatListActivity : AppCompatActivity() {
             if (chatOtherUser.profileImage != "")
                 Glide.with(applicationContext).load(chatOtherUser.profileImage).into(viewHolder.itemView.imgMainProfile)
 
-
-//            // Display unread message (if the last message is not from user and not yet read)
-//            if (chatRoom.lastMessage.fromId != shopId){
-//                if (!chatRoom.lastMessage.read){
-//                    viewHolder.itemView.chatPreview.setTypeface(null, Typeface.BOLD) // TODO: Bold not working always
-//                    viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
-////                    viewHolder.itemView.unreadDot.visibility = View.VISIBLE
-//                }
-//            }
+            if (chatRoom.lastMessage.toId == shopId) {
+                if(chatRoom.lastMessage.read == false){
+                    viewHolder.itemView.unreadDot.visibility = View.VISIBLE
+                }
+            }
 
 
         }
