@@ -46,6 +46,22 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        displayMessageBadge()
+    }
+
+    private fun displayMessageBadge(){
+
+        MotorBroDatabase().getUnreadMessageCount(shop.shopId){ unreadMessageCount ->
+
+            chatImageView.setBadgeValue(unreadMessageCount)
+
+        }
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
