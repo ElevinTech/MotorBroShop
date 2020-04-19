@@ -31,14 +31,21 @@ class ChatListActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getShop()
+    }
+
+    private fun getShop() {
         MotorBroDatabase().getShop(shopId){
             shop = it
 
             // get all chat rooms where shop is a participant of
             getShopChatRooms()
         }
-
-
     }
 
     private fun getShopChatRooms(){
