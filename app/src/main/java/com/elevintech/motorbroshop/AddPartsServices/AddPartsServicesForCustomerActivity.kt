@@ -66,11 +66,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 saveProduct()
         }
 
-        dateText.setOnClickListener {
-            setDatePickerAction()
-            openDatePicker()
-        }
-
         customerName.setOnClickListener {
 
             val shopId = intent.getStringExtra("shopId")
@@ -135,9 +130,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
             birthDayInMilliseconds = Utils().convertDateToMilliseconds(year,month,day,12, 0, 0)
 
-            // PUT THE SELECTED DATE ON THE DATE PLACEHOLDER
-            dateText.setText("${year}-${monthString}-${dayString}")
-
             // TODO: How to get current AGE??
 
             // If todays month is greater than current month
@@ -172,9 +164,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
             MotorBroDatabase().saveProduct(shopId, product){
 
                 val bikeParts = BikeParts()
-                bikeParts.date = dateText.text.toString()
-                bikeParts.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
-                bikeParts.odometer = odometerText.text.toString().toDouble()
                 bikeParts.typeOfParts = typeOfPartsText.text.toString()
                 bikeParts.brand = brandText.text.toString()
                 bikeParts.price = priceText.text.toString().toDouble()
@@ -307,11 +296,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 //            return false
 //        }
 
-        if (odometerText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
-            return false
-        }
-
         if (typeOfPartsText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Type of part field", Toast.LENGTH_LONG).show()
             return false
@@ -324,11 +308,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
         if (priceText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Price field", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if (dateText.text.isEmpty()) {
-            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
             return false
         }
 

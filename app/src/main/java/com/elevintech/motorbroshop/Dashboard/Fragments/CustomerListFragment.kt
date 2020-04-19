@@ -54,12 +54,6 @@ class CustomerListFragment : Fragment() {
             return
         }
 
-        chatImageView.setOnClickListener {
-            val intent = Intent(context, ChatListActivity::class.java)
-            intent.putExtra("shopId", user.shopId)
-            startActivity(intent)
-        }
-
     }
 
 

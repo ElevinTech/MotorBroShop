@@ -53,11 +53,6 @@ class PartsServicesFragment : Fragment() {
             askWhoPartIsFor()
         }
 
-        chatImageView.setOnClickListener {
-            val intent = Intent(context, ChatListActivity::class.java)
-            intent.putExtra("shopId", user.shopId)
-            startActivity(intent)
-        }
         setupRecyclerView()
     }
 
