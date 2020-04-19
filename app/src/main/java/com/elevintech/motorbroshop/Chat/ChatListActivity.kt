@@ -50,10 +50,19 @@ class ChatListActivity : AppCompatActivity() {
         getShop()
     }
 
-    // ADAPTER REFERENCE
+    private fun getShop() {
+        MotorBroDatabase().getShop(shopId){
+            shop = it
+
+            // get all chat rooms where shop is a participant of
+            getChatRoomOfShop(shop.shopId)
+        }
+    }
+
+    // ADAPTER REFERENCE - the chat messages and it's current order in the recycler view
     // the position of the chat messages are saved here
-    // the adapter uses it to find the current position of a chat message by it's ID to change it's order
-    // (kapag example yung pangatlong message ay nag bago so need yun ilagay sa taas na position kasi yun na yung latest, hahanapin yung current position nun sa list na to base sa ID nya)
+    // the adapter uses it to find the current position of a chat message by it's ID used for change it's position in the recycler view
+    // (example kapag may bagong chat na na-receive, need idisplay yun sa taas ng recycler view kasi yun yung pinaka-latest)
     val chatListAdapterReference: MutableList<String> = ArrayList()
 
     fun getChatRoomOfShop(shopId: String){
@@ -69,35 +78,37 @@ class ChatListActivity : AppCompatActivity() {
 
                 if ( snapshot.type == DocumentChange.Type.ADDED ){
 
-                    // GET THE LATEST CHATS
+                    // get the chats
                     val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
                     chatRoom.id = snapshot.document.id
 
-                    // ADD TO ADAPTER + ADAPTER REFERENCE
+                    // display in the recycler view
                     chatListAdapter.add(ChatItem(chatRoom, chatRoom.participants["user"]!!))
+
+                    // add to adapter reference
                     chatListAdapterReference.add(chatRoom.id)
 
                 }
 
                 if ( snapshot.type == DocumentChange.Type.MODIFIED  ){
 
-                    // GET THE LATEST CHAT
+                    // get new chat
                     val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
                     val newMessage = chatRoom.lastMessage.message
                     chatRoom.id = snapshot.document.id
 
-                    // THE ADAPTER REFERENCE USED HERE
+                    // get the chat item position based from adapter reference (we will be moving it to the top of the recycler view as it is the new latest message)
                     val oldPosition = chatListAdapterReference.indexOf(chatRoom.id)
-                    val newPosition = 0 /* new index position 0 = first position in the recycler view */
+                    val newPosition = 0
 
-                    // MOVE THE CHAT ITEM TO THE FIRST POSITION OF THE ADAPTER REFERENCE
+                    // update the adapter reference, move it to the first position as well
                     chatListAdapterReference.remove(chatRoom.id)
                     chatListAdapterReference.add(0, chatRoom.id)
 
-                    // UPDATE CHAT MESSAGE
+                    // change the value of the chat message text
                     chatListAdapter.notifyItemChanged(oldPosition, "$newMessage")
 
-                    // MOVE THE CHAT ITEM TO THE FIRST POSITION OF THE ADAPTER
+                    // move to the top of the recyclerview
                     chatListAdapter.notifyItemMoved(oldPosition, newPosition) /* move the chat on the first row */
 
                 }
@@ -106,14 +117,7 @@ class ChatListActivity : AppCompatActivity() {
         }
     }
 
-    private fun getShop() {
-        MotorBroDatabase().getShop(shopId){
-            shop = it
 
-            // get all chat rooms where shop is a participant of
-            getChatRoomOfShop(shop.shopId)
-        }
-    }
 
 
 
