@@ -20,6 +20,7 @@ class ChatListActivity : AppCompatActivity() {
 
     var shopId = ""
     lateinit var shop: Shop
+    val chatListAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,9 @@ class ChatListActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
+
+        reycler_view_chats.isNestedScrollingEnabled = true
+        reycler_view_chats.adapter = chatListAdapter
 
     }
 
@@ -48,6 +52,18 @@ class ChatListActivity : AppCompatActivity() {
         }
     }
 
+    val latestMessagesMap = HashMap<String, ChatRoom>()
+    private fun refreshRecyclerViewMessages(){
+        chatListAdapter.clear()
+        latestMessagesMap.values.forEachIndexed { index, chatRoom ->
+            MotorBroDatabase().getCustomerById(chatRoom.participants["user"]!!){
+                chatListAdapter.add( ChatItem(chatRoom, it) )
+                chatListAdapter.notifyItemInserted(index)
+            }
+
+        }
+    }
+
     private fun getShopChatRooms(){
 
         var db = MotorBroDatabase()
@@ -61,19 +77,11 @@ class ChatListActivity : AppCompatActivity() {
 
     private fun displayListOfLastMessages(chatRoomList: MutableList<ChatRoom>){
 
-        reycler_view_chats.isNestedScrollingEnabled = true
-
-        val chatListAdapter = GroupAdapter<ViewHolder>()
-
-        for (chatRoom in chatRoomList){
-
-            MotorBroDatabase().getCustomerById(chatRoom.participants["user"]!!){
-                chatListAdapter.add( ChatItem(chatRoom, it) )
-            }
-
+        for (chatRoom in chatRoomList.reversed()){
+            latestMessagesMap[chatRoom.id] = chatRoom
         }
 
-        reycler_view_chats.adapter = chatListAdapter
+        refreshRecyclerViewMessages()
 
     }
 

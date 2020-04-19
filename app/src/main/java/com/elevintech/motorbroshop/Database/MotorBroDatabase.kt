@@ -785,7 +785,9 @@ class MotorBroDatabase {
                 for ( snapshot in querysnapshot!!.documentChanges){
                     if ( snapshot.type == DocumentChange.Type.ADDED || snapshot.type == DocumentChange.Type.MODIFIED ){
                         val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                        chatRoom.id = snapshot.document.id
                         chatRoomList.add(chatRoom)
+                        println("getChatRoomOfShop: chatRoom: " + chatRoom.id + ", last message: " + chatRoom.lastMessage.message  + ", date: " +  Utils().convertMillisecondsToDate(chatRoom.lastMessage.createdDate * 1000, "MM/dd/yyyy hh:mm") )
                     }
                 }
 
