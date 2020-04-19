@@ -43,20 +43,19 @@ class HomeFragment : Fragment() {
         //user = (activity as DashboardActivity).user
         getUserType(view)
 
+
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
 
-        displayMessageBadge()
-    }
-
-    private fun displayMessageBadge(){
+    private fun displayMessageBadge(view: View){
 
         MotorBroDatabase().getUnreadMessageCount(shop.shopId){ unreadMessageCount ->
 
-            chatImageView.setBadgeValue(unreadMessageCount)
+            if (!isAdded) {
+                return@getUnreadMessageCount
+            }
+            view.chatImageView.setBadgeValue(unreadMessageCount)
 
         }
 
@@ -243,6 +242,9 @@ class HomeFragment : Fragment() {
 
 
             }
+
+            // GET UNREAD MESSAGES
+            displayMessageBadge(view)
         }
     }
 
