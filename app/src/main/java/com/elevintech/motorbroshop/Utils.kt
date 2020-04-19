@@ -92,5 +92,12 @@ class Utils {
 
     }
 
+    fun getCurrentTime(): String {
+
+        return convertMillisecondsToDate(System.currentTimeMillis(), "hh:mm a")
+
+
+    }
+
 
 }
