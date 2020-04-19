@@ -38,6 +38,7 @@ class ChatLogActivity : AppCompatActivity() {
         shopId = intent.getStringExtra("shopId")!!
         chatRoomId = intent.getStringExtra("chatRoomId")!!
 
+        setAsRead()
         getShop()
         getCustomer()
 
@@ -60,6 +61,19 @@ class ChatLogActivity : AppCompatActivity() {
             updateUi()
             getRecipientToken()
         }
+    }
+
+    private fun setAsRead() {
+        if(chatRoomId != ""){
+            MotorBroDatabase().getChatRoomById(chatRoomId){ chatRoom ->
+                if (chatRoom.lastMessage.toId == shopId) {
+                    if(chatRoom.lastMessage.read == false){
+                        MotorBroDatabase().updateLastMessageAsRead(chatRoomId)
+                    }
+                }
+            }
+        }
+
     }
 
     private fun getShop() {

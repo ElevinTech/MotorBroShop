@@ -1121,4 +1121,25 @@ class MotorBroDatabase {
 
     }
 
+    fun getChatRoomById(chatRoomId: String, callback: (ChatRoom) -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms").document(chatRoomId)
+
+        chatRoomRef.get()
+            .addOnSuccessListener {
+                val chatRoom = it.toObject(ChatRoom::class.java)!!
+                callback(chatRoom)
+            }
+            .addOnFailureListener { e-> println("error getting chat room with ID: $chatRoomId") }
+
+    }
+
+    fun updateLastMessageAsRead(chatRoomId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms").document(chatRoomId)
+
+        chatRoomRef.update("lastMessage.read" , true)
+            .addOnSuccessListener { }
+            .addOnFailureListener { e-> println("error getting chat room with ID: $chatRoomId") }
+    }
 }
