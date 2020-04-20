@@ -172,6 +172,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 bikeParts.userId = FirebaseAuth.getInstance().uid!!
                 bikeParts.shopId = shopId
                 bikeParts.createdByShop = true
+                bikeParts.dateLong = Utils().getCurrentTimestamp()
 
                 val database = MotorBroDatabase()
                 database.saveBikeParts(bikeParts, selectedCustomerId) {
