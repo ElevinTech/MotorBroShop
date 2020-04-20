@@ -389,7 +389,7 @@ class MotorBroDatabase {
             }
     }
 
-    fun getUserType(callback: (String) -> Unit) {
+    fun getUserType(callback: (String?) -> Unit) {
 
         val db = FirebaseFirestore.getInstance()
         val uid = FirebaseAuth.getInstance().uid!!
@@ -397,8 +397,14 @@ class MotorBroDatabase {
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
 
-            var user = documentSnapshot.toObject(UserType::class.java)!!
-            callback( user.userType )
+            if (documentSnapshot.exists()){
+                var user = documentSnapshot.toObject(UserType::class.java)!!
+                callback( user.userType )
+            } else {
+                callback( null )
+            }
+
+
         }
 
     }
