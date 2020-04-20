@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Time!"
+        android:textColor="@color/textColorBlack"
+        android:textSize="24sp"
+        android:layout_marginBottom="10dp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:lottie_rawRes="@raw/template"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:layout_weight="8"
+        />
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Avoid filling up the same fields when assigning to other customers by creating a template of it for future use."
+        android:textSize="14sp" />
+
+
+
+    <Button
+
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_gravity="end"
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/create_account_button_background"
+        android:text="Create template"
+        android:textColor="#fff" />
+
+    <Button
+
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_gravity="end"
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+
+        android:background="@drawable/round_edit_text"
+        android:text="No, I'm good"
+        android:textColor="@color/textColorBlack" />
+
+</LinearLayout>

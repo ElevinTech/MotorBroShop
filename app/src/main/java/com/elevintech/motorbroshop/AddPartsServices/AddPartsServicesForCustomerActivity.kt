@@ -1,8 +1,8 @@
 package com.elevintech.motorbroshop.AddPartsServices
 
 import android.Manifest
-import android.app.Activity
-import android.app.DatePickerDialog
+import android.app.*
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.os.StrictMode
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.Toast
 import com.elevintech.motorbroshop.Customer.CustomerSelectorActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
@@ -49,6 +51,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_parts_services)
+
 
         customerSelectorLabel.visibility = View.VISIBLE
         customerSelectorLayout.visibility = View.VISIBLE
@@ -96,6 +99,38 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         }
     }
 
+    private fun askCreateTemplate(product: Product){
+
+        println("askCreateTemplate")
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_ask_create_template)
+        dialog.setCancelable(false)
+
+        val submitButton = dialog.findViewById<Button>(R.id.submitButton)
+        val cancelButton = dialog.findViewById<Button>(R.id.cancelButton)
+
+        submitButton.setOnClickListener {
+
+            val showDialog = Utils().showProgressDialog(this, "Saving Template...")
+
+            MotorBroDatabase().saveProductTemplate(product){
+                showDialog.dismiss()
+                finish()
+            }
+
+        }
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+
+
+        dialog.show()
+
+    }
+
     private fun openDatePicker() {
 
         // INSTANTIATE CALENDAR
@@ -139,6 +174,19 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
     }
 
+    private fun onProductSaved(product: Product){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Part/Service Created!")
+        builder.setMessage("Your product is now visible to customers")
+        builder.setPositiveButton("Great!") { dialog, which ->
+            askCreateTemplate(product)
+
+        }
+        builder.setCancelable(false)
+        builder.show()
+
+    }
+
     private fun saveProduct() {
 
 //        val shopId = intent.getStringExtra("shopId")
@@ -147,8 +195,9 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 //        val progressDialog = Utils().easyProgressDialog(this, "Saving Product...")
 //        progressDialog.show()
 //
+        val showDialog = Utils().showProgressDialog(this, "Saving Product...")
+
         val shopId = intent.getStringExtra("shopId")
-        val showDialog = Utils().showProgressDialog(this, "Saving bike part")
 
 
         var product = Product()
@@ -177,8 +226,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 val database = MotorBroDatabase()
                 database.saveBikeParts(bikeParts, selectedCustomerId) {
                     showDialog.dismiss()
-                    Toast.makeText(this, "Successfully saved bike part", Toast.LENGTH_SHORT).show()
-                    finish()
+                    onProductSaved(product)
                 }
 
             }
@@ -204,8 +252,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                     val database = MotorBroDatabase()
                     database.saveBikeParts(bikeParts, selectedCustomerId) {
                         showDialog.dismiss()
-                        Toast.makeText(this, "Successfully saved bike part", Toast.LENGTH_SHORT).show()
-                        finish()
+                        onProductSaved(product)
                     }
 
                 }

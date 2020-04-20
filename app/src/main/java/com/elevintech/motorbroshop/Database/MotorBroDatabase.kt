@@ -1152,4 +1152,19 @@ class MotorBroDatabase {
             .addOnSuccessListener { }
             .addOnFailureListener { e-> println("error getting chat room with ID: $chatRoomId") }
     }
+
+    fun saveProductTemplate(product: Product, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(product.shopId).collection("product-templates").document(product.id)
+            .set(product)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+
+    }
 }
