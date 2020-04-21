@@ -36,7 +36,7 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-android:src="@drawable/employee_colored_icon"
+                android:src="@drawable/employee_select_user_icon"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 />
@@ -57,28 +57,26 @@ android:src="@drawable/employee_colored_icon"
             android:id="@+id/ownerButton"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/shadow_background"
-            >
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/owner_icon"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                />
+                android:src="@drawable/owner_select_user_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Owner"
-                android:textColor="@color/textColorBlack"
-                android:fontFamily="@font/open_sans_bold"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"/>
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Owner"
+                android:textColor="@color/textColorBlack" />
 
 
         </LinearLayout>

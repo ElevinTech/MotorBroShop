@@ -160,8 +160,11 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:text=""
+                    android:textSize="15sp"
+                    android:fontFamily="@font/open_sans"
+                    android:maxLength="70"
                     android:inputType="text"
+
                     />
 
             </LinearLayout>
@@ -180,10 +183,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-
                 >
 
                 <ImageView
@@ -199,13 +200,22 @@
                 <EditText
                     android:id="@+id/shopAddressEditText"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="100dp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:maxLines="4"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:focusable="false"
-                    android:inputType="text"
-                    android:text="" />
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:minLines="6"
+
+                    android:gravity="top|left"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/open_sans"
+                    android:maxLength="90"
+                    />
 
             </LinearLayout>
 
@@ -247,8 +257,10 @@
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:text=""
-                    android:inputType="text"
+                    android:inputType="number"
                     android:focusable="false"
+                    android:fontFamily="@font/open_sans"
+                    android:maxLength="70"
                     />
 
             </LinearLayout>
