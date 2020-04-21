@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#F1333A"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -63,8 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="50dp">
 
             <ImageView
@@ -129,7 +129,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/camera_compact_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,13 +165,14 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/shop_name_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimaryDark"
                     />
 
                 <EditText
                     android:id="@+id/shopNameEditText"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
+                    android:textSize="15sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
@@ -208,13 +209,16 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/address_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimaryDark"
                     />
 
                 <EditText
                     android:id="@+id/shopAddressEditText"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:minHeight="40dp"
+                    android:maxHeight="100dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
@@ -251,17 +255,20 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/date_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimaryDark"
                     />
 
                 <EditText
                     android:id="@+id/shopDateEstablished"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    android:maxHeight="100dp"
+                    android:fontFamily="@font/open_sans"
+                    android:textSize="15sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:text=""
                     android:focusable="false"
                     />
 
@@ -291,7 +298,7 @@
                 android:inputType="textMultiLine"
                 android:paddingLeft="16dp"
                 android:paddingTop="5dp"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:hint="Your shop description in 150 characters or less."
                 android:visibility="visible"
                 />
@@ -316,6 +323,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/create_account_button_background"
                 android:text="Save Shop"
+                android:textAllCaps="false"
                 android:textColor="#fff" />
         </LinearLayout>
     </ScrollView>

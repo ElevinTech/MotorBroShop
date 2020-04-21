@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
@@ -160,6 +161,8 @@ class HomeFragment : Fragment() {
                 }
 
                 if (employeeList.size != 0) {
+                    lastScannedUserLayout.visibility = View.VISIBLE
+
                     for (employee in employeeList){
                         // instantiate the view for the dialog
                         val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
@@ -169,6 +172,7 @@ class HomeFragment : Fragment() {
                     }
 
                 } else {
+
                     view.employeeHeaderText.text = "You have no employees yet."
                 }
             }
@@ -185,6 +189,9 @@ class HomeFragment : Fragment() {
 
                 // GET FIRST CUSTOMER
                 if (customerCount > 0){
+                    view.lastScannedUserLayout.visibility = View.VISIBLE
+                    view.lastScannedHeader.visibility = View.VISIBLE
+
                     val firstCustomerBasicData = customerList[0]
 
                     MotorBroDatabase().getCustomerByUid( firstCustomerBasicData.customerId ){ firstCustomerAllData ->
@@ -209,7 +216,9 @@ class HomeFragment : Fragment() {
 
                     }
                 } else {
-                    view.lastScannedHeaderText.text = "No User Scanned Yet, Get Started by scanning a user."
+                    view.lastScannedUserLayout.visibility = View.GONE
+                    view.lastScannedHeader.visibility = View.GONE
+                    view.lastScannedHeader.text = "No User Scanned Yet, Get Started by scanning a user."
                 }
 
             }
@@ -220,6 +229,9 @@ class HomeFragment : Fragment() {
                 if (!isAdded) {
                     return@getShopProducts
                 }
+
+                view.lastAddedPartsLayout.visibility = View.VISIBLE
+                view.lastAddedPartsHeader.visibility = View.VISIBLE
 
                 val productCount = productsList.count()
                 view.shopPartsServicesNumber.text = "$productCount parts/services"
@@ -234,10 +246,9 @@ class HomeFragment : Fragment() {
                         }
                     }
                 } else {
-                    view.partsServicesHeader.text = "No Parts / Services yet!"
-                    view.partsIcon.visibility = View.GONE
-                    view.partsMessage.visibility = View.GONE
-
+                    view.lastAddedPartsHeader.text = "No Parts / Services yet!"
+                    view.lastAddedPartsLayout.visibility = View.GONE
+                    view.lastAddedPartsHeader.visibility = View.GONE
                 }
 
 

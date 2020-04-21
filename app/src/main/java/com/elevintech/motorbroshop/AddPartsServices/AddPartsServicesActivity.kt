@@ -163,14 +163,8 @@ class AddPartsServicesActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
         }
-
-
-
-
     }
-
 
     private fun askUploadSource(){
 

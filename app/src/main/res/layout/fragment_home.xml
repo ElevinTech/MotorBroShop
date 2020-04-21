@@ -25,7 +25,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="#F1333A"
+                android:background="#BA4D51"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -76,7 +76,7 @@
             android:orientation="vertical"
             android:layout_margin="5dp"
             android:background="@drawable/rounded_shadow_background"
-            android:paddingBottom="20dp"
+            android:paddingBottom="30dp"
             >
 
             <TextView
@@ -85,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:text="Your Shop"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#F1333A"
-                android:textSize="16sp"
+                android:textColor="#252525"
+                android:textSize="19sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 />
@@ -109,6 +109,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
+                    android:elevation="0dp"
                     >
 
                     <ImageView
@@ -164,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="9dp"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/open_sans_bold"
                     android:text=""
                     android:textColor="#292929"
                     android:textSize="13sp" />
@@ -191,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/open_sans_bold"
                     android:textColor="#292929"
                     android:textSize="13sp"
                     android:layout_marginLeft="9dp"
@@ -218,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/open_sans_bold"
                     android:textColor="#292929"
                     android:textSize="13sp"
                     android:layout_marginLeft="9dp"
@@ -231,6 +232,8 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
                 android:layout_marginTop="20dp">
 
                 <Button
@@ -240,8 +243,9 @@
                     android:layout_height="wrap_content"
                     android:text="View your Shop"
                     android:textAllCaps="false"
+                    android:stateListAnimator="@null"
                     android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#F1333A"
+                    android:textColor="#BA4D51"
                     android:layout_marginRight="20dp"
 
                     />
@@ -253,13 +257,30 @@
                     android:layout_height="wrap_content"
                     android:text="Edit your Shop"
                     android:textAllCaps="false"
-                    android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#F1333A"
+                    android:stateListAnimator="@null"
+                    android:background="@drawable/dark_red_bg"
+                    android:textColor="@color/white"
                     android:layout_marginRight="10dp"
 
                     />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="70dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ads_image_gpc"
+                android:scaleType="centerCrop"
+                />
 
         </LinearLayout>
 
@@ -280,10 +301,36 @@
                 android:layout_height="wrap_content"
                 android:text="Employees"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#F1333A"
-                android:textSize="16sp"
-
+                android:textColor="#252525"
+                android:textSize="17sp"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/employee_empty_icon"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your employess that can access this app is available on the employees page!"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="#313131"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    />
+
+            </LinearLayout>
+
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->
@@ -343,16 +390,56 @@
             android:id="@+id/lastScannedHeaderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last Scanned"
+            android:text="Scan"
             android:fontFamily="@font/open_sans_semibold"
-            android:textColor="#F1333A"
-            android:textSize="16sp"
+            android:textColor="#252525"
+            android:textSize="17sp"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/last_scanned_empty_icon"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Scan your users QR Code and view their full document info! "
+                android:fontFamily="@font/open_sans"
+                android:textColor="#313131"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lastScannedHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Scanned"
+            android:fontFamily="@font/open_sans_semibold"
+            android:textColor="#252525"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            />
+
+        <LinearLayout
+            android:id="@+id/lastScannedUserLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
             android:layout_marginLeft="20dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -411,9 +498,9 @@
                 android:id="@+id/partsServicesHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Parts and Services - Last Added"
+                android:text="Parts and Services"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textColor="#F1333A"
+                android:textColor="#252525"
                 android:textSize="16sp"
 
                 />
@@ -424,7 +511,47 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="20dp"
                 >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/parts_home_empty_icon"
+                    android:layout_marginTop="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter your customers parts and services or provide your own parts and services details!"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="#313131"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    />
 
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/lastAddedPartsHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Added"
+                android:fontFamily="@font/open_sans_semibold"
+                android:textColor="#252525"
+                android:textSize="14sp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/lastAddedPartsLayout"
+                android:visibility="gone"
+                >
 
                 <ImageView
                     android:id="@+id/partsIcon"
@@ -433,7 +560,7 @@
                     android:src="@drawable/tab_settings_icon"
 
                     android:layout_marginTop="10dp"
-                    android:tint="#F3242B"
+                    android:tint="#BA4D51"
                     />
 
                 <LinearLayout

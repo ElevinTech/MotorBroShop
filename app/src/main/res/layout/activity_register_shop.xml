@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary"
+        android:background="#F1333A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -114,7 +114,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/camera_compact_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -144,13 +144,13 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:textColor="#3F3F3F"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:textColor="#EC6469"
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/shop_name_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText
@@ -187,13 +187,13 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
                     android:textColor="#3F3F3F"
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/address_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText
@@ -230,13 +230,13 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
                     android:textColor="#3F3F3F"
                     android:fontFamily="@font/open_sans_semibold"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/date_icon"
-                    android:tint="#4F6B91"
+                    android:tint="#EC6469"
                     />
 
                 <EditText

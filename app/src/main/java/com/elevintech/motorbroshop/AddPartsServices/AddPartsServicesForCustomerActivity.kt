@@ -52,7 +52,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_parts_services)
 
-
         customerSelectorLabel.visibility = View.VISIBLE
         customerSelectorLayout.visibility = View.VISIBLE
 
@@ -271,10 +270,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-
-
 
 
 
