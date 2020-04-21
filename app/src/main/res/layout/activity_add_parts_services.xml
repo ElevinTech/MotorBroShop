@@ -82,6 +82,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/useTemplateButton"
             android:layout_width="60dp"
             android:layout_height="match_parent"

@@ -64,13 +64,8 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         }
 
         checkMarkButton.setOnClickListener {
-
-
-            val product = Product()
-            askCreateTemplate(product)
-
-//            if (hasCompletedValues())
-//                saveProduct()
+            if (hasCompletedValues())
+                saveProduct()
         }
 
         customerName.setOnClickListener {
@@ -187,28 +182,23 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
     }
 
     private fun onProductSaved(product: Product){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Part/Service Created!")
-        builder.setMessage("Your product is now visible to customers")
-        builder.setPositiveButton("Great!") { dialog, which ->
-            askCreateTemplate(product)
+//        val builder = AlertDialog.Builder(this)
+//        builder.setTitle("Part/Service Created!")
+//        builder.setMessage("Your product is now visible to customers")
+//        builder.setPositiveButton("Great!") { dialog, which ->
+//            askCreateTemplate(product)
+//
+//        }
+//        builder.setCancelable(false)
+//        builder.show()
 
-        }
-        builder.setCancelable(false)
-        builder.show()
+        finish()
 
     }
 
     private fun saveProduct() {
 
-//        val shopId = intent.getStringExtra("shopId")
-//
-//        // SHOW PROGRESS DIALOG
-//        val progressDialog = Utils().easyProgressDialog(this, "Saving Product...")
-//        progressDialog.show()
-//
         val showDialog = Utils().showProgressDialog(this, "Saving Product...")
-
         val shopId = intent.getStringExtra("shopId")
 
 
