@@ -65,8 +65,13 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         }
 
         checkMarkButton.setOnClickListener {
-            if (hasCompletedValues())
-                saveProduct()
+
+
+            val product = Product()
+            askCreateTemplate(product)
+
+//            if (hasCompletedValues())
+//                saveProduct()
         }
 
         customerName.setOnClickListener {
@@ -96,6 +101,14 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
         noteText.setOnClickListener {
             noteText.getParent().requestDisallowInterceptTouchEvent(true);
+        }
+
+        useTemplateButton.setOnClickListener {
+
+            // TODO: Load the templates in a bottom sheet dialog
+            // TODO: Save template name
+            // TODO: Load templates and display name
+
         }
     }
 
