@@ -158,7 +158,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/calendar_icon"
-                    android:tint="#888888"
+                    android:tint="@color/darkTextColorBlack"
                     />
                 <TextView
                     android:id="@+id/shopEstablished"
@@ -185,7 +185,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/users_icon"
-                    android:tint="#888888"
+                    android:tint="@color/darkTextColorBlack"
                     />
                 <TextView
                     android:id="@+id/shopCustomersNumber"
@@ -212,7 +212,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/wrench_icon"
-                    android:tint="#888888"
+                    android:tint="@color/darkTextColorBlack"
                     />
                 <TextView
                     android:id="@+id/shopPartsServicesNumber"

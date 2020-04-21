@@ -366,7 +366,7 @@
                     android:layout_height="20dp"
                     android:tint="@color/colorPrimary"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/cash_small_icon"
+                    android:src="@drawable/cash_wallet_icon"
 
                     />
 

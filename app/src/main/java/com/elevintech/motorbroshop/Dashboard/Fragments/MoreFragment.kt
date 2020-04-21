@@ -53,11 +53,10 @@ class MoreFragment : Fragment() {
 
         userFirstName.text = user.firstName
         emailText.text = user.email
+
         if (user.profilePictureUrl != "") {
             Glide.with(this).load(user.profilePictureUrl).into(userProfileImage)
         }
-
-
 
         editShopLayout.setOnClickListener {
             val intent = Intent(activity, UpdateShop::class.java)

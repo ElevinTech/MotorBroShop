@@ -66,6 +66,39 @@ class TypeOfBrandActivity : AppCompatActivity() {
                 }
             }
         }
+
+        addItemsButton.setOnClickListener {
+
+            val selectedBrands = totalList.filter { it.isChecked }
+//            if (selectedBrand.count() != 1){
+//                Snackbar.make(addItemsButton, "Please select only one brand", Snackbar.LENGTH_LONG).show()
+//            }
+
+//            else {
+
+
+            if (selectedBrands.isEmpty()) {
+                Snackbar.make(addItemsButton, "Please pick at least one brand", Snackbar.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            var partsRemaining = ""
+            var isFirst = true
+
+            for (part in selectedBrands) {
+                if (!isFirst) {
+                    partsRemaining += ", "
+                }
+                partsRemaining += part.name
+                isFirst = false
+            }
+
+            val returnIntent = Intent()
+            returnIntent.putExtra("selectedBrand", partsRemaining)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+
+        }
     }
 
     override fun onResume() {
