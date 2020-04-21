@@ -6,7 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
+import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Login.LoginActivity
+import com.elevintech.motorbroshop.Model.UserType
+import com.elevintech.motorbroshop.Register.RegisterShop
 import com.elevintech.motorbroshop.Register.SelectLocation
 import com.google.firebase.auth.FirebaseAuth
 
@@ -46,9 +49,43 @@ class SplashPageActivity : AppCompatActivity() {
 
             val currentUser = auth.currentUser
             if (currentUser != null) {
-                val intent = Intent(applicationContext, DashboardActivity::class.java)
-                startActivity(intent)
-                finish()
+
+                val db = MotorBroDatabase()
+                db.getUserType { userType ->
+
+                    if (userType == UserType.Type.OWNER) {
+
+                        db.getOwner {
+                            val user = it
+
+                            if (user.shopId.isEmpty()) {
+                                val intent = Intent(applicationContext, RegisterShop::class.java)
+                                startActivity(intent)
+                            } else {
+                                val intent =
+                                    Intent(applicationContext, DashboardActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+                    } else if (userType == UserType.Type.EMPLOYEE) {
+
+                        db.getEmployee {
+                            val user = it
+
+                            if (user.shopId.isEmpty()) {
+                                val intent = Intent(applicationContext, RegisterShop::class.java)
+                                startActivity(intent)
+                            } else {
+                                val intent =
+                                    Intent(applicationContext, DashboardActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+                    }
+                }
+
             } else {
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
