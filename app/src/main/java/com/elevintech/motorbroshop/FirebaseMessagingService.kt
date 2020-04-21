@@ -25,7 +25,6 @@ class FirebaseMessagingService : FirebaseMessagingService(){
 
             if(isLoggedIn)
                 MotorBroDatabase().updateFcmToken(token)
-
         }
 
     }

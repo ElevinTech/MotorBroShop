@@ -105,8 +105,12 @@ class HomeFragment : Fragment() {
         }
 
         val db = MotorBroDatabase()
-        db.getShop(user.shopId) {
 
+        if (user.shopId.isEmpty()) {
+            return
+        }
+
+        db.getShop(user.shopId) {
             if (!isAdded) {
                 return@getShop
             }

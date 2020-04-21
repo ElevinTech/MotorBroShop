@@ -11,12 +11,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="30dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingBottom="30dp"
             >
 
             <androidx.appcompat.widget.Toolbar
@@ -37,7 +38,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="16dp"
                     android:text="More"
-                    android:textColor="#fff"
+                    android:textColor="#FFFFFF"
                     android:textSize="19sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/open_sans_bold"
@@ -86,7 +87,7 @@
                     >
 
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/userProfileImage"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -167,7 +168,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/shop_name_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimary"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -206,7 +207,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_branches_icon"
-                        android:tint="#F1333A"
+                        android:tint="@color/colorPrimary"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -242,7 +243,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_documents_icon"
-                        android:tint="#F1333A"
+                        android:tint="@color/colorPrimary"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -278,7 +279,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_employees_icon"
-                        android:tint="#F1333A"
+                        android:tint="@color/colorPrimary"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -334,7 +335,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/side_nav_feedback_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimary"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -370,7 +371,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/terms_services_icon"
-                    android:tint="#F1333A"
+                    android:tint="@color/colorPrimary"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout

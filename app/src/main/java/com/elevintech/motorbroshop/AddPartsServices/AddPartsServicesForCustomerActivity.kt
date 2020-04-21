@@ -336,10 +336,10 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 //            return false
 //        }
 
-        if (imageUri == null) {
-            Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
-            return false
-        }
+//        if (imageUri == null) {
+//            Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
+//            return false
+//        }
 
         return true
     }

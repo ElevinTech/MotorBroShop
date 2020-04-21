@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
@@ -99,6 +100,10 @@ class CustomerListFragment : Fragment() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.customerName.text = customer.firstName + " " + customer.lastName
 
+            if (user.profilePictureUrl != "") {
+                activity?.let { Glide.with(it).load(user.profilePictureUrl).into( viewHolder.itemView.userProfileImage) }
+            }
+
             viewHolder.itemView.setOnClickListener {
                 val intent = Intent(activity, CustomerProfileActivity::class.java)
                 intent.putExtra("customer", customer)
@@ -108,7 +113,6 @@ class CustomerListFragment : Fragment() {
 
         override fun getLayout(): Int {
             return R.layout.row_customer
-
         }
     }
 

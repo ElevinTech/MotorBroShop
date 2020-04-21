@@ -32,6 +32,7 @@ class AddPartsServicesActivity : AppCompatActivity() {
     var birthDayInMilliseconds = 0.toLong()
 
     lateinit var mDateSetListener: DatePickerDialog.OnDateSetListener
+    private var isForEditParts = false
 
     var imageUri: Uri? = null
     var OPEN_CAMERA = 10
@@ -49,6 +50,9 @@ class AddPartsServicesActivity : AppCompatActivity() {
         // uri exposure fix
         var builder = StrictMode.VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
+
+        // get the intent if from parts fragment edit
+        isForEditParts = intent.getBooleanExtra("isForEditParts", false)
 
         imgMainProfile.setOnClickListener {
             askUploadSource()
@@ -71,6 +75,12 @@ class AddPartsServicesActivity : AppCompatActivity() {
         typeOfPartsText.setOnClickListener {
             val intent = Intent(applicationContext, TypeOfPartsActivity::class.java)
             intent.putExtra("fromAddExtra", true)
+
+            val parts = typeOfPartsText.text.toString()
+            if (parts.isNotEmpty()){
+                intent.putExtra("previousParts", parts)
+            }
+
             startActivityForResult(intent, SELECT_PART_TYPE)
         }
 
@@ -210,7 +220,7 @@ class AddPartsServicesActivity : AppCompatActivity() {
         builder.show()
     }
 
-    fun openCamera(){
+    private fun openCamera(){
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         var filename = UUID.randomUUID().toString() + ".jpg"
         var file = File(this.externalCacheDir, filename)
@@ -219,7 +229,7 @@ class AddPartsServicesActivity : AppCompatActivity() {
         startActivityForResult(intent, OPEN_CAMERA)
     }
 
-    fun openGallery(){
+    private fun openGallery(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, OPEN_GALLERY)
@@ -253,6 +263,8 @@ class AddPartsServicesActivity : AppCompatActivity() {
                 }
             }
         }
+
+
 
     }
 
