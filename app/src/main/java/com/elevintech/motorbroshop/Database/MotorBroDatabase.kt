@@ -389,7 +389,7 @@ class MotorBroDatabase {
             }
     }
 
-    fun getUserType(callback: (String) -> Unit) {
+    fun getUserType(callback: (String?) -> Unit) {
 
         val db = FirebaseFirestore.getInstance()
         val uid = FirebaseAuth.getInstance().uid!!
@@ -397,8 +397,14 @@ class MotorBroDatabase {
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
 
-            var user = documentSnapshot.toObject(UserType::class.java)!!
-            callback( user.userType )
+            if (documentSnapshot.exists()){
+                var user = documentSnapshot.toObject(UserType::class.java)!!
+                callback( user.userType )
+            } else {
+                callback( null )
+            }
+
+
         }
 
     }
@@ -791,7 +797,9 @@ class MotorBroDatabase {
                 for ( snapshot in querysnapshot!!.documentChanges){
                     if ( snapshot.type == DocumentChange.Type.ADDED || snapshot.type == DocumentChange.Type.MODIFIED ){
                         val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                        chatRoom.id = snapshot.document.id
                         chatRoomList.add(chatRoom)
+                        println("getChatRoomOfShop: chatRoom: " + chatRoom.id + ", last message: " + chatRoom.lastMessage.message  + ", date: " +  Utils().convertMillisecondsToDate(chatRoom.lastMessage.createdDate * 1000, "MM/dd/yyyy hh:mm") )
                     }
                 }
 
@@ -1101,4 +1109,68 @@ class MotorBroDatabase {
         }
     }
 
+    fun getUnreadMessageCount(shopId: String, callback: (Int) -> Unit) {
+
+
+
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms")
+            .whereEqualTo("participants.shop", shopId )
+
+        chatRoomRef.addSnapshotListener { querysnapshot, e ->
+
+            var unreadMessageCount = 0
+
+            for (documentSnapshot in querysnapshot!!.documents){
+                val chatRoom = documentSnapshot.toObject(ChatRoom::class.java)!!
+
+                if (chatRoom.lastMessage.toId == shopId){
+                    if (chatRoom.lastMessage.read == false){
+                        unreadMessageCount++
+                    }
+                }
+            }
+
+            callback(unreadMessageCount)
+
+        }
+
+    }
+
+    fun getChatRoomById(chatRoomId: String, callback: (ChatRoom) -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms").document(chatRoomId)
+
+        chatRoomRef.get()
+            .addOnSuccessListener {
+                val chatRoom = it.toObject(ChatRoom::class.java)!!
+                callback(chatRoom)
+            }
+            .addOnFailureListener { e-> println("error getting chat room with ID: $chatRoomId") }
+
+    }
+
+    fun updateLastMessageAsRead(chatRoomId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val chatRoomRef = db.collection("chat-rooms").document(chatRoomId)
+
+        chatRoomRef.update("lastMessage.read" , true)
+            .addOnSuccessListener { }
+            .addOnFailureListener { e-> println("error getting chat room with ID: $chatRoomId") }
+    }
+
+    fun saveProductTemplate(product: Product, callback: () -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(product.shopId).collection("product-templates").document(product.id)
+            .set(product)
+            .addOnSuccessListener {
+                callback()
+            }
+            .addOnFailureListener {
+                    e -> println(e)
+                callback()
+            }
+
+    }
 }

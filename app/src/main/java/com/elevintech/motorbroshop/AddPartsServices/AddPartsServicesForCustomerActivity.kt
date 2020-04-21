@@ -1,8 +1,8 @@
 package com.elevintech.motorbroshop.AddPartsServices
 
 import android.Manifest
-import android.app.Activity
-import android.app.DatePickerDialog
+import android.app.*
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.os.StrictMode
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.Toast
 import com.elevintech.motorbroshop.Customer.CustomerSelectorActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
@@ -66,11 +68,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 saveProduct()
         }
 
-        dateText.setOnClickListener {
-            setDatePickerAction()
-            openDatePicker()
-        }
-
         customerName.setOnClickListener {
 
             val shopId = intent.getStringExtra("shopId")
@@ -99,6 +96,46 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         noteText.setOnClickListener {
             noteText.getParent().requestDisallowInterceptTouchEvent(true);
         }
+
+        useTemplateButton.setOnClickListener {
+
+            // TODO: Load the templates in a bottom sheet dialog
+            // TODO: Save template name
+            // TODO: Load templates and display name
+
+        }
+    }
+
+    private fun askCreateTemplate(product: Product){
+
+        println("askCreateTemplate")
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_ask_create_template)
+        dialog.setCancelable(false)
+
+        val submitButton = dialog.findViewById<Button>(R.id.submitButton)
+        val cancelButton = dialog.findViewById<Button>(R.id.cancelButton)
+
+        submitButton.setOnClickListener {
+
+            val showDialog = Utils().showProgressDialog(this, "Saving Template...")
+
+            MotorBroDatabase().saveProductTemplate(product){
+                showDialog.dismiss()
+                finish()
+            }
+
+        }
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+
+
+        dialog.show()
+
     }
 
     private fun openDatePicker() {
@@ -135,9 +172,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
             birthDayInMilliseconds = Utils().convertDateToMilliseconds(year,month,day,12, 0, 0)
 
-            // PUT THE SELECTED DATE ON THE DATE PLACEHOLDER
-            dateText.setText("${year}-${monthString}-${dayString}")
-
             // TODO: How to get current AGE??
 
             // If todays month is greater than current month
@@ -147,38 +181,41 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 
     }
 
+    private fun onProductSaved(product: Product){
+//        val builder = AlertDialog.Builder(this)
+//        builder.setTitle("Part/Service Created!")
+//        builder.setMessage("Your product is now visible to customers")
+//        builder.setPositiveButton("Great!") { dialog, which ->
+//            askCreateTemplate(product)
+//
+//        }
+//        builder.setCancelable(false)
+//        builder.show()
+
+        finish()
+
+    }
+
     private fun saveProduct() {
 
-//        val shopId = intent.getStringExtra("shopId")
-//
-//        // SHOW PROGRESS DIALOG
-//        val progressDialog = Utils().easyProgressDialog(this, "Saving Product...")
-//        progressDialog.show()
-//
+        val showDialog = Utils().showProgressDialog(this, "Saving Product...")
         val shopId = intent.getStringExtra("shopId")
-        val showDialog = Utils().showProgressDialog(this, "Saving bike part")
 
-        // Save it to both so it would appear on both
-        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-            var product = Product()
-            product.description = noteText.text.toString()
-            product.price = priceText.text.toString()
-            product.imageUrl = imageUrl
-            product.type = typeOfPartsText.text.toString()
-            product.brand = brandText.text.toString()
-            product.shopId = shopId
-            product.isShopProduct = false
-            product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+
+        var product = Product()
+        product.description = noteText.text.toString()
+        product.price = priceText.text.toString()
+        product.type = typeOfPartsText.text.toString()
+        product.brand = brandText.text.toString()
+        product.shopId = shopId
+        product.isShopProduct = false
+        product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+
+        if (imageUri == null){
+
             MotorBroDatabase().saveProduct(shopId, product){
 
                 val bikeParts = BikeParts()
-                bikeParts.date = dateText.text.toString()
-
-                if (!dateText.text.isEmpty()) {
-                    bikeParts.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
-                }
-
-                bikeParts.odometer = odometerText.text.toString().toDouble()
                 bikeParts.typeOfParts = typeOfPartsText.text.toString()
                 bikeParts.brand = brandText.text.toString()
                 bikeParts.price = priceText.text.toString().toDouble()
@@ -186,14 +223,41 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 bikeParts.userId = FirebaseAuth.getInstance().uid!!
                 bikeParts.shopId = shopId
                 bikeParts.createdByShop = true
+                bikeParts.dateLong = Utils().getCurrentTimestamp()
 
                 val database = MotorBroDatabase()
                 database.saveBikeParts(bikeParts, selectedCustomerId) {
                     showDialog.dismiss()
-                    Toast.makeText(this, "Successfully saved bike part", Toast.LENGTH_SHORT).show()
-                    finish()
+                    onProductSaved(product)
                 }
 
+            }
+
+        } else {
+            // Save it to both so it would appear on both
+            MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+
+                product.imageUrl = imageUrl
+
+                MotorBroDatabase().saveProduct(shopId, product){
+
+                    val bikeParts = BikeParts()
+                    bikeParts.typeOfParts = typeOfPartsText.text.toString()
+                    bikeParts.brand = brandText.text.toString()
+                    bikeParts.price = priceText.text.toString().toDouble()
+                    bikeParts.note = noteText.text.toString()
+                    bikeParts.userId = FirebaseAuth.getInstance().uid!!
+                    bikeParts.shopId = shopId
+                    bikeParts.createdByShop = true
+                    bikeParts.imageUrl = imageUrl
+
+                    val database = MotorBroDatabase()
+                    database.saveBikeParts(bikeParts, selectedCustomerId) {
+                        showDialog.dismiss()
+                        onProductSaved(product)
+                    }
+
+                }
             }
         }
 
@@ -311,11 +375,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
 //            return false
 //        }
 
-//        if (odometerText.text.isEmpty()) {
-//            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
-//            return false
-//        }
-
         if (typeOfPartsText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Type of part field", Toast.LENGTH_LONG).show()
             return false
@@ -330,16 +389,6 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill up the Price field", Toast.LENGTH_LONG).show()
             return false
         }
-
-//        if (dateText.text.isEmpty()) {
-//            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
-//            return false
-//        }
-
-//        if (imageUri == null) {
-//            Toast.makeText(this, "Please fill up the Part type image field", Toast.LENGTH_LONG).show()
-//            return false
-//        }
 
         return true
     }

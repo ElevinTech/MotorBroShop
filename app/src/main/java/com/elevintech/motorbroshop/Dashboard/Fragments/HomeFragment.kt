@@ -44,7 +44,22 @@ class HomeFragment : Fragment() {
         //user = (activity as DashboardActivity).user
         getUserType(view)
 
+
         return view
+    }
+
+
+    private fun displayMessageBadge(view: View){
+
+        MotorBroDatabase().getUnreadMessageCount(shop.shopId){ unreadMessageCount ->
+
+            if (!isAdded) {
+                return@getUnreadMessageCount
+            }
+            view.chatImageView.setBadgeValue(unreadMessageCount)
+
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -242,6 +257,9 @@ class HomeFragment : Fragment() {
 
 
             }
+
+            // GET UNREAD MESSAGES
+            displayMessageBadge(view)
         }
     }
 

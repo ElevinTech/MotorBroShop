@@ -67,11 +67,6 @@ class AddPartsServicesActivity : AppCompatActivity() {
             finish()
         }
 
-        dateText.setOnClickListener {
-            setDatePickerAction()
-            openDatePicker()
-        }
-
         typeOfPartsText.setOnClickListener {
             val intent = Intent(applicationContext, TypeOfPartsActivity::class.java)
             intent.putExtra("fromAddExtra", true)
@@ -131,9 +126,6 @@ class AddPartsServicesActivity : AppCompatActivity() {
 
             birthDayInMilliseconds = Utils().convertDateToMilliseconds(year,month,day,12, 0, 0)
 
-            // PUT THE SELECTED DATE ON THE DATE PLACEHOLDER
-            dateText.setText("${year}-${monthString}-${dayString}")
-
             // TODO: How to get current AGE??
 
             // If todays month is greater than current month
@@ -162,11 +154,6 @@ class AddPartsServicesActivity : AppCompatActivity() {
         product.shopId = shopId
         product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
         product.dateCreated = Utils().getCurrentTimestamp().toString()
-
-        if (!dateText.text.isEmpty()) {
-            product.dateLong = Utils().convertDateToTimestamp(dateText.text.toString(), "yyyy-MM-dd")
-        }
-
 
         if (imageUri == null){
 
@@ -280,10 +267,6 @@ class AddPartsServicesActivity : AppCompatActivity() {
 //            return false
 //        }
 
-//        if (odometerText.text.isEmpty()) {
-//            Toast.makeText(this, "Please fill up the odometerText field", Toast.LENGTH_LONG).show()
-//            return false
-//        }
 
         if (typeOfPartsText.text.isEmpty()) {
             Toast.makeText(this, "Please fill up the Type of part field", Toast.LENGTH_LONG).show()
@@ -299,11 +282,6 @@ class AddPartsServicesActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill up the Price field", Toast.LENGTH_LONG).show()
             return false
         }
-
-//        if (dateText.text.isEmpty()) {
-//            Toast.makeText(this, "Please fill up the date field", Toast.LENGTH_LONG).show()
-//            return false
-//        }
 
 
         return true

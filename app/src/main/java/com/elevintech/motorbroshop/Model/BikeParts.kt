@@ -10,4 +10,5 @@ class BikeParts(
     var note: String = "",
     var price: Double = 0.0,
     var shopId: String ="",
-    var createdByShop: Boolean = false)
+    var createdByShop: Boolean = false,
+    var imageUrl: String ="")

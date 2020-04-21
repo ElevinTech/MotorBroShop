@@ -71,6 +71,16 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 //                    setValuesNavHeader()
                 }
             }
+
+            else if ( userType == null ){
+
+                // Force logout if no user found
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+                finish()
+            }
         }
 
         MotorBroDatabase().checkRegistrationToken()

@@ -1,15 +1,18 @@
 package com.elevintech.motorbroshop.Chat
 
 import android.content.Intent
-import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
-import com.elevintech.motorbroshop.Model.*
+import com.elevintech.motorbroshop.Model.ChatRoom
+import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.R
-import com.google.firebase.auth.FirebaseAuth
+import com.elevintech.motorbroshop.Utils
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -21,6 +24,8 @@ class ChatListActivity : AppCompatActivity() {
     var shopId = ""
     lateinit var shop: Shop
 
+    val chatListAdapter = GroupAdapter<ViewHolder>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_list)
@@ -31,81 +36,141 @@ class ChatListActivity : AppCompatActivity() {
             finish()
         }
 
+        reycler_view_chats.isNestedScrollingEnabled = true
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        chatListAdapter.clear()
+        chatListAdapterReference.clear()
+        reycler_view_chats.adapter = chatListAdapter
+
+        getShop()
+    }
+
+    private fun getShop() {
         MotorBroDatabase().getShop(shopId){
             shop = it
 
             // get all chat rooms where shop is a participant of
-            getShopChatRooms()
+            getChatRoomOfShop(shop.shopId)
         }
-
-
     }
 
-    private fun getShopChatRooms(){
+    // ADAPTER REFERENCE - the chat messages and it's current order in the recycler view
+    // the position of the chat messages are saved here
+    // the adapter uses it to find the current position of a chat message by it's ID used for change it's position in the recycler view
+    // (example kapag may bagong chat na na-receive, need idisplay yun sa taas ng recycler view kasi yun yung pinaka-latest)
+    val chatListAdapterReference: MutableList<String> = ArrayList()
 
-        var db = MotorBroDatabase()
-        db.getChatRoomOfShop(shopId) {
+    fun getChatRoomOfShop(shopId: String){
 
-            displayListOfLastMessages(it)
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("chat-rooms")
+            .whereEqualTo("participants.shop", shopId)
+            .orderBy("lastMessage.createdDate", Query.Direction.DESCENDING)
 
-        }
+        ref.addSnapshotListener { querysnapshot, e ->
 
-    }
+            for ( snapshot in querysnapshot!!.documentChanges){
 
-    private fun displayListOfLastMessages(chatRoomList: MutableList<ChatRoom>){
+                if ( snapshot.type == DocumentChange.Type.ADDED ){
 
-        reycler_view_chats.isNestedScrollingEnabled = true
+                    // get the chats
+                    val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                    chatRoom.id = snapshot.document.id
 
-        val chatListAdapter = GroupAdapter<ViewHolder>()
+                    // display in the recycler view
+                    chatListAdapter.add(ChatItem(chatRoom, chatRoom.participants["user"]!!))
 
-        for (chatRoom in chatRoomList){
+                    // add to adapter reference
+                    chatListAdapterReference.add(chatRoom.id)
 
-            MotorBroDatabase().getCustomerById(chatRoom.participants["user"]!!){
-                chatListAdapter.add( ChatItem(chatRoom, it) )
+                }
+
+                if ( snapshot.type == DocumentChange.Type.MODIFIED  ){
+
+                    // get new chat
+                    val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
+                    val newMessage = chatRoom.lastMessage.message
+                    chatRoom.id = snapshot.document.id
+
+                    // get the chat item position based from adapter reference (we will be moving it to the top of the recycler view as it is the new latest message)
+                    val oldPosition = chatListAdapterReference.indexOf(chatRoom.id)
+                    val newPosition = 0
+
+                    // update the adapter reference, move it to the first position as well
+                    chatListAdapterReference.remove(chatRoom.id)
+                    chatListAdapterReference.add(0, chatRoom.id)
+
+                    // change the value of the chat message text
+                    chatListAdapter.notifyItemChanged(oldPosition, "$newMessage")
+
+                    // move to the top of the recyclerview
+                    chatListAdapter.notifyItemMoved(oldPosition, newPosition) /* move the chat on the first row */
+
+                }
             }
 
         }
-
-        reycler_view_chats.adapter = chatListAdapter
-
     }
 
-    inner class ChatItem(val chatRoom: ChatRoom, val chatOtherUser: Customer): Item<ViewHolder>() {
+
+
+
+
+    inner class ChatItem(val chatRoom: ChatRoom, val user: String): Item<ViewHolder>() {
+
+        // UPDATE CHAT MESSAGE
+        override fun bind(viewHolder: ViewHolder, position: Int, payloads: List<Any>) {
+
+            if (payloads.isNotEmpty()){
+
+                val newMessage = payloads[0] as String
+                viewHolder.itemView.chatPreview.text = newMessage
+                viewHolder.itemView.unreadDot.visibility = View.VISIBLE
+                viewHolder.itemView.chatDate.text = Utils().getCurrentTime()
+
+            } else {
+                super.bind(viewHolder, position, payloads)
+            }
+        }
+
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-            viewHolder.itemView.userName.text = chatOtherUser.firstName.capitalize()
+            MotorBroDatabase().getCustomerById(user){ chatOtherUser ->
+                viewHolder.itemView.userName.text = chatOtherUser.firstName.capitalize()
 
-            if (chatRoom.lastMessage.fromId == shopId){
-                viewHolder.itemView.chatPreview.text = "You: " + chatRoom.lastMessage.message
-            } else {
+                if (chatRoom.lastMessage.fromId == shopId){
+                    viewHolder.itemView.chatPreview.text = "You: " + chatRoom.lastMessage.message
+                } else {
+                    viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
+                }
+
                 viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
+                viewHolder.itemView.chatDate.text = Utils().convertMillisecondsToDate(chatRoom.lastMessage.createdDate * 1000, "MMM dd - hh:mm a")
+
+                viewHolder.itemView.setOnClickListener {
+                    val intent = Intent(this@ChatListActivity, ChatLogActivity::class.java)
+                    intent.putExtra("customerId", chatOtherUser.uid)
+                    intent.putExtra("chatRoomId", chatRoom.lastMessage.chatRoomId)
+                    intent.putExtra("shopId", shop.shopId)
+                    startActivity(intent)
+                }
+
+
+                // Display the profile image (if they have one)
+                if (chatOtherUser.profileImage != "")
+                    Glide.with(applicationContext).load(chatOtherUser.profileImage).into(viewHolder.itemView.imgMainProfile)
+
+                if (chatRoom.lastMessage.toId == shopId) {
+                    if(chatRoom.lastMessage.read == false){
+                        viewHolder.itemView.unreadDot.visibility = View.VISIBLE
+                    }
+                }
             }
-
-            viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
-
-            viewHolder.itemView.setOnClickListener {
-                val intent = Intent(this@ChatListActivity, ChatLogActivity::class.java)
-                intent.putExtra("customerId", chatOtherUser.uid)
-                intent.putExtra("chatRoomId", chatRoom.lastMessage.chatRoomId)
-                intent.putExtra("shopId", shop.shopId)
-                startActivity(intent)
-            }
-
-
-            // Display the profile image (if they have one)
-            if (chatOtherUser.profileImage != "")
-                Glide.with(applicationContext).load(chatOtherUser.profileImage).into(viewHolder.itemView.imgMainProfile)
-
-
-//            // Display unread message (if the last message is not from user and not yet read)
-//            if (chatRoom.lastMessage.fromId != shopId){
-//                if (!chatRoom.lastMessage.read){
-//                    viewHolder.itemView.chatPreview.setTypeface(null, Typeface.BOLD) // TODO: Bold not working always
-//                    viewHolder.itemView.chatPreview.text = chatRoom.lastMessage.message
-////                    viewHolder.itemView.unreadDot.visibility = View.VISIBLE
-//                }
-//            }
-
 
         }
 
