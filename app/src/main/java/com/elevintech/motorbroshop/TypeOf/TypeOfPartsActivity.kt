@@ -20,6 +20,7 @@ class TypeOfPartsActivity : AppCompatActivity() {
 
     private lateinit var viewAdapter : RecyclerView.Adapter<*>
     val totalList = ArrayList<CheckboxObj>()
+    var selectedParts = ArrayList<String>()
     //private val partsListAdapter = MyAdapter<MyAdapter.MyViewHolder>()
 
     var isFromAddParts = false
@@ -32,6 +33,18 @@ class TypeOfPartsActivity : AppCompatActivity() {
 
         //isFromAddParts = intent.getSerializableExtra("fromAddExtra", false)
         isFromAddParts = intent.getBooleanExtra("fromAddExtra", false)
+        val previousExtraParts = intent.getStringExtra("previousParts")
+
+
+
+        if (previousExtraParts != null) {
+            val previousParts = previousExtraParts.split(",")
+            for (part in previousParts) {
+                val trimmedPart = part.trimStart()
+                selectedParts.add(trimmedPart)
+            }
+        }
+
         viewAdapter = MyAdapter(totalList)
 
         if (isFromAddParts) {
@@ -115,13 +128,10 @@ class TypeOfPartsActivity : AppCompatActivity() {
         var isActive = true
 
         for (deletedPart in deletedParts){
-
             if (deletedPart.trim().toLowerCase() == part.trim().toLowerCase() ){
                 isActive = false
             }
-
         }
-
         return isActive
     }
 
@@ -184,13 +194,14 @@ class TypeOfPartsActivity : AppCompatActivity() {
             val part = myDataset[position]
             viewHolder.itemView.parts_name.text = part.name
 
+            if (selectedParts.contains(part.name.trimStart())){
+                part.isChecked = true
+            }
+
             viewHolder.itemView.checkbox.isChecked = part.isChecked
 
-
-
-            viewHolder.itemView.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
-
-                part.isChecked = isChecked
+            viewHolder.itemView.checkbox.setOnClickListener {
+                part.isChecked = !part.isChecked
 
                 val partsChecked = myDataset.filter { it.isChecked }
                 if (partsChecked.count() == 0){
@@ -200,7 +211,6 @@ class TypeOfPartsActivity : AppCompatActivity() {
                     addItemsButton.alpha = 1f
                     deleteItemsButton.alpha = 1f
                 }
-
             }
         }
 
