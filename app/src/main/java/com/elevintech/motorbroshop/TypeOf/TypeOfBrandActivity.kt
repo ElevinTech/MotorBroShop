@@ -28,6 +28,11 @@ class TypeOfBrandActivity : AppCompatActivity() {
 
         isFromAddParts = intent.getBooleanExtra("fromAddExtra", false)
         viewAdapter = BrandAdapter(totalList)
+
+        if (isFromAddParts) {
+            addItemsButton.visibility = View.VISIBLE
+        }
+
         recycler_view_type_of_brands.apply {
             //this.adapter = partsListAdapter
             this.adapter = viewAdapter
@@ -176,21 +181,20 @@ class TypeOfBrandActivity : AppCompatActivity() {
             val part = myDataset[position]
             viewHolder.itemView.parts_name.text = part.name
 
-            viewHolder.itemView.setOnClickListener {
-                if (isFromAddParts) {
-                    val returnIntent = Intent()
-                    returnIntent.putExtra("selectedBrand", part.name)
-                    setResult(Activity.RESULT_OK, returnIntent)
-                    finish()
-                }
-
-            }
+//            viewHolder.itemView.setOnClickListener {
+//                if (isFromAddParts) {
+//                    val returnIntent = Intent()
+//                    returnIntent.putExtra("selectedBrand", part.name)
+//                    setResult(Activity.RESULT_OK, returnIntent)
+//                    finish()
+//                }
+//
+//            }
 
             viewHolder.itemView.checkbox.isChecked = part.isChecked
 
-            viewHolder.itemView.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
-
-                part.isChecked = isChecked
+            viewHolder.itemView.checkbox.setOnClickListener {
+                part.isChecked = !part.isChecked
 
                 val partsChecked = myDataset.filter { it.isChecked }
                 if (partsChecked.count() == 0){
@@ -200,16 +204,30 @@ class TypeOfBrandActivity : AppCompatActivity() {
                     addItemsButton.alpha = 1f
                     deleteItemsButton.alpha = 1f
                 }
-
             }
 
-            // DEFAULT BRANDS CANNOT BE DELETED
-            val defaultBrands: List<String> = Constants.TYPE_OF.brands
+//            viewHolder.itemView.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
+//
+//                part.isChecked = isChecked
+//
+//                val partsChecked = myDataset.filter { it.isChecked }
+//                if (partsChecked.count() == 0){
+//                    addItemsButton.alpha = 0.65f
+//                    deleteItemsButton.alpha = 0.65f
+//                } else {
+//                    addItemsButton.alpha = 1f
+//                    deleteItemsButton.alpha = 1f
+//                }
+//
+//            }
 
-            // HIDE CHECKBOX IF IT IS ONE
-            if ( defaultBrands.contains(part.name) ){
-                viewHolder.itemView.checkbox.visibility = View.GONE
-            }
+//            // DEFAULT BRANDS CANNOT BE DELETED
+//            val defaultBrands: List<String> = Constants.TYPE_OF.brands
+//
+//            // HIDE CHECKBOX IF IT IS ONE
+//            if ( defaultBrands.contains(part.name) ){
+//                viewHolder.itemView.checkbox.visibility = View.GONE
+//            }
 
         }
 

@@ -132,6 +132,48 @@
     </LinearLayout>
 
     <LinearLayout
+
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:layout_editor_absoluteX="10dp">
+
+        <LinearLayout
+            android:id="@+id/deleteItemsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.65"
+            android:background="@drawable/type_parts_delete_bg"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/delete_parts_icon"
+                android:tint="#A52222" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/open_sans"
+                android:paddingRight="6dp"
+                android:text="Delete"
+                android:textColor="#A52222" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_marginBottom="150dp"
         android:layout_below="@+id/linearLayout2"
@@ -154,26 +196,6 @@
             />
     </LinearLayout>
 
-    <Button
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:alpha="0.65"
-        android:background="@drawable/type_parts_add_bg"
-        android:drawableStart="@drawable/smaller_add_icon"
-        android:drawableTint="@color/white"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="Insert"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:visibility="visible"

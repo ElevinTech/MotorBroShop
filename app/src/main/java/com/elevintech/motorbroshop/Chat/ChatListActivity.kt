@@ -76,6 +76,9 @@ class ChatListActivity : AppCompatActivity() {
 
             for ( snapshot in querysnapshot!!.documentChanges){
 
+                noDataLayout.visibility = View.GONE
+                reycler_view_chats.visibility = View.VISIBLE
+
                 if ( snapshot.type == DocumentChange.Type.ADDED ){
 
                     // get the chats
@@ -112,6 +115,11 @@ class ChatListActivity : AppCompatActivity() {
                     chatListAdapter.notifyItemMoved(oldPosition, newPosition) /* move the chat on the first row */
 
                 }
+            }
+
+            if (querysnapshot.isEmpty) {
+                noDataLayout.visibility = View.VISIBLE
+                reycler_view_chats.visibility = View.GONE
             }
 
         }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
     tools:context=".Chat.ChatListActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -36,6 +38,36 @@
     <View style="@style/horizontalLine"
         android:layout_below="@+id/toolbar"/>
 
+    <LinearLayout
+        android:id="@+id/noDataLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="visible"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:srcCompat="@drawable/empty_image_one" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorBlack"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:text="You have no current user chats." />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -78,4 +110,4 @@
         </androidx.core.widget.NestedScrollView>
 
     </FrameLayout>
-</RelativeLayout>
+</LinearLayout>

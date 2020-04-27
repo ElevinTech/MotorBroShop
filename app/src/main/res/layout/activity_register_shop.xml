@@ -200,7 +200,7 @@
                 <EditText
                     android:id="@+id/shopAddressEditText"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:autoSizeMinTextSize="12sp"
                     android:maxLines="4"
                     android:layout_marginLeft="20dp"
@@ -210,9 +210,9 @@
                     android:inputType="textMultiLine"
                     android:lines="8"
                     android:minLines="6"
-
+                    android:hint="Click to select a location"
                     android:gravity="top|left"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/open_sans"
                     android:maxLength="90"
                     />
