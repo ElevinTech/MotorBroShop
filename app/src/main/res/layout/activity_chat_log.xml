@@ -25,13 +25,14 @@
             android:layout_marginTop="2dp"
             app:srcCompat="@drawable/back_icon" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgMainProfile"
-            android:padding="4dp"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginLeft="40dp"
             android:layout_gravity="start"
-            android:layout_marginLeft="40dp" />
+            android:padding="4dp"
+            />
 
         <TextView
             android:id="@+id/profileName"
