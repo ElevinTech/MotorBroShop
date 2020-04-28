@@ -76,7 +76,6 @@ class ChatListActivity : AppCompatActivity() {
 
             for ( snapshot in querysnapshot!!.documentChanges){
 
-                noDataLayout.visibility = View.GONE
                 reycler_view_chats.visibility = View.VISIBLE
 
                 if ( snapshot.type == DocumentChange.Type.ADDED ){

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -109,6 +110,27 @@ class HomeFragment : Fragment() {
         }
 
     }
+
+    private fun playAnimation(itemView: View) {
+
+        itemView.visibility = View.GONE
+        val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.slide_in_right)
+        itemView.startAnimation(rightToLeft)
+        itemView.visibility = View.VISIBLE
+
+
+    }
+
+    private fun playAnimationFade(itemView: View) {
+
+        itemView.visibility = View.GONE
+        val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.fadein)
+        itemView.startAnimation(rightToLeft)
+        itemView.visibility = View.VISIBLE
+
+
+    }
+
     private fun setupShop(view: View) {
 
         if (!isAdded) {
@@ -133,12 +155,14 @@ class HomeFragment : Fragment() {
             this.shop = it
             val shop = it
 
+            playAnimation(view.shopName)
             view.shopName.text = shop.name
 
             // GET DATE ESTABLISHED
             if (shop.dateEstablished != "") {
                 //val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
                 val date = Utils().convertMillisecondsToDate(shop.dateEstablished, "MMM dd, yyyy")
+                playAnimation(view.shopEstablished)
                 view.shopEstablished.text = "Acquired: $date"
 //                if (view.shopImageView != null) {
 //                    Glide.with(this).load(shop.imageUrl).into(view.shopImageView)
@@ -146,9 +170,11 @@ class HomeFragment : Fragment() {
 
                 if (view.shopImageView != null) {
                     if (shop.imageUrl != "") {
+                        playAnimationFade(view.shopImageView)
                         Glide.with(this).load(shop.imageUrl).into(view.shopImageView)
                     } else {
                         // Put an empty image here
+                        playAnimationFade(view.shopImageView)
                         Glide.with(this).load(R.drawable.users_icon).into(view.shopImageView)
                     }
                 }
@@ -189,6 +215,7 @@ class HomeFragment : Fragment() {
                 }
 
                 val customerCount = customerList.count()
+                playAnimation(view.shopCustomersNumber)
                 view.shopCustomersNumber.text = "$customerCount customer(s)"
 
                 // GET FIRST CUSTOMER
@@ -238,6 +265,7 @@ class HomeFragment : Fragment() {
                 view.lastAddedPartsHeader.visibility = View.VISIBLE
 
                 val productCount = productsList.count()
+                playAnimation(view.shopPartsServicesNumber)
                 view.shopPartsServicesNumber.text = "$productCount parts/services"
                 if (productCount != 0) {
 
@@ -245,11 +273,14 @@ class HomeFragment : Fragment() {
                     if (productCount > 0){
                         val latestProduct = productsList[0]
                         if (!latestProduct.dateCreated.isEmpty()) {
+
+                            playAnimation(view.latestProductName)
                             view.latestProductName.text = "${latestProduct.brand} ${latestProduct.name}"
                             view.latestProductDate.text = Utils().convertMillisecondsToDate((latestProduct.dateCreated.toLong() * 1000), "MMM dd, yyyy")
                         }
                     }
                 } else {
+                    playAnimation(view.lastAddedPartsHeader)
                     view.lastAddedPartsHeader.text = "No Parts / Services yet!"
                     view.lastAddedPartsLayout.visibility = View.GONE
                     view.lastAddedPartsHeader.visibility = View.GONE
