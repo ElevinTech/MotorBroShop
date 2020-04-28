@@ -96,49 +96,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="end"
-        android:visibility="gone"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="10dp">
-
-        <LinearLayout
-            android:id="@+id/deleteItemsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha="0.65"
-            android:background="@drawable/type_parts_delete_bg"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/delete_parts_icon"
-                android:tint="#A52222" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:layout_marginLeft="5dp"
-                android:fontFamily="@font/open_sans"
-                android:paddingRight="6dp"
-                android:text="Delete"
-                android:textColor="#A52222" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:layout_below="@+id/toolbar"
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="end"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:layout_editor_absoluteX="10dp">
