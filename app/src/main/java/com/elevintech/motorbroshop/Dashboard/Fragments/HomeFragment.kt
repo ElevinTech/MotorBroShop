@@ -113,7 +113,7 @@ class HomeFragment : Fragment() {
 
     private fun playAnimation(itemView: View) {
 
-        itemView.visibility = View.GONE
+//        itemView.visibility = View.GONE
         val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.slide_in_right)
         itemView.startAnimation(rightToLeft)
         itemView.visibility = View.VISIBLE
@@ -123,7 +123,7 @@ class HomeFragment : Fragment() {
 
     private fun playAnimationFade(itemView: View) {
 
-        itemView.visibility = View.GONE
+//        itemView.visibility = View.GONE
         val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.fadein)
         itemView.startAnimation(rightToLeft)
         itemView.visibility = View.VISIBLE
