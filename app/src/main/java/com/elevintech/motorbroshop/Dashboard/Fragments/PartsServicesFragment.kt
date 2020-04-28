@@ -105,7 +105,10 @@ class PartsServicesFragment : Fragment() {
                 customersListAdapter.add(customerItem(customers))
             }
 
-            noDataFullLayout.visibility = View.GONE
+            if (noDataFullLayout != null){
+                noDataFullLayout.visibility = View.GONE
+            }
+
         }
     }
 
@@ -157,10 +160,15 @@ class PartsServicesFragment : Fragment() {
             itemView.visibility = View.GONE
 
             Utils().doAfterDelay((position * 300).toLong()){
-                val rightToLeft = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
-                rightToLeft.duration = 250
-                itemView.startAnimation(rightToLeft)
-                itemView.visibility = View.VISIBLE
+
+                if (itemView != null && activity!= null){
+                    val rightToLeft = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
+                    rightToLeft.duration = 250
+                    itemView.startAnimation(rightToLeft)
+                    itemView.visibility = View.VISIBLE
+                }
+
+
             }
 
         }
