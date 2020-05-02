@@ -526,13 +526,20 @@ class MotorBroDatabase {
             }
     }
 
-    fun uploadImageToFirebaseStorage(imageUri: Uri, callback: (url: String) -> Unit) {
+    fun uploadImageToFirebaseStorage(imageUri: Uri?, callback: (url: String) -> Unit) {
+
+
+        if(imageUri == null){
+
+            callback("")
+            return
+        }
 
         val filename = UUID.randomUUID().toString()
         val storageRef = FirebaseStorage.getInstance().getReference("/user_uploads/$filename.jpg")
 
         // UPLOAD TO FIREBASE
-        storageRef.putFile(imageUri)
+        storageRef.putFile(imageUri!!)
             .addOnSuccessListener {
 
                 storageRef.downloadUrl.addOnSuccessListener {

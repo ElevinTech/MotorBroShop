@@ -142,6 +142,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:focusable="false"
                 android:id="@+id/addressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,9 +210,9 @@
                 android:id="@+id/saveBranchButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/create_account_button_background"
-                android:text="Create Account"
+                android:text="Create Branch"
                 android:textColor="#fff" />
         </LinearLayout>
     </ScrollView>
