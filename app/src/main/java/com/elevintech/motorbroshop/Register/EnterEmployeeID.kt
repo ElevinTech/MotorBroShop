@@ -17,7 +17,7 @@ class EnterEmployeeID : AppCompatActivity() {
 
         submitButton.setOnClickListener {
 
-            MotorBroDatabase().getEmployee( employeeIdText.text.toString() ){ employee ->
+            MotorBroDatabase().getEmployee( employeeCodeText.text.toString() ){ employee ->
 
 
                 if (employee != null){
@@ -27,9 +27,11 @@ class EnterEmployeeID : AppCompatActivity() {
                         val intent = Intent(this, RegisterEmployee::class.java)
                         intent.putExtra("employee", employee)
                         startActivity(intent)
+
                     } else {
 
-                        Toast.makeText(this, "Hey [employee name], seems like you have already set up your login account. Please sign in through the login page.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Hey ${employee.firstName}, seems like you have already set up your login account. Please sign in through the login page.", Toast.LENGTH_SHORT).show()
+
                     }
 
                 } else {

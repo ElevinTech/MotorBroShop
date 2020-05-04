@@ -24,7 +24,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_employee)
 
-        var shopId = intent.getStringExtra("shopId")
+        val shopId = intent.getStringExtra("shopId")!!
 
         branchEditText.setOnClickListener {
 
@@ -41,18 +41,23 @@ class CreateEmployeeActivity : AppCompatActivity() {
             progressDialog.show()
 
             // CREATE EMPLOYEE OBJECT
-            var employee = Employee()
+            val employee = Employee()
             employee.firstName = firstNameEditText.text.toString()
             employee.lastName = lastNameEditText.text.toString()
             employee.shopId = shopId
             employee.employeeId = FirebaseFirestore.getInstance().collection("employees").document().id
+            employee.employeeCode = employee.employeeId.take(5) // first five characters of the employee ID
             employee.branchId = branchId
             employee.profilePictureUrl = "" // TODO: set profile picture
 
             // SAVE IN FIRESTORE
             MotorBroDatabase().createEmployee(employee){
-               progressDialog.dismiss()
-                createBasicAlertDialog(employee)
+
+                MotorBroDatabase().incrementEmployeeCount(shopId, branchId){
+                    progressDialog.dismiss()
+                    createBasicAlertDialog(employee)
+                }
+
             }
 
 
@@ -63,7 +68,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
     fun createBasicAlertDialog(employee: Employee){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Success!")
-        builder.setMessage("Your employee's ID is: '" + employee.employeeId + "', they will use this to create their own login account.")
+        builder.setMessage("Your employee's Code is: '" + employee.employeeCode + "'")
         builder.setPositiveButton("Got it") { dialog, which ->
 
             dialog.dismiss()
@@ -82,6 +87,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
                     var branch = data!!.getSerializableExtra("branch") as Branch
                     branchEditText.setText(branch.name)
                     branchId = branch.branchId
+                    println("branchId $branchId")
                 }
             }
         }

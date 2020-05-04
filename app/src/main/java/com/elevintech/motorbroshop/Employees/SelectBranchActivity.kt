@@ -24,10 +24,10 @@ class SelectBranchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_select_branch)
 
         shopId = intent.getStringExtra("shopId")
-        getShops(shopId)
+        getBranches(shopId)
     }
 
-    private fun getShops(shopId: String) {
+    private fun getBranches(shopId: String) {
         MotorBroDatabase().getShopBranches(shopId){
 
             displayBranchList(it)
@@ -57,13 +57,14 @@ class SelectBranchActivity : AppCompatActivity() {
             row.branchName.text = branch.name
 
             row.setOnClickListener {
-                // create intent
+
+                // first item is the main shop
+                if(position == 0){
+                    branch.branchId = branch.shopId
+                }
+
                 val intent = Intent()
-
-                // set result ok
                 setResult(Activity.RESULT_OK, intent)
-
-                // pass the image path in intent
                 intent.putExtra("branch", branch)
 
                 // go back loan activity with the intent

@@ -7,15 +7,16 @@
     tools:context=".Employees.CreateEmployeeActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:background="#BA4D51"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#3C7BCF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <!--srcCompatapp:srcCompat="@drawable/backbutton"-->
+<!--
                 <ImageView
                     android:id="@+id/backButton"
                     android:layout_width="30dp"
@@ -26,6 +27,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:src="@drawable/ic_launcher_background"
                      />
+-->
 
 
     </androidx.appcompat.widget.Toolbar>

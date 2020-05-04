@@ -124,21 +124,23 @@ class MotorBroDatabase {
     }
 
     // used for gettings details of the employee before creating login account
-    fun getEmployee(employeeId: String, callback: (Employee?) -> Unit){
+    fun getEmployee(employeeCode: String, callback: (Employee?) -> Unit){
 
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection("employees").document(employeeId)
+        val docRef = db.collection("employees").whereEqualTo("employeeCode" , employeeCode)
 
-        docRef.get().addOnSuccessListener { documentSnapshot ->
+        docRef.get().addOnSuccessListener { QuerySnapshot ->
 
-            if (documentSnapshot != null && documentSnapshot.exists()) {
+            if (QuerySnapshot.isEmpty) {
 
-                val employee = documentSnapshot.toObject(Employee::class.java)!!
-                callback( employee )
+                callback( null )
 
             } else {
 
-                callback( null )
+                for (employeeDocument in QuerySnapshot){
+                    val employee = employeeDocument.toObject(Employee::class.java)
+                    callback( employee )
+                }
 
             }
 
@@ -233,6 +235,24 @@ class MotorBroDatabase {
 
                 if (it != null && it.exists()) {
                     shop = it.toObject(Shop::class.java)!!
+
+                }
+
+                callback(shop)
+            }
+    }
+
+    fun getMainBranch(shopId: String, callback: (Branch) -> Unit){
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shops").document(shopId)
+            .get()
+            .addOnSuccessListener {
+
+                var shop = Branch()
+
+                if (it != null && it.exists()) {
+                    shop = it.toObject(Branch::class.java)!!
 
                 }
 
@@ -398,7 +418,7 @@ class MotorBroDatabase {
         docRef.get().addOnSuccessListener { documentSnapshot ->
 
             if (documentSnapshot.exists()){
-                var user = documentSnapshot.toObject(UserType::class.java)!!
+                val user = documentSnapshot.toObject(UserType::class.java)!!
                 callback( user.userType )
             } else {
                 callback( null )
@@ -409,13 +429,14 @@ class MotorBroDatabase {
 
     }
 
-    fun updateEmployeeFields(employeeId: String, email: String, uid: String, callback: () -> Unit){
+    fun updateEmployeeFields(employeeId: String, email: String, uid: String, profilePictureUrl: String, callback: () -> Unit){
         val db = FirebaseFirestore.getInstance()
 
         db.collection("employees").document(employeeId)
             .update(mapOf("hasSetupLogin" to true,
                             "email" to email,
-                            "uid"   to uid))
+                            "uid"   to uid,
+                            "profilePictureUrl" to profilePictureUrl))
             .addOnSuccessListener { callback() }
             .addOnFailureListener { callback() }
     }
@@ -481,20 +502,28 @@ class MotorBroDatabase {
 
     fun getShopBranches(shopId: String, callback: (MutableList<Branch>) -> Unit) {
 
-        var branchList = mutableListOf<Branch>()
+        val db = FirebaseFirestore.getInstance()
+        val branchList = mutableListOf<Branch>()
 
-        FirebaseFirestore.getInstance().collection("branches").whereEqualTo("shopId" , shopId)
-            .get()
-            .addOnSuccessListener {
+        // get our main shop
+        getMainBranch(shopId){
+            branchList.add(it)
 
-                for (branchDocument in it){
-                    val branch = branchDocument.toObject(Branch::class.java)
-                    branchList.add(branch)
+            db.collection("branches").whereEqualTo("shopId" , shopId)
+                .get()
+                .addOnSuccessListener {
+
+                    for (branchDocument in it){
+                        val branch = branchDocument.toObject(Branch::class.java)
+                        branchList.add(branch)
+                    }
+
+                    callback(branchList)
+
                 }
+        }
 
-                callback(branchList)
 
-            }
 
     }
 
@@ -1178,6 +1207,35 @@ class MotorBroDatabase {
                     e -> println(e)
                 callback()
             }
+
+    }
+
+    fun incrementEmployeeCount(shopId: String, branchId: String, callback: () -> Unit) {
+
+        // get current employee count
+        getShop(shopId){
+            val currentEmployeeCount = it.employeeCount
+
+            val db = FirebaseFirestore.getInstance()
+            if (shopId == branchId){
+                db.collection("shops").document(shopId)
+                    .update("employeeCount", currentEmployeeCount + 1)
+                    .addOnSuccessListener { callback() }
+            }
+
+            else {
+                db.collection("branches").document(branchId)
+                    .update("employeeCount", currentEmployeeCount + 1)
+                    .addOnSuccessListener { callback() }
+
+            }
+
+
+
+
+        }
+
+
 
     }
 }

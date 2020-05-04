@@ -15,5 +15,7 @@ open class Shop (
     var deviceTokens: Map<String, String> = mapOf(), // FCM device tokens of all the users working for the shop (e.g. the shop owner and employees)
     var contactNumber: String = "",
     var email: String = "",
-    var ownerId: String = ""
+    var ownerId: String = "",
+    var employeeCount: Int = 0,
+    var customerCount: Int = 0
 ) : Serializable

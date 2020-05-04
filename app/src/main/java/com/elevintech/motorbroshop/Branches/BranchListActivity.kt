@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Branch
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.ShopView.ShopViewActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -73,12 +74,32 @@ class BranchListActivity : AppCompatActivity() {
             val row = viewHolder.itemView
             row.branchName.text = branch.name
 
-            row.setOnClickListener {
-                val intent = Intent(this@BranchListActivity, BranchDetailsActivity::class.java)
-                intent.putExtra("shopId", shopId)
-                intent.putExtra("branchId", branch.branchId)
-                startActivity(intent)
+            // first item is the main shop
+            if (position == 0){
+
+                row.setOnClickListener {
+
+                    MotorBroDatabase().getShop(shopId){
+                        val intent = Intent(this@BranchListActivity, ShopViewActivity::class.java)
+                        intent.putExtra("shop", it)
+                        startActivity(intent)
+                    }
+
+                }
+
+            // branches
+            } else {
+
+                row.setOnClickListener {
+                    val intent = Intent(this@BranchListActivity, BranchDetailsActivity::class.java)
+                    intent.putExtra("shopId", shopId)
+                    intent.putExtra("branchId", branch.branchId)
+                    startActivity(intent)
+                }
+
             }
+
+
 
         }
 
