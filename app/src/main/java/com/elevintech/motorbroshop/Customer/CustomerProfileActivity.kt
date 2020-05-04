@@ -39,6 +39,7 @@ class CustomerProfileActivity : AppCompatActivity() {
 
         userNameToolbar.text = (customer.firstName + " " + customer.lastName)
         userNameFull.text = (customer.firstName + " " + customer.lastName)
+        emailEditText.text = "Email: " + customer.email
     }
 
     fun chatWithUser(){
