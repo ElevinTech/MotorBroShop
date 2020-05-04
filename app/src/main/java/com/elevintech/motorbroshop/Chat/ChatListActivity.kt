@@ -92,26 +92,31 @@ class ChatListActivity : AppCompatActivity() {
 
                 }
 
-                if ( snapshot.type == DocumentChange.Type.MODIFIED  ){
+                if ( snapshot.type == DocumentChange.Type.MODIFIED ){
 
                     // get new chat
                     val chatRoom = snapshot.document.toObject(ChatRoom::class.java)!!
                     val newMessage = chatRoom.lastMessage.message
-                    chatRoom.id = snapshot.document.id
 
-                    // get the chat item position based from adapter reference (we will be moving it to the top of the recycler view as it is the new latest message)
-                    val oldPosition = chatListAdapterReference.indexOf(chatRoom.id)
-                    val newPosition = 0
+                    if( chatRoom.lastMessage.read == false ){
 
-                    // update the adapter reference, move it to the first position as well
-                    chatListAdapterReference.remove(chatRoom.id)
-                    chatListAdapterReference.add(0, chatRoom.id)
+                        chatRoom.id = snapshot.document.id
 
-                    // change the value of the chat message text
-                    chatListAdapter.notifyItemChanged(oldPosition, "$newMessage")
+                        // get the chat item position based from adapter reference (we will be moving it to the top of the recycler view because it's the latest message)
+                        val oldPosition = chatListAdapterReference.indexOf(chatRoom.id)
+                        val newPosition = 0
 
-                    // move to the top of the recyclerview
-                    chatListAdapter.notifyItemMoved(oldPosition, newPosition) /* move the chat on the first row */
+                        // update the adapter reference, move it to the first position as well
+                        chatListAdapterReference.remove(chatRoom.id)
+                        chatListAdapterReference.add(0, chatRoom.id)
+
+                        // change the value of the chat message text
+                        chatListAdapter.notifyItemChanged(oldPosition, "$newMessage")
+
+                        // move to the top of the recyclerview
+                        chatListAdapter.notifyItemMoved(oldPosition, newPosition) /* move the chat on the first row */
+
+                    }
 
                 }
             }
