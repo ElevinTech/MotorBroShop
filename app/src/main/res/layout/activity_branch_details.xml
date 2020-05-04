@@ -121,7 +121,7 @@
             android:fontFamily="@font/open_sans"
             />
 
-        <TextView
+<!--        <TextView
             android:layout_width="wrap_content"
             android:layout_height= "wrap_content"
             android:text="branch"
@@ -132,7 +132,7 @@
             android:layout_marginRight="20dp"
             android:textSize="24sp"
             android:fontFamily="@font/open_sans"
-            />
+            />-->
 
         <TextView
             android:id="@+id/branchAddress"
@@ -186,10 +186,10 @@
 
 
             <TextView
+                android:id="@+id/employeeCountEditText"
                 android:textSize="32sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"
                 android:textColor="@color/textColorBlack"
                 android:fontFamily="@font/open_sans_bold"
                 android:layout_marginTop="10dp"
@@ -218,10 +218,10 @@
             >
 
             <TextView
+                android:id="@+id/customerCountEditText"
                 android:textSize="32sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="32"
                 android:textColor="@color/textColorBlack"
                 android:fontFamily="@font/open_sans_bold"
                 android:layout_marginTop="10dp"

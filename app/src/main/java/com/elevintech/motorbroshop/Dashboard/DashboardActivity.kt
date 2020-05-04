@@ -251,10 +251,15 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     val customerShopData = CustomerShopData(Utils().getCurrentTimestamp().toString(), customerId)
                     MotorBroDatabase().addShopCustomer(user.shopId, customerShopData){
 
-                        progressDialog.dismiss()
-                        val intent = Intent(this, CustomerProfileActivity::class.java)
-                        intent.putExtra("customer", customer)
-                        startActivity(intent)
+                        MotorBroDatabase().incrementCustomerCount{
+
+                            progressDialog.dismiss()
+                            val intent = Intent(this, CustomerProfileActivity::class.java)
+                            intent.putExtra("customer", customer)
+                            startActivity(intent)
+
+                        }
+
                     }
 
 

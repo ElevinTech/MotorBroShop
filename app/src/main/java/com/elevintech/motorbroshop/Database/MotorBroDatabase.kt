@@ -500,7 +500,7 @@ class MotorBroDatabase {
 
     }
 
-    fun getShopBranches(shopId: String, callback: (MutableList<Branch>) -> Unit) {
+    fun getShopBranchesIncludingMain(shopId: String, callback: (MutableList<Branch>) -> Unit) {
 
         val db = FirebaseFirestore.getInstance()
         val branchList = mutableListOf<Branch>()
@@ -523,6 +523,24 @@ class MotorBroDatabase {
                 }
         }
 
+    }
+
+    fun getShopBranches(shopId: String, callback: (MutableList<Branch>) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val branchList = mutableListOf<Branch>()
+
+        db.collection("branches").whereEqualTo("shopId" , shopId)
+            .get()
+            .addOnSuccessListener {
+
+                for (branchDocument in it){
+                    val branch = branchDocument.toObject(Branch::class.java)
+                    branchList.add(branch)
+                }
+
+                callback(branchList)
+            }
 
 
     }
@@ -1210,32 +1228,77 @@ class MotorBroDatabase {
 
     }
 
+
     fun incrementEmployeeCount(shopId: String, branchId: String, callback: () -> Unit) {
 
-        // get current employee count
-        getShop(shopId){
-            val currentEmployeeCount = it.employeeCount
+        val db = FirebaseFirestore.getInstance()
 
-            val db = FirebaseFirestore.getInstance()
-            if (shopId == branchId){
+        if (shopId == branchId){
+
+            getShop(shopId){
+                val currentEmployeeCount = it.employeeCount
                 db.collection("shops").document(shopId)
                     .update("employeeCount", currentEmployeeCount + 1)
                     .addOnSuccessListener { callback() }
             }
 
-            else {
+
+        } else {
+
+            getBranch(branchId){
+                val currentEmployeeCount = it.employeeCount
+
                 db.collection("branches").document(branchId)
                     .update("employeeCount", currentEmployeeCount + 1)
                     .addOnSuccessListener { callback() }
-
             }
-
-
-
 
         }
 
+    }
 
+    fun incrementCustomerCount(callback: () -> Unit) {
+
+        getUserType { userType ->
+
+            if (userType == UserType.Type.EMPLOYEE) {
+
+                getEmployee { employee ->
+
+                    val shopId = employee.shopId
+                    val branchId = employee.branchId
+                    val db = FirebaseFirestore.getInstance()
+
+                    if (shopId == branchId){
+
+                        getShop(shopId){
+                            val currentEmployeeCount = it.customerCount
+                            db.collection("shops").document(shopId)
+                                .update("customerCount", currentEmployeeCount + 1)
+                                .addOnSuccessListener { callback() }
+                        }
+
+                    } else {
+
+                        getBranch(branchId){
+                            val currentEmployeeCount = it.customerCount
+
+                            db.collection("branches").document(branchId)
+                                .update("customerCount", currentEmployeeCount + 1)
+                                .addOnSuccessListener { callback() }
+                        }
+
+                    }
+
+                }
+
+            } else {
+
+                callback()
+
+            }
+
+        }
 
     }
 }

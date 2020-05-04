@@ -49,6 +49,8 @@ class BranchDetailsActivity : AppCompatActivity() {
         branchAddress.text = branch.address
         branchContactNumber.text = branch.contactNumber
         branchEmail.text = branch.email
+        employeeCountEditText.text = branch.employeeCount.toString()
+        customerCountEditText.text = branch.customerCount.toString()
 
         if(branch.imageUrl != "")
             Glide.with(this).load(branch.imageUrl).into(emptyImageIcon)

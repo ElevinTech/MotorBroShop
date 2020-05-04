@@ -74,7 +74,14 @@ class BranchListActivity : AppCompatActivity() {
             val row = viewHolder.itemView
             row.branchName.text = branch.name
 
-            // first item is the main shop
+            row.setOnClickListener {
+                val intent = Intent(this@BranchListActivity, BranchDetailsActivity::class.java)
+                intent.putExtra("shopId", shopId)
+                intent.putExtra("branchId", branch.branchId)
+                startActivity(intent)
+            }
+
+            /*// first item is the main shop
             if (position == 0){
 
                 row.setOnClickListener {
@@ -97,7 +104,7 @@ class BranchListActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-            }
+            }*/
 
 
 

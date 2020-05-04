@@ -28,7 +28,7 @@ class SelectBranchActivity : AppCompatActivity() {
     }
 
     private fun getBranches(shopId: String) {
-        MotorBroDatabase().getShopBranches(shopId){
+        MotorBroDatabase().getShopBranchesIncludingMain(shopId){
 
             displayBranchList(it)
 
