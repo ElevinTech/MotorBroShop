@@ -76,7 +76,7 @@ class BranchListActivity : AppCompatActivity() {
             row.setOnClickListener {
                 val intent = Intent(this@BranchListActivity, BranchDetailsActivity::class.java)
                 intent.putExtra("shopId", shopId)
-                intent.putExtra("branchId", branch.id)
+                intent.putExtra("branchId", branch.branchId)
                 startActivity(intent)
             }
 

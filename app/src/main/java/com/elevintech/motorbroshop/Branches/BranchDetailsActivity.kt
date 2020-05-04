@@ -31,10 +31,15 @@ class BranchDetailsActivity : AppCompatActivity() {
 
         }
 
-        MotorBroDatabase().getBranch(shopId, branchId){ branch ->
+        MotorBroDatabase().getBranch(branchId){ branch ->
             updateUi(branch)
         }
 
+        gloveboxBackImageView.setOnClickListener {
+
+            finish()
+
+        }
 
     }
 

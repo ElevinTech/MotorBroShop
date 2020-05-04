@@ -11,10 +11,13 @@ import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Address
 import com.elevintech.motorbroshop.Model.Branch
+import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Register.SelectLocation
 import com.elevintech.motorbroshop.Utils
 import com.github.florent37.runtimepermission.RuntimePermission
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_edit_branch.*
 import java.io.File
 import java.util.*
@@ -48,42 +51,45 @@ class EditBranch : AppCompatActivity() {
             startActivityForResult(intent, SELECT_LOCATION)
         }
 
-        MotorBroDatabase().getBranch(shopId, branchId){ branch ->
+        MotorBroDatabase().getBranch(branchId){ branch ->
 
             address = branch.fullAddress
             updateUI(branch)
 
             saveBranchButton.setOnClickListener {
 
-                saveBranch(branch, shopId)
+                saveBranch(shopId, branch)
 
             }
 
         }
 
+        saveBranchButton.text = "Update Branch"
+
 
     }
 
-    private fun saveBranch(branch: Branch, shopId: String){
+    private fun saveBranch(shopId: String, branch: Branch){
         // SHOW PROGRESS DIALOG
         val progressDialog = Utils().easyProgressDialog(this, "Saving Branch")
         progressDialog.show()
 
-        branch.address = addressEditText.text.toString()
+        branch.shopId = shopId
         branch.name = branchNameEditText.text.toString()
-        branch.contactNumber = contactNumberEditText.text.toString()
-        branch.email = emailEditText.text.toString()
-        branch.isMain = (isMainSwitch.isChecked)
+        branch.description = descriptionEditText.text.toString()
+        branch.address = addressEditText.text.toString()
         branch.fullAddress = address
         branch.searchTags = createListOfSearchTag()
-        branch.imageUrl = branch.imageUrl
+        branch.contactNumber = contactNumberEditText.text.toString()
+        branch.email = emailEditText.text.toString()
+        branch.ownerId = FirebaseAuth.getInstance().uid!! // get the logged in user ID, since only owners can create branches TODO: restrict employees from creating branches
 
         if(imageUri != null){
 
             MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
                 branch.imageUrl = imageUrl
 
-                MotorBroDatabase().saveBranch(shopId, branch){
+                MotorBroDatabase().saveBranch(branch){
                     progressDialog.dismiss()
                     finish()
                 }
@@ -92,7 +98,7 @@ class EditBranch : AppCompatActivity() {
 
         } else {
 
-            MotorBroDatabase().saveBranch(shopId, branch){
+            MotorBroDatabase().saveBranch(branch){
                 progressDialog.dismiss()
                 finish()
             }
@@ -134,13 +140,17 @@ class EditBranch : AppCompatActivity() {
         branchNameEditText.setText(branch.name)
         contactNumberEditText.setText(branch.contactNumber)
         emailEditText.setText(branch.email)
+        descriptionEditText.setText(branch.description)
 
         if (branch.imageUrl != "") {
             Glide.with(this).load(branch.imageUrl).into(branchPhoto)
             branchPhoto.visibility = View.VISIBLE
             emptyImageIcon.visibility = View.INVISIBLE
         }
-        if (branch.isMain) isMainSwitch.isChecked = true
+
+
+
+//        if (branch.isMain) isMainSwitch.isChecked = true
 
     }
 

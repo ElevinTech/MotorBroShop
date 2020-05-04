@@ -10,10 +10,12 @@ import android.view.View
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Address
 import com.elevintech.motorbroshop.Model.Branch
+import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Register.SelectLocation
 import com.elevintech.motorbroshop.Utils
 import com.github.florent37.runtimepermission.RuntimePermission
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_edit_branch.*
 import java.io.File
@@ -60,25 +62,33 @@ class CreateBranch : AppCompatActivity() {
         progressDialog.show()
 
         val branch = Branch()
-        branch.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("branches").document().id
-        branch.address = addressEditText.text.toString()
+        branch.shopId = shopId
         branch.name = branchNameEditText.text.toString()
-        branch.contactNumber = contactNumberEditText.text.toString()
-        branch.imageUrl = ""
-        branch.email = emailEditText.text.toString()
-        branch.isMain = (isMainSwitch.isChecked)
+        branch.description = descriptionEditText.text.toString()
+        branch.address = addressEditText.text.toString()
         branch.fullAddress = address
         branch.searchTags = createListOfSearchTag()
+        branch.contactNumber = contactNumberEditText.text.toString()
+        branch.email = emailEditText.text.toString()
+        branch.ownerId = FirebaseAuth.getInstance().uid!! // get the logged in user ID, since only owners can create branches TODO: restrict employees from creating branches
+        branch.branchId = FirebaseFirestore.getInstance().collection("branches").document().id
+//        branch.isMain = (isMainSwitch.isChecked) /* Assume for now that the main branch is the shop created upon registration */
 
-        MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
-            branch.imageUrl = imageUrl
+        MotorBroDatabase().getDeviceToken{
+            branch.deviceTokens = mapOf(branch.ownerId to it)
 
-            MotorBroDatabase().saveBranch(shopId, branch){
-                progressDialog.dismiss()
-                finish()
+            // TODO: make image upload mandatory, nag-eerror kapag sinubmit na walang image
+            MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
+                branch.imageUrl = imageUrl
+
+                MotorBroDatabase().saveBranch(branch){
+                    progressDialog.dismiss()
+                    finish()
+                }
+
             }
-
         }
+
 
     }
 

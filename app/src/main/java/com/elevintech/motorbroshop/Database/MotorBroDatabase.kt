@@ -483,7 +483,7 @@ class MotorBroDatabase {
 
         var branchList = mutableListOf<Branch>()
 
-        FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("branches")
+        FirebaseFirestore.getInstance().collection("branches").whereEqualTo("shopId" , shopId)
             .get()
             .addOnSuccessListener {
 
@@ -498,9 +498,9 @@ class MotorBroDatabase {
 
     }
 
-    fun saveBranch(shopId: String, branch: Branch, callback: () -> Unit) {
+    fun saveBranch(branch: Branch, callback: () -> Unit) {
         val db = FirebaseFirestore.getInstance()
-        db.collection("shops").document(shopId).collection("branches").document(branch.id)
+        db.collection("branches").document(branch.branchId)
             .set(branch)
             .addOnSuccessListener {
                 callback()
@@ -511,11 +511,11 @@ class MotorBroDatabase {
             }
     }
 
-    fun getBranch(shopId: String, branchId: String, callback: (Branch) -> Unit) {
+    fun getBranch(branchId: String, callback: (Branch) -> Unit) {
 
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("shops").document(shopId).collection("branches").document(branchId)
+        db.collection("branches").document(branchId)
             .get()
             .addOnSuccessListener {
 
@@ -1067,7 +1067,7 @@ class MotorBroDatabase {
                     // Get new Instance ID token
                     val token = task.result?.token!!
                     callback(token)
-
+                    println("getDeviceToken" + token)
                 } else {
                     println("getInstanceId failed" + task.exception)
                 }

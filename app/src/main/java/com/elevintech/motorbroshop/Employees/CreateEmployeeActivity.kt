@@ -81,7 +81,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
                 if (requestCode == SELECT_BRANCH){
                     var branch = data!!.getSerializableExtra("branch") as Branch
                     branchEditText.setText(branch.name)
-                    branchId = branch.id
+                    branchId = branch.branchId
                 }
             }
         }
