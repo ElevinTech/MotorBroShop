@@ -64,6 +64,13 @@ class AddEditDocument : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
+
+        backButton.setOnClickListener {
+
+            finish()
+
+        }
+
         imageView.setOnClickListener {
             askUploadSource()
         }

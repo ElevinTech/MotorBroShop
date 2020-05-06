@@ -99,12 +99,12 @@ class HomeFragment : Fragment() {
             if ( userType == UserType.Type.OWNER) {
                 MotorBroDatabase().getOwner {
                     user = it
-                    setupShop(view)
+                    setupShop(view, userType)
                 }
             } else if ( userType == UserType.Type.EMPLOYEE ){
                 MotorBroDatabase().getEmployee {
                     user = it
-                    setupShop(view)
+                    setupShop(view, userType)
                 }
             }
         }
@@ -139,7 +139,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun setupShop(view: View) {
+    private fun setupShop(view: View, userType: String) {
 
         if (!isAdded) {
             return
@@ -153,6 +153,10 @@ class HomeFragment : Fragment() {
 
         if (user.shopId.isEmpty()) {
             return
+        }
+
+        if (userType == UserType.Type.EMPLOYEE){
+            editShopButton.visibility = View.GONE
         }
 
         db.getShop(user.shopId) {

@@ -91,7 +91,6 @@
         app:maxImageSize="56dp"
         android:layout_margin="20dp"
         android:src="@drawable/blue_plus_icon"
-        android:visibility="visible"
         />
 
     <androidx.recyclerview.widget.RecyclerView
