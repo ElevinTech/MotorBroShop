@@ -51,7 +51,14 @@ class PartsServicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         floating_button.setOnClickListener {
-            askWhoPartIsFor()
+//            askWhoPartIsFor()
+
+
+
+            val intent = Intent(activity, AddPartsServicesForCustomerActivity::class.java)
+            intent.putExtra("shopId", user.shopId)
+            startActivity(intent)
+
         }
 
         setupRecyclerView()
@@ -112,19 +119,27 @@ class PartsServicesFragment : Fragment() {
         }
     }
 
+
+
     inner class customerItem(val product: Product): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
             var isShopProduct = "Shop - "
 
             if (product.isShopProduct == false) {
-                isShopProduct = "Customer - "
+                /*isShopProduct = "Customer - "*/
+
+                MotorBroDatabase().getCustomer(product.customerId){ customer ->
+                    isShopProduct = "${customer!!.firstName} ${customer!!.lastName} - "
+                    viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
+                }
+            } else {
+                viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
             }
 
-            viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
-            viewHolder.itemView.odometerText.text = product.odometer.toString() + "km"
+//            viewHolder.itemView.odometerText.text = product.odometer.toString() + "km"
             viewHolder.itemView.cashText.text = " ₱" + product.price
-            viewHolder.itemView.noteText.text = product.description
+//            viewHolder.itemView.noteText.text = product.description
 
 //            if (product.isShopProduct == false) {
 //                if (product.customerId != "") {

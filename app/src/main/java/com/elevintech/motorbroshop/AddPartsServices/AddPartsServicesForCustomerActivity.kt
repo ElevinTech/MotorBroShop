@@ -202,7 +202,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         val shopId = intent.getStringExtra("shopId")
 
 
-        var product = Product()
+        val product = Product()
         product.description = noteText.text.toString()
         product.price = priceText.text.toString()
         product.type = typeOfPartsText.text.toString()
@@ -210,6 +210,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         product.shopId = shopId
         product.isShopProduct = false
         product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
+        product.customerId = selectedCustomerId
 
         if (imageUri == null){
 
@@ -228,7 +229,8 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 val database = MotorBroDatabase()
                 database.saveBikeParts(bikeParts, selectedCustomerId) {
                     showDialog.dismiss()
-                    onProductSaved(product)
+//                    onProductSaved(product)
+                    finish()
                 }
 
             }
@@ -254,7 +256,8 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                     val database = MotorBroDatabase()
                     database.saveBikeParts(bikeParts, selectedCustomerId) {
                         showDialog.dismiss()
-                        onProductSaved(product)
+//                        onProductSaved(product)
+                        finish()
                     }
 
                 }
