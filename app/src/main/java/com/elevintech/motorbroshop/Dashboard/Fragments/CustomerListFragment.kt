@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Chat.ChatListActivity
@@ -17,6 +18,7 @@ import com.elevintech.motorbroshop.Model.Customer
 import com.elevintech.motorbroshop.Model.User
 
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.Utils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -82,9 +84,18 @@ class CustomerListFragment : Fragment() {
 
 
         if (customersList.isNotEmpty()){
+
+//            loading_list.visibility = View.GONE
+
             for(customers in customersList){
                 customersListAdapter.add(customerItem(customers))
             }
+
+        } else {
+
+//            loading_list.visibility = View.GONE
+            // isEmptyLayout.visibility = View.VISIBLE
+
         }
 
 
@@ -103,7 +114,30 @@ class CustomerListFragment : Fragment() {
                 intent.putExtra("customer", customer)
                 startActivity(intent)
             }
+
+            playAnimation(viewHolder.itemView, position)
+
         }
+
+        private fun playAnimation(itemView: View, position: Int) {
+
+            itemView.visibility = View.GONE
+
+
+                Utils().doAfterDelay((position * 300).toLong()){
+
+                    if (itemView != null && activity != null){
+                        val rightToLeft = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
+                        rightToLeft.duration = 250
+                        itemView.startAnimation(rightToLeft)
+                        itemView.visibility = View.VISIBLE
+                    }
+                }
+
+
+
+        }
+
 
         override fun getLayout(): Int {
             return R.layout.row_customer

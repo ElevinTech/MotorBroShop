@@ -116,7 +116,6 @@
                         android:id="@+id/shopImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/motorbroinicon"
                         android:scaleType="centerCrop"
                         android:layout_marginBottom="3dp"/>
                 </androidx.cardview.widget.CardView>

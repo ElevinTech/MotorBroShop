@@ -24,8 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageView
@@ -73,9 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="3:52 pm"
         android:textSize="11sp"
-        android:layout_marginBottom="6dp"
         app:layout_constraintStart_toEndOf="@+id/layoutImgProfile"
         app:layout_constraintTop_toBottomOf="@+id/chatPreview" />
 

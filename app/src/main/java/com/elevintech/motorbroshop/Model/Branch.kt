@@ -2,17 +2,9 @@ package com.elevintech.motorbroshop.Model
 
 import java.io.Serializable
 
+// INHERITS the SHOP class
 class Branch (
 
+    var branchId: String = ""
 
-    var id: String = "",
-    var address: String = "",
-
-    var name: String = "",
-    var contactNumber: String = "",
-    var email: String = "",
-
-    var imageUrl: String = "",
-    var isMain: Boolean = false
-
-) : Serializable
+) : Serializable, Shop()

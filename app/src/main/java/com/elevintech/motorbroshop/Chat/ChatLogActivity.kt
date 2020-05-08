@@ -1,9 +1,11 @@
 package com.elevintech.motorbroshop.Chat
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.ChatMessage
 import com.elevintech.motorbroshop.Model.Customer
@@ -94,6 +96,14 @@ class ChatLogActivity : AppCompatActivity() {
     private fun updateUi() {
         Glide.with(this).load(customer.profileImage).into(imgMainProfile)
         profileName.text = customer.firstName.capitalize()
+
+        imgMainProfile.setOnClickListener {
+
+            val intent = Intent(this, CustomerProfileActivity::class.java)
+            intent.putExtra("customer", customer)
+            startActivity(intent)
+
+        }
     }
 
 

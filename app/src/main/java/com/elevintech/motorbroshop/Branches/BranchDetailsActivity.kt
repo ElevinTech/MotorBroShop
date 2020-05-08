@@ -3,6 +3,7 @@ package com.elevintech.motorbroshop.Branches
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Branch
 import com.elevintech.motorbroshop.R
@@ -30,12 +31,15 @@ class BranchDetailsActivity : AppCompatActivity() {
 
         }
 
-        MotorBroDatabase().getBranch(shopId, branchId){ branch ->
+        MotorBroDatabase().getBranch(branchId){ branch ->
             updateUi(branch)
-
-
         }
 
+        gloveboxBackImageView.setOnClickListener {
+
+            finish()
+
+        }
 
     }
 
@@ -45,6 +49,13 @@ class BranchDetailsActivity : AppCompatActivity() {
         branchAddress.text = branch.address
         branchContactNumber.text = branch.contactNumber
         branchEmail.text = branch.email
+        employeeCountEditText.text = branch.employeeCount.toString()
+        customerCountEditText.text = branch.customerCount.toString()
+
+        if(branch.imageUrl != "")
+            Glide.with(this).load(branch.imageUrl).into(emptyImageIcon)
+
+
 
     }
 }

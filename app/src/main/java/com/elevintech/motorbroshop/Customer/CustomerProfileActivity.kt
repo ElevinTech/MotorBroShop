@@ -1,5 +1,6 @@
 package com.elevintech.motorbroshop.Customer
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import com.elevintech.motorbroshop.Chat.ChatLogActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Customer
 import com.elevintech.motorbroshop.R
+import com.elevintech.motorbroshop.Utils
 import kotlinx.android.synthetic.main.activity_customer_profile.*
 
 class CustomerProfileActivity : AppCompatActivity() {
@@ -37,9 +39,13 @@ class CustomerProfileActivity : AppCompatActivity() {
 
         userNameToolbar.text = (customer.firstName + " " + customer.lastName)
         userNameFull.text = (customer.firstName + " " + customer.lastName)
+        emailEditText.text = "Email: " + customer.email
     }
 
     fun chatWithUser(){
+
+        val progressDialog = Utils().easyProgressDialog(this, "Please wait...")
+        progressDialog.show()
 
         MotorBroDatabase().getUserCommonData {
             val shopId = it.shopId
@@ -57,6 +63,7 @@ class CustomerProfileActivity : AppCompatActivity() {
                         intent.putExtra("chatRoomId", newChatRoomId)
                         startActivity(intent)
 
+                        progressDialog.dismiss()
                     }
                 }
 
@@ -66,6 +73,8 @@ class CustomerProfileActivity : AppCompatActivity() {
                     intent.putExtra("shopId", shopId)
                     intent.putExtra("chatRoomId", chatRoomId)
                     startActivity(intent)
+
+                    progressDialog.dismiss()
                 }
 
 

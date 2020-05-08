@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesActivity
@@ -104,7 +105,10 @@ class PartsServicesFragment : Fragment() {
                 customersListAdapter.add(customerItem(customers))
             }
 
-            noDataFullLayout.visibility = View.GONE
+            if (noDataFullLayout != null){
+                noDataFullLayout.visibility = View.GONE
+            }
+
         }
     }
 
@@ -144,6 +148,27 @@ class PartsServicesFragment : Fragment() {
                 Glide.with(activity as DashboardActivity).load(product.imageUrl).into(viewHolder.itemView.productImage)
             } else {
                 viewHolder.itemView.productImage.visibility = View.GONE
+            }
+
+            playAnimation(viewHolder.itemView, position)
+
+
+        }
+
+        private fun playAnimation(itemView: View, position: Int) {
+
+            itemView.visibility = View.GONE
+
+            Utils().doAfterDelay((position * 300).toLong()){
+
+                if (itemView != null && activity!= null){
+                    val rightToLeft = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
+                    rightToLeft.duration = 250
+                    itemView.startAnimation(rightToLeft)
+                    itemView.visibility = View.VISIBLE
+                }
+
+
             }
 
         }

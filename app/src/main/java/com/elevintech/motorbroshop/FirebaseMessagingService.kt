@@ -65,7 +65,7 @@ class FirebaseMessagingService : FirebaseMessagingService(){
             .setPriority(NotificationCompat.PRIORITY_MAX) //Important for heads-up notification
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
-            .setOngoing(true)
+            .setOngoing(false) // set to false to allow dismissing by swipe
 
         val manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

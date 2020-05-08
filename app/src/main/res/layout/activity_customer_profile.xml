@@ -182,7 +182,7 @@
                         android:id="@+id/userNameFull"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Jimmy Michaels"
+                        android:text=""
                         android:fontFamily="@font/open_sans_bold"
                         android:textSize="13sp"
                         android:layout_gravity="center"
@@ -203,16 +203,18 @@
                         android:textColor="@color/textColorBlack"
                         />
 
+<!--
                     <TextView
+                        android:id="@+id/genderEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Gender: Male"
-                        android:fontFamily="@font/open_sans"
-                        android:textSize="13sp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="13dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Gender: Male"
                         android:textColor="@color/textColorBlack"
-                        />
+                        android:textSize="13sp" />
+-->
 
                     <TextView
                         android:layout_width="match_parent"
@@ -227,15 +229,15 @@
                         />
 
                     <TextView
+                        android:id="@+id/emailEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Email: jovdelfin01@gmail.com"
-                        android:fontFamily="@font/open_sans"
-                        android:textSize="13sp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="13dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Email:"
                         android:textColor="@color/textColorBlack"
-                        />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 

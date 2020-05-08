@@ -2,6 +2,7 @@ package com.elevintech.motorbroshop
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.os.Handler
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -97,6 +98,14 @@ class Utils {
         return convertMillisecondsToDate(System.currentTimeMillis(), "hh:mm a")
 
 
+    }
+
+    fun doAfterDelay(delay: Long, callback: () -> Unit){
+
+        val handler = Handler()
+        handler.postDelayed({
+            callback()
+        }, delay )
     }
 
 

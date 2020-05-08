@@ -17,6 +17,7 @@ import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.FeedbackActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
 import com.elevintech.motorbroshop.Model.User
+import com.elevintech.motorbroshop.Model.UserType
 
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Shop.ShopActivity
@@ -105,6 +106,22 @@ class MoreFragment : Fragment() {
         val intent = Intent(context, LoginActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        MotorBroDatabase().getUserType {
+
+            if (it == UserType.Type.EMPLOYEE){
+                editShopLayout.visibility = View.GONE
+                documentsLayout.visibility = View.GONE
+                branchesLayout.visibility = View.GONE
+            }
+
+
+        }
 
     }
 

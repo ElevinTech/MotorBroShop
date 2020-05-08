@@ -3,11 +3,13 @@ package com.elevintech.motorbroshop.Employees
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Employee
 import com.elevintech.motorbroshop.Model.ShopOwner
 import com.elevintech.motorbroshop.Model.ShopUser
+import com.elevintech.motorbroshop.Model.UserType
 import com.elevintech.motorbroshop.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -42,6 +44,18 @@ class EmployeeListActivity : AppCompatActivity() {
         super.onResume()
 
         getShopEmployees()
+        getUserType()
+    }
+
+    private fun getUserType(){
+
+        MotorBroDatabase().getUserType {
+
+            if (it == UserType.Type.EMPLOYEE)
+                (floatingActionButton as View).visibility = View.GONE
+
+        }
+
     }
 
     private fun getShopEmployees() {
@@ -72,7 +86,7 @@ class EmployeeListActivity : AppCompatActivity() {
     inner class employeeItem(val employee: Employee): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.employeeName.text = employee.firstName + " " + employee.lastName
-            viewHolder.itemView.employeeId.text = employee.employeeId
+            viewHolder.itemView.employeeId.text = employee.employeeCode
             viewHolder.itemView.setOnClickListener {
 
 

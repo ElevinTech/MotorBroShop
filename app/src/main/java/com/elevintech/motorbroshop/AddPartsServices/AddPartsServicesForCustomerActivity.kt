@@ -182,17 +182,17 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
     }
 
     private fun onProductSaved(product: Product){
-//        val builder = AlertDialog.Builder(this)
-//        builder.setTitle("Part/Service Created!")
-//        builder.setMessage("Your product is now visible to customers")
-//        builder.setPositiveButton("Great!") { dialog, which ->
-//            askCreateTemplate(product)
-//
-//        }
-//        builder.setCancelable(false)
-//        builder.show()
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Part/Service Created!")
+        builder.setMessage("Your product is now visible to customers")
+        builder.setPositiveButton("Great!") { dialog, which ->
+            askCreateTemplate(product)
 
-        finish()
+        }
+        builder.setCancelable(false)
+        builder.show()
+
+//        finish()
 
     }
 

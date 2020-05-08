@@ -4,7 +4,8 @@ import java.io.Serializable
 
 class Employee(
 
-    var employeeId: String = "", // used for getting data (generated when shop owner creates the employee)
+    var employeeId: String = "",
+    var employeeCode: String = "",
     var branchId: String = "",
     var hasSetupLogin: Boolean = false
 

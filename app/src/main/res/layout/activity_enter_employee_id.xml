@@ -13,7 +13,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Your Employee ID"
+        android:text="Enter Your Employee Code"
         android:fontFamily="@font/open_sans_bold"
         android:textSize="16sp"
         android:textColor="@color/textColorBlack"/>
@@ -23,12 +23,12 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/open_sans"
         android:textSize="13sp"
-        android:id="@+id/employeeIdText"
+        android:id="@+id/employeeCodeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Employee ID"/>
+        android:hint="Example: g45Xy"/>
 
     <Button
         android:id="@+id/submitButton"
@@ -37,7 +37,7 @@
         android:text="Submit"
         android:layout_marginTop="20dp"
         android:background="@drawable/login_button_background"
-        android:textColor="@color/white"
+        android:textColor="@color/textColorBlack"
         android:textAllCaps="false"/>
 
 </LinearLayout>

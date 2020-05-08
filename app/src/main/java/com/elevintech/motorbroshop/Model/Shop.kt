@@ -2,24 +2,20 @@ package com.elevintech.motorbroshop.Model
 
 import java.io.Serializable
 
-class Shop (
-
+open class Shop (
     var shopId: String = "",
-    var ownerId: String = "",
-
     var name: String = "",
-    var logoUrl: String = "",
-
-    var dateEstablished: String = "",
-
+    var spotlight: Boolean = false,
     var description: String = "",
-    var address: String = "", // will be replace by fullAddress
-    var fullAddress: Address = Address(),
-
     var imageUrl: String = "",
-
+    var dateEstablished: String = "",
+    var address: String = "",
+    var fullAddress: Address = Address(),
     var searchTags: List<String> = listOf(), // contains an array of words (such as the shop's name, city, province, and street) used for searching a shop in the consumer app ( via firestore's "whereArrayContainsAny" query )
-
-    var deviceTokens: Map<String, String> = mapOf() // FCM device tokens of all the users working for the shop (e.g. the shop owner and employees)
-
+    var deviceTokens: Map<String, String> = mapOf(), // FCM device tokens of all the users working for the shop (e.g. the shop owner and employees)
+    var contactNumber: String = "",
+    var email: String = "",
+    var ownerId: String = "",
+    var employeeCount: Int = 0,
+    var customerCount: Int = 0
 ) : Serializable
