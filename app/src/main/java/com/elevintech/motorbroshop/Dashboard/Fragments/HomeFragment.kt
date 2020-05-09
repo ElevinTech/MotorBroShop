@@ -84,6 +84,9 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        scanLayout.setOnClickListener {
+            
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
