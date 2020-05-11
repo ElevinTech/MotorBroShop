@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
 import com.elevintech.motorbroshop.Chat.ChatListActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Customer.CustomerProfileActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
@@ -25,7 +27,6 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_customer_list.*
 //import kotlinx.android.synthetic.main.fragment_customer_list.chatImageView
 import kotlinx.android.synthetic.main.fragment_customer_list.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.row_customer.view.*
 
 /**
@@ -57,6 +58,11 @@ class CustomerListFragment : Fragment() {
             return
         }
 
+        adsLayout.setOnClickListener {
+            val intent = Intent(context, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.GPC)
+            startActivity(intent)
+        }
     }
 
 
@@ -103,17 +109,24 @@ class CustomerListFragment : Fragment() {
 
     inner class customerItem(val customer: Customer): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
-            viewHolder.itemView.customerName.text = customer.firstName + " " + customer.lastName
+            viewHolder.itemView.customerName.text = customer.firstName.capitalize() + " " + customer.lastName.capitalize()
 
-            if (customer.profilePictureUrl != "") {
-                activity?.let { Glide.with(it).load(customer.profilePictureUrl).into( viewHolder.itemView.userProfileImage) }
+            if (customer.profileImage != "") {
+                Glide.with(this@CustomerListFragment).load(customer.profileImage).into( viewHolder.itemView.userProfileImage)
+//                activity?.let { Glide.with(it).load(customer.profilePictureUrl).into( viewHolder.itemView.userProfileImage) }
             }
+
+//            Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.lastEmployeeImage)
 
             viewHolder.itemView.setOnClickListener {
                 val intent = Intent(activity, CustomerProfileActivity::class.java)
                 intent.putExtra("customer", customer)
                 startActivity(intent)
             }
+
+
+            val date = Utils().convertMillisecondsToDate(customer.dateAdded, "MMM dd, yyyy")
+            viewHolder.itemView.dateAdded.text = "Date Added: $date"
 
             playAnimation(viewHolder.itemView, position)
 

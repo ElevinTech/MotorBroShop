@@ -96,7 +96,7 @@
             android:layout_height="56dp"
             app:maxImageSize="56dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/blue_plus_icon"
+            android:src="@drawable/green_plus_icon"
             />
 
         <TextView

@@ -57,4 +57,20 @@ class Constants {
         val history = listOf("Income", "Service", "Expenses", "Refueling")
 
     }
+
+    object AD_TYPE {
+        const val SAMURAI_PAINT = "SAMURAI_PAINT"
+        const val OWENS = "OWENS"
+        const val TSR = "TSR"
+        const val OSAKI = "OSAKI"
+        const val E_POWER = "EPOWER"
+        const val COMSTAR = "COMSTAR"
+        const val CYCLEFIX = "CYCLEFIX"
+        const val TIGER = "TIGER"
+        const val OKK = "OKK"
+        const val MOTMOT = "MOTMOT"
+        const val POSH = "POSH"
+        const val GPC = "GPC"
+
+    }
 }

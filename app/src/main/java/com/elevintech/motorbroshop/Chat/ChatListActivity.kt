@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.ChatRoom
 import com.elevintech.motorbroshop.Model.Shop
@@ -37,6 +39,12 @@ class ChatListActivity : AppCompatActivity() {
         }
 
         reycler_view_chats.isNestedScrollingEnabled = true
+
+        adsLayout.setOnClickListener {
+            val intent = Intent(this, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.POSH)
+            startActivity(intent)
+        }
 
     }
 

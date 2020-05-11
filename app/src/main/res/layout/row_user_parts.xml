@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_goneMarginRight="5dp"
+        android:background="@drawable/shadow_background"
+        android:orientation="vertical"
+        android:paddingBottom="40dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/open_sans"
+            android:textColor="@color/textColorBlack"
+            android:visibility="gone"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/parts_new_colored_icon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/partsShopName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:text=""
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/partsNameCombine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="14sp"
+                    android:text="April 18, 2020 - GPC Air Filter - P140.00"
+                    />
+
+                <TextView
+                    android:id="@+id/partsOdoCombine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="14sp"
+                    android:text="Odometer = 1.00km"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/pencil_new_icon" />
+
+                    <TextView
+                        android:id="@+id/noteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Note"
+                        android:textColor="@color/textColorBlack"
+
+                        android:textSize="11sp"
+
+                        />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/productImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/partsName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="15sp"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/cash_wallet_icon" />
+
+                    <TextView
+                        android:id="@+id/cashText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="@color/textColorBlack"
+
+                        android:textSize="11sp"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/brand_icon"
+                        android:tint="#1B1B1B" />
+
+                    <TextView
+                        android:id="@+id/odometerText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text=""
+                        android:textColor="@color/textColorBlack"
+
+                        android:textSize="11sp"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/bike_icon"
+                        android:tint="#1B1B1B" />
+
+                    <TextView
+                        android:id="@+id/primaryBikeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Bike: Unassigned"
+                        android:textColor="@color/textColorBlack"
+
+                        android:textSize="11sp"
+
+                        />
+
+                </LinearLayout>
+
+
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:visibility="gone">-->
+
+                <!--                    <ImageView-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="15dp"-->
+                <!--                        android:layout_marginTop="10dp"-->
+                <!--                        android:src="@drawable/pencil_new_icon" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/noteText"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginLeft="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:fontFamily="@font/open_sans"-->
+                <!--                        android:text="Fueling is really exciting today for this day dadadadadadadadad dadad dadada"-->
+                <!--                        android:textColor="@color/textColorBlack"-->
+
+                <!--                        android:textSize="11sp"-->
+
+                <!--                        />-->
+
+                <!--                </LinearLayout>-->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

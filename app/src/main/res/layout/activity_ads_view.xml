@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdsView.AdsViewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/backView"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/back_icon"
+                android:tint="@color/white"/>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="View Ads"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/adsImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#DCDCDC"
+        android:scaleType="fitCenter"
+        />
+
+    <TextView
+        android:id="@+id/adsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genuine Parts Company"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textColor="@color/textColorBlack"
+        />
+
+    <TextView
+        android:id="@+id/adsBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/textColorBlack"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Genuine Parts Company is a motorcycle parts / services shop open 5 days a week. To contact us please email gpc@gmail.com"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:id="@+id/hyperLink1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/hyperLink2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/hyperLink3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="" />
+
+</LinearLayout>

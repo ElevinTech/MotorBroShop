@@ -15,6 +15,8 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Customer.CustomerSelectorActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.BikeParts
@@ -66,6 +68,12 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         checkMarkButton.setOnClickListener {
             if (hasCompletedValues())
                 saveProduct()
+        }
+
+        adsLayout.setOnClickListener {
+            val intent = Intent(this, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.E_POWER)
+            startActivity(intent)
         }
 
         customerName.setOnClickListener {
@@ -207,10 +215,12 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
         product.price = priceText.text.toString()
         product.type = typeOfPartsText.text.toString()
         product.brand = brandText.text.toString()
+        product.odometer = odometerText.text.toString().toDouble()
         product.shopId = shopId
         product.isShopProduct = false
         product.id = FirebaseFirestore.getInstance().collection("shops").document(shopId).collection("products").document().id
         product.customerId = selectedCustomerId
+        product.dateLong = Utils().getCurrentTimestamp()
 
         if (imageUri == null){
 
@@ -223,6 +233,7 @@ class AddPartsServicesForCustomerActivity : AppCompatActivity() {
                 bikeParts.note = noteText.text.toString()
                 bikeParts.userId = FirebaseAuth.getInstance().uid!!
                 bikeParts.shopId = shopId
+                bikeParts.odometer = odometerText.text.toString().toDouble()
                 bikeParts.createdByShop = true
                 bikeParts.dateLong = Utils().getCurrentTimestamp()
 

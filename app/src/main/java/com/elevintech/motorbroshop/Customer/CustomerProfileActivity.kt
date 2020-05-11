@@ -7,13 +7,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
 import com.elevintech.motorbroshop.BikeView.BikeViewActivity
 import com.elevintech.motorbroshop.Chat.ChatLogActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.BikeInfo
 import com.elevintech.motorbroshop.Model.Customer
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Utils
+import com.elevintech.motorbroshop.ViewUsersPartsServices.ViewUsersPartsServicesActivity
 import kotlinx.android.synthetic.main.activity_customer_profile.*
 
 class CustomerProfileActivity : AppCompatActivity() {
@@ -32,8 +35,20 @@ class CustomerProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        viewUsersPartsServices.setOnClickListener {
+            val intent = Intent(this, ViewUsersPartsServicesActivity::class.java)
+            intent.putExtra("customer", customer)
+            startActivity(intent)
+        }
+
         chatUserButton.setOnClickListener {
             chatWithUser()
+        }
+
+        adsLayout.setOnClickListener {
+            val intent = Intent(this, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.MOTMOT)
+            startActivity(intent)
         }
 
         MotorBroDatabase().getUserBikes(customer.uid) {
@@ -59,8 +74,8 @@ class CustomerProfileActivity : AppCompatActivity() {
         userNameFull.text = (customer.firstName + " " + customer.lastName)
         emailEditText.text = "Email: " + customer.email
 
-        if (customer.profilePictureUrl != "") {
-            Glide.with(this).load(customer.profilePictureUrl).into(userProfileImage)
+        if (customer.profileImage != "") {
+            Glide.with(this).load(customer.profileImage).into(userProfileImage)
         } else {
             // Put an empty image here
 //            Glide.with(this).load(R.drawable.new_empty_data_icon).into(userProfileImage)

@@ -9,8 +9,8 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#F1333A"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -240,9 +240,11 @@ id est laborum."
         android:textColor="@color/textColorBlack"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         />
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

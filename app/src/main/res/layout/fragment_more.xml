@@ -135,6 +135,23 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/adsLayout"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="70dp"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ads_comstar"
+                    android:scaleType="fitCenter"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -168,7 +185,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/shop_name_icon"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/colorLight"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -207,7 +224,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_branches_icon"
-                        android:tint="@color/colorPrimary"
+                        android:tint="@color/colorLight"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -243,7 +260,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_documents_icon"
-                        android:tint="@color/colorPrimary"
+                        android:tint="@color/colorLight"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -279,7 +296,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/side_nav_employees_icon"
-                        android:tint="@color/colorPrimary"
+                        android:tint="@color/colorLight"
                         android:layout_marginTop="10dp"
                         />
                     <LinearLayout
@@ -323,6 +340,20 @@
 
                 />
 
+            <TextView
+                android:id="@+id/asa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/open_sans"
+                android:textColor="#313131"
+                android:textSize="15sp"
+                android:text="MotorBro Shop Version: 1.0"
+
+                />
+
             <LinearLayout
                 android:id="@+id/feedbackLayout"
                 android:layout_width="match_parent"
@@ -335,7 +366,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/side_nav_feedback_icon"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/colorLight"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -371,7 +402,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/terms_services_icon"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/colorLight"
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
@@ -382,7 +413,43 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Terms and Policies"
+                        android:text="Terms and Services"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textColor="#141414"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/privacyPolicyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                >
+
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/policy_icon"
+                    android:tint="@color/colorLight"
+                    android:layout_marginTop="10dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Privacy Policy"
                         android:fontFamily="@font/open_sans_semibold"
                         android:textColor="#141414"
                         android:textSize="15sp"

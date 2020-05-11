@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesActivity
 import com.elevintech.motorbroshop.AddPartsServices.AddPartsServicesForCustomerActivity
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
 import com.elevintech.motorbroshop.Chat.ChatListActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Product
@@ -23,7 +25,6 @@ import com.elevintech.motorbroshop.Utils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_parts_services.*
 //import kotlinx.android.synthetic.main.fragment_parts_services.chatImageView
 import kotlinx.android.synthetic.main.row_product.view.*
@@ -55,6 +56,12 @@ class PartsServicesFragment : Fragment() {
             intent.putExtra("shopId", user.shopId)
             startActivity(intent)
 //            askWhoPartIsFor()
+        }
+
+        adsLayout.setOnClickListener {
+            val intent = Intent(context, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.TIGER)
+            startActivity(intent)
         }
 
         setupRecyclerView()
@@ -124,8 +131,12 @@ class PartsServicesFragment : Fragment() {
                 /*isShopProduct = "Customer - "*/
 
                 MotorBroDatabase().getCustomer(product.customerId){ customer ->
-                    isShopProduct = "${customer!!.firstName} ${customer!!.lastName} - "
-                    viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
+
+                    if(customer != null){
+                        isShopProduct = "${customer.firstName.capitalize()} ${customer.lastName.capitalize()} - "
+                        viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
+                    }
+
                 }
             } else {
                 viewHolder.itemView.partsName.text = isShopProduct + product.brand + " " + product.type
@@ -143,8 +154,8 @@ class PartsServicesFragment : Fragment() {
 //                }
 //            }
 
-            if (!product.dateCreated.isEmpty()) {
-                viewHolder.itemView.dateText.text = Utils().convertMillisecondsToDate(product.dateCreated, "MMM d, yyyy")
+            if (product.dateLong != 0.toLong()) {
+                viewHolder.itemView.dateText.text = Utils().convertMillisecondsToDate(product.dateLong * 1000, "MMM d, yyyy")
             }
 
 //            if(product.dateLong != 0.toLong()) {

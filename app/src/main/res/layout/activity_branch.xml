@@ -35,12 +35,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-
+            android:fontFamily="@font/open_sans_semibold"
             android:layout_gravity="center_horizontal"
             android:text="Branches"
             android:textColor="#fff"
             android:textSize="21sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/scrollView2"
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="@+id/toolbar" />
@@ -90,7 +89,7 @@
         android:layout_gravity="bottom|end"
         app:maxImageSize="56dp"
         android:layout_margin="20dp"
-        android:src="@drawable/blue_plus_icon"
+        android:src="@drawable/green_plus_icon"
         app:backgroundTint="@color/loginRedButtonBackground"
         android:visibility="visible"
         />

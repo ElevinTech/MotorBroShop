@@ -5,4 +5,216 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Privacy Policy ,, terms services -->
+
+    <string name="privacyPolicy1">
+        MotorBro Privacy Policy
+    </string>
+
+    <string name="privacyPolic1Desc">
+        Your privacy is important to us and we are committed to protecting it.
+This Privacy Policy describes how we collect, use, store, share and protect your information both on our digital platform and with our partners. This Privacy Policy applies when you install the application, access any of the platforms, visit or use any of the services provided. This document is governed by the terms and conditions set forth in the Terms of Service.
+By creating an account or simply accessing the platform, you expressly agree to the collection, use, disclosure and retention of your information as described in this document.
+If you purchase or access the Service through a third-party service that provides the application in your environment or only a link to the application on our servers, you will have a separate and additional account relationship with these third parties and this information will be treated accordingly their privacy policy agreed with them, and we have no relation of representativeness with these services, being entirely responsible for the use.
+If you don´t agree to any changes occured in this Privacy Policy, you may close your account in a specific area.
+    </string>
+    <string name="privacyPolicy2">
+        1. Information collected by MotorBro
+    </string>
+
+    <string name="privacyPolic2Desc">
+       we may collect and store any of the information provided with account creation, profile completion, registration of vehicles, registration of services or any use of any of our services as well as contact by email or any other channel.
+    </string>
+
+    <string name="privacyPolicy3">
+2. Information that you share in the service
+    </string>
+
+    <string name="privacyPolicy3Desc">
+Some of the information will be shared with other users of the services, such as your profile picture, your username, your opinions and comments about a service or partner, but we will not share personal data, such as registration numbers or public documents, your contact details and anything similar.
+    </string>
+
+    <string name="privacyPolicy4">
+3. Information automatically collected through the service
+    </string>
+
+    <string name="privacyPolicy4Desc">
+ We may automatically collect information about you when you use the Service.
+If you access the Service through a mobile device, we will collect information about your geographic location, including the geographic location relative to third-party merchant locations. In addition, we may collect information such as the type of device, system version used, statistics for viewing pages and services, and the use of features, functions, or notifications on the device, even if you do not have an account created.
+If you access the Service through a computer, we may collect information such as your browser type and version, computer and connection information, statistics on pageviews, traffic to and from the service, IP address, and standard web log information.
+If you use the Service through a mobile device and you do not want us to collect your location information, change your preferences through the feature on your mobile device by disabling it. However, by doing this, some of the features of the Service that depend on location will not work well.
+    </string>
+
+    <string name="privacyPolicy5">
+4. Cookies
+    </string>
+
+    <string name="privacyPolicy5Desc">
+We may collect information automatically when you use the Service using “cookies”. Cookies are small amounts of data that are stored in your computer’s Internet browser and are accessed and logged by the sites you visit so they can recognize the same browser by browsing online later.
+Information that may be collected by cookies when you use the Service may include, without limitation:
+• The pages you visit on the Service;
+• The date and time of your visit to the Service;
+• The amount of time you spent using the Service;
+• The Internet Protocol (IP) address used to connect your computer to the Internet;
+• Your computer and connection information, such as your browser type and version, operating system, and platform.
+You can set your browser to reject cookies or notify you when you send a cookie. However, if you disable cookies, you may not be able to use all features of the Service, including those features that are only available to registered members of the Service.</string>
+
+    <string name="privacyPolicy6">
+5. Information provided by social networking services
+    </string>
+
+    <string name="privacyPolicy6Desc">
+ By logging into the Service through a third-party social networking service such as Facebook, you give us permission to access, store and use any information that enables the network service third-party social networks to share with us according to the privacy settings that are applicable to your account with this social network service. We encourage you to review and, if necessary, adjust your privacy settings to the applicable social networking service before logging into the Service through a social networking service. The information we receive from a third-party social networking service is stored and used by us in accordance with this Privacy Policy.</string>
+
+    <string name="privacyPolicy7">
+        6. Collection of information by third parties
+    </string>
+
+    <string name="privacyPolicy7Desc">
+If your access happens through third parties, the data collected by them may be used in accordance with their privacy policies and terms of service, and MotorBro is not responsible for any bad use of this information.
+The use of social networks from MotorBro, as well as their privacy, will depend solely and exclusively on the configuration of privacy configured in these social networks. We encourage you to review the privacy policies and settings on the social networking sites you interact with to make sure you understand the information that may be collected, used, and shared by those sites.
+MotorBro may include third-party advertising, links to other sites and other third-party content that will be generated based on your behavior, and there is no sharing of your personal information on MotorBro.
+Only behavioral data, grouped, can be shared, so any user´s data can be identified. These sites, third-party advertisers and companies, or advertising companies working on your behalf, can use beacons and cookies to measure the effectiveness of your ads, customize or optimize advertising content, and track users who click on the links made available through the service. These third parties may use cookies and web beacons to track the actions of users online over time and on different websites or platforms to provide targeted electronic ads to an individual user.
+    </string>
+
+    <string name="privacyPolicy8">
+        7. Use of information by MotorBro
+    </string>
+
+    <string name="privacyPolicy8Desc">
+We may use the information we collect about you through the Service to:
+• Provide access to the Service and provide you with requested services and customer support in addition to processing and answering your questions;
+• Customize, measure and improve our services, content and advertising and otherwise enhance your experience with the Service;
+• Prevent, detect and investigate potentially prohibited or illegal activities and enforce the MotorBro Terms of Service;
+• Analysis of the accuracy, effectiveness, usability or popularity of the Service;
+• Generate and analyze reports and data about the user base and service usage patterns;
+• Compile aggregate data for internal and external business purposes;
+• Resolve disputes and solve problems;
+• Contact us through any of the channels you have registered with information, promotional, marketing and advertising and recommendations that we believe may be of interest to you;
+• Provide you with other services requested by you as described when we collect the information;
+• Offer products and services that we consider relevant, according to their behavior or insertion of information;
+• If you use the Service on a mobile device, we may send “push notifications” to your mobile device to provide updates about the Service and other relevant messages.
+<br /><br />
+    </string>
+
+    <string name="privacyPolicy9">
+        8. Disclosure of information to third parties
+    </string>
+
+    <string name="privacyPolicy9Desc">
+MotorBro will not disclose individualized information to trading partners.
+    </string>
+
+    <string name="privacyPolicy10">
+        9. Sending information and displaying ads from our partners
+    </string>
+
+    <string name="privacyPolicy10Desc">
+All communication by e-mail will not contain SPAM. If you no longer wish to receive our communications by email, simply select this option.
+Regarding bid notifications, they should be disabled in the Settings area of ​​your Android device.
+If you detect any SPAM, please contact us at email@motorbro.com.
+    </string>
+
+    <string name="privacyPolicy11">
+        10. Place of information storage
+    </string>
+
+    <string name="privacyPolicy11Desc">
+your information will be stored according to the Philippine laws of protection and secrecy, based Republic Act 10173 — Data Privacy Act of 2012 that ensures the inviolability of privacy, privacy, honor and the image of people.
+    </string>
+
+    <string name="privacyPol12">
+        Updates
+    </string>
+
+    <string name="privacyPolDesc12">
+        MotorBro updates the APPLICATION in order to provide performance improvements, bug fixes and new functionality, but there is no specific periodicity depending on the sole and exclusive decision of its managers.
+The download of the APPLICATION and its updates implies the tacit acceptance of this service term.
+    </string>
+
+    <string name="privacyPol13">
+        Penalties
+    </string>
+
+    <string name="privacyPolDesc13">
+        The use of the APPLICATION improperly, in disagreement with this term, may lead to the exclusion of the USER as well as other legal sanctions envisaged and the reimbursement of any damages resulting from this misuse.
+    </string>
+
+    <string name="termsServicesDescription">
+This term regulates the use of MotorBro, assigning to the Motorbro´s user (called USER) and implies full acceptance of its terms’ conditions when performing the installation of the application on your mobile device.
+    </string>
+
+    <string name="termsServices1">
+        Object
+    </string>
+
+    <string name="termsServices1Desc">
+        MotorBro provides USERS with access to various services and products related to their vehicles (automotive or not) registered in the system, called respectively SERVICES and PRODUCTS. Some of the services offered will only be able to be used by registering data relating to vehicles as well as user interactions.
+    </string>
+
+    <string name="termsServices2">
+        Conditions of access and use
+    </string>
+    <string name="termsServices2Desc">
+        APPLICATION: expense management software for motor vehicles or not.
+REGISTRATION: previous and necessary process for complete use of all services offered.
+MY LOCATIONS: places registered by the USER and that will be used for calculations of distances traveled as well as in the ROUTE´s registers.
+SUPPLIES: data registered by the USER of supplies made at his vehicle.
+EXPENSES: USER registration of expenses incurred in his vehicles such as parking, taxes, insurance, fines, among others.
+SERVICES: data registered by the USER of the services related to the maintenance of his vehicle such as parts, oil change, tires, among others.
+REMINDERS: USER registration of expenses and services to be performed on his vehicle.
+ACHIEVEMENTS: system of rewards to the user according to the combinations of updates inserted by the client.
+PRO VERSION: paid version that allows to export reports, absence of ads’ display, more options of graphics and priority service, among other advantages, by means of monthly, quarterly or annual payments.
+
+    </string>
+    <string name="termsServices3">
+        User obligations
+    </string>
+    <string name="termsServices3Desc">
+        The USER undertakes to use MotorBro according the law, this service term, and the privacy policy, in addition to other standards and undertakes not to reproduce, copy, distribute, transform or modify the contents, unless it has the prior authorization of the holder of the corresponding rights or is legally permitted.
+    </string>
+    <string name="termsServices4">
+        Intellectual property
+    </string>
+    <string name="termsServices4Desc">
+        The contents of this application and the website, texts, images, icons and others, as well as the trademark MotorBro, are protected by Philippines’ law and by foreign law. Reproduction, edition, distribution, or use of any information contained in this application outside its original scope requires the written permission of the owners´s application or the content in question.
+Downloads and copies of this application are allowed only for private use and for the benefit of users, both individuals and corporations.
+Any acts or contributions intended for decompilation, reverse engineering, features´modification, enhancement, alteration, merging or incorporation of MotorBro in any other programs, systems or sites are forbidden.
+    </string>
+
+    <string name="termsServices5">
+        Responsibilities for links
+    </string>
+    <string name="termsServices5Desc">
+       The links contained in the APPLICATION will direct USER to third-party websites or applications or partners. We, however, do not control the content of these sites from third parties and partners, and can not guarantee the fidelity of the information they provide. Web providers and app/websites managers are responsible for their own content.
+    </string>
+    <string name="termsServices6">
+    </string>
+    <string name="termsServices6Desc">
+
+    </string>
+    <string name="termsServices7">
+    </string>
+    <string name="termsServices7Desc">
+
+    </string>
+
+    <string name="termsServices8">
+    </string>
+    <string name="termsServices8Desc">
+    </string>
+
+    <string name="termsServices9">
+    </string>
+    <string name="termsServices9Desc">
+
+    </string>
+
+    <string name="termsServices10">
+    </string>
+    <string name="termsServices10Desc">
+
+    </string>
 </resources>

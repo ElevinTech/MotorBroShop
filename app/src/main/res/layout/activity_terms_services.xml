@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TermsServices.TermsServicesActivity">
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:elevation="10dp"
+        android:paddingTop="5dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:paddingStart="0dp"
+            android:padding="18dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/back_icon" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms and Condition"
+            android:textSize="19sp"
+            android:fontFamily="@font/open_sans"
+            android:textColor="@color/white"
+            />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The Service and Acceptance of Terms and Conditions"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServicesDescription"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices2"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices2Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices3"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices3Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices4"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices4Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices5"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices5Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices6"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices6Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices7"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices7Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices8"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices8Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices9"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices9Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices10"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termsServices10Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy11"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy11Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPol12"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolDesc12"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPol13"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolDesc13"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

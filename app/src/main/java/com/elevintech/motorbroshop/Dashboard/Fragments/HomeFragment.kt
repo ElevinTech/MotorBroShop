@@ -11,7 +11,9 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
 import com.elevintech.motorbroshop.Chat.ChatListActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Employees.EmployeeListActivity
@@ -87,6 +89,12 @@ class HomeFragment : Fragment() {
 
         scanLayout.setOnClickListener {
             
+        }
+
+        adsLayout.setOnClickListener {
+            val intent = Intent(context, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.GPC)
+            startActivity(intent)
         }
 
         addEmployeeButton.setOnClickListener {
@@ -219,7 +227,13 @@ class HomeFragment : Fragment() {
                         // instantiate the view for the dialog
                         val viewInflated = layoutInflater.inflate(R.layout.row_employee_dashboard, null)
                         viewInflated.employeeName.text = employee.firstName + " " + employee.lastName
-                        Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.lastEmployeeImage)
+
+                        if (employee.profilePictureUrl != "") {
+                            Glide.with(this).load(employee.profilePictureUrl).into(viewInflated.lastEmployeeImage)
+                        } else {
+                            Glide.with(this).load(R.drawable.user_sample_facial_hair).into(viewInflated.lastEmployeeImage)
+                        }
+
                         view.employeeLayout.addView(viewInflated)
                     }
 

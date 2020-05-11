@@ -244,7 +244,7 @@
                     android:textAllCaps="false"
                     android:stateListAnimator="@null"
                     android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#BA4D51"
+                    android:textColor="@color/colorLight"
                     android:layout_marginRight="20dp"
 
                     />
@@ -268,6 +268,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/adsLayout"
             android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:layout_height="70dp"
@@ -278,7 +279,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ads_image_gpc"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 />
 
         </LinearLayout>
@@ -349,7 +350,7 @@
                     android:textAllCaps="false"
                     android:stateListAnimator="@null"
                     android:background="@drawable/white_bg_light_black_background"
-                    android:textColor="#BA4D51"
+                    android:textColor="@color/colorLight"
                     android:layout_marginRight="20dp"
 
                     />
@@ -357,49 +358,6 @@
 
             </LinearLayout>
 
-
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                >-->
-
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:cardCornerRadius="50dp"-->
-<!--                    app:cardPreventCornerOverlap="false"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    app:elevation="0dp"-->
-<!--                    >-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:src="@drawable/sample_man_circular"-->
-<!--                        android:id="@+id/lastEmployeeImage"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:layout_marginBottom="3dp"/>-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Jack Mantley"-->
-<!--                    android:fontFamily="@font/open_sans_semibold"-->
-<!--                    android:textColor="#313131"-->
-<!--                    android:textSize="13sp"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    />-->
-
-<!--            </LinearLayout>-->
         </LinearLayout>
 
 

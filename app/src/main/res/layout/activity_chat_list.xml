@@ -87,8 +87,25 @@
                 android:orientation="vertical">
 
 
+                <LinearLayout
+                    android:id="@+id/adsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ads_posh"
+                        android:scaleType="fitCenter"
+                        />
+
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/email_register_text"
+                    android:id="@+id/recentConversationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Recent Conversations"

@@ -14,7 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BikeView.BikeViewActivity"></activity>
+        <activity android:name=".TermsServices.TermsServicesActivity"></activity>
+        <activity android:name=".PrivacyPolicy.PrivacyPolicyActivity" />
+        <activity android:name=".ViewUsersPartsServices.ViewUsersPartsServicesActivity" />
+        <activity android:name=".AdsView.AdsViewActivity" />
+        <activity android:name=".BikeView.BikeViewActivity" />
         <activity android:name=".Register.SelectLocation" />
         <activity android:name=".AddTypeOfParts.AddBrandActivity" />
         <activity android:name=".TypeOf.TypeOfBrandActivity" />

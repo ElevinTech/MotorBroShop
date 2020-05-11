@@ -29,23 +29,35 @@
                      />
 -->
 
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="left"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/back_button_icon" />
+
+        <TextView
+            android:id="@+id/dashboardLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Create an Employee Account"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginLeft="30dp"
+            />
+
 
     </androidx.appcompat.widget.Toolbar>
 
 
     <!--android:fontFamily="@font/lato"-->
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Create an Employee Account"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar" />
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -60,7 +72,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/shadow_background"
             android:paddingLeft="16dp"
+            android:paddingBottom="26dp"
             android:paddingRight="16dp">
 
 <!--            <TextView-->
@@ -89,9 +104,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="First Name"
+                android:fontFamily="@font/open_sans"
                 android:textColor="#0C0C0C"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/firstNameEditText"
@@ -109,9 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Last Name"
+                android:fontFamily="@font/open_sans"
                 android:textColor="#0C0C0C"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/lastNameEditText"
@@ -128,9 +143,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Branch"
+                android:fontFamily="@font/open_sans"
                 android:textColor="#0C0C0C"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/branchEditText"
@@ -146,7 +161,7 @@
                 android:id="@+id/createAccountButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="26dp"
                 android:background="@drawable/create_account_button_background"
                 android:text="Create Account"
                 android:textColor="#fff" />

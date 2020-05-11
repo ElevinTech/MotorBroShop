@@ -339,12 +339,19 @@ class MotorBroDatabase {
                 } else {
 
                         val listOfCustomerId = mutableListOf<String>()
+
+                        val listOfPairs = mutableMapOf<String, String>()
+
                         for (customerShopData in customerShopDataList){
                             listOfCustomerId.add(customerShopData.customerId)
+
+                            listOfPairs.put(customerShopData.customerId, customerShopData.dateScanned)
+
                         }
 
 
                         val listOfCustomers = mutableListOf<Customer>()
+
                         val db = FirebaseFirestore.getInstance()
                         db.collection("customers")
                             .whereIn("uid", listOfCustomerId)
@@ -354,6 +361,11 @@ class MotorBroDatabase {
                                 for(customerSnapshot in it){
 
                                     val customer = customerSnapshot.toObject(Customer::class.java)
+                                    val dateScanned = listOfPairs[customer.uid]
+
+                                    if (dateScanned != null) {
+                                        customer.dateAdded  = dateScanned
+                                    }
                                     listOfCustomers.add(customer)
 
                                 }
@@ -1343,4 +1355,31 @@ class MotorBroDatabase {
         }
 
     }
+
+    fun getUserBikeParts(uid: String, callback: (MutableList<BikeParts>) -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("customers").document(uid).collection("bike-parts")
+//            .whereEqualTo("bikeId", bikeId)
+        val list = mutableListOf<BikeParts>()
+        var listToPass = mutableListOf<BikeParts>()
+
+        docRef.get()
+            .addOnSuccessListener {
+                for (obj in it){
+                    val bikePart = obj.toObject(BikeParts::class.java)
+                    bikePart.id = obj.id
+                    list.add(bikePart)
+                }
+
+                //Get the bikes from the actual parts list
+//                for ( part in list) {
+//                    if (part.bikeId == bikeId || part.shopId != "") {
+//                        listToPass.add(part)
+//                    }
+//                }
+
+                callback(list)
+            }
+    }
+
 }

@@ -26,6 +26,10 @@ class CreateEmployeeActivity : AppCompatActivity() {
 
         val shopId = intent.getStringExtra("shopId")!!
 
+        backButton.setOnClickListener {
+            finish()
+        }
+
         branchEditText.setOnClickListener {
 
             val intent = Intent(applicationContext, SelectBranchActivity::class.java)

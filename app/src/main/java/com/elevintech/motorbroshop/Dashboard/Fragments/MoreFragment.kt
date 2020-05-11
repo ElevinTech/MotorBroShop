@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.elevintech.motorbroshop.AdsView.AdsViewActivity
 import com.elevintech.motorbroshop.Branches.BranchListActivity
+import com.elevintech.motorbroshop.Constants
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Documents.DocumentsActivity
@@ -18,10 +20,12 @@ import com.elevintech.motorbroshop.FeedbackActivity
 import com.elevintech.motorbroshop.Login.LoginActivity
 import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.Model.UserType
+import com.elevintech.motorbroshop.PrivacyPolicy.PrivacyPolicyActivity
 
 import com.elevintech.motorbroshop.R
 import com.elevintech.motorbroshop.Shop.ShopActivity
 import com.elevintech.motorbroshop.Shop.UpdateShop
+import com.elevintech.motorbroshop.TermsServices.TermsServicesActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_more.*
 
@@ -88,8 +92,21 @@ class MoreFragment : Fragment() {
             startActivity(intent)
         }
 
-        termsServicesLayout.setOnClickListener {
+        adsLayout.setOnClickListener {
+            val intent = Intent(context, AdsViewActivity::class.java)
+            intent.putExtra("adType", Constants.AD_TYPE.COMSTAR)
+            startActivity(intent)
+        }
 
+
+        termsServicesLayout.setOnClickListener {
+            val intent = Intent(activity, TermsServicesActivity::class.java)
+            startActivity(intent)
+        }
+
+        privacyPolicyLayout.setOnClickListener {
+            val intent = Intent(activity, PrivacyPolicyActivity::class.java)
+            startActivity(intent)
         }
 
         signoutView.setOnClickListener {
@@ -119,7 +136,6 @@ class MoreFragment : Fragment() {
                 documentsLayout.visibility = View.GONE
                 branchesLayout.visibility = View.GONE
             }
-
 
         }
 

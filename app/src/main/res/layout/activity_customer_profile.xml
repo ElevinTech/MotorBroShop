@@ -112,11 +112,11 @@
                 </LinearLayout>
 
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/userProfileImage"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/sample_user_2"
+                    android:src="@drawable/user_sample_facial_hair"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     />
@@ -438,32 +438,67 @@
             </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/chatUserButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:paddingBottom="20dp"
-            android:background="@drawable/shadow_background"
-
-            >
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/adsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chat User"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:textColor="@color/textColorBlack"
-                />
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                >
+                <ImageView
+                    android:layout_width="350dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ads_motmot"
+                    />
 
-        </LinearLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="8dp"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/viewUsersPartsServices"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="View Parts / Services"
+                    android:textAllCaps="false"
+                    android:stateListAnimator="@null"
+                    android:background="@drawable/white_bg_light_black_background"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginRight="20dp"
+
+                    />
+
+                <Button
+                    android:id="@+id/chatUserButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Chat User"
+                    android:textAllCaps="false"
+                    android:stateListAnimator="@null"
+                    android:background="@drawable/dark_red_bg"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+
+                    />
+
+            </LinearLayout>
+
+
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"

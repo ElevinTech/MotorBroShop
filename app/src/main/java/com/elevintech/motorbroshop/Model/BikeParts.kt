@@ -1,7 +1,9 @@
 package com.elevintech.motorbroshop.Model
 
 class BikeParts(
+    var id: String = "",
     var userId: String = "",
+    var bikeId: String = "",
     var date: String = "",
     var dateLong: Long = 0.toLong(),
     var odometer: Double = 0.0,

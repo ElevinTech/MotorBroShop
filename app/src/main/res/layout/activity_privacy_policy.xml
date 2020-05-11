@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PrivacyPolicy.PrivacyPolicyActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:elevation="10dp"
+        android:paddingTop="5dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:paddingStart="0dp"
+            android:padding="18dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/back_icon" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textSize="19sp"
+            android:fontFamily="@font/open_sans"
+            android:textColor="@color/white"
+            />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy1"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolic1Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy2"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolic2Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy3"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy3Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy4"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy4Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy5"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy5Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy6"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy6Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy7"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy7Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy8"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy8Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy9"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy9Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy10"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy10Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy11"
+                android:textColor="@color/textColorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacyPolicy11Desc"
+                android:textColor="@color/textColorBlack"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

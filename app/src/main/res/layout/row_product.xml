@@ -21,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/open_sans"
-            android:text="Wed, Feb 19, 2020"
+            android:text=""
             android:textColor="@color/textColorBlack"
             android:textSize="17sp" />
 

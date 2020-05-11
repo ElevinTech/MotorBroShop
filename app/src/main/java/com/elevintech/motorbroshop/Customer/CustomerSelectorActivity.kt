@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Customer
 import com.elevintech.motorbroshop.R
@@ -60,7 +61,13 @@ class CustomerSelectorActivity : AppCompatActivity() {
 
     inner class customerItem(val customer: Customer): Item<ViewHolder>() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
-            viewHolder.itemView.customerName.text = customer.firstName + " " + customer.lastName
+            viewHolder.itemView.customerName.text = customer.firstName.capitalize() + " " + customer.lastName.capitalize()
+
+            if (customer.profileImage != "") {
+                Glide.with(this@CustomerSelectorActivity).load(customer.profileImage).into( viewHolder.itemView.userProfileImage)
+//                activity?.let { Glide.with(it).load(customer.profilePictureUrl).into( viewHolder.itemView.userProfileImage) }
+            }
+
             viewHolder.itemView.setOnClickListener {
                 val returnIntent = Intent()
                 returnIntent.putExtra("selectedCustomer", customer)

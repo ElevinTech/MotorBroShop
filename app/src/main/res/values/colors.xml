@@ -3,13 +3,14 @@
     <color name="colorPrimary">#BA4D51</color>
     <color name="colorPrimaryDark">#C1BA4D51</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorLight">#C81D1D</color>
 
-    <color name="triadPrimaryGreen">#7bcf3c</color>
-    <color name="triadPrimaryRed">#cf3c7b</color>
+    <color name="triadPrimaryGreen">#55CF3C</color>
+    <color name="triadPrimaryRed">#F33224</color>
 
     <color name="darkTextColorBlack">#3C3C3C</color>
 
-    <color name="colorSecondary">#9C27B0</color>
+    <color name="colorSecondary">#4527B0</color>
     <color name="white">#FFFFFF</color>
     <color name="loginTransparentBackground">#F9F7F7</color>
     <color name="loginBorderBackground">#979797</color>
