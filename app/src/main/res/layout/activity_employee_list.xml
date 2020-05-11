@@ -63,7 +63,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/glovebox_new_icon"
+            android:src="@drawable/employee_select_user_icon"
             android:layout_gravity="center"
             />
 

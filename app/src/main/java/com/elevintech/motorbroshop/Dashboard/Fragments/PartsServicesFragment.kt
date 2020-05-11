@@ -51,7 +51,10 @@ class PartsServicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         floating_button.setOnClickListener {
-            askWhoPartIsFor()
+            val intent = Intent(activity, AddPartsServicesForCustomerActivity::class.java)
+            intent.putExtra("shopId", user.shopId)
+            startActivity(intent)
+//            askWhoPartIsFor()
         }
 
         setupRecyclerView()

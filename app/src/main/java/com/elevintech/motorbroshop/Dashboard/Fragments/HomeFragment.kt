@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.elevintech.motorbroshop.Chat.ChatListActivity
 import com.elevintech.motorbroshop.Dashboard.DashboardActivity
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
+import com.elevintech.motorbroshop.Employees.EmployeeListActivity
 import com.elevintech.motorbroshop.Model.Shop
 import com.elevintech.motorbroshop.Model.User
 import com.elevintech.motorbroshop.Model.UserType
@@ -86,6 +87,12 @@ class HomeFragment : Fragment() {
 
         scanLayout.setOnClickListener {
             
+        }
+
+        addEmployeeButton.setOnClickListener {
+            val intent = Intent(activity, EmployeeListActivity::class.java)
+            intent.putExtra("shopId", user.shopId)
+            startActivity(intent)
         }
     }
 

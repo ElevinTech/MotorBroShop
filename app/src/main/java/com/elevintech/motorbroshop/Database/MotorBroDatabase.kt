@@ -1301,4 +1301,46 @@ class MotorBroDatabase {
         }
 
     }
+
+    fun getUserBikes(uid: String, callback: (MutableList<BikeInfo>) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("bikes").whereEqualTo("userId", uid)
+
+        val list = mutableListOf<BikeInfo>()
+
+        docRef.get()
+            .addOnSuccessListener {
+
+                // if there is no primary bike get the first bike of the array
+
+                for (bikeDocument in it){
+                    val bike = bikeDocument.toObject(BikeInfo::class.java)
+                    bike.id = bikeDocument.id
+                    list.add(bike)
+                }
+
+                callback(list)
+
+            }
+    }
+
+    fun getBikeById(bikeId: String, callback: (BikeInfo) -> Unit) {
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("bikes").document(bikeId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+
+            var bike = BikeInfo()
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                bike = documentSnapshot.toObject(BikeInfo::class.java)!!
+
+            }
+
+            callback( bike )
+        }
+
+    }
 }
