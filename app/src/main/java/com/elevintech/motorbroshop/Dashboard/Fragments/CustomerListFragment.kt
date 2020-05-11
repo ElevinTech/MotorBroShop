@@ -105,8 +105,8 @@ class CustomerListFragment : Fragment() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.customerName.text = customer.firstName + " " + customer.lastName
 
-            if (user.profilePictureUrl != "") {
-                activity?.let { Glide.with(it).load(user.profilePictureUrl).into( viewHolder.itemView.userProfileImage) }
+            if (customer.profilePictureUrl != "") {
+                activity?.let { Glide.with(it).load(customer.profilePictureUrl).into( viewHolder.itemView.userProfileImage) }
             }
 
             viewHolder.itemView.setOnClickListener {
