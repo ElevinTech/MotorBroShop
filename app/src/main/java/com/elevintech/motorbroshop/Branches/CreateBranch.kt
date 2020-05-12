@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import com.elevintech.motorbroshop.Database.MotorBroDatabase
 import com.elevintech.motorbroshop.Model.Address
 import com.elevintech.motorbroshop.Model.Branch
@@ -37,7 +38,8 @@ class CreateBranch : AppCompatActivity() {
         val shopId = intent.getStringExtra("shopId")!!
 
         saveBranchButton.setOnClickListener {
-            saveBranch(shopId)
+            if (hasCompletedValues())
+                saveBranch(shopId)
         }
 
         addressEditText.setOnClickListener {
@@ -70,14 +72,13 @@ class CreateBranch : AppCompatActivity() {
         branch.searchTags = createListOfSearchTag()
         branch.contactNumber = contactNumberEditText.text.toString()
         branch.email = emailEditText.text.toString()
-        branch.ownerId = FirebaseAuth.getInstance().uid!! // get the logged in user ID, since only owners can create branches TODO: restrict employees from creating branches
+        branch.ownerId = FirebaseAuth.getInstance().uid!! // get the logged in user ID, since only owners can create branches
         branch.branchId = FirebaseFirestore.getInstance().collection("branches").document().id
 //        branch.isMain = (isMainSwitch.isChecked) /* Assume for now that the main branch is the shop created upon registration */
 
         MotorBroDatabase().getDeviceToken{
             branch.deviceTokens = mapOf(branch.ownerId to it)
 
-            // TODO: make image upload mandatory, nag-eerror kapag sinubmit na walang image
             MotorBroDatabase().uploadImageToFirebaseStorage(imageUri!!){ imageUrl ->
                 branch.imageUrl = imageUrl
 
@@ -187,6 +188,36 @@ class CreateBranch : AppCompatActivity() {
             addressEditText.setText( address.province + ", " + address.city +  ", " + address.street )
         }
 
+    }
+
+    fun hasCompletedValues(): Boolean {
+
+        if (branchNameEditText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the branch name field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (addressEditText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the address field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (emailEditText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the email field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (contactNumberEditText.text.isEmpty()) {
+            Toast.makeText(this, "Please fill up the contact number field", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        if (imageUri == null) {
+            Toast.makeText(this, "Please upload a branch image", Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        return true
     }
 
 
