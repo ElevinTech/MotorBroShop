@@ -70,8 +70,8 @@ class CustomerProfileActivity : AppCompatActivity() {
 
     private fun updateUI(customer: Customer) {
 
-        userNameToolbar.text = (customer.firstName + " " + customer.lastName)
-        userNameFull.text = (customer.firstName + " " + customer.lastName)
+        userNameToolbar.text = (customer.firstName.capitalize() + " " + customer.lastName.capitalize())
+        userNameFull.text = (customer.firstName.capitalize() + " " + customer.lastName.capitalize())
         emailEditText.text = "Email: " + customer.email
 
         if (customer.profileImage != "") {
