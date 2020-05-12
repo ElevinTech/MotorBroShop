@@ -61,8 +61,8 @@
             android:orientation="vertical"
             android:layout_margin="10dp"
             android:background="@drawable/shadow_background"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp">
 
             <TextView
                 android:id="@+id/firstNameLabel"
@@ -189,7 +189,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
 
 
             <TextView
