@@ -6,7 +6,7 @@
     <stroke android:width="0.5dp" android:color="@android:color/darker_gray"/>
 
     <!-- The radius makes the corners rounded -->
-    <corners android:radius="30dp"/>
+    <corners android:radius="5dp"/>
 
     <solid android:color="#FFFFFF"/>
 </shape>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/circle_gradient_oval"
+    android:background="@drawable/bg_admin"
     tools:context="com.elevintech.motorbroshop.Login.LoginActivity">
 
     <ScrollView
@@ -60,9 +60,9 @@
                 android:layout_width="160dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/motorbro_white_red"
+                android:src="@drawable/logo_admin"
                 android:layout_gravity="center"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="10dp"
                 />
 
 
@@ -72,47 +72,40 @@
                 android:layout_height="wrap_content"
                 android:text="Email"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textSize="16sp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="30dp"
+                android:textSize="21sp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#FFFFFF"
+                android:visibility="gone"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="30dp"
                 >
 
-                <!--android:src="@drawable/email_icon"-->
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/email_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="10dp"
-                    android:tint="@color/white"
-                    android:layout_marginTop="5dp"
-                    />
 
                 <EditText
                     android:id="@+id/userNameEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:paddingLeft="50dp"
-                    android:paddingBottom="12dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="19sp"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
+
+                    android:textColorHint="@color/white"
 
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -124,11 +117,12 @@
                 android:layout_height="wrap_content"
                 android:text="Password"
                 android:fontFamily="@font/open_sans_semibold"
-                android:textSize="16sp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp"
+                android:textSize="21sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#FFFFFF"
+                android:visibility="gone"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,37 +130,27 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
                 >
 
                 <!--android:src="@drawable/password_icon"-->
-                <ImageView
-                    android:id="@+id/passwordImageView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-android:src="@drawable/password_icon"
-                    android:tint="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    />
 
                 <EditText
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:paddingLeft="50dp"
-                    android:paddingBottom="12dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="40dp"
-
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="19sp"
+                    android:backgroundTint="@color/white"
                     android:inputType="textPassword"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textColor="@color/white"
+                    android:hint="Password"
+                    android:textColorHint="@color/white"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -181,23 +165,42 @@ android:src="@drawable/password_icon"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:textSize="19sp"
-                android:layout_marginTop="10dp"
-
-            android:background="@drawable/login_button_background"
-            android:textColor="@color/loginRedButtonBackground"
-            android:fontFamily="@font/open_sans_semibold"
+                android:layout_marginTop="50dp"
+                android:textAllCaps="false"
+                android:background="@drawable/login_button_background"
+                android:textColor="@color/loginRedButtonBackground"
+                android:fontFamily="@font/open_sans_semibold"
                 />
 
-            <TextView
+
+
+            <LinearLayout
                 android:id="@+id/createAccountText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Don't have an Account? Register Here"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:textColor="#FFFFFF"
-                />
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center_horizontal" android:layout_marginBottom="25dp">
 
+                <TextView
+                    android:text="Don't have an Account?"
+                    android:textColor="#E4E4E4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView2" android:textSize="15sp"/>
+
+
+                <TextView
+                    android:text=" Register Here"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signInText"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" android:textSize="16sp"/>
+
+            </LinearLayout>
 
 
 
